@@ -170,9 +170,9 @@ export function mount(host) {
      concretamente, anche a chi deve approvare il sito per la pubblicità. */
   const links = el('nav', 'hub__links');
   [
-    ['come-si-gioca.html', t('foot.howto')],
-    ['dati.html', t('foot.data')],
-    ['privacy.html', t('foot.privacy')],
+    ['/come-si-gioca', t('foot.howto')],
+    ['/dati', t('foot.data')],
+    ['/privacy', t('foot.privacy')],
   ].forEach(([href, label]) => {
     const a = el('a', 'hub__legal dim', label);
     a.href = href;

@@ -7,6 +7,7 @@ memorizzato dal browser significa collaudare la versione di ieri.
     python3 serve.py            # porta 8080
     python3 serve.py 3000
 """
+import os
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
@@ -29,6 +30,17 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
             self.send_header('Cache-Control', 'no-store, must-revalidate')
             self.send_header('Pragma', 'no-cache')
         super().end_headers()
+
+    # Cloudflare Pages serve /privacy al posto di /privacy.html: senza questo
+    # i link funzionano online e si rompono in locale, che è il modo migliore
+    # per accorgersene troppo tardi.
+    def translate_path(self, path):
+        full = super().translate_path(path)
+        if not os.path.splitext(full)[1] and not os.path.isdir(full):
+            candidate = full + '.html'
+            if os.path.exists(candidate):
+                return candidate
+        return full
 
     def log_message(self, fmt, *args):
         if '404' in (args[1] if len(args) > 1 else ''):
