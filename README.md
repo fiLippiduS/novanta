@@ -77,7 +77,7 @@ ads.txt               chi può vendere la pubblicità del sito
 sitemap.xml           mappa per i motori di ricerca
 tools/                generatore delle immagini di anteprima, non si pubblica
 data/squads.json      32 rose curate a mano, 743 giocatori
-data/auction.json     114 giocatori con ruolo e voto, per l'asta
+data/auction.json     647 giocatori con ruolo e voto, dai fuoriclasse ai comprimari
 data/clubs.json       243 club da 66 paesi, con fascia e colori
 data/duel.json        111 giocatori veri con quindici dati di carriera
 data/events.json      47 fra scelte e imprevisti, in due lingue

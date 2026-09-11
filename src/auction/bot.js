@@ -25,8 +25,9 @@ export function valuation(bot, team, lot, remainingOfRole) {
   const surplus = maxBid(team, lot.role);
   if (surplus <= 1) return surplus;
 
-  // 84 è più o meno il pavimento del catalogo, 96 il tetto
-  const quality = Math.min(1, Math.max(0, (lot.player.rating - 84) / 12));
+  // il catalogo va da 73 a 96: la qualità si legge su tutto l'arco,
+  // altrimenti metà dei giocatori varrebbero uguale a zero
+  const quality = Math.min(1, Math.max(0, (lot.player.rating - 74) / 22));
 
   // se restano esattamente tanti giocatori quanti i posti, quel giocatore
   // arriverà comunque: non serve svenarsi

@@ -29,9 +29,20 @@ export function buildLots(rand, catalog) {
   const lots = [];
   for (const role of ROLES) {
     const pool = catalog.filter((p) => p.role === role);
-    const picked = shuffled(rand, pool)
-      .slice(0, NEED[role] * 2)
-      .sort((a, b) => b.rating - a.rating);
+
+    /* Il catalogo è largo e pieno di comprimari: pescando del tutto a caso
+       capitavano aste intere senza un nome per cui valga la pena litigare.
+       Per ogni posto del ruolo si tira fuori un pezzo grosso dal quarto alto,
+       il resto arriva da tutto il catalogo. Così ogni asta ha il suo colpo
+       e le sue occasioni. */
+    const perVoto = [...pool].sort((a, b) => b.rating - a.rating);
+    const alto = perVoto.slice(0, Math.max(NEED[role] * 2, Math.round(perVoto.length * 0.22)));
+
+    const picked = shuffled(rand, alto).slice(0, NEED[role]);
+    const resto = shuffled(rand, pool).filter((p) => !picked.includes(p));
+    while (picked.length < NEED[role] * 2 && resto.length) picked.push(resto.pop());
+
+    picked.sort((a, b) => b.rating - a.rating);
     picked.forEach((player, i) => lots.push({ role, player, pair: Math.floor(i / 2) }));
   }
   return lots;
