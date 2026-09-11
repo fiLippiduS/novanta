@@ -1,0 +1,9 @@
+# ads.txt — chi è autorizzato a vendere la pubblicità di questo sito.
+# Finché AdSense non approva il sito, questo file contiene solo commenti:
+# è valido e non dichiara nulla, che è la cosa giusta da dire adesso.
+#
+# Quando arriva l'approvazione, copia il tuo codice editore (quello che
+# comincia con pub-) dentro la riga qui sotto e togli il cancelletto.
+# L'ultimo campo è l'identificativo di Google e non cambia mai.
+#
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

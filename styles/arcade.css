@@ -1,0 +1,72 @@
+/* RIGORI */
+
+.arcade { display: flex; flex-direction: column; gap: var(--s-3); flex: 1; }
+
+.arcade__score { font-size: 2.4rem; line-height: 1; color: var(--chalk); }
+
+.arcade__stage {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--ink-950);
+  /* Su telefono il campo prende tutta l'altezza che avanza: la geometria
+     del disegno si adatta da sola alla forma del riquadro. Su schermo largo
+     torna panoramico con le proporzioni fisse. */
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 15rem;
+  margin-inline: auto;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.arcade__canvas {
+  /* In colonna flessibile l'altezza percentuale non si risolve: il canvas
+     resterebbe alto quanto il suo contenuto. Va ancorato ai bordi. */
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.arcade__say {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 2px;
+  /* altezza fissa: il campo non si muove quando cambia il testo */
+  min-height: 5.2rem;
+  text-align: center;
+}
+
+.arcade__prompt {
+  font-size: clamp(1.1rem, 3.4vw, 1.6rem);
+  line-height: 1.1;
+  letter-spacing: 0.14em;
+  color: var(--chalk);
+}
+
+.arcade__verdict {
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  line-height: 1;
+  color: transparent;
+}
+.arcade__verdict:empty { display: none; }
+.arcade__verdict--good { color: var(--lime); }
+.arcade__verdict--bad { color: var(--flare); }
+.arcade__verdict--warn { color: var(--amber); }
+
+.arcade__hint { margin: 0; color: var(--chalk-4); }
+
+.arcade .commentary { text-align: center; }
+
+@media (min-width: 46rem) {
+  .arcade__score { font-size: 3rem; }
+  .arcade__stage {
+    aspect-ratio: 1000 / 620;
+    max-height: 60vh;
+    max-width: calc(60vh * 1000 / 620);
+  }
+}

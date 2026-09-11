@@ -1,0 +1,41 @@
+# Cloudflare Pages — intestazioni per il sito statico.
+# Senza bundler i nomi dei file non cambiano mai, quindi la cache lunga
+# andrebbe messa solo su ciò che si può invalidare a mano. Qui teniamo
+# una cache breve con rivalidazione: veloce, ma un aggiornamento arriva subito.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/src/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/styles/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+/data/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/i18n/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+# Il service worker non va mai messo in cache: è il file che decide
+# quando tutto il resto si aggiorna.
+/sw.js
+  Cache-Control: no-cache
+
+/manifest.webmanifest
+  Cache-Control: public, max-age=3600
+
+# ads.txt lo leggono i sistemi pubblicitari, e vogliono testo semplice.
+/ads.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600

@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# editor
+.vscode/
+.idea/
+
+# roba locale che non deve finire online
+*.log
+node_modules/

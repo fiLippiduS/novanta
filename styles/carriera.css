@@ -1,0 +1,246 @@
+/* CARRIERA */
+
+.carriera { display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
+.car__stage { display: flex; flex-direction: column; gap: var(--s-5); }
+
+.car__intro, .car__end { display: grid; gap: var(--s-3); padding: var(--s-6) var(--s-5); }
+.car__lead { font-size: var(--t-lg); color: var(--chalk); max-width: 30ch; line-height: 1.25; }
+.car__intro .btn, .car__end .btn { margin-top: var(--s-2); }
+
+/* ---------- creazione ---------- */
+
+.car__create { display: grid; gap: var(--s-4); padding: var(--s-5); }
+.car__nameform { display: grid; gap: var(--s-3); }
+
+.optgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-2); }
+.optgrid--wide { grid-template-columns: 1fr; }
+
+.optcard {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  min-height: 62px;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-800);
+  color: var(--text);
+  text-align: left;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: transform var(--d-fast) var(--e-spring), border-color var(--d-fast) linear,
+              background var(--d-fast) linear;
+}
+.optcard:hover { transform: translateY(-2px); border-color: var(--lime); background: var(--ink-700); }
+.optcard:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.optcard__t { font-size: 1.05rem; line-height: 1.05; }
+.optcard__k { color: var(--chalk-4); }
+.optcard__d { font-size: var(--t-sm); color: var(--chalk-3); line-height: 1.35; }
+.optcard--tall { min-height: 76px; }
+
+.numgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-2); }
+.numcell {
+  min-height: 56px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-800);
+  color: var(--chalk);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform var(--d-fast) var(--e-spring), color var(--d-fast) linear;
+}
+.numcell:hover { transform: translateY(-3px); color: var(--lime); border-color: var(--lime); }
+
+.natgrid { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.natcell {
+  padding: 9px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--chalk-2);
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--d-fast) linear, color var(--d-fast) linear;
+}
+.natcell:hover { background: var(--lime); color: var(--ink-950); border-color: var(--lime); }
+
+/* ---------- testata del giocatore ---------- */
+
+.car__head { display: grid; gap: var(--s-4); padding: var(--s-5); }
+.car__id { display: flex; align-items: center; gap: var(--s-4); }
+.car__num { font-size: 3rem; line-height: 1; color: var(--lime); min-width: 2.4ch; }
+.car__who { display: grid; gap: 2px; min-width: 0; }
+.car__name { line-height: 1; }
+.car__role { color: var(--chalk-3); }
+
+.car__line { display: flex; gap: var(--s-5); flex-wrap: wrap; }
+
+.cstat { display: grid; gap: 2px; }
+.cstat__v { font-size: 1.7rem; line-height: 1; }
+.cstat--good .cstat__v { color: var(--lime); }
+.cstat--sky .cstat__v { color: var(--sky); }
+
+.meters, .attrs { display: grid; gap: var(--s-2); }
+.attrs { grid-template-columns: repeat(2, 1fr); gap: var(--s-2) var(--s-4); }
+.meter { display: grid; gap: 3px; }
+.meter__head { display: flex; justify-content: space-between; align-items: baseline; }
+.meter__head .num { font-size: var(--t-sm); color: var(--chalk-2); }
+.meter__track { height: 5px; border-radius: var(--r-pill); background: rgba(237,232,218,0.10); overflow: hidden; }
+.meter__fill { display: block; height: 100%; border-radius: inherit; transition: width var(--d-slow) var(--e-out); }
+
+/* ---------- squadre e offerte ---------- */
+
+.clubchip { display: flex; align-items: center; gap: var(--s-3); min-width: 0; }
+.clubchip__txt { display: grid; gap: 2px; min-width: 0; }
+.clubchip__name { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.01em;
+  text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clubchip__sub { color: var(--chalk-4); }
+
+.offers { display: grid; gap: var(--s-3); }
+.offer {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: linear-gradient(100deg,
+    color-mix(in srgb, var(--team-a, var(--ink-700)) 16%, transparent), var(--ink-850) 70%);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--d-base) var(--e-spring), border-color var(--d-base) linear;
+}
+.offer:hover { transform: translateX(4px); border-color: var(--lime); }
+.offer__go { margin-left: auto; color: var(--lime); font-size: 1.3rem; }
+.offer__tag { flex: 0 0 auto; color: var(--amber); }
+.offer--stay { background: var(--ink-800); }
+
+/* ---------- rapporto di fine stagione ---------- */
+
+.car__report { display: grid; gap: var(--s-4); padding: var(--s-5); }
+.car__reporthead { display: grid; gap: 2px; }
+.car__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4) var(--s-3); }
+.car__out { color: var(--flare); }
+
+.car__won { display: grid; gap: var(--s-2); }
+/* Ogni trofeo sta nella sua colonna di larghezza fissa, altrimenti i nomi
+   lunghi si accavallano con quelli accanto. Il conteggio è un gettone
+   appoggiato sulla coppa, non una riga in più sotto al nome. */
+.tbadges { display: flex; flex-wrap: wrap; gap: var(--s-3); }
+.tbadge {
+  position: relative;
+  width: 5.4rem;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding-top: 2px;
+}
+.tbadge__n {
+  color: var(--chalk-3);
+  text-align: center;
+  font-size: 0.58rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+.tbadge__x {
+  position: absolute;
+  top: -2px;
+  right: 0.6rem;
+  padding: 1px 6px;
+  border-radius: var(--r-pill);
+  background: var(--ink-950);
+  border: 1px solid currentColor;
+  color: inherit;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+.trophy { display: block; filter: drop-shadow(0 2px 10px currentColor); }
+
+.car__incidents, .car__cabinet, .car__dec { display: grid; gap: var(--s-3); }
+.incident { display: grid; gap: 4px; padding: var(--s-4); border-left: 3px solid var(--flare); }
+.incident__t { font-size: 1.05rem; }
+
+@media (min-width: 46rem) {
+  .optgrid { grid-template-columns: repeat(3, 1fr); }
+  .optgrid--wide { grid-template-columns: repeat(3, 1fr); }
+  .numgrid { grid-template-columns: repeat(6, 1fr); }
+  .attrs { grid-template-columns: repeat(4, 1fr); }
+  .car__grid { grid-template-columns: repeat(6, 1fr); }
+  .meters { grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+}
+
+/* ---------- il 4-3-3 su cui si sceglie il ruolo ---------- */
+
+.pitch {
+  position: relative;
+  width: 100%;
+  max-width: 22rem;
+  margin-inline: auto;
+  aspect-ratio: 100 / 150;
+  border-radius: var(--r-md);
+  background:
+    linear-gradient(180deg, rgba(17,58,38,0.55), rgba(9,32,21,0.55)),
+    repeating-linear-gradient(180deg,
+      rgba(255,255,255,0.018) 0 8%, transparent 8% 16%);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.pitch__lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.spot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  animation: snap-in 320ms var(--e-spring) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+.spot__dot {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--ink-900);
+  border: 2px solid var(--spot-c, var(--chalk-3));
+  box-shadow: 0 0 0 0 var(--spot-c, transparent);
+  transition: transform var(--d-fast) var(--e-spring), box-shadow var(--d-base) var(--e-out),
+              background var(--d-fast) linear;
+}
+.spot__k { color: var(--spot-c, var(--chalk-3)); font-size: 0.56rem; }
+
+.spot--POR { --spot-c: var(--amber); }
+.spot--DC, .spot--TZ { --spot-c: var(--lime); }
+.spot--MED, .spot--MEZ { --spot-c: var(--sky); }
+.spot--ALA, .spot--PUN { --spot-c: var(--flare); }
+
+.spot:hover .spot__dot, .spot:focus-visible .spot__dot {
+  transform: scale(1.22);
+  background: var(--spot-c);
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--spot-c) 22%, transparent);
+}
+.spot:focus-visible { outline: none; }
+
+/* ---------- numero digitato ---------- */
+
+.car__numform { display: grid; gap: var(--s-3); justify-items: center; }
+.numinput {
+  width: 100%;
+  max-width: 9rem;
+  height: 6rem;
+  text-align: center;
+  font-size: 3.4rem;
+  letter-spacing: 0.02em;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line-strong);
+  background: var(--ink-800);
+  color: var(--lime);
+}
+.numinput::placeholder { color: var(--chalk-4); }
+.numinput:focus { outline: none; border-color: var(--lime); box-shadow: 0 0 0 4px var(--lime-glow); }
+.car__numform .btn { width: 100%; max-width: 22rem; }

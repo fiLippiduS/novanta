@@ -1,0 +1,1486 @@
+{
+ "version": 2,
+ "squads": [
+  {
+   "id": "inter-2010",
+   "name": "Inter",
+   "season": "2009/10",
+   "league": "Serie A",
+   "colors": [
+    "#2A5CD6",
+    "#0B0B0B"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Júlio César",
+    "Francesco Toldo",
+    "Maicon",
+    "Lúcio",
+    "Walter Samuel",
+    "Iván Córdoba",
+    "Cristian Chivu",
+    "Javier Zanetti",
+    "Davide Santon",
+    "Marco Materazzi",
+    "Thiago Motta",
+    "Esteban Cambiasso",
+    "Dejan Stanković",
+    "Wesley Sneijder",
+    "Sulley Muntari",
+    "McDonald Mariga",
+    "Patrick Vieira",
+    "Goran Pandev",
+    "Samuel Eto'o",
+    "Diego Milito",
+    "Mario Balotelli",
+    "Ricardo Quaresma",
+    "Nelson Rivas",
+    "Paolo Orlandoni",
+    "David Suazo",
+    "René Krhin",
+    "Marko Arnautović"
+   ],
+   "aliases": {
+    "Diego Milito": [
+     "principe"
+    ],
+    "Javier Zanetti": [
+     "pupi"
+    ],
+    "Esteban Cambiasso": [
+     "cuchu"
+    ]
+   }
+  },
+  {
+   "id": "milan-2007",
+   "name": "Milan",
+   "season": "2006/07",
+   "league": "Serie A",
+   "colors": [
+    "#E11B22",
+    "#0B0B0B"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Dida",
+    "Željko Kalac",
+    "Cafu",
+    "Alessandro Nesta",
+    "Paolo Maldini",
+    "Kakhaber Kaladze",
+    "Marek Jankulovski",
+    "Daniele Bonera",
+    "Massimo Oddo",
+    "Serginho",
+    "Giuseppe Favalli",
+    "Alessandro Costacurta",
+    "Gennaro Gattuso",
+    "Andrea Pirlo",
+    "Massimo Ambrosini",
+    "Clarence Seedorf",
+    "Cristian Brocchi",
+    "Yoann Gourcuff",
+    "Kaká",
+    "Filippo Inzaghi",
+    "Alberto Gilardino",
+    "Ricardo Oliveira",
+    "Ronaldo",
+    "Marco Storari",
+    "Christian Vieri",
+    "Dario Šimić"
+   ],
+   "aliases": {
+    "Filippo Inzaghi": [
+     "pippo",
+     "superpippo"
+    ],
+    "Alessandro Costacurta": [
+     "billy"
+    ]
+   }
+  },
+  {
+   "id": "barcelona-2015",
+   "name": "Barcelona",
+   "season": "2014/15",
+   "league": "La Liga",
+   "colors": [
+    "#A50044",
+    "#004D98"
+   ],
+   "difficulty": "easy",
+   "players": [
+    "Marc-André ter Stegen",
+    "Claudio Bravo",
+    "Jordi Masip",
+    "Dani Alves",
+    "Gerard Piqué",
+    "Javier Mascherano",
+    "Marc Bartra",
+    "Jordi Alba",
+    "Jérémy Mathieu",
+    "Adriano",
+    "Martín Montoya",
+    "Sergio Busquets",
+    "Xavi",
+    "Andrés Iniesta",
+    "Ivan Rakitić",
+    "Rafinha",
+    "Sergi Roberto",
+    "Lionel Messi",
+    "Neymar",
+    "Luis Suárez",
+    "Pedro",
+    "Munir El Haddadi",
+    "Sandro Ramírez",
+    "Thomas Vermaelen",
+    "Douglas",
+    "Sergi Samper"
+   ],
+   "aliases": {
+    "Lionel Messi": [
+     "leo messi",
+     "pulga"
+    ],
+    "Marc-André ter Stegen": [
+     "ter stegen"
+    ]
+   }
+  },
+  {
+   "id": "real-2017",
+   "name": "Real Madrid",
+   "season": "2016/17",
+   "league": "La Liga",
+   "colors": [
+    "#F0EDE4",
+    "#D4AF37"
+   ],
+   "difficulty": "easy",
+   "players": [
+    "Keylor Navas",
+    "Kiko Casilla",
+    "Dani Carvajal",
+    "Sergio Ramos",
+    "Raphaël Varane",
+    "Nacho",
+    "Pepe",
+    "Marcelo",
+    "Fábio Coentrão",
+    "Danilo",
+    "Toni Kroos",
+    "Luka Modrić",
+    "Casemiro",
+    "Mateo Kovačić",
+    "Isco",
+    "James Rodríguez",
+    "Marco Asensio",
+    "Cristiano Ronaldo",
+    "Karim Benzema",
+    "Gareth Bale",
+    "Álvaro Morata",
+    "Lucas Vázquez",
+    "Mariano Díaz",
+    "Marcos Llorente",
+    "Enzo Zidane"
+   ],
+   "aliases": {
+    "Cristiano Ronaldo": [
+     "cr7",
+     "cristiano"
+    ],
+    "Karim Benzema": [
+     "benz"
+    ]
+   }
+  },
+  {
+   "id": "city-2023",
+   "name": "Manchester City",
+   "season": "2022/23",
+   "league": "Premier League",
+   "colors": [
+    "#7FC3E8",
+    "#0B2B4B"
+   ],
+   "difficulty": "easy",
+   "players": [
+    "Ederson",
+    "Stefan Ortega",
+    "Kyle Walker",
+    "Rúben Dias",
+    "Manuel Akanji",
+    "John Stones",
+    "Nathan Aké",
+    "Aymeric Laporte",
+    "João Cancelo",
+    "Sergio Gómez",
+    "Rico Lewis",
+    "Rodri",
+    "Kevin De Bruyne",
+    "İlkay Gündoğan",
+    "Bernardo Silva",
+    "Jack Grealish",
+    "Phil Foden",
+    "Riyad Mahrez",
+    "Kalvin Phillips",
+    "Julián Álvarez",
+    "Erling Haaland",
+    "Cole Palmer",
+    "Scott Carson",
+    "Máximo Perrone"
+   ],
+   "aliases": {
+    "Kevin De Bruyne": [
+     "kdb"
+    ],
+    "Erling Haaland": [
+     "haland"
+    ]
+   }
+  },
+  {
+   "id": "liverpool-2019",
+   "name": "Liverpool",
+   "season": "2018/19",
+   "league": "Premier League",
+   "colors": [
+    "#D4141E",
+    "#F5C542"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Alisson",
+    "Simon Mignolet",
+    "Trent Alexander-Arnold",
+    "Virgil van Dijk",
+    "Joël Matip",
+    "Joe Gomez",
+    "Dejan Lovren",
+    "Andrew Robertson",
+    "Alberto Moreno",
+    "Nathaniel Clyne",
+    "James Milner",
+    "Jordan Henderson",
+    "Georginio Wijnaldum",
+    "Fabinho",
+    "Naby Keïta",
+    "Xherdan Shaqiri",
+    "Adam Lallana",
+    "Mohamed Salah",
+    "Sadio Mané",
+    "Roberto Firmino",
+    "Divock Origi",
+    "Daniel Sturridge",
+    "Ki-Jana Hoever",
+    "Adam Bogdan"
+   ],
+   "aliases": {
+    "Trent Alexander-Arnold": [
+     "taa",
+     "trent",
+     "alexander arnold"
+    ],
+    "Mohamed Salah": [
+     "mo salah"
+    ]
+   }
+  },
+  {
+   "id": "juventus-2020",
+   "name": "Juventus",
+   "season": "2019/20",
+   "league": "Serie A",
+   "colors": [
+    "#F0EDE4",
+    "#0B0B0B"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Wojciech Szczęsny",
+    "Gianluigi Buffon",
+    "Juan Cuadrado",
+    "Leonardo Bonucci",
+    "Matthijs de Ligt",
+    "Giorgio Chiellini",
+    "Danilo",
+    "Alex Sandro",
+    "Mattia De Sciglio",
+    "Daniele Rugani",
+    "Miralem Pjanić",
+    "Blaise Matuidi",
+    "Adrien Rabiot",
+    "Rodrigo Bentancur",
+    "Sami Khedira",
+    "Aaron Ramsey",
+    "Cristiano Ronaldo",
+    "Paulo Dybala",
+    "Gonzalo Higuaín",
+    "Douglas Costa",
+    "Federico Bernardeschi",
+    "Merih Demiral",
+    "Carlo Pinsoglio",
+    "Marko Pjaca",
+    "Luca Coccolo"
+   ],
+   "aliases": {
+    "Gianluigi Buffon": [
+     "gigi buffon",
+     "gigi"
+    ],
+    "Cristiano Ronaldo": [
+     "cr7",
+     "cristiano"
+    ],
+    "Wojciech Szczęsny": [
+     "szczesny"
+    ]
+   }
+  },
+  {
+   "id": "napoli-2023",
+   "name": "Napoli",
+   "season": "2022/23",
+   "league": "Serie A",
+   "colors": [
+    "#3AA7E0",
+    "#0B2B4B"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Alex Meret",
+    "Pierluigi Gollini",
+    "Giovanni Di Lorenzo",
+    "Kim Min-jae",
+    "Amir Rrahmani",
+    "Juan Jesus",
+    "Leo Østigård",
+    "Mathías Olivera",
+    "Mário Rui",
+    "Stanislav Lobotka",
+    "André-Frank Zambo Anguissa",
+    "Piotr Zieliński",
+    "Eljif Elmas",
+    "Tanguy Ndombélé",
+    "Diego Demme",
+    "Khvicha Kvaratskhelia",
+    "Matteo Politano",
+    "Hirving Lozano",
+    "Victor Osimhen",
+    "Giacomo Raspadori",
+    "Giovanni Simeone",
+    "Alessio Zerbin",
+    "Salvatore Sirigu",
+    "Bartosz Bereszyński",
+    "Giuseppe Ambrosino"
+   ],
+   "aliases": {
+    "Khvicha Kvaratskhelia": [
+     "kvara",
+     "kvaradona"
+    ],
+    "André-Frank Zambo Anguissa": [
+     "anguissa",
+     "zambo"
+    ],
+    "Hirving Lozano": [
+     "chucky"
+    ],
+    "Kim Min-jae": [
+     "kim",
+     "minjae"
+    ]
+   }
+  },
+  {
+   "id": "chelsea-2012",
+   "name": "Chelsea",
+   "season": "2011/12",
+   "league": "Premier League",
+   "colors": [
+    "#1B4EC9",
+    "#F0EDE4"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Petr Čech",
+    "Ross Turnbull",
+    "Branislav Ivanović",
+    "John Terry",
+    "David Luiz",
+    "Gary Cahill",
+    "Ashley Cole",
+    "José Bosingwa",
+    "Paulo Ferreira",
+    "Ryan Bertrand",
+    "Frank Lampard",
+    "John Obi Mikel",
+    "Ramires",
+    "Raul Meireles",
+    "Michael Essien",
+    "Florent Malouda",
+    "Juan Mata",
+    "Daniel Sturridge",
+    "Fernando Torres",
+    "Didier Drogba",
+    "Salomon Kalou",
+    "Oriol Romeu",
+    "Josh McEachran",
+    "Sam Hutchinson"
+   ],
+   "aliases": {
+    "Petr Čech": [
+     "cech"
+    ],
+    "John Obi Mikel": [
+     "mikel"
+    ]
+   }
+  },
+  {
+   "id": "bayern-2020",
+   "name": "Bayern",
+   "season": "2019/20",
+   "league": "Bundesliga",
+   "colors": [
+    "#DC052D",
+    "#0B2B6B"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Manuel Neuer",
+    "Sven Ulreich",
+    "Joshua Kimmich",
+    "Jérôme Boateng",
+    "David Alaba",
+    "Alphonso Davies",
+    "Benjamin Pavard",
+    "Niklas Süle",
+    "Lucas Hernández",
+    "Javi Martínez",
+    "Thiago Alcântara",
+    "Leon Goretzka",
+    "Corentin Tolisso",
+    "Thomas Müller",
+    "Kingsley Coman",
+    "Serge Gnabry",
+    "Ivan Perišić",
+    "Philippe Coutinho",
+    "Robert Lewandowski",
+    "Michaël Cuisance",
+    "Alvaro Odriozola",
+    "Christian Früchtl",
+    "Joshua Zirkzee"
+   ],
+   "aliases": {
+    "Robert Lewandowski": [
+     "lewa"
+    ],
+    "Thiago Alcântara": [
+     "thiago"
+    ]
+   }
+  },
+  {
+   "id": "united-2008",
+   "name": "Manchester United",
+   "season": "2007/08",
+   "league": "Premier League",
+   "colors": [
+    "#DA291C",
+    "#F5C542"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Edwin van der Sar",
+    "Tomasz Kuszczak",
+    "Wes Brown",
+    "Rio Ferdinand",
+    "Nemanja Vidić",
+    "Patrice Evra",
+    "John O'Shea",
+    "Mikaël Silvestre",
+    "Gary Neville",
+    "Michael Carrick",
+    "Paul Scholes",
+    "Owen Hargreaves",
+    "Anderson",
+    "Darren Fletcher",
+    "Ryan Giggs",
+    "Nani",
+    "Ji-sung Park",
+    "Cristiano Ronaldo",
+    "Wayne Rooney",
+    "Carlos Tévez",
+    "Louis Saha",
+    "Fraizer Campbell",
+    "Ben Foster",
+    "Danny Simpson",
+    "Chris Eagles"
+   ],
+   "aliases": {
+    "Edwin van der Sar": [
+     "van der sar"
+    ],
+    "Cristiano Ronaldo": [
+     "cr7",
+     "cristiano"
+    ],
+    "Ji-sung Park": [
+     "park"
+    ]
+   }
+  },
+  {
+   "id": "atletico-2014",
+   "name": "Atlético Madrid",
+   "season": "2013/14",
+   "league": "La Liga",
+   "colors": [
+    "#CB3524",
+    "#F0EDE4"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Thibaut Courtois",
+    "Daniel Aranzubia",
+    "Juanfran",
+    "Diego Godín",
+    "Miranda",
+    "Filipe Luís",
+    "Emiliano Insúa",
+    "Toby Alderweireld",
+    "Javier Manquillo",
+    "Tiago",
+    "Gabi",
+    "Mario Suárez",
+    "Koke",
+    "Raúl García",
+    "Arda Turan",
+    "Diego Ribas",
+    "José Sosa",
+    "Diego Costa",
+    "David Villa",
+    "Adrián López",
+    "Leo Baptistão",
+    "Jesús Gámez",
+    "Cristian Rodríguez",
+    "Josuha Guilavogui"
+   ],
+   "aliases": {
+    "Diego Ribas": [
+     "diego"
+    ]
+   }
+  },
+  {
+   "id": "roma-2001",
+   "name": "Roma",
+   "season": "2000/01",
+   "league": "Serie A",
+   "colors": [
+    "#8E1F2F",
+    "#E2A72E"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Francesco Antonioli",
+    "Cristiano Lupatelli",
+    "Cafu",
+    "Walter Samuel",
+    "Zago",
+    "Aldair",
+    "Vincent Candela",
+    "Cristiano Zanetti",
+    "Jonathan Zebina",
+    "Damiano Tommasi",
+    "Emerson",
+    "Marcos Assunção",
+    "Hidetoshi Nakata",
+    "Gaetano D'Agostino",
+    "Francesco Totti",
+    "Vincenzo Montella",
+    "Gabriel Batistuta",
+    "Marco Delvecchio",
+    "Gianni Guigou",
+    "Gustavo Bartelt",
+    "Eusebio Di Francesco",
+    "Ivan Pelizzoli",
+    "Saliou Lassissi"
+   ],
+   "aliases": {
+    "Francesco Totti": [
+     "totti",
+     "er pupone"
+    ],
+    "Gabriel Batistuta": [
+     "batigol",
+     "bati"
+    ],
+    "Vincenzo Montella": [
+     "aeroplanino"
+    ]
+   }
+  },
+  {
+   "id": "arsenal-2004",
+   "name": "Arsenal",
+   "season": "2003/04",
+   "league": "Premier League",
+   "colors": [
+    "#EF0107",
+    "#F0EDE4"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Jens Lehmann",
+    "Stuart Taylor",
+    "Lauren",
+    "Sol Campbell",
+    "Kolo Touré",
+    "Ashley Cole",
+    "Martin Keown",
+    "Pascal Cygan",
+    "Gaël Clichy",
+    "Patrick Vieira",
+    "Gilberto Silva",
+    "Edu",
+    "Ray Parlour",
+    "Robert Pirès",
+    "Fredrik Ljungberg",
+    "Thierry Henry",
+    "Dennis Bergkamp",
+    "José Antonio Reyes",
+    "Nwankwo Kanu",
+    "Sylvain Wiltord",
+    "Jérémie Aliadière",
+    "Graham Stack",
+    "Justin Hoyte",
+    "David Bentley"
+   ],
+   "aliases": {
+    "Fredrik Ljungberg": [
+     "freddie ljungberg",
+     "ljungberg"
+    ],
+    "Nwankwo Kanu": [
+     "kanu"
+    ]
+   }
+  },
+  {
+   "id": "italia-2006",
+   "name": "Italia",
+   "season": "2006",
+   "league": "Mondiali",
+   "colors": [
+    "#1E5AA8",
+    "#F0EDE4"
+   ],
+   "difficulty": "easy",
+   "players": [
+    "Gianluigi Buffon",
+    "Angelo Peruzzi",
+    "Marco Amelia",
+    "Fabio Cannavaro",
+    "Marco Materazzi",
+    "Alessandro Nesta",
+    "Cristian Zaccardo",
+    "Andrea Barzagli",
+    "Gianluca Zambrotta",
+    "Fabio Grosso",
+    "Massimo Oddo",
+    "Andrea Pirlo",
+    "Gennaro Gattuso",
+    "Daniele De Rossi",
+    "Simone Perrotta",
+    "Mauro Camoranesi",
+    "Simone Barone",
+    "Francesco Totti",
+    "Alessandro Del Piero",
+    "Luca Toni",
+    "Alberto Gilardino",
+    "Vincenzo Iaquinta",
+    "Filippo Inzaghi"
+   ],
+   "aliases": {
+    "Gianluigi Buffon": [
+     "gigi buffon",
+     "gigi"
+    ],
+    "Alessandro Del Piero": [
+     "del piero",
+     "adp"
+    ],
+    "Filippo Inzaghi": [
+     "pippo inzaghi"
+    ]
+   }
+  },
+  {
+   "id": "brasile-2002",
+   "name": "Brasile",
+   "season": "2002",
+   "league": "Mondiali",
+   "colors": [
+    "#F7DF1E",
+    "#009C3B"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Marcos",
+    "Dida",
+    "Rogério Ceni",
+    "Cafu",
+    "Lúcio",
+    "Roque Júnior",
+    "Edmílson",
+    "Roberto Carlos",
+    "Júnior",
+    "Anderson Polga",
+    "Belletti",
+    "Gilberto Silva",
+    "Kléberson",
+    "Juninho Paulista",
+    "Ricardinho",
+    "Vampeta",
+    "Rivaldo",
+    "Ronaldinho",
+    "Ronaldo",
+    "Denílson",
+    "Edílson",
+    "Luizão",
+    "Kaká"
+   ],
+   "aliases": {
+    "Ronaldo": [
+     "fenomeno",
+     "ronaldo nazario"
+    ]
+   }
+  },
+  {
+   "id": "francia-2018",
+   "name": "Francia",
+   "season": "2018",
+   "league": "Mondiali",
+   "colors": [
+    "#1E3A8A",
+    "#F0EDE4"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Hugo Lloris",
+    "Steve Mandanda",
+    "Alphonse Areola",
+    "Benjamin Pavard",
+    "Raphaël Varane",
+    "Samuel Umtiti",
+    "Lucas Hernández",
+    "Presnel Kimpembe",
+    "Djibril Sidibé",
+    "Adil Rami",
+    "Benjamin Mendy",
+    "N'Golo Kanté",
+    "Paul Pogba",
+    "Blaise Matuidi",
+    "Corentin Tolisso",
+    "Steven Nzonzi",
+    "Nabil Fekir",
+    "Thomas Lemar",
+    "Antoine Griezmann",
+    "Kylian Mbappé",
+    "Olivier Giroud",
+    "Ousmane Dembélé",
+    "Florian Thauvin"
+   ],
+   "aliases": {
+    "N'Golo Kanté": [
+     "kante"
+    ],
+    "Kylian Mbappé": [
+     "mbappe"
+    ]
+   }
+  },
+  {
+   "id": "spagna-2010",
+   "name": "Spagna",
+   "season": "2010",
+   "league": "Mondiali",
+   "colors": [
+    "#C60B1E",
+    "#FFC400"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Iker Casillas",
+    "Víctor Valdés",
+    "Pepe Reina",
+    "Sergio Ramos",
+    "Gerard Piqué",
+    "Carles Puyol",
+    "Joan Capdevila",
+    "Álvaro Arbeloa",
+    "Raúl Albiol",
+    "Carlos Marchena",
+    "Sergio Busquets",
+    "Xabi Alonso",
+    "Xavi",
+    "Andrés Iniesta",
+    "Cesc Fàbregas",
+    "David Silva",
+    "Jesús Navas",
+    "David Villa",
+    "Fernando Torres",
+    "Pedro",
+    "Fernando Llorente",
+    "Juan Mata",
+    "Javi Martínez"
+   ],
+   "aliases": {
+    "Cesc Fàbregas": [
+     "fabregas",
+     "cesc"
+    ],
+    "Pepe Reina": [
+     "reina"
+    ]
+   }
+  },
+  {
+   "id": "argentina-2022",
+   "name": "Argentina",
+   "season": "2022",
+   "league": "Mondiali",
+   "colors": [
+    "#75AADB",
+    "#F0EDE4"
+   ],
+   "difficulty": "easy",
+   "players": [
+    "Emiliano Martínez",
+    "Franco Armani",
+    "Gerónimo Rulli",
+    "Nahuel Molina",
+    "Cristian Romero",
+    "Nicolás Otamendi",
+    "Nicolás Tagliafico",
+    "Marcos Acuña",
+    "Gonzalo Montiel",
+    "Lisandro Martínez",
+    "Germán Pezzella",
+    "Juan Foyth",
+    "Rodrigo De Paul",
+    "Enzo Fernández",
+    "Alexis Mac Allister",
+    "Leandro Paredes",
+    "Guido Rodríguez",
+    "Alejandro Gómez",
+    "Ángel Di María",
+    "Lionel Messi",
+    "Julián Álvarez",
+    "Lautaro Martínez",
+    "Paulo Dybala",
+    "Ángel Correa",
+    "Exequiel Palacios",
+    "Thiago Almada"
+   ],
+   "aliases": {
+    "Emiliano Martínez": [
+     "dibu",
+     "dibu martinez",
+     "emi martinez"
+    ],
+    "Lisandro Martínez": [
+     "licha",
+     "lisandro"
+    ],
+    "Lautaro Martínez": [
+     "lautaro",
+     "el toro"
+    ],
+    "Alejandro Gómez": [
+     "papu",
+     "papu gomez"
+    ],
+    "Lionel Messi": [
+     "leo messi"
+    ],
+    "Ángel Di María": [
+     "fideo"
+    ]
+   }
+  },
+  {
+   "id": "dortmund-2013",
+   "name": "Borussia Dortmund",
+   "season": "2012/13",
+   "league": "Bundesliga",
+   "colors": [
+    "#FDE100",
+    "#0B0B0B"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Roman Weidenfeller",
+    "Mitchell Langerak",
+    "Łukasz Piszczek",
+    "Mats Hummels",
+    "Neven Subotić",
+    "Marcel Schmelzer",
+    "Felipe Santana",
+    "Sven Bender",
+    "İlkay Gündoğan",
+    "Sebastian Kehl",
+    "Nuri Şahin",
+    "Marco Reus",
+    "Mario Götze",
+    "Jakub Błaszczykowski",
+    "Kevin Großkreutz",
+    "Robert Lewandowski",
+    "Julian Schieber",
+    "Ivan Perišić",
+    "Moritz Leitner",
+    "Oliver Kirch",
+    "Leonardo Bittencourt"
+   ],
+   "aliases": {
+    "Jakub Błaszczykowski": [
+     "kuba",
+     "blaszczykowski"
+    ],
+    "Robert Lewandowski": [
+     "lewa"
+    ]
+   }
+  },
+  {
+   "id": "leicester-2016",
+   "name": "Leicester City",
+   "season": "2015/16",
+   "league": "Premier League",
+   "colors": [
+    "#003090",
+    "#FDBE11"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Kasper Schmeichel",
+    "Mark Schwarzer",
+    "Danny Simpson",
+    "Wes Morgan",
+    "Robert Huth",
+    "Christian Fuchs",
+    "Marcin Wasilewski",
+    "Ben Chilwell",
+    "Daniel Amartey",
+    "Danny Drinkwater",
+    "N'Golo Kanté",
+    "Marc Albrighton",
+    "Riyad Mahrez",
+    "Shinji Okazaki",
+    "Jamie Vardy",
+    "Leonardo Ulloa",
+    "Demarai Gray",
+    "Andy King",
+    "Gökhan İnler",
+    "Jeffrey Schlupp",
+    "Ron-Robert Zieler",
+    "Nathan Dyer",
+    "Joe Dodoo"
+   ],
+   "aliases": {
+    "N'Golo Kanté": [
+     "kante"
+    ]
+   }
+  },
+  {
+   "id": "ajax-2019",
+   "name": "Ajax",
+   "season": "2018/19",
+   "league": "Eredivisie",
+   "colors": [
+    "#D2122E",
+    "#F0EDE4"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "André Onana",
+    "Kostas Lamprou",
+    "Noussair Mazraoui",
+    "Matthijs de Ligt",
+    "Daley Blind",
+    "Nicolás Tagliafico",
+    "Joël Veltman",
+    "Rasmus Kristensen",
+    "Frenkie de Jong",
+    "Lasse Schöne",
+    "Donny van de Beek",
+    "Carel Eiting",
+    "Hakim Ziyech",
+    "David Neres",
+    "Dušan Tadić",
+    "Kasper Dolberg",
+    "Klaas-Jan Huntelaar",
+    "Zakaria Labyad",
+    "Daley Sinkgraven",
+    "Bruno Varela",
+    "Perr Schuurs",
+    "Ekkelenkamp"
+   ],
+   "aliases": {
+    "Frenkie de Jong": [
+     "de jong",
+     "frenkie"
+    ],
+    "Klaas-Jan Huntelaar": [
+     "huntelaar"
+    ],
+    "Donny van de Beek": [
+     "van de beek"
+    ]
+   }
+  },
+  {
+   "id": "united-1999",
+   "name": "Manchester United",
+   "season": "1998/99",
+   "league": "Premier League",
+   "colors": [
+    "#DA291C",
+    "#F5C542"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Peter Schmeichel",
+    "Raimond van der Gouw",
+    "Gary Neville",
+    "Phil Neville",
+    "Jaap Stam",
+    "Ronny Johnsen",
+    "Denis Irwin",
+    "David May",
+    "Henning Berg",
+    "Wes Brown",
+    "Roy Keane",
+    "Paul Scholes",
+    "Nicky Butt",
+    "David Beckham",
+    "Ryan Giggs",
+    "Jesper Blomqvist",
+    "Jordi Cruyff",
+    "Dwight Yorke",
+    "Andy Cole",
+    "Teddy Sheringham",
+    "Ole Gunnar Solskjær",
+    "Karel Poborský"
+   ],
+   "aliases": {
+    "Ole Gunnar Solskjær": [
+     "solskjaer"
+    ],
+    "David Beckham": [
+     "becks"
+    ]
+   }
+  },
+  {
+   "id": "milan-1994",
+   "name": "Milan",
+   "season": "1993/94",
+   "league": "Serie A",
+   "colors": [
+    "#E11B22",
+    "#0B0B0B"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Sebastiano Rossi",
+    "Mario Ielpo",
+    "Mauro Tassotti",
+    "Franco Baresi",
+    "Paolo Maldini",
+    "Alessandro Costacurta",
+    "Christian Panucci",
+    "Filippo Galli",
+    "Marcel Desailly",
+    "Demetrio Albertini",
+    "Roberto Donadoni",
+    "Zvonimir Boban",
+    "Dejan Savićević",
+    "Stefano Eranio",
+    "Marco Simone",
+    "Daniele Massaro",
+    "Jean-Pierre Papin",
+    "Florin Răducioiu",
+    "Gianluigi Lentini",
+    "Brian Laudrup",
+    "Stefano Nava"
+   ],
+   "aliases": {
+    "Franco Baresi": [
+     "baresi"
+    ],
+    "Dejan Savićević": [
+     "savicevic",
+     "il genio"
+    ]
+   }
+  },
+  {
+   "id": "real-2003",
+   "name": "Real Madrid",
+   "season": "2002/03",
+   "league": "La Liga",
+   "colors": [
+    "#F0EDE4",
+    "#D4AF37"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Iker Casillas",
+    "César Sánchez",
+    "Míchel Salgado",
+    "Fernando Hierro",
+    "Iván Helguera",
+    "Roberto Carlos",
+    "Aitor Karanka",
+    "Francisco Pavón",
+    "Raúl Bravo",
+    "Claude Makélélé",
+    "Guti",
+    "Zinédine Zidane",
+    "Luís Figo",
+    "Steve McManaman",
+    "Santiago Solari",
+    "Esteban Cambiasso",
+    "Flávio Conceição",
+    "Raúl",
+    "Fernando Morientes",
+    "Ronaldo",
+    "Javier Portillo"
+   ],
+   "aliases": {
+    "Zinédine Zidane": [
+     "zidane",
+     "zizou"
+    ],
+    "Luís Figo": [
+     "figo"
+    ],
+    "Ronaldo": [
+     "fenomeno"
+    ]
+   }
+  },
+  {
+   "id": "ajax-1995",
+   "name": "Ajax",
+   "season": "1994/95",
+   "league": "Eredivisie",
+   "colors": [
+    "#D2122E",
+    "#F0EDE4"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Edwin van der Sar",
+    "Fred Grim",
+    "Michael Reiziger",
+    "Danny Blind",
+    "Frank de Boer",
+    "Winston Bogarde",
+    "Sonny Silooy",
+    "Frank Rijkaard",
+    "Ronald de Boer",
+    "Edgar Davids",
+    "Clarence Seedorf",
+    "Jari Litmanen",
+    "Marc Overmars",
+    "Finidi George",
+    "Patrick Kluivert",
+    "Nwankwo Kanu",
+    "Peter van Vossen",
+    "Nordin Wooter",
+    "John Veldman"
+   ],
+   "aliases": {
+    "Edwin van der Sar": [
+     "van der sar"
+    ],
+    "Patrick Kluivert": [
+     "kluivert"
+    ]
+   }
+  },
+  {
+   "id": "brasile-1970",
+   "name": "Brasile",
+   "season": "1970",
+   "league": "Mondiali",
+   "colors": [
+    "#F7DF1E",
+    "#009C3B"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Félix",
+    "Ado",
+    "Leão",
+    "Carlos Alberto",
+    "Brito",
+    "Piazza",
+    "Everaldo",
+    "Marco Antônio",
+    "Zé Maria",
+    "Fontana",
+    "Baldocchi",
+    "Clodoaldo",
+    "Gérson",
+    "Rivelino",
+    "Paulo César",
+    "Jairzinho",
+    "Tostão",
+    "Pelé",
+    "Roberto Miranda",
+    "Edu",
+    "Dario"
+   ],
+   "aliases": {
+    "Pelé": [
+     "pele",
+     "o rei"
+    ],
+    "Carlos Alberto": [
+     "carlos alberto torres"
+    ]
+   }
+  },
+  {
+   "id": "barcelona-2009",
+   "name": "Barcelona",
+   "season": "2008/09",
+   "league": "La Liga",
+   "colors": [
+    "#A50044",
+    "#004D98"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Víctor Valdés",
+    "José Manuel Pinto",
+    "Dani Alves",
+    "Carles Puyol",
+    "Gerard Piqué",
+    "Rafael Márquez",
+    "Éric Abidal",
+    "Martín Cáceres",
+    "Sylvinho",
+    "Gabriel Milito",
+    "Yaya Touré",
+    "Sergio Busquets",
+    "Xavi",
+    "Andrés Iniesta",
+    "Seydou Keita",
+    "Aleksandr Hleb",
+    "Eiður Guðjohnsen",
+    "Lionel Messi",
+    "Samuel Eto'o",
+    "Thierry Henry",
+    "Bojan Krkić",
+    "Pedro"
+   ],
+   "aliases": {
+    "Eiður Guðjohnsen": [
+     "gudjohnsen"
+    ],
+    "Lionel Messi": [
+     "leo messi"
+    ],
+    "Víctor Valdés": [
+     "valdes"
+    ]
+   }
+  },
+  {
+   "id": "chelsea-2021",
+   "name": "Chelsea",
+   "season": "2020/21",
+   "league": "Premier League",
+   "colors": [
+    "#1B4EC9",
+    "#F0EDE4"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Édouard Mendy",
+    "Kepa Arrizabalaga",
+    "César Azpilicueta",
+    "Antonio Rüdiger",
+    "Thiago Silva",
+    "Andreas Christensen",
+    "Kurt Zouma",
+    "Ben Chilwell",
+    "Marcos Alonso",
+    "Reece James",
+    "Jorginho",
+    "N'Golo Kanté",
+    "Mateo Kovačić",
+    "Mason Mount",
+    "Kai Havertz",
+    "Timo Werner",
+    "Christian Pulisic",
+    "Hakim Ziyech",
+    "Callum Hudson-Odoi",
+    "Olivier Giroud",
+    "Tammy Abraham",
+    "Billy Gilmour"
+   ],
+   "aliases": {
+    "Kepa Arrizabalaga": [
+     "kepa"
+    ],
+    "N'Golo Kanté": [
+     "kante"
+    ],
+    "César Azpilicueta": [
+     "azpilicueta",
+     "dave"
+    ]
+   }
+  },
+  {
+   "id": "germania-2014",
+   "name": "Germania",
+   "season": "2014",
+   "league": "Mondiali",
+   "colors": [
+    "#F0EDE4",
+    "#0B0B0B"
+   ],
+   "difficulty": "medium",
+   "players": [
+    "Manuel Neuer",
+    "Roman Weidenfeller",
+    "Ron-Robert Zieler",
+    "Philipp Lahm",
+    "Jérôme Boateng",
+    "Mats Hummels",
+    "Per Mertesacker",
+    "Benedikt Höwedes",
+    "Erik Durm",
+    "Matthias Ginter",
+    "Shkodran Mustafi",
+    "Kevin Großkreutz",
+    "Sami Khedira",
+    "Bastian Schweinsteiger",
+    "Toni Kroos",
+    "Mesut Özil",
+    "Christoph Kramer",
+    "Mario Götze",
+    "Thomas Müller",
+    "Miroslav Klose",
+    "André Schürrle",
+    "Lukas Podolski",
+    "Julian Draxler"
+   ],
+   "aliases": {
+    "Bastian Schweinsteiger": [
+     "schweini",
+     "schweinsteiger"
+    ],
+    "Mesut Özil": [
+     "ozil"
+    ]
+   }
+  },
+  {
+   "id": "argentina-1986",
+   "name": "Argentina",
+   "season": "1986",
+   "league": "Mondiali",
+   "colors": [
+    "#75AADB",
+    "#F0EDE4"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Nery Pumpido",
+    "Luis Islas",
+    "Héctor Zelada",
+    "José Luis Brown",
+    "Óscar Ruggeri",
+    "Néstor Clausen",
+    "José Luis Cuciuffo",
+    "Oscar Garré",
+    "Julio Olarticoechea",
+    "Sergio Batista",
+    "Ricardo Giusti",
+    "Jorge Burruchaga",
+    "Héctor Enrique",
+    "Diego Maradona",
+    "Jorge Valdano",
+    "Claudio Borghi",
+    "Pedro Pasculli",
+    "Ricardo Bochini",
+    "Carlos Tapia",
+    "Marcelo Trobbiani"
+   ],
+   "aliases": {
+    "Diego Maradona": [
+     "maradona",
+     "d10s",
+     "pibe de oro"
+    ]
+   }
+  },
+  {
+   "id": "portogallo-2016",
+   "name": "Portogallo",
+   "season": "2016",
+   "league": "Europei",
+   "colors": [
+    "#C60B1E",
+    "#0B7A3B"
+   ],
+   "difficulty": "hard",
+   "players": [
+    "Rui Patrício",
+    "Anthony Lopes",
+    "Eduardo",
+    "Pepe",
+    "Bruno Alves",
+    "José Fonte",
+    "Ricardo Carvalho",
+    "Cédric Soares",
+    "Vieirinha",
+    "Raphaël Guerreiro",
+    "Eliseu",
+    "William Carvalho",
+    "Danilo Pereira",
+    "João Moutinho",
+    "Adrien Silva",
+    "André Gomes",
+    "Renato Sanches",
+    "João Mário",
+    "Cristiano Ronaldo",
+    "Nani",
+    "Ricardo Quaresma",
+    "Éder",
+    "Rafa Silva"
+   ],
+   "aliases": {
+    "Cristiano Ronaldo": [
+     "cr7",
+     "cristiano"
+    ],
+    "Rui Patrício": [
+     "patricio"
+    ]
+   }
+  }
+ ]
+}

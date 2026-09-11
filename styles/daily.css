@@ -1,0 +1,110 @@
+/* IL NOVANTESIMO */
+
+.daily { display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
+
+.daily__score { font-size: 2.2rem; line-height: 1; color: var(--chalk); }
+
+/* ---- avanzamento a cinque pallini ---- */
+.pips { display: flex; gap: var(--s-2); }
+.pip {
+  flex: 1;
+  height: 5px;
+  border-radius: var(--r-pill);
+  background: rgba(237, 232, 218, 0.10);
+  transition: background var(--d-base) linear, transform var(--d-base) var(--e-spring);
+}
+.pip--now { background: rgba(237, 232, 218, 0.30); transform: scaleY(1.8); }
+.pip--full { background: var(--lime); }
+.pip--part { background: var(--amber); }
+.pip--miss { background: var(--flare); opacity: 0.7; }
+
+/* ---- la domanda ---- */
+.qcard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-5);
+  --misreg-color: var(--sky);
+}
+.qcard__prompt { color: var(--chalk); max-width: 26ch; }
+.qcard__note { font-size: var(--t-sm); }
+
+.clues { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.clue {
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  background: rgba(0, 0, 0, 0.28);
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+.clue--big { font-size: var(--t-md); }
+
+/* i due nomi restano uno sopra l'altro con la e commerciale in mezzo:
+   affiancarli mandava a capo la congiunzione da sola */
+.pair {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-2);
+}
+.pair__amp { font-size: 1.4rem; color: var(--chalk-4); padding-left: var(--s-3); }
+
+@media (min-width: 34rem) {
+  .pair { grid-auto-flow: column; justify-content: start; align-items: center; gap: var(--s-3); }
+  .pair__amp { padding-left: 0; }
+}
+
+.btn--sm { min-height: 38px; font-size: 0.9rem; padding-inline: var(--s-4); align-self: flex-start; }
+
+/* ---- le risposte ---- */
+.options { display: grid; gap: var(--s-2); }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 56px;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-800);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--t-md);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--d-fast) var(--e-spring), border-color var(--d-fast) linear,
+              background var(--d-fast) linear;
+}
+.option:hover:not(:disabled) { transform: translateX(4px); border-color: var(--line-strong); background: var(--ink-700); }
+.option:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.option:disabled { cursor: default; opacity: 0.55; }
+
+.option--right {
+  opacity: 1;
+  border-color: var(--lime);
+  background: color-mix(in srgb, var(--lime) 14%, transparent);
+}
+.option--wrong {
+  opacity: 1;
+  border-color: var(--flare);
+  background: color-mix(in srgb, var(--flare) 12%, transparent);
+}
+
+.option .crest { transform: rotate(-2deg); }
+
+/* ---- risultato condivisibile ---- */
+.sharegrid {
+  font-size: 1.6rem;
+  letter-spacing: 0.18em;
+  margin-block: var(--s-2) var(--s-4);
+}
+
+.soon { display: grid; gap: var(--s-4); justify-items: start; padding: var(--s-7) var(--s-5); margin-top: var(--s-5); }
+.soon p { max-width: 40ch; }
+
+@media (min-width: 46rem) {
+  .options { grid-template-columns: 1fr 1fr; }
+  .daily__score { font-size: 2.8rem; }
+}

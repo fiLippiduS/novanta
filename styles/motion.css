@@ -1,0 +1,102 @@
+/* NOVANTA — movimento condiviso.
+   Tutto entra dal campo, con una rotazione di frazione di grado. */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px) rotate(var(--tilt, -0.4deg)); }
+  to   { opacity: 1; transform: translateY(0) rotate(var(--tilt, -0.4deg)); }
+}
+
+@keyframes snap-in {
+  0%   { opacity: 0; transform: scale(0.72) rotate(-3deg); }
+  60%  { opacity: 1; transform: scale(1.06) rotate(0.8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(var(--tilt, 0deg)); }
+}
+
+@keyframes shake-x {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-7px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(3px); }
+  80% { transform: translateX(-1px); }
+}
+
+@keyframes pulse-ring {
+  from { box-shadow: 0 0 0 0 var(--ring-color, var(--lime-glow)); }
+  to   { box-shadow: 0 0 0 22px transparent; }
+}
+
+@keyframes wave-out {
+  from { opacity: 0.85; transform: scale(0.2); }
+  to   { opacity: 0; transform: scale(2.6); }
+}
+
+@keyframes flash-bad {
+  0%, 100% { background-color: transparent; }
+  25% { background-color: var(--flare-glow); }
+}
+
+@keyframes drift-up {
+  from { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  to   { opacity: 0; transform: translate(-50%, -46px) scale(1.18); }
+}
+
+@keyframes overtake {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-14px); opacity: 0; }
+  41%  { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes tick-urgent {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+
+@keyframes sweep {
+  from { transform: translateX(-110%); }
+  to   { transform: translateX(110%); }
+}
+
+/* classi applicabili */
+.anim-rise  { animation: rise-in var(--d-slow) var(--e-out) both; }
+.anim-snap  { animation: snap-in var(--d-slow) var(--e-spring) both; }
+.anim-shake { animation: shake-x 420ms var(--e-out); }
+.anim-ring  { animation: pulse-ring 640ms var(--e-out); }
+
+/* onda che parte dal punto d'origine di un evento */
+.wave {
+  position: fixed;
+  z-index: 800;
+  width: 90px; height: 90px;
+  margin: -45px 0 0 -45px;
+  border-radius: 50%;
+  border: 2px solid var(--wave-color, var(--lime));
+  pointer-events: none;
+  animation: wave-out 620ms var(--e-out) forwards;
+}
+
+/* numero che vola via verso l'alto (+1, +30s) */
+.float-gain {
+  position: fixed;
+  z-index: 810;
+  transform: translate(-50%, 0);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--gain-color, var(--lime));
+  pointer-events: none;
+  text-shadow: 0 2px 18px var(--lime-glow);
+  animation: drift-up 720ms var(--e-out) forwards;
+}
+
+/* scossa dello schermo, due pixel, niente di più */
+.quake { animation: shake-x 300ms var(--e-out); }
+
+/* ingressi scaglionati: --i impostato in JS */
+.stagger { animation-delay: calc(var(--i, 0) * 34ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise, .anim-snap { animation: none; opacity: 1; transform: none; }
+  .anim-shake, .quake, .anim-ring { animation: none; }
+  .wave, .float-gain { display: none; }
+}

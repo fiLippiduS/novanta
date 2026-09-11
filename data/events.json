@@ -1,0 +1,1757 @@
+{
+ "version": 1,
+ "events": [
+  {
+   "id": "scuola",
+   "type": "decision",
+   "weight": 6,
+   "when": {
+    "ageMax": 18
+   },
+   "it": {
+    "title": "La scuola o il campo",
+    "text": "Gli esami cadono nella settimana della finale giovanile. Non puoi esserci in tutti e due i posti."
+   },
+   "en": {
+    "title": "School or the pitch",
+    "text": "Exams fall in the week of the youth final. You cannot be in both places."
+   },
+   "options": [
+    {
+     "effects": {
+      "men": 3,
+      "reputation": -2,
+      "morale": -4
+     },
+     "it": {
+      "label": "Vai agli esami",
+      "outcome": "Passi, e l'allenatore incassa senza dire niente. La testa però ti si allarga."
+     },
+     "en": {
+      "label": "Sit the exams",
+      "outcome": "You pass. The coach says nothing, and says it loudly. But your head grows."
+     }
+    },
+    {
+     "effects": {
+      "tec": 2,
+      "reputation": 4,
+      "morale": 5
+     },
+     "it": {
+      "label": "Giochi la finale",
+      "outcome": "Segni il gol del titolo. Il preside ti guarda male per un anno intero."
+     },
+     "en": {
+      "label": "Play the final",
+      "outcome": "You score the winner. The headmaster glares at you for a year."
+     }
+    },
+    {
+     "effects": {
+      "fis": 1,
+      "men": 1,
+      "fitness": -6
+     },
+     "it": {
+      "label": "Provi a fare entrambe",
+      "outcome": "Notte in bianco, esame passato, finale giocata da sonnambulo. Reggi, ma lo paghi."
+     },
+     "en": {
+      "label": "Try to do both",
+      "outcome": "No sleep, exam passed, final played in a daze. You manage, and you pay for it."
+     }
+    }
+   ]
+  },
+  {
+   "id": "procuratore",
+   "type": "decision",
+   "weight": 7,
+   "when": {
+    "ageMax": 21
+   },
+   "it": {
+    "title": "Il primo procuratore",
+    "text": "Due uomini ti offrono di curarti la carriera. Uno ha una macchina che costa quanto lo stadio."
+   },
+   "en": {
+    "title": "Your first agent",
+    "text": "Two men offer to handle your career. One drives a car worth more than the stadium."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 6,
+      "morale": -3,
+      "trait": "ambizioso"
+     },
+     "it": {
+      "label": "Quello con la macchina",
+      "outcome": "Ti porta ovunque e parla con tutti. Di te, però, parla come di un prodotto."
+     },
+     "en": {
+      "label": "The one with the car",
+      "outcome": "He gets you everywhere and talks to everyone. About you, like a product."
+     }
+    },
+    {
+     "effects": {
+      "men": 3,
+      "morale": 6,
+      "trait": "leale"
+     },
+     "it": {
+      "label": "Quello di paese",
+      "outcome": "Conosce tuo padre da trent'anni. Non ti farà mai fare il salto più grande, ma non ti venderà mai."
+     },
+     "en": {
+      "label": "The local man",
+      "outcome": "He has known your father for thirty years. He will never sell you, and never push you."
+     }
+    },
+    {
+     "effects": {
+      "men": 2,
+      "reputation": -3
+     },
+     "it": {
+      "label": "Nessuno dei due",
+      "outcome": "Ti gestisci da solo. Ci metti più tempo, ma quello che firmi lo hai letto."
+     },
+     "en": {
+      "label": "Neither",
+      "outcome": "You handle it yourself. It takes longer, but you read everything you sign."
+     }
+    }
+   ]
+  },
+  {
+   "id": "numero",
+   "type": "decision",
+   "weight": 5,
+   "when": {
+    "ageMax": 23
+   },
+   "it": {
+    "title": "Il numero pesante",
+    "text": "Il vecchio capitano ha smesso. La sua maglia è appesa nello spogliatoio e nessuno la tocca."
+   },
+   "en": {
+    "title": "The heavy number",
+    "text": "The old captain has retired. His shirt hangs in the dressing room and nobody touches it."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 7,
+      "morale": -6,
+      "men": 2
+     },
+     "it": {
+      "label": "La prendi tu",
+      "outcome": "La curva ti guarda come si guarda un erede. Ogni errore pesa il doppio."
+     },
+     "en": {
+      "label": "Take it",
+      "outcome": "The stand looks at you like an heir. Every mistake weighs twice as much."
+     }
+    },
+    {
+     "effects": {
+      "morale": 5,
+      "men": 1
+     },
+     "it": {
+      "label": "La lasci dov'è",
+      "outcome": "Lo spogliatoio apprezza. Il rispetto costa poco e rende parecchio."
+     },
+     "en": {
+      "label": "Leave it",
+      "outcome": "The dressing room notices. Respect is cheap and pays well."
+     }
+    }
+   ]
+  },
+  {
+   "id": "focus",
+   "type": "decision",
+   "weight": 9,
+   "when": {},
+   "it": {
+    "title": "Su cosa lavori quest'anno",
+    "text": "Il preparatore ti chiede dove vuoi mettere le ore in più."
+   },
+   "en": {
+    "title": "What you work on this year",
+    "text": "The fitness coach asks where you want to put the extra hours."
+   },
+   "options": [
+    {
+     "effects": {
+      "focus": "tec",
+      "tec": 2
+     },
+     "it": {
+      "label": "Tecnica",
+      "outcome": "Mille tocchi al giorno, da solo, dopo tutti gli altri."
+     },
+     "en": {
+      "label": "Technique",
+      "outcome": "A thousand touches a day, alone, after everyone else has gone."
+     }
+    },
+    {
+     "effects": {
+      "focus": "fis",
+      "fis": 2
+     },
+     "it": {
+      "label": "Fisico",
+      "outcome": "Pesi, corsa, freddo. Torni a casa che non senti le gambe."
+     },
+     "en": {
+      "label": "Body",
+      "outcome": "Weights, running, ice. You get home without legs."
+     }
+    },
+    {
+     "effects": {
+      "focus": "men",
+      "men": 2
+     },
+     "it": {
+      "label": "Testa",
+      "outcome": "Video, appunti, partite riviste tre volte. Capisci prima."
+     },
+     "en": {
+      "label": "Mind",
+      "outcome": "Video, notes, matches watched three times. You read the game earlier."
+     }
+    },
+    {
+     "effects": {
+      "focus": "vel",
+      "vel": 2
+     },
+     "it": {
+      "label": "Velocità",
+      "outcome": "Scatti, scatti, scatti. Il primo passo diventa un'altra cosa."
+     },
+     "en": {
+      "label": "Pace",
+      "outcome": "Sprints, sprints, sprints. The first step becomes something else."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ritiro-estivo",
+   "type": "decision",
+   "weight": 4,
+   "when": {
+    "ageMin": 19
+   },
+   "it": {
+    "title": "L'estate",
+    "text": "Tre settimane libere prima del ritiro. Qualcuno le passa in spiaggia, qualcuno no."
+   },
+   "en": {
+    "title": "The summer",
+    "text": "Three free weeks before pre-season. Some spend them on a beach, some don't."
+   },
+   "options": [
+    {
+     "effects": {
+      "fitness": 9,
+      "morale": -5
+     },
+     "it": {
+      "label": "Ti alleni da solo",
+      "outcome": "Arrivi in ritiro già pronto. Ti senti anche già stanco."
+     },
+     "en": {
+      "label": "Train alone",
+      "outcome": "You arrive in pre-season ready. And already tired."
+     }
+    },
+    {
+     "effects": {
+      "morale": 12,
+      "fitness": -8
+     },
+     "it": {
+      "label": "Stacchi del tutto",
+      "outcome": "Torni felice e fuori forma. Due settimane per rimetterti."
+     },
+     "en": {
+      "label": "Switch off completely",
+      "outcome": "You come back happy and heavy. Two weeks to catch up."
+     }
+    },
+    {
+     "effects": {
+      "men": 3,
+      "morale": 4,
+      "fitness": 2
+     },
+     "it": {
+      "label": "Vai a vedere altro calcio",
+      "outcome": "Giri stadi minori, guardi allenamenti, prendi appunti. Nessuno capisce perché."
+     },
+     "en": {
+      "label": "Go watch other football",
+      "outcome": "Small grounds, training sessions, notes. Nobody understands why."
+     }
+    }
+   ]
+  },
+  {
+   "id": "dieta",
+   "type": "decision",
+   "weight": 4,
+   "when": {
+    "ageMin": 18
+   },
+   "it": {
+    "title": "Il nutrizionista",
+    "text": "Ti mettono davanti un piano alimentare che cancella metà di quello che mangi da sempre."
+   },
+   "en": {
+    "title": "The nutritionist",
+    "text": "They hand you a diet that deletes half of what you have always eaten."
+   },
+   "options": [
+    {
+     "effects": {
+      "fitness": 8,
+      "morale": -6
+     },
+     "it": {
+      "label": "Segui tutto alla lettera",
+      "outcome": "Peso perfetto, umore pessimo. Tua nonna è offesa da mesi."
+     },
+     "en": {
+      "label": "Follow it to the letter",
+      "outcome": "Perfect weight, terrible mood. Your grandmother has been offended for months."
+     }
+    },
+    {
+     "effects": {
+      "fitness": 3,
+      "morale": 3
+     },
+     "it": {
+      "label": "Segui, ma la domenica no",
+      "outcome": "Un compromesso che regge. Il preparatore fa finta di non vedere."
+     },
+     "en": {
+      "label": "Follow it, except Sundays",
+      "outcome": "A compromise that holds. The coach pretends not to notice."
+     }
+    },
+    {
+     "effects": {
+      "morale": 6,
+      "fitness": -5
+     },
+     "it": {
+      "label": "Lo ignori",
+      "outcome": "Mangi come hai sempre mangiato. Giochi bene lo stesso, per ora."
+     },
+     "en": {
+      "label": "Ignore it",
+      "outcome": "You eat like you always have. You still play well. For now."
+     }
+    }
+   ]
+  },
+  {
+   "id": "cambio-ruolo",
+   "type": "decision",
+   "weight": 6,
+   "when": {
+    "ageMin": 19
+   },
+   "it": {
+    "title": "Ti vuole altrove",
+    "text": "Il nuovo allenatore dice che nel suo sistema rendi di più venti metri più indietro."
+   },
+   "en": {
+    "title": "He wants you somewhere else",
+    "text": "The new coach says you would do more twenty metres deeper."
+   },
+   "options": [
+    {
+     "effects": {
+      "men": 4,
+      "tec": 1,
+      "morale": -4
+     },
+     "it": {
+      "label": "Accetti e impari",
+      "outcome": "Ci metti sei mesi. Poi capisci che aveva ragione, e non glielo dici."
+     },
+     "en": {
+      "label": "Accept and learn",
+      "outcome": "It takes six months. Then you see he was right, and you never tell him."
+     }
+    },
+    {
+     "effects": {
+      "morale": -10,
+      "reputation": -2,
+      "trait": "testardo"
+     },
+     "it": {
+      "label": "Rifiuti",
+      "outcome": "Resti dove sei e giochi meno. Ma sei ancora tu a decidere chi sei."
+     },
+     "en": {
+      "label": "Refuse",
+      "outcome": "You stay where you are and play less. But you still decide who you are."
+     }
+    },
+    {
+     "effects": {
+      "men": 2,
+      "reputation": 3
+     },
+     "it": {
+      "label": "Proponi una via di mezzo",
+      "outcome": "Gli porti un video di tre minuti. Lui guarda, annuisce, e cambia due cose invece di dieci."
+     },
+     "en": {
+      "label": "Propose a middle way",
+      "outcome": "You bring him a three minute video. He nods and changes two things instead of ten."
+     }
+    }
+   ]
+  },
+  {
+   "id": "litigio",
+   "type": "decision",
+   "weight": 5,
+   "when": {
+    "ageMin": 18
+   },
+   "it": {
+    "title": "Il litigio",
+    "text": "A fine primo tempo un compagno ti urla addosso davanti a tutti. Non era colpa tua."
+   },
+   "en": {
+    "title": "The row",
+    "text": "At half time a teammate screams at you in front of everyone. It was not your fault."
+   },
+   "options": [
+    {
+     "effects": {
+      "morale": -6,
+      "reputation": 3,
+      "fis": 1
+     },
+     "it": {
+      "label": "Rispondi",
+      "outcome": "Volano parole grosse, poi ci si guarda. Da quel giorno nessuno ti parla più così."
+     },
+     "en": {
+      "label": "Answer back",
+      "outcome": "Words fly, then eyes meet. Nobody speaks to you like that again."
+     }
+    },
+    {
+     "effects": {
+      "men": 3,
+      "morale": 2
+     },
+     "it": {
+      "label": "Ti giri e giochi",
+      "outcome": "Nel secondo tempo lo servi per il gol del pareggio. Ti abbraccia. Non serve altro."
+     },
+     "en": {
+      "label": "Turn away and play",
+      "outcome": "In the second half you set him up to equalise. He hugs you. Nothing else needed."
+     }
+    },
+    {
+     "effects": {
+      "morale": -3,
+      "men": 4
+     },
+     "it": {
+      "label": "Ne parli dopo, da soli",
+      "outcome": "Due birre e mezz'ora. Scoprite che il problema era un terzo che non c'era."
+     },
+     "en": {
+      "label": "Talk after, alone",
+      "outcome": "Two beers and half an hour. You find out the problem was a third man who was not there."
+     }
+    }
+   ]
+  },
+  {
+   "id": "fascia",
+   "type": "decision",
+   "weight": 5,
+   "when": {
+    "ageMin": 24,
+    "repMin": 30
+   },
+   "it": {
+    "title": "La fascia",
+    "text": "L'allenatore ti offre la fascia da capitano. Nello spogliatoio c'è chi la aspettava da tre anni."
+   },
+   "en": {
+    "title": "The armband",
+    "text": "The coach offers you the captaincy. Someone in there has been waiting three years for it."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 8,
+      "men": 3,
+      "morale": -3
+     },
+     "it": {
+      "label": "La prendi",
+      "outcome": "Diventi il primo a parlare e l'ultimo a uscire. Non è un premio, è un turno in più."
+     },
+     "en": {
+      "label": "Take it",
+      "outcome": "First to speak, last to leave. It is not a prize, it is another shift."
+     }
+    },
+    {
+     "effects": {
+      "morale": 7,
+      "men": 2,
+      "trait": "rispettato"
+     },
+     "it": {
+      "label": "La lasci a chi aspettava",
+      "outcome": "Lui non lo dimenticherà. E adesso lo spogliatoio ascolta te anche senza fascia."
+     },
+     "en": {
+      "label": "Give it to the man who waited",
+      "outcome": "He will not forget. And now the dressing room listens to you anyway."
+     }
+    }
+   ]
+  },
+  {
+   "id": "intervista",
+   "type": "decision",
+   "weight": 6,
+   "when": {
+    "ageMin": 18
+   },
+   "it": {
+    "title": "Il microfono",
+    "text": "Dopo una sconfitta pesante ti mettono un microfono sotto il naso mentre sei ancora sudato."
+   },
+   "en": {
+    "title": "The microphone",
+    "text": "After a heavy defeat they put a microphone under your nose while you are still soaked."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 5,
+      "morale": -4
+     },
+     "it": {
+      "label": "Dici la verità",
+      "outcome": "Titoli ovunque. Lo spogliatoio si divide in due, ma i tifosi ti credono."
+     },
+     "en": {
+      "label": "Tell the truth",
+      "outcome": "Headlines everywhere. The dressing room splits in two, but the fans believe you."
+     }
+    },
+    {
+     "effects": {
+      "men": 2,
+      "reputation": -1
+     },
+     "it": {
+      "label": "Frasi fatte",
+      "outcome": "Nessuno scrive niente. È esattamente quello che volevi."
+     },
+     "en": {
+      "label": "Say nothing in many words",
+      "outcome": "Nobody writes a line. Exactly what you wanted."
+     }
+    },
+    {
+     "effects": {
+      "reputation": 8,
+      "morale": -8,
+      "trait": "divisivo"
+     },
+     "it": {
+      "label": "Ti prendi tutta la colpa",
+      "outcome": "Esageri, e si vede. Metà del paese ti ama, l'altra metà pensa che reciti."
+     },
+     "en": {
+      "label": "Take all the blame",
+      "outcome": "You overdo it and it shows. Half the country loves you, half thinks you are acting."
+     }
+    }
+   ]
+  },
+  {
+   "id": "social",
+   "type": "decision",
+   "weight": 5,
+   "when": {
+    "ageMin": 17
+   },
+   "it": {
+    "title": "Il video virale",
+    "text": "Un tuo tiro in allenamento finisce online e fa sei milioni di visualizzazioni in due giorni."
+   },
+   "en": {
+    "title": "The viral clip",
+    "text": "A training shot of yours goes online and does six million views in two days."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 7,
+      "morale": 4,
+      "men": -2
+     },
+     "it": {
+      "label": "Ci giochi sopra",
+      "outcome": "Ne posti un altro. Poi un altro. Il campo diventa un set."
+     },
+     "en": {
+      "label": "Lean into it",
+      "outcome": "You post another. Then another. The pitch becomes a set."
+     }
+    },
+    {
+     "effects": {
+      "men": 3,
+      "reputation": -2
+     },
+     "it": {
+      "label": "Chiudi tutto per un mese",
+      "outcome": "Sparisci dalle bacheche e riappari in campo. Funziona."
+     },
+     "en": {
+      "label": "Go dark for a month",
+      "outcome": "You vanish from the feeds and reappear on the pitch. It works."
+     }
+    },
+    {
+     "effects": {
+      "reputation": 3,
+      "morale": 3
+     },
+     "it": {
+      "label": "Lo regali a un ragazzino",
+      "outcome": "Ripubblichi il video di un dodicenne che ti imita. Diventa più famoso lui."
+     },
+     "en": {
+      "label": "Give it to a kid",
+      "outcome": "You repost a twelve-year-old copying you. He ends up more famous than you."
+     }
+    }
+   ]
+  },
+  {
+   "id": "spot",
+   "type": "decision",
+   "weight": 4,
+   "when": {
+    "repMin": 35
+   },
+   "it": {
+    "title": "Lo spot",
+    "text": "Un marchio di merendine vuole la tua faccia su tre milioni di confezioni."
+   },
+   "en": {
+    "title": "The advert",
+    "text": "A snack brand wants your face on three million packets."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 9,
+      "morale": 3,
+      "fitness": -3
+     },
+     "it": {
+      "label": "Firmi",
+      "outcome": "Guadagni in un giorno quanto in un anno. I compagni ti chiamano 'il biscotto' per sempre."
+     },
+     "en": {
+      "label": "Sign",
+      "outcome": "You earn a year's money in a day. Your teammates call you 'the biscuit' forever."
+     }
+    },
+    {
+     "effects": {
+      "men": 2,
+      "trait": "integro"
+     },
+     "it": {
+      "label": "Rifiuti",
+      "outcome": "Non ti va di vendere zucchero ai bambini. Nessuno lo sa, ma tu sì."
+     },
+     "en": {
+      "label": "Refuse",
+      "outcome": "You do not want to sell sugar to children. Nobody knows. You do."
+     }
+    }
+   ]
+  },
+  {
+   "id": "documentario",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "repMin": 45
+   },
+   "it": {
+    "title": "Le telecamere",
+    "text": "Vogliono girarti un documentario. Telecamere in casa, in macchina, nello spogliatoio."
+   },
+   "en": {
+    "title": "The cameras",
+    "text": "They want to film a documentary. Cameras at home, in the car, in the dressing room."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 10,
+      "morale": -6
+     },
+     "it": {
+      "label": "Le fai entrare ovunque",
+      "outcome": "Esce bellissimo e ti costa due amicizie."
+     },
+     "en": {
+      "label": "Let them in everywhere",
+      "outcome": "It comes out beautiful and costs you two friendships."
+     }
+    },
+    {
+     "effects": {
+      "reputation": 4,
+      "morale": 2
+     },
+     "it": {
+      "label": "Solo il campo",
+      "outcome": "Un'ora di allenamenti e partite. Noioso per loro, perfetto per te."
+     },
+     "en": {
+      "label": "Pitch only",
+      "outcome": "An hour of training and matches. Boring for them, perfect for you."
+     }
+    },
+    {
+     "effects": {
+      "morale": 5,
+      "men": 2
+     },
+     "it": {
+      "label": "No, grazie",
+      "outcome": "La tua vita resta tua. Strano, di questi tempi."
+     },
+     "en": {
+      "label": "No thanks",
+      "outcome": "Your life stays yours. Unusual, these days."
+     }
+    }
+   ]
+  },
+  {
+   "id": "cane",
+   "type": "decision",
+   "weight": 3,
+   "when": {},
+   "it": {
+    "title": "Il cane del centro sportivo",
+    "text": "Un cane randagio entra dal buco nella rete ogni mattina e si mette in porta. Il magazziniere vuole mandarlo via."
+   },
+   "en": {
+    "title": "The dog at the training ground",
+    "text": "A stray dog comes through the hole in the fence every morning and stands in the goal. The kit man wants him gone."
+   },
+   "options": [
+    {
+     "effects": {
+      "morale": 9,
+      "trait": "portafortuna"
+     },
+     "it": {
+      "label": "Lo adotti tu",
+      "outcome": "Si chiama Palo. Dorme in tribuna e la squadra non perde per due mesi."
+     },
+     "en": {
+      "label": "Adopt him",
+      "outcome": "His name is Post. He sleeps in the stand and the team does not lose for two months."
+     }
+    },
+    {
+     "effects": {
+      "morale": -2,
+      "men": 1
+     },
+     "it": {
+      "label": "Non ti immischi",
+      "outcome": "Sparisce in una settimana. Ogni tanto ti chiedi dove sia finito."
+     },
+     "en": {
+      "label": "Stay out of it",
+      "outcome": "He is gone within a week. Sometimes you wonder where."
+     }
+    }
+   ]
+  },
+  {
+   "id": "scacchi",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "ageMin": 18
+   },
+   "it": {
+    "title": "Il club di scacchi",
+    "text": "Il preparatore dei portieri ha aperto un torneo di scacchi nella sala video. Ci vanno in quattro."
+   },
+   "en": {
+    "title": "The chess club",
+    "text": "The goalkeeping coach has started a chess tournament in the video room. Four people go."
+   },
+   "options": [
+    {
+     "effects": {
+      "men": 5,
+      "morale": 2,
+      "trait": "stratega"
+     },
+     "it": {
+      "label": "Ti iscrivi",
+      "outcome": "Perdi trenta partite di fila, poi cominci a vedere le cose due mosse prima. Anche in campo."
+     },
+     "en": {
+      "label": "Sign up",
+      "outcome": "You lose thirty in a row, then you start seeing things two moves earlier. On the pitch too."
+     }
+    },
+    {
+     "effects": {
+      "fis": 2,
+      "morale": 1
+     },
+     "it": {
+      "label": "Preferisci la palestra",
+      "outcome": "Ore in più sui pesi mentre gli altri muovono cavalli."
+     },
+     "en": {
+      "label": "Prefer the gym",
+      "outcome": "Extra hours on the weights while the others move knights."
+     }
+    }
+   ]
+  },
+  {
+   "id": "sagra",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "tierMin": 3
+   },
+   "it": {
+    "title": "La sagra del paese",
+    "text": "Il paese della squadra ti vuole sul palco della sagra della salsiccia. Ci sono quattrocento persone e un microfono che fischia."
+   },
+   "en": {
+    "title": "The village festival",
+    "text": "The club's village wants you on stage at the sausage festival. Four hundred people and a whistling microphone."
+   },
+   "options": [
+    {
+     "effects": {
+      "morale": 7,
+      "reputation": 4,
+      "trait": "beniamino"
+     },
+     "it": {
+      "label": "Vai e canti pure",
+      "outcome": "Canti stonato una canzone che non sai. Da quel giorno sei uno di loro per sempre."
+     },
+     "en": {
+      "label": "Go, and sing too",
+      "outcome": "You murder a song you do not know. From that day you are one of them, forever."
+     }
+    },
+    {
+     "effects": {
+      "morale": -3
+     },
+     "it": {
+      "label": "Ti scusi",
+      "outcome": "Nessuno dice niente. Ma la curva se lo ricorda a lungo."
+     },
+     "en": {
+      "label": "Send apologies",
+      "outcome": "Nobody says anything. But the stand remembers for a long time."
+     }
+    }
+   ]
+  },
+  {
+   "id": "tatuaggio",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "repMin": 25
+   },
+   "it": {
+    "title": "Il tatuaggio",
+    "text": "Un tifoso si è fatto tatuare la tua faccia sul polpaccio. È venuta malissimo e ti manda la foto."
+   },
+   "en": {
+    "title": "The tattoo",
+    "text": "A fan has tattooed your face on his calf. It came out terribly and he sends you the photo."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 6,
+      "morale": 5
+     },
+     "it": {
+      "label": "Gli paghi la copertura",
+      "outcome": "Lo porti da un bravo. Diventa una storia che si racconta per anni."
+     },
+     "en": {
+      "label": "Pay to have it covered",
+      "outcome": "You take him to someone good. The story gets told for years."
+     }
+    },
+    {
+     "effects": {
+      "morale": 3,
+      "reputation": 2
+     },
+     "it": {
+      "label": "Gli rispondi e basta",
+      "outcome": "Due righe e una foto insieme. Per lui vale più di un tatuaggio riuscito."
+     },
+     "en": {
+      "label": "Just reply",
+      "outcome": "Two lines and a photo together. Worth more to him than a good tattoo."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ristorante",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "ageMin": 25,
+    "repMin": 40
+   },
+   "it": {
+    "title": "Il ristorante",
+    "text": "Un amico ti propone di aprire un ristorante con il tuo nome sull'insegna."
+   },
+   "en": {
+    "title": "The restaurant",
+    "text": "A friend wants to open a restaurant with your name on the sign."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 4,
+      "morale": -4,
+      "men": -1
+     },
+     "it": {
+      "label": "Ci metti i soldi e il nome",
+      "outcome": "Va bene sei mesi, poi diventa un problema che ti chiama alle undici di sera."
+     },
+     "en": {
+      "label": "Put in money and name",
+      "outcome": "It works for six months, then it becomes a problem that calls you at eleven at night."
+     }
+    },
+    {
+     "effects": {
+      "morale": 4,
+      "men": 2
+     },
+     "it": {
+      "label": "Solo il nome, niente soldi",
+      "outcome": "Lui lavora, tu firmi i tovaglioli. Tutti contenti."
+     },
+     "en": {
+      "label": "Name only, no money",
+      "outcome": "He works, you sign napkins. Everyone happy."
+     }
+    },
+    {
+     "effects": {
+      "men": 3
+     },
+     "it": {
+      "label": "Declini",
+      "outcome": "Gli presti i soldi senza entrarci. È il tipo di amico che te li restituisce."
+     },
+     "en": {
+      "label": "Decline",
+      "outcome": "You lend him the money instead. He is the kind of friend who pays it back."
+     }
+    }
+   ]
+  },
+  {
+   "id": "superstizione",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "ageMin": 19
+   },
+   "it": {
+    "title": "La superstizione",
+    "text": "Hai segnato tre partite di fila con le stesse calze. Non le hai più lavate."
+   },
+   "en": {
+    "title": "The superstition",
+    "text": "You have scored three games running in the same socks. You have not washed them since."
+   },
+   "options": [
+    {
+     "effects": {
+      "morale": 6,
+      "fitness": -3,
+      "trait": "scaramantico"
+     },
+     "it": {
+      "label": "Non le lavi",
+      "outcome": "Lo spogliatoio protesta. Tu segni ancora. La scienza tace."
+     },
+     "en": {
+      "label": "Do not wash them",
+      "outcome": "The dressing room complains. You keep scoring. Science says nothing."
+     }
+    },
+    {
+     "effects": {
+      "men": 3,
+      "morale": -2
+     },
+     "it": {
+      "label": "Chiudila lì",
+      "outcome": "Le lavi e segni lo stesso. Era tutto nella tua testa, come sempre."
+     },
+     "en": {
+      "label": "End it",
+      "outcome": "You wash them and score anyway. It was all in your head, as always."
+     }
+    }
+   ]
+  },
+  {
+   "id": "poesie",
+   "type": "decision",
+   "weight": 2,
+   "when": {
+    "ageMin": 22
+   },
+   "it": {
+    "title": "Il libro",
+    "text": "Scrivi da anni, di nascosto. Un editore piccolo vorrebbe pubblicare le tue cose."
+   },
+   "en": {
+    "title": "The book",
+    "text": "You have been writing in secret for years. A small publisher would like to print it."
+   },
+   "options": [
+    {
+     "effects": {
+      "men": 5,
+      "reputation": 3,
+      "morale": 6
+     },
+     "it": {
+      "label": "Lo pubblichi",
+      "outcome": "Vende poco e viene recensito bene. I compagni ti prendono in giro con affetto."
+     },
+     "en": {
+      "label": "Publish it",
+      "outcome": "It sells little and reviews well. Your teammates mock you kindly."
+     }
+    },
+    {
+     "effects": {
+      "men": 2,
+      "morale": 3
+     },
+     "it": {
+      "label": "Tieni tutto nel cassetto",
+      "outcome": "Continui a scrivere per te. È l'unica ora della giornata in cui nessuno ti guarda."
+     },
+     "en": {
+      "label": "Keep it in the drawer",
+      "outcome": "You keep writing for yourself. The only hour of the day nobody watches you."
+     }
+    }
+   ]
+  },
+  {
+   "id": "casa",
+   "type": "decision",
+   "weight": 4,
+   "when": {
+    "ageMin": 20
+   },
+   "it": {
+    "title": "Dove vivere",
+    "text": "Il contratto nuovo ti permette di scegliere dove stare."
+   },
+   "en": {
+    "title": "Where to live",
+    "text": "The new contract lets you choose where to live."
+   },
+   "options": [
+    {
+     "effects": {
+      "morale": 6,
+      "fitness": -3
+     },
+     "it": {
+      "label": "In centro, in mezzo a tutto",
+      "outcome": "Vita, gente, rumore. Dormi poco e sorridi molto."
+     },
+     "en": {
+      "label": "In the centre, in the middle of it",
+      "outcome": "Life, people, noise. Little sleep, plenty of smiling."
+     }
+    },
+    {
+     "effects": {
+      "fitness": 6,
+      "morale": -2,
+      "men": 2
+     },
+     "it": {
+      "label": "Fuori, vicino al campo",
+      "outcome": "Dieci minuti dal centro sportivo e il silenzio alle nove di sera."
+     },
+     "en": {
+      "label": "Outside, near the training ground",
+      "outcome": "Ten minutes from work and silence by nine."
+     }
+    },
+    {
+     "effects": {
+      "morale": 8,
+      "reputation": -2
+     },
+     "it": {
+      "label": "Resti dai tuoi",
+      "outcome": "Tua madre continua a svegliarti. A ventiquattro anni. E stai benissimo."
+     },
+     "en": {
+      "label": "Stay with your family",
+      "outcome": "Your mother still wakes you up. At twenty-four. And you are fine."
+     }
+    }
+   ]
+  },
+  {
+   "id": "lingua",
+   "type": "decision",
+   "weight": 4,
+   "when": {
+    "ageMin": 19
+   },
+   "it": {
+    "title": "La lingua",
+    "text": "Sei all'estero da un anno e nello spogliatoio parli ancora a gesti."
+   },
+   "en": {
+    "title": "The language",
+    "text": "You have been abroad a year and you still talk with your hands."
+   },
+   "options": [
+    {
+     "effects": {
+      "men": 4,
+      "morale": 5,
+      "reputation": 3
+     },
+     "it": {
+      "label": "Prendi un insegnante",
+      "outcome": "Sei mesi dopo fai un'intervista nella loro lingua e la città ti adotta."
+     },
+     "en": {
+      "label": "Get a teacher",
+      "outcome": "Six months later you do an interview in their language and the city adopts you."
+     }
+    },
+    {
+     "effects": {
+      "morale": -4,
+      "men": -1
+     },
+     "it": {
+      "label": "Ti arrangi",
+      "outcome": "Capisci il novanta per cento. Il dieci che manca è sempre quello importante."
+     },
+     "en": {
+      "label": "Get by",
+      "outcome": "You understand ninety per cent. The missing ten is always the important part."
+     }
+    }
+   ]
+  },
+  {
+   "id": "fondazione",
+   "type": "decision",
+   "weight": 3,
+   "when": {
+    "repMin": 50,
+    "ageMin": 25
+   },
+   "it": {
+    "title": "La fondazione",
+    "text": "Vuoi restituire qualcosa al quartiere dove hai imparato a giocare. Ti serve tempo, e ne hai poco."
+   },
+   "en": {
+    "title": "The foundation",
+    "text": "You want to give something back to the neighbourhood where you learned to play. It takes time you do not have."
+   },
+   "options": [
+    {
+     "effects": {
+      "reputation": 6,
+      "morale": 9,
+      "fitness": -3
+     },
+     "it": {
+      "label": "Ci metti la faccia e le ore",
+      "outcome": "Un campetto rifatto e trenta ragazzini che giocano. Torni a casa distrutto e contento."
+     },
+     "en": {
+      "label": "Give your face and your hours",
+      "outcome": "One pitch rebuilt and thirty kids playing. You go home wrecked and happy."
+     }
+    },
+    {
+     "effects": {
+      "reputation": 3,
+      "morale": 3
+     },
+     "it": {
+      "label": "Ci metti solo i soldi",
+      "outcome": "Funziona lo stesso. Solo, non la senti tua."
+     },
+     "en": {
+      "label": "Give only money",
+      "outcome": "It works anyway. It just never feels like yours."
+     }
+    }
+   ]
+  },
+  {
+   "id": "crociato",
+   "type": "incident",
+   "weight": 2,
+   "when": {
+    "ageMin": 19
+   },
+   "effects": {
+    "injuryRisk": 0.55,
+    "fitness": -16,
+    "morale": -20,
+    "vel": -4
+   },
+   "it": {
+    "title": "Il ginocchio",
+    "text": "Ti giri senza che nessuno ti tocchi e senti un rumore che non dimenticherai. Sette mesi."
+   },
+   "en": {
+    "title": "The knee",
+    "text": "You turn with nobody near you and hear a sound you will never forget. Seven months."
+   }
+  },
+  {
+   "id": "caviglia",
+   "type": "incident",
+   "weight": 5,
+   "when": {},
+   "effects": {
+    "injuryRisk": 0.25,
+    "fitness": -7,
+    "morale": -6
+   },
+   "it": {
+    "title": "La caviglia",
+    "text": "Un'entrata in ritardo al novantesimo di una partita che non contava niente."
+   },
+   "en": {
+    "title": "The ankle",
+    "text": "A late tackle in the last minute of a game that meant nothing."
+   }
+  },
+  {
+   "id": "schiena",
+   "type": "incident",
+   "weight": 4,
+   "when": {
+    "ageMin": 27
+   },
+   "effects": {
+    "injuryRisk": 0.2,
+    "fitness": -8,
+    "fis": -2,
+    "morale": -5
+   },
+   "it": {
+    "title": "La schiena",
+    "text": "Non c'è un momento preciso. Un giorno ti alzi e non riesci ad allacciarti le scarpe."
+   },
+   "en": {
+    "title": "The back",
+    "text": "There is no single moment. One day you get up and cannot tie your own boots."
+   }
+  },
+  {
+   "id": "spalla",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "roles": [
+     "POR"
+    ]
+   },
+   "effects": {
+    "injuryRisk": 0.22,
+    "fitness": -6,
+    "morale": -6
+   },
+   "it": {
+    "title": "La spalla",
+    "text": "Esci sui piedi di un attaccante e atterri male. Il braccio non risponde per tre mesi."
+   },
+   "en": {
+    "title": "The shoulder",
+    "text": "You dive at a striker's feet and land badly. The arm does not answer for three months."
+   }
+  },
+  {
+   "id": "mononucleosi",
+   "type": "incident",
+   "weight": 2,
+   "when": {
+    "ageMax": 24
+   },
+   "effects": {
+    "fitness": -14,
+    "fis": -3,
+    "morale": -8
+   },
+   "it": {
+    "title": "La stanchezza",
+    "text": "Non è un infortunio. È un virus che ti toglie le gambe per quattro mesi e nessuno sa spiegartelo."
+   },
+   "en": {
+    "title": "The tiredness",
+    "text": "Not an injury. A virus that takes your legs for four months and nobody can explain it."
+   }
+  },
+  {
+   "id": "esonero",
+   "type": "incident",
+   "weight": 6,
+   "when": {},
+   "effects": {
+    "morale": -6
+   },
+   "it": {
+    "title": "L'allenatore salta",
+    "text": "Tre sconfitte di fila e lo mandano via. Quello nuovo arriva con idee opposte."
+   },
+   "en": {
+    "title": "The coach goes",
+    "text": "Three defeats and he is gone. The new one arrives with opposite ideas."
+   }
+  },
+  {
+   "id": "nuovo-arrivo",
+   "type": "incident",
+   "weight": 5,
+   "when": {},
+   "effects": {
+    "morale": -9,
+    "men": 2
+   },
+   "it": {
+    "title": "Comprano uno nel tuo ruolo",
+    "text": "Costa tre volte te e ha due anni meno. Lo presentano in conferenza mentre ti alleni."
+   },
+   "en": {
+    "title": "They buy your position",
+    "text": "He costs three times what you do and is two years younger. They present him while you train."
+   }
+  },
+  {
+   "id": "compagno-parte",
+   "type": "incident",
+   "weight": 4,
+   "when": {},
+   "effects": {
+    "morale": -7
+   },
+   "it": {
+    "title": "Il tuo compagno se ne va",
+    "text": "Quello con cui dividevi la stanza in trasferta firma altrove. Lo saluti in aeroporto."
+   },
+   "en": {
+    "title": "Your friend leaves",
+    "text": "The one you shared a room with on away trips signs elsewhere. You say goodbye at the airport."
+   }
+  },
+  {
+   "id": "veterano",
+   "type": "incident",
+   "weight": 4,
+   "when": {
+    "ageMax": 23
+   },
+   "effects": {
+    "men": 4,
+    "morale": 6
+   },
+   "it": {
+    "title": "Il vecchio ti prende sotto",
+    "text": "Un trentaquattrenne comincia a fermarti dopo ogni allenamento per dirti due cose. Solo due, ogni volta."
+   },
+   "en": {
+    "title": "The old man takes you aside",
+    "text": "A thirty-four-year-old starts stopping you after training to tell you two things. Only two, every time."
+   }
+  },
+  {
+   "id": "ammutinamento",
+   "type": "incident",
+   "weight": 2,
+   "when": {
+    "tierMax": 3
+   },
+   "effects": {
+    "morale": -10,
+    "reputation": 4
+   },
+   "it": {
+    "title": "Lo spogliatoio si spacca",
+    "text": "Metà squadra non parla più con l'allenatore. Ti tocca scegliere una parte senza volerlo."
+   },
+   "en": {
+    "title": "The dressing room splits",
+    "text": "Half the squad has stopped speaking to the coach. You end up picking a side without meaning to."
+   }
+  },
+  {
+   "id": "furto",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "repMin": 30
+   },
+   "effects": {
+    "morale": -8,
+    "men": 2
+   },
+   "it": {
+    "title": "Entrano in casa",
+    "text": "Mentre giochi in trasferta ti svuotano la casa. Non erano i soldi, era il sentirsi al sicuro."
+   },
+   "en": {
+    "title": "They break into your house",
+    "text": "While you play away they empty your home. It was not the money, it was feeling safe."
+   }
+  },
+  {
+   "id": "stampa",
+   "type": "incident",
+   "weight": 4,
+   "when": {
+    "repMin": 35
+   },
+   "effects": {
+    "morale": -9,
+    "reputation": -4
+   },
+   "it": {
+    "title": "Il titolo falso",
+    "text": "Un giornale scrive una cosa che non hai mai detto. La smentita esce in dodicesima pagina."
+   },
+   "en": {
+    "title": "The invented headline",
+    "text": "A paper prints something you never said. The correction runs on page twelve."
+   }
+  },
+  {
+   "id": "nascita",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "ageMin": 24
+   },
+   "effects": {
+    "morale": 16,
+    "fitness": -5,
+    "men": 3
+   },
+   "it": {
+    "title": "Nasce tuo figlio",
+    "text": "Dormi tre ore a notte e giochi meglio di prima. Non lo sa spiegare nemmeno il preparatore."
+   },
+   "en": {
+    "title": "Your child is born",
+    "text": "Three hours of sleep a night and you play better than before. Even the fitness coach cannot explain it."
+   }
+  },
+  {
+   "id": "lutto",
+   "type": "incident",
+   "weight": 2,
+   "when": {
+    "ageMin": 20
+   },
+   "effects": {
+    "morale": -18,
+    "men": 5
+   },
+   "it": {
+    "title": "Se ne va tuo nonno",
+    "text": "Quello che ti portava al campo in bicicletta. Segni la domenica dopo e non esulti."
+   },
+   "en": {
+    "title": "Your grandfather dies",
+    "text": "The one who took you to the pitch on his bicycle. You score the next Sunday and do not celebrate."
+   }
+  },
+  {
+   "id": "patente",
+   "type": "incident",
+   "weight": 2,
+   "when": {
+    "ageMin": 18,
+    "ageMax": 24
+   },
+   "effects": {
+    "morale": -6,
+    "reputation": -5
+   },
+   "it": {
+    "title": "La macchina",
+    "text": "Ti ritirano la patente per eccesso di velocità. Per un mese ti accompagna il magazziniere."
+   },
+   "en": {
+    "title": "The car",
+    "text": "You lose your licence for speeding. For a month the kit man drives you."
+   }
+  },
+  {
+   "id": "gol-storico",
+   "type": "incident",
+   "weight": 4,
+   "when": {},
+   "effects": {
+    "morale": 14,
+    "reputation": 8
+   },
+   "it": {
+    "title": "Il gol dell'anno",
+    "text": "Da quaranta metri, all'incrocio, in un derby. Lo rivedrai per il resto della vita."
+   },
+   "en": {
+    "title": "Goal of the year",
+    "text": "Forty yards, top corner, in a derby. You will watch it back forever."
+   }
+  },
+  {
+   "id": "rigore-sbagliato",
+   "type": "incident",
+   "weight": 4,
+   "when": {},
+   "effects": {
+    "morale": -12,
+    "men": 3
+   },
+   "it": {
+    "title": "Il rigore",
+    "text": "Ultimo minuto, tu sul dischetto, fuori. Il silenzio dello stadio lo senti ancora adesso."
+   },
+   "en": {
+    "title": "The penalty",
+    "text": "Last minute, you on the spot, over the bar. You can still hear the silence."
+   }
+  },
+  {
+   "id": "espulsione",
+   "type": "incident",
+   "weight": 4,
+   "when": {},
+   "effects": {
+    "morale": -7,
+    "reputation": 2
+   },
+   "it": {
+    "title": "Il rosso",
+    "text": "Due gialli in quattro minuti per due proteste. Tre giornate e una multa."
+   },
+   "en": {
+    "title": "The red",
+    "text": "Two yellows in four minutes for two complaints. Three games and a fine."
+   }
+  },
+  {
+   "id": "parata-storica",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "roles": [
+     "POR"
+    ]
+   },
+   "effects": {
+    "morale": 13,
+    "reputation": 8
+   },
+   "it": {
+    "title": "La parata",
+    "text": "All'ultimo secondo, sulla linea, con una mano sola. La foto finisce su tutti i giornali."
+   },
+   "en": {
+    "title": "The save",
+    "text": "Last second, on the line, one hand. The photo is on every front page."
+   }
+  },
+  {
+   "id": "porta-inviolata",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "roles": [
+     "POR",
+     "DC",
+     "TZ"
+    ]
+   },
+   "effects": {
+    "morale": 9,
+    "reputation": 5,
+    "men": 2
+   },
+   "it": {
+    "title": "Otto di fila",
+    "text": "Otto partite senza prendere gol. Il record del club resiste da quarant'anni e adesso è vostro."
+   },
+   "en": {
+    "title": "Eight in a row",
+    "text": "Eight games without conceding. The club record stood for forty years. Now it is yours."
+   }
+  },
+  {
+   "id": "nazionale",
+   "type": "incident",
+   "weight": 5,
+   "when": {
+    "ageMin": 18,
+    "repMin": 35
+   },
+   "effects": {
+    "morale": 15,
+    "reputation": 10
+   },
+   "it": {
+    "title": "La chiamata",
+    "text": "Arriva una mail. Poi una telefonata. Poi tua madre che piange al telefono."
+   },
+   "en": {
+    "title": "The call-up",
+    "text": "An email arrives. Then a phone call. Then your mother crying down the line."
+   }
+  },
+  {
+   "id": "fischi",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "repMin": 25
+   },
+   "effects": {
+    "morale": -11,
+    "men": 3
+   },
+   "it": {
+    "title": "I fischi di casa",
+    "text": "Ti fischia il tuo stadio. Esci al settantesimo guardando per terra."
+   },
+   "en": {
+    "title": "Booed at home",
+    "text": "Your own ground boos you. You come off on seventy looking at the grass."
+   }
+  },
+  {
+   "id": "capocannoniere",
+   "type": "incident",
+   "weight": 2,
+   "when": {
+    "roles": [
+     "PUN",
+     "ALA"
+    ],
+    "ageMin": 21
+   },
+   "effects": {
+    "morale": 14,
+    "reputation": 12
+   },
+   "it": {
+    "title": "La classifica marcatori",
+    "text": "Chiudi l'anno davanti a tutti. Ti danno una scarpa d'oro finta e sorridi come un bambino."
+   },
+   "en": {
+    "title": "Top scorer",
+    "text": "You finish the year ahead of everyone. They hand you a fake golden boot and you grin like a child."
+   }
+  },
+  {
+   "id": "assist",
+   "type": "incident",
+   "weight": 3,
+   "when": {
+    "roles": [
+     "ALA",
+     "MEZ",
+     "MED",
+     "TZ"
+    ]
+   },
+   "effects": {
+    "morale": 10,
+    "reputation": 6
+   },
+   "it": {
+    "title": "Quindici assist",
+    "text": "Nessuno in campionato ne ha fatti tanti. I compagni ti offrono la cena, tutti insieme."
+   },
+   "en": {
+    "title": "Fifteen assists",
+    "text": "Nobody in the league made more. Your teammates take you to dinner, all of them."
+   }
+  }
+ ]
+}

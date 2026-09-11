@@ -1,0 +1,1033 @@
+{
+ "version": 1,
+ "players": [
+  {
+   "name": "Gianluigi Buffon",
+   "role": "POR",
+   "rating": 93,
+   "tag": "Juventus · Italia",
+   "aliases": [
+    "gigi buffon",
+    "buffon"
+   ]
+  },
+  {
+   "name": "Manuel Neuer",
+   "role": "POR",
+   "rating": 92,
+   "tag": "Bayern · Germania",
+   "aliases": []
+  },
+  {
+   "name": "Iker Casillas",
+   "role": "POR",
+   "rating": 91,
+   "tag": "Real Madrid · Spagna",
+   "aliases": [
+    "casillas",
+    "san iker"
+   ]
+  },
+  {
+   "name": "Peter Schmeichel",
+   "role": "POR",
+   "rating": 91,
+   "tag": "Manchester United · Danimarca",
+   "aliases": []
+  },
+  {
+   "name": "Oliver Kahn",
+   "role": "POR",
+   "rating": 90,
+   "tag": "Bayern · Germania",
+   "aliases": [
+    "kahn"
+   ]
+  },
+  {
+   "name": "Dino Zoff",
+   "role": "POR",
+   "rating": 90,
+   "tag": "Juventus · Italia",
+   "aliases": []
+  },
+  {
+   "name": "Thibaut Courtois",
+   "role": "POR",
+   "rating": 89,
+   "tag": "Real Madrid · Belgio",
+   "aliases": []
+  },
+  {
+   "name": "Petr Čech",
+   "role": "POR",
+   "rating": 89,
+   "tag": "Chelsea · Rep. Ceca",
+   "aliases": [
+    "cech"
+   ]
+  },
+  {
+   "name": "Alisson",
+   "role": "POR",
+   "rating": 89,
+   "tag": "Liverpool · Brasile",
+   "aliases": []
+  },
+  {
+   "name": "Edwin van der Sar",
+   "role": "POR",
+   "rating": 88,
+   "tag": "Ajax · Olanda",
+   "aliases": [
+    "van der sar"
+   ]
+  },
+  {
+   "name": "Marc-André ter Stegen",
+   "role": "POR",
+   "rating": 87,
+   "tag": "Barcelona · Germania",
+   "aliases": [
+    "ter stegen"
+   ]
+  },
+  {
+   "name": "Ederson",
+   "role": "POR",
+   "rating": 87,
+   "tag": "Manchester City · Brasile",
+   "aliases": []
+  },
+  {
+   "name": "David De Gea",
+   "role": "POR",
+   "rating": 87,
+   "tag": "Manchester United · Spagna",
+   "aliases": [
+    "de gea"
+   ]
+  },
+  {
+   "name": "Júlio César",
+   "role": "POR",
+   "rating": 86,
+   "tag": "Inter · Brasile",
+   "aliases": [
+    "julio cesar"
+   ]
+  },
+  {
+   "name": "Samir Handanović",
+   "role": "POR",
+   "rating": 85,
+   "tag": "Inter · Slovenia",
+   "aliases": [
+    "handanovic"
+   ]
+  },
+  {
+   "name": "Hugo Lloris",
+   "role": "POR",
+   "rating": 85,
+   "tag": "Tottenham · Francia",
+   "aliases": [
+    "lloris"
+   ]
+  },
+  {
+   "name": "Keylor Navas",
+   "role": "POR",
+   "rating": 84,
+   "tag": "Real Madrid · Costa Rica",
+   "aliases": [
+    "navas"
+   ]
+  },
+  {
+   "name": "Pepe Reina",
+   "role": "POR",
+   "rating": 84,
+   "tag": "Liverpool · Spagna",
+   "aliases": [
+    "reina"
+   ]
+  },
+  {
+   "name": "Dida",
+   "role": "POR",
+   "rating": 84,
+   "tag": "Milan · Brasile",
+   "aliases": []
+  },
+  {
+   "name": "Francesco Toldo",
+   "role": "POR",
+   "rating": 83,
+   "tag": "Inter · Italia",
+   "aliases": [
+    "toldo"
+   ]
+  },
+  {
+   "name": "Paolo Maldini",
+   "role": "DIF",
+   "rating": 94,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "maldini"
+   ]
+  },
+  {
+   "name": "Franco Baresi",
+   "role": "DIF",
+   "rating": 93,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "baresi"
+   ]
+  },
+  {
+   "name": "Fabio Cannavaro",
+   "role": "DIF",
+   "rating": 91,
+   "tag": "Real Madrid · Italia",
+   "aliases": [
+    "cannavaro"
+   ]
+  },
+  {
+   "name": "Alessandro Nesta",
+   "role": "DIF",
+   "rating": 91,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "nesta"
+   ]
+  },
+  {
+   "name": "Virgil van Dijk",
+   "role": "DIF",
+   "rating": 91,
+   "tag": "Liverpool · Olanda",
+   "aliases": [
+    "van dijk"
+   ]
+  },
+  {
+   "name": "Sergio Ramos",
+   "role": "DIF",
+   "rating": 90,
+   "tag": "Real Madrid · Spagna",
+   "aliases": [
+    "ramos"
+   ]
+  },
+  {
+   "name": "Roberto Carlos",
+   "role": "DIF",
+   "rating": 90,
+   "tag": "Real Madrid · Brasile",
+   "aliases": [
+    "roberto carlos"
+   ]
+  },
+  {
+   "name": "Philipp Lahm",
+   "role": "DIF",
+   "rating": 90,
+   "tag": "Bayern · Germania",
+   "aliases": [
+    "lahm"
+   ]
+  },
+  {
+   "name": "Carles Puyol",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Barcelona · Spagna",
+   "aliases": [
+    "puyol"
+   ]
+  },
+  {
+   "name": "Gerard Piqué",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Barcelona · Spagna",
+   "aliases": [
+    "pique"
+   ]
+  },
+  {
+   "name": "Lilian Thuram",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Juventus · Francia",
+   "aliases": [
+    "thuram"
+   ]
+  },
+  {
+   "name": "Cafu",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Milan · Brasile",
+   "aliases": []
+  },
+  {
+   "name": "Rio Ferdinand",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Manchester United · Inghilterra",
+   "aliases": [
+    "ferdinand"
+   ]
+  },
+  {
+   "name": "Dani Alves",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Barcelona · Brasile",
+   "aliases": [
+    "alves"
+   ]
+  },
+  {
+   "name": "Giorgio Chiellini",
+   "role": "DIF",
+   "rating": 89,
+   "tag": "Juventus · Italia",
+   "aliases": [
+    "chiellini"
+   ]
+  },
+  {
+   "name": "Marcel Desailly",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Milan · Francia",
+   "aliases": [
+    "desailly"
+   ]
+  },
+  {
+   "name": "Jaap Stam",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Manchester United · Olanda",
+   "aliases": [
+    "stam"
+   ]
+  },
+  {
+   "name": "Nemanja Vidić",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Manchester United · Serbia",
+   "aliases": [
+    "vidic"
+   ]
+  },
+  {
+   "name": "John Terry",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Chelsea · Inghilterra",
+   "aliases": [
+    "terry"
+   ]
+  },
+  {
+   "name": "Javier Zanetti",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Inter · Argentina",
+   "aliases": [
+    "zanetti",
+    "pupi"
+   ]
+  },
+  {
+   "name": "Vincent Kompany",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Manchester City · Belgio",
+   "aliases": [
+    "kompany"
+   ]
+  },
+  {
+   "name": "Diego Godín",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Atlético · Uruguay",
+   "aliases": [
+    "godin"
+   ]
+  },
+  {
+   "name": "Thiago Silva",
+   "role": "DIF",
+   "rating": 88,
+   "tag": "Milan · Brasile",
+   "aliases": [
+    "thiago silva"
+   ]
+  },
+  {
+   "name": "David Alaba",
+   "role": "DIF",
+   "rating": 87,
+   "tag": "Bayern · Austria",
+   "aliases": [
+    "alaba"
+   ]
+  },
+  {
+   "name": "Marcelo",
+   "role": "DIF",
+   "rating": 87,
+   "tag": "Real Madrid · Brasile",
+   "aliases": []
+  },
+  {
+   "name": "Mats Hummels",
+   "role": "DIF",
+   "rating": 87,
+   "tag": "Dortmund · Germania",
+   "aliases": [
+    "hummels"
+   ]
+  },
+  {
+   "name": "Raphaël Varane",
+   "role": "DIF",
+   "rating": 87,
+   "tag": "Real Madrid · Francia",
+   "aliases": [
+    "varane"
+   ]
+  },
+  {
+   "name": "Jérôme Boateng",
+   "role": "DIF",
+   "rating": 86,
+   "tag": "Bayern · Germania",
+   "aliases": [
+    "boateng"
+   ]
+  },
+  {
+   "name": "Leonardo Bonucci",
+   "role": "DIF",
+   "rating": 86,
+   "tag": "Juventus · Italia",
+   "aliases": [
+    "bonucci"
+   ]
+  },
+  {
+   "name": "Sol Campbell",
+   "role": "DIF",
+   "rating": 86,
+   "tag": "Arsenal · Inghilterra",
+   "aliases": [
+    "campbell"
+   ]
+  },
+  {
+   "name": "Laurent Blanc",
+   "role": "DIF",
+   "rating": 86,
+   "tag": "Francia",
+   "aliases": [
+    "blanc"
+   ]
+  },
+  {
+   "name": "Alessandro Costacurta",
+   "role": "DIF",
+   "rating": 85,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "costacurta",
+    "billy"
+   ]
+  },
+  {
+   "name": "Zinédine Zidane",
+   "role": "CEN",
+   "rating": 95,
+   "tag": "Real Madrid · Francia",
+   "aliases": [
+    "zidane",
+    "zizou"
+   ]
+  },
+  {
+   "name": "Xavi",
+   "role": "CEN",
+   "rating": 93,
+   "tag": "Barcelona · Spagna",
+   "aliases": []
+  },
+  {
+   "name": "Andrés Iniesta",
+   "role": "CEN",
+   "rating": 93,
+   "tag": "Barcelona · Spagna",
+   "aliases": [
+    "iniesta"
+   ]
+  },
+  {
+   "name": "Kevin De Bruyne",
+   "role": "CEN",
+   "rating": 92,
+   "tag": "Manchester City · Belgio",
+   "aliases": [
+    "de bruyne",
+    "kdb"
+   ]
+  },
+  {
+   "name": "Andrea Pirlo",
+   "role": "CEN",
+   "rating": 91,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "pirlo"
+   ]
+  },
+  {
+   "name": "Luka Modrić",
+   "role": "CEN",
+   "rating": 91,
+   "tag": "Real Madrid · Croazia",
+   "aliases": [
+    "modric"
+   ]
+  },
+  {
+   "name": "Francesco Totti",
+   "role": "CEN",
+   "rating": 91,
+   "tag": "Roma · Italia",
+   "aliases": [
+    "totti",
+    "er pupone"
+   ]
+  },
+  {
+   "name": "Lothar Matthäus",
+   "role": "CEN",
+   "rating": 90,
+   "tag": "Bayern · Germania",
+   "aliases": [
+    "matthaus"
+   ]
+  },
+  {
+   "name": "Steven Gerrard",
+   "role": "CEN",
+   "rating": 90,
+   "tag": "Liverpool · Inghilterra",
+   "aliases": [
+    "gerrard"
+   ]
+  },
+  {
+   "name": "Toni Kroos",
+   "role": "CEN",
+   "rating": 90,
+   "tag": "Real Madrid · Germania",
+   "aliases": [
+    "kroos"
+   ]
+  },
+  {
+   "name": "Frank Rijkaard",
+   "role": "CEN",
+   "rating": 90,
+   "tag": "Milan · Olanda",
+   "aliases": [
+    "rijkaard"
+   ]
+  },
+  {
+   "name": "Pavel Nedvěd",
+   "role": "CEN",
+   "rating": 89,
+   "tag": "Juventus · Rep. Ceca",
+   "aliases": [
+    "nedved"
+   ]
+  },
+  {
+   "name": "Frank Lampard",
+   "role": "CEN",
+   "rating": 89,
+   "tag": "Chelsea · Inghilterra",
+   "aliases": [
+    "lampard"
+   ]
+  },
+  {
+   "name": "Paul Scholes",
+   "role": "CEN",
+   "rating": 89,
+   "tag": "Manchester United · Inghilterra",
+   "aliases": [
+    "scholes"
+   ]
+  },
+  {
+   "name": "Roy Keane",
+   "role": "CEN",
+   "rating": 89,
+   "tag": "Manchester United · Irlanda",
+   "aliases": [
+    "keane"
+   ]
+  },
+  {
+   "name": "Patrick Vieira",
+   "role": "CEN",
+   "rating": 89,
+   "tag": "Arsenal · Francia",
+   "aliases": [
+    "vieira"
+   ]
+  },
+  {
+   "name": "Sergio Busquets",
+   "role": "CEN",
+   "rating": 89,
+   "tag": "Barcelona · Spagna",
+   "aliases": [
+    "busquets"
+   ]
+  },
+  {
+   "name": "Juan Román Riquelme",
+   "role": "CEN",
+   "rating": 88,
+   "tag": "Boca · Argentina",
+   "aliases": [
+    "riquelme"
+   ]
+  },
+  {
+   "name": "Fernando Redondo",
+   "role": "CEN",
+   "rating": 88,
+   "tag": "Real Madrid · Argentina",
+   "aliases": [
+    "redondo"
+   ]
+  },
+  {
+   "name": "N'Golo Kanté",
+   "role": "CEN",
+   "rating": 88,
+   "tag": "Chelsea · Francia",
+   "aliases": [
+    "kante"
+   ]
+  },
+  {
+   "name": "Clarence Seedorf",
+   "role": "CEN",
+   "rating": 88,
+   "tag": "Milan · Olanda",
+   "aliases": [
+    "seedorf"
+   ]
+  },
+  {
+   "name": "Bastian Schweinsteiger",
+   "role": "CEN",
+   "rating": 88,
+   "tag": "Bayern · Germania",
+   "aliases": [
+    "schweinsteiger",
+    "schweini"
+   ]
+  },
+  {
+   "name": "Xabi Alonso",
+   "role": "CEN",
+   "rating": 88,
+   "tag": "Liverpool · Spagna",
+   "aliases": [
+    "xabi alonso"
+   ]
+  },
+  {
+   "name": "Manuel Rui Costa",
+   "role": "CEN",
+   "rating": 87,
+   "tag": "Milan · Portogallo",
+   "aliases": [
+    "rui costa"
+   ]
+  },
+  {
+   "name": "Edgar Davids",
+   "role": "CEN",
+   "rating": 87,
+   "tag": "Juventus · Olanda",
+   "aliases": [
+    "davids"
+   ]
+  },
+  {
+   "name": "Claude Makélélé",
+   "role": "CEN",
+   "rating": 87,
+   "tag": "Chelsea · Francia",
+   "aliases": [
+    "makelele"
+   ]
+  },
+  {
+   "name": "Juan Sebastián Verón",
+   "role": "CEN",
+   "rating": 87,
+   "tag": "Lazio · Argentina",
+   "aliases": [
+    "veron"
+   ]
+  },
+  {
+   "name": "Pep Guardiola",
+   "role": "CEN",
+   "rating": 87,
+   "tag": "Barcelona · Spagna",
+   "aliases": [
+    "guardiola"
+   ]
+  },
+  {
+   "name": "Michael Ballack",
+   "role": "CEN",
+   "rating": 87,
+   "tag": "Bayern · Germania",
+   "aliases": [
+    "ballack"
+   ]
+  },
+  {
+   "name": "Gennaro Gattuso",
+   "role": "CEN",
+   "rating": 84,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "gattuso",
+    "ringhio"
+   ]
+  },
+  {
+   "name": "Lionel Messi",
+   "role": "ATT",
+   "rating": 96,
+   "tag": "Barcelona · Argentina",
+   "aliases": [
+    "messi",
+    "leo messi"
+   ]
+  },
+  {
+   "name": "Ronaldo",
+   "role": "ATT",
+   "rating": 95,
+   "tag": "Inter · Brasile",
+   "aliases": [
+    "fenomeno",
+    "ronaldo nazario"
+   ]
+  },
+  {
+   "name": "Cristiano Ronaldo",
+   "role": "ATT",
+   "rating": 95,
+   "tag": "Real Madrid · Portogallo",
+   "aliases": [
+    "cr7",
+    "cristiano"
+   ]
+  },
+  {
+   "name": "Marco van Basten",
+   "role": "ATT",
+   "rating": 94,
+   "tag": "Milan · Olanda",
+   "aliases": [
+    "van basten"
+   ]
+  },
+  {
+   "name": "Diego Maradona",
+   "role": "ATT",
+   "rating": 95,
+   "tag": "Napoli · Argentina",
+   "aliases": [
+    "maradona",
+    "d10s"
+   ]
+  },
+  {
+   "name": "Ronaldinho",
+   "role": "ATT",
+   "rating": 93,
+   "tag": "Barcelona · Brasile",
+   "aliases": [
+    "dinho"
+   ]
+  },
+  {
+   "name": "Roberto Baggio",
+   "role": "ATT",
+   "rating": 92,
+   "tag": "Juventus · Italia",
+   "aliases": [
+    "baggio",
+    "divin codino"
+   ]
+  },
+  {
+   "name": "Thierry Henry",
+   "role": "ATT",
+   "rating": 92,
+   "tag": "Arsenal · Francia",
+   "aliases": [
+    "henry"
+   ]
+  },
+  {
+   "name": "Romário",
+   "role": "ATT",
+   "rating": 92,
+   "tag": "Barcelona · Brasile",
+   "aliases": [
+    "romario"
+   ]
+  },
+  {
+   "name": "Kylian Mbappé",
+   "role": "ATT",
+   "rating": 92,
+   "tag": "PSG · Francia",
+   "aliases": [
+    "mbappe"
+   ]
+  },
+  {
+   "name": "Gabriel Batistuta",
+   "role": "ATT",
+   "rating": 91,
+   "tag": "Fiorentina · Argentina",
+   "aliases": [
+    "batistuta",
+    "batigol"
+   ]
+  },
+  {
+   "name": "Andriy Shevchenko",
+   "role": "ATT",
+   "rating": 91,
+   "tag": "Milan · Ucraina",
+   "aliases": [
+    "shevchenko",
+    "sheva"
+   ]
+  },
+  {
+   "name": "Luis Suárez",
+   "role": "ATT",
+   "rating": 91,
+   "tag": "Barcelona · Uruguay",
+   "aliases": [
+    "suarez"
+   ]
+  },
+  {
+   "name": "Neymar",
+   "role": "ATT",
+   "rating": 91,
+   "tag": "Barcelona · Brasile",
+   "aliases": []
+  },
+  {
+   "name": "Robert Lewandowski",
+   "role": "ATT",
+   "rating": 91,
+   "tag": "Bayern · Polonia",
+   "aliases": [
+    "lewandowski",
+    "lewa"
+   ]
+  },
+  {
+   "name": "Erling Haaland",
+   "role": "ATT",
+   "rating": 91,
+   "tag": "Manchester City · Norvegia",
+   "aliases": [
+    "haaland"
+   ]
+  },
+  {
+   "name": "Alessandro Del Piero",
+   "role": "ATT",
+   "rating": 90,
+   "tag": "Juventus · Italia",
+   "aliases": [
+    "del piero",
+    "pinturicchio"
+   ]
+  },
+  {
+   "name": "Zlatan Ibrahimović",
+   "role": "ATT",
+   "rating": 90,
+   "tag": "Milan · Svezia",
+   "aliases": [
+    "ibrahimovic",
+    "ibra"
+   ]
+  },
+  {
+   "name": "Mohamed Salah",
+   "role": "ATT",
+   "rating": 90,
+   "tag": "Liverpool · Egitto",
+   "aliases": [
+    "salah"
+   ]
+  },
+  {
+   "name": "Raúl",
+   "role": "ATT",
+   "rating": 89,
+   "tag": "Real Madrid · Spagna",
+   "aliases": [
+    "raul"
+   ]
+  },
+  {
+   "name": "Samuel Eto'o",
+   "role": "ATT",
+   "rating": 89,
+   "tag": "Barcelona · Camerun",
+   "aliases": [
+    "eto o",
+    "etoo"
+   ]
+  },
+  {
+   "name": "Didier Drogba",
+   "role": "ATT",
+   "rating": 89,
+   "tag": "Chelsea · Costa d'Avorio",
+   "aliases": [
+    "drogba"
+   ]
+  },
+  {
+   "name": "Sergio Agüero",
+   "role": "ATT",
+   "rating": 89,
+   "tag": "Manchester City · Argentina",
+   "aliases": [
+    "aguero",
+    "kun"
+   ]
+  },
+  {
+   "name": "Karim Benzema",
+   "role": "ATT",
+   "rating": 89,
+   "tag": "Real Madrid · Francia",
+   "aliases": [
+    "benzema"
+   ]
+  },
+  {
+   "name": "George Weah",
+   "role": "ATT",
+   "rating": 89,
+   "tag": "Milan · Liberia",
+   "aliases": [
+    "weah"
+   ]
+  },
+  {
+   "name": "Sadio Mané",
+   "role": "ATT",
+   "rating": 88,
+   "tag": "Liverpool · Senegal",
+   "aliases": [
+    "mane"
+   ]
+  },
+  {
+   "name": "Harry Kane",
+   "role": "ATT",
+   "rating": 88,
+   "tag": "Tottenham · Inghilterra",
+   "aliases": [
+    "kane"
+   ]
+  },
+  {
+   "name": "Christian Vieri",
+   "role": "ATT",
+   "rating": 87,
+   "tag": "Inter · Italia",
+   "aliases": [
+    "vieri",
+    "bobo"
+   ]
+  },
+  {
+   "name": "Edinson Cavani",
+   "role": "ATT",
+   "rating": 87,
+   "tag": "PSG · Uruguay",
+   "aliases": [
+    "cavani"
+   ]
+  },
+  {
+   "name": "Fernando Torres",
+   "role": "ATT",
+   "rating": 87,
+   "tag": "Liverpool · Spagna",
+   "aliases": [
+    "torres",
+    "el nino"
+   ]
+  },
+  {
+   "name": "David Trezeguet",
+   "role": "ATT",
+   "rating": 86,
+   "tag": "Juventus · Francia",
+   "aliases": [
+    "trezeguet"
+   ]
+  },
+  {
+   "name": "Filippo Inzaghi",
+   "role": "ATT",
+   "rating": 86,
+   "tag": "Milan · Italia",
+   "aliases": [
+    "inzaghi",
+    "pippo"
+   ]
+  }
+ ]
+}

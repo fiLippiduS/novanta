@@ -1,0 +1,520 @@
+{
+  "common": {
+    "back": "Indietro",
+    "play": "Gioca",
+    "retry": "Rigioca",
+    "close": "Chiudi",
+    "cancel": "Annulla",
+    "best": "Record",
+    "score": "Punti",
+    "coins": "Monete",
+    "share": "Condividi",
+    "copied": "Copiato",
+    "sound": "Audio",
+    "language": "Lingua",
+    "soon": "Presto",
+    "of": "di"
+  },
+  "hub": {
+    "tagline": "Il calcio che ti ricordi",
+    "sub": "Sei sfide. Novanta secondi alla volta.",
+    "streak": "Striscia",
+    "days": "giorni",
+    "squadTitle": "La Rosa",
+    "squadDesc": "Novanta secondi per nominare più giocatori possibili di una squadra.",
+    "arcadeTitle": "Rigori",
+    "arcadeDesc": "Un tiro alla volta. Un portiere che impara da te.",
+    "dailyTitle": "Il Novantesimo",
+    "dailyDesc": "Cinque round. La stessa sfida per tutti, oggi.",
+    "dailyDone": "Fatto oggi",
+    "nextIn": "Prossima fra",
+    "playedTimes": "{n} partite",
+    "noRecord": "nessun record",
+    "games": "Partite",
+    "astaTitle": "Asta",
+    "astaDesc": "Venti crediti contro un bot che sa di calcio. Costruisci i cinque e giocatela.",
+    "carrieraTitle": "Carriera",
+    "carrieraDesc": "Sedici anni, una squadra di provincia. Vedi dove arrivi.",
+    "duelloTitle": "Più o Meno",
+    "duelloDesc": "Due giocatori, un dato. Chi ha fatto di più? Sbagli una volta e finisce."
+  },
+  "squad": {
+    "title": "La Rosa",
+    "getReady": "Preparati",
+    "go": "Via",
+    "placeholder": "Scrivi un giocatore…",
+    "found": "Trovati",
+    "missed": "Ti sono sfuggiti",
+    "timeUp": "Tempo scaduto",
+    "newRecord": "Nuovo record",
+    "youNamed": "Hai nominato {n} giocatori su {tot}",
+    "again": "Un'altra squadra",
+    "sameAgain": "Riprova questa",
+    "addTime": "+30 secondi",
+    "addTimeDesc": "Guarda un annuncio e continua da dove eri",
+    "hint": "Suggerimento",
+    "hintDesc": "Rivela le iniziali di un giocatore che ti manca",
+    "hintGiven": "Inizia per {letters}",
+    "duplicate": "Già detto",
+    "perfect": "Rosa completa"
+  },
+  "arcade": {
+    "title": "Rigori",
+    "round": "Tiro",
+    "aim": "Mira",
+    "power": "Potenza",
+    "curve": "Effetto",
+    "tapAim": "Tocca per fermare la mira",
+    "tapPower": "Tocca per la potenza",
+    "tapCurve": "Tocca per l'effetto, o aspetta",
+    "goal": "Gol",
+    "saved": "Parata",
+    "post": "Palo",
+    "out": "Fuori",
+    "gameOver": "Finita qui",
+    "scored": "Gol segnati",
+    "keeperSays": "Il portiere",
+    "oneMore": "Un'altra chance",
+    "oneMoreDesc": "Il portiere te ne concede uno. Una volta sola.",
+    "streak": "Serie"
+  },
+  "daily": {
+    "title": "Il Novantesimo",
+    "soon": "Arriva presto",
+    "soonDesc": "Cinque round, la stessa sfida per tutti nel mondo. Intanto prova La Rosa.",
+    "round": "Round",
+    "of": "di",
+    "intruderPrompt": "Chi non giocava con gli altri tre?",
+    "whichTeamPrompt": "Di che squadra è questa gente?",
+    "teammatesPrompt": "Sono mai stati compagni di squadra?",
+    "dripPrompt": "Che squadra è? Ogni nome in più vale meno punti",
+    "yes": "Sì",
+    "no": "No",
+    "nextClue": "Un altro nome",
+    "correct": "Giusto",
+    "wrong": "Sbagliato",
+    "wasTeam": "Era il {team} {season}",
+    "notTeammates": "Non hanno mai giocato insieme",
+    "wereTeammates": "Insieme nel {team} {season}",
+    "done": "Novantesimo finito",
+    "total": "Punteggio",
+    "streakNow": "Striscia di {n}",
+    "streakStart": "Striscia iniziata",
+    "streakLost": "Striscia interrotta",
+    "shareCta": "Condividi il risultato",
+    "shared": "Copiato negli appunti",
+    "comeBack": "Torna domani",
+    "alreadyPlayed": "Hai già giocato oggi",
+    "yourScore": "Il tuo punteggio di oggi: {n}",
+    "nextIn": "Prossima sfida fra {t}"
+  },
+  "consent": {
+    "text": "Usiamo cookie per la pubblicità che tiene in piedi il gioco.",
+    "allow": "Accetto",
+    "deny": "Solo essenziali",
+    "privacy": "Privacy"
+  },
+  "commentary": {
+    "squadStart": [
+      "Novanta secondi. Vai.",
+      "Il cronometro parte adesso.",
+      "Fammi vedere cosa ti ricordi."
+    ],
+    "squadHit": [
+      "Preso.",
+      "Esatto.",
+      "C'era, sì.",
+      "Uno dei loro.",
+      "Bravo.",
+      "Quello era difficile."
+    ],
+    "squadStreak": [
+      "Non ti fermi più.",
+      "Uno dietro l'altro.",
+      "Li stai svuotando.",
+      "Che memoria."
+    ],
+    "squadDup": [
+      "Già detto.",
+      "Quello ce l'hai già.",
+      "Di nuovo lui?"
+    ],
+    "squadMiss": [
+      "Mai stato lì.",
+      "Squadra sbagliata.",
+      "No, quello no.",
+      "Non in questa rosa."
+    ],
+    "squadEnd": [
+      "Il resto lo sapevi, ammettilo.",
+      "Guardali: li conoscevi tutti.",
+      "Domani vai meglio."
+    ],
+    "squadRecord": [
+      "Record tuo.",
+      "Meglio di sempre.",
+      "Hai superato te stesso."
+    ],
+    "arcadeStart": [
+      "Sul dischetto.",
+      "Silenzio allo stadio.",
+      "Tutto su questo tiro."
+    ],
+    "arcadeGoal": [
+      "Dentro!",
+      "Non l'ha vista.",
+      "Angolo perfetto.",
+      "Gol.",
+      "Non poteva farci nulla."
+    ],
+    "arcadeSave": [
+      "Parato.",
+      "L'aveva letto.",
+      "Ci era arrivato.",
+      "Ti aspettava lì."
+    ],
+    "arcadePost": [
+      "Palo!",
+      "Un centimetro.",
+      "Il legno."
+    ],
+    "arcadeOut": [
+      "Alto.",
+      "Fuori di tanto.",
+      "Sopra la traversa."
+    ],
+    "arcadeHot": [
+      "Sei in fiducia.",
+      "Il portiere comincia a innervosirsi.",
+      "Non sbagli un colpo."
+    ],
+    "dailyRight": [
+      "Giusto.",
+      "Preso.",
+      "Lo sapevi.",
+      "Facile, eh?",
+      "Esatto."
+    ],
+    "dailyWrong": [
+      "No.",
+      "Non era lui.",
+      "Sbagliato.",
+      "Ci stava, ma no."
+    ],
+    "dailyEnd": [
+      "Fine del novantesimo.",
+      "Triplice fischio.",
+      "È finita qui."
+    ],
+    "astaOpen": [
+      "Si parte da uno.",
+      "Chi lo vuole?",
+      "Sul tavolo."
+    ],
+    "astaYouLead": [
+      "Tuo, per ora.",
+      "Sei avanti.",
+      "Nessuno rilancia?"
+    ],
+    "astaBotBid": [
+      "Il bot rilancia.",
+      "Non te lo lascia.",
+      "Il bot alza."
+    ],
+    "astaWonYou": [
+      "Preso.",
+      "È tuo.",
+      "Buon colpo."
+    ],
+    "astaWonBot": [
+      "Se l'è preso lui.",
+      "Andato al bot.",
+      "Questo lo perdi."
+    ],
+    "astaBroke": [
+      "Non puoi più rilanciare.",
+      "Ti servono i crediti per il resto."
+    ],
+    "matchWin": [
+      "Partita vinta.",
+      "Rosa costruita bene.",
+      "Hai fatto la scelta giusta all'asta."
+    ],
+    "matchLoss": [
+      "Il bot ha comprato meglio.",
+      "Partita persa.",
+      "Ti è mancato qualcosa davanti."
+    ],
+    "matchDraw": [
+      "Finisce pari.",
+      "Non si fanno male.",
+      "Un punto per uno."
+    ],
+    "matchYellow": [
+      "Giallo.",
+      "Ammonito.",
+      "L'arbitro tira fuori il cartellino."
+    ],
+    "matchRed": [
+      "Rosso!",
+      "Espulso.",
+      "Resta in inferiorità numerica.",
+      "Doveva starci attento."
+    ],
+    "matchKick": [
+      "Si comincia.",
+      "Fischio d'inizio.",
+      "Palla al centro."
+    ],
+    "duelStart": [
+      "Si comincia.",
+      "Chi dei due?",
+      "Uno dei due. Scegli."
+    ],
+    "duelRight": [
+      "Giusto.",
+      "Esatto.",
+      "Lo sapevi.",
+      "Preso."
+    ],
+    "duelHot": [
+      "Non ne sbagli una.",
+      "Catena lunga.",
+      "Li conosci tutti."
+    ],
+    "duelWrong": [
+      "No.",
+      "Era l'altro.",
+      "Sbagliato.",
+      "Ci stava, ma no."
+    ]
+  },
+  "asta": {
+    "title": "Asta",
+    "intro": "Venti crediti. Cinque ruoli. Un avversario che sa il fatto suo.",
+    "rules1": "Ogni giocatore va all'asta uno alla volta. Cinque secondi per rilanciare, poi è aggiudicato.",
+    "rules2": "Devi chiudere con 1 portiere, 2 difensori, 1 centrocampista e 1 attaccante. Tieni sempre un credito per i posti che ti restano.",
+    "start": "Comincia l'asta",
+    "you": "Tu",
+    "bot": "Il Bot",
+    "credits": "Crediti",
+    "lot": "Lotto",
+    "price": "Prezzo",
+    "raise": "Rilancia",
+    "leading": "Sei in testa",
+    "botLeading": "Il bot è in testa",
+    "uncontested": "Nessuno può contendertelo",
+    "botUncontested": "Non ti serve più questo ruolo",
+    "sold": "Aggiudicato",
+    "soldTo": "a {who} per {n}",
+    "noCredits": "Crediti finiti per questo ruolo",
+    "roles": {
+      "POR": "Portiere",
+      "DIF": "Difensore",
+      "CEN": "Centrocampista",
+      "ATT": "Attaccante"
+    },
+    "rolesShort": {
+      "POR": "POR",
+      "DIF": "DIF",
+      "CEN": "CEN",
+      "ATT": "ATT"
+    },
+    "rating": "Voto",
+    "squadsReady": "Rose al completo",
+    "playMatch": "Gioca la partita",
+    "scout": "Taccuino dell'osservatore",
+    "scoutDesc": "Guarda un annuncio e scopri fin dove il bot è disposto a spingersi sui prossimi giocatori",
+    "scoutTitle": "Fin dove si spinge il bot",
+    "scoutMax": "fino a {n}",
+    "matchTitle": "Calcio a 5",
+    "vs": "contro",
+    "win": "Hai vinto",
+    "loss": "Hai perso",
+    "draw": "Pareggio",
+    "again": "Nuova asta",
+    "spent": "Speso",
+    "left": "Avanzati",
+    "record": "Vittorie",
+    "yourSquad": "La tua rosa",
+    "botSquad": "La rosa del bot",
+    "yoursFor": "Tuo per {n}",
+    "maxBid": "Puoi arrivare a {n}",
+    "assigning": "Se lo aggiudica per {n}",
+    "yellow": "Ammonito",
+    "red": "Espulso",
+    "secondYellow": "Secondo giallo",
+    "kickoff": "Si comincia",
+    "fullTime": "Finita",
+    "menDown": "in {n}",
+    "secondYellowShort": "2° giallo",
+    "avg": "Media rosa",
+    "pens": "Ai rigori",
+    "penResult": "{a}-{b} ai rigori"
+  },
+  "carriera": {
+    "title": "Carriera",
+    "new": "Nuova carriera",
+    "continue": "Riprendi",
+    "restart": "Ricomincia da capo",
+    "intro": "Sedici anni, una squadra di provincia e trent'anni davanti.",
+    "introText": "Scegli chi sei, poi prendi una decisione all'anno. Il resto capita.",
+    "yourName": "Come ti chiami",
+    "namePlaceholder": "Nome e cognome",
+    "chooseRole": "Che giocatore sei",
+    "chooseStyle": "Che tipo di {role}",
+    "chooseNumber": "Il numero",
+    "chooseNation": "Da dove vieni",
+    "chooseClub": "Da dove si comincia",
+    "chooseClubText": "Tre squadre ti vogliono. Nessuna di queste vincerà niente quest'anno.",
+    "begin": "Comincia",
+    "season": "Stagione",
+    "age": "anni",
+    "at": "al",
+    "apps": "Presenze",
+    "goals": "Gol",
+    "assists": "Assist",
+    "clean": "Porte inviolate",
+    "rating": "Media voto",
+    "position": "Posizione",
+    "overall": "Valore",
+    "career": "In carriera",
+    "cabinet": "Bacheca",
+    "empty": "Ancora vuota",
+    "morale": "Morale",
+    "fitness": "Condizione",
+    "fame": "Fama",
+    "tec": "Tecnica",
+    "fis": "Fisico",
+    "men": "Testa",
+    "vel": "Velocità",
+    "decisions": "Le scelte dell'anno",
+    "whatHappened": "Quello che è successo",
+    "playSeason": "Gioca la stagione",
+    "nextSeason": "Stagione successiva",
+    "market": "Il mercato",
+    "marketText": "Chi ti vuole per l'anno prossimo.",
+    "stay": "Resti dove sei",
+    "loan": "in prestito",
+    "tier": [
+      "Élite",
+      "Grande squadra",
+      "Prima divisione",
+      "Bassa classifica",
+      "Provincia"
+    ],
+    "won": "Hai vinto",
+    "retire": "Ritirati",
+    "retired": "Carriera finita",
+    "endTitle": "La fine",
+    "endText": "{name}, {age} anni. {apps} partite, {goals} gol, {assists} assist.",
+    "noTrophies": "Nessun trofeo. Ma hai giocato.",
+    "trophyNames": {
+      "campionato": "Campionato",
+      "coppa": "Coppa nazionale",
+      "supercoppa": "Supercoppa",
+      "continentale": "Coppa continentale",
+      "promozione": "Promozione",
+      "nazionale": "Titolo con la nazionale"
+    },
+    "roles": {
+      "POR": "Portiere",
+      "DC": "Difensore centrale",
+      "TZ": "Terzino",
+      "MED": "Mediano",
+      "MEZ": "Mezzala",
+      "ALA": "Ala",
+      "PUN": "Prima punta"
+    },
+    "styles": {
+      "volante": "Portiere volante",
+      "linea": "Portiere di linea",
+      "rigorista": "Para-rigori",
+      "marcatore": "Marcatore",
+      "costruttore": "Costruttore",
+      "libero": "Libero",
+      "fluidificante": "Fluidificante",
+      "bloccato": "Terzino bloccato",
+      "braccetto": "Braccetto",
+      "diga": "Diga",
+      "regista": "Regista arretrato",
+      "incursore": "Incursore",
+      "tuttocampista": "Tuttocampista",
+      "saltatore": "Salta l'uomo",
+      "rientrante": "Ala rientrante",
+      "assistman": "Rifinitore",
+      "rapace": "Rapace d'area",
+      "falsonueve": "Falso nueve",
+      "torre": "Torre"
+    },
+    "styleHint": {
+      "volante": "Esce alto, gioca coi piedi, sbaglia in grande.",
+      "linea": "Non si muove dalla riga e le para tutte.",
+      "rigorista": "Studia i rigoristi da anni. Ha un quaderno.",
+      "marcatore": "Sul suo attaccante non passa niente.",
+      "costruttore": "Imposta da dietro, cerca sempre la linea.",
+      "libero": "Esce palla al piede quando nessuno se lo aspetta.",
+      "fluidificante": "Su e giù per la fascia per novanta minuti.",
+      "bloccato": "Non supera mai la metà campo. Non prende mai gol.",
+      "braccetto": "Difensore che diventa centrocampista a partita in corso.",
+      "diga": "Recupera palloni e li dà semplici.",
+      "regista": "Vede la giocata tre secondi prima di tutti.",
+      "incursore": "Arriva in area senza che nessuno se ne accorga.",
+      "tuttocampista": "Corre più di tutti e serve dappertutto.",
+      "saltatore": "Uno contro uno, sempre. A volte funziona.",
+      "rientrante": "Viene dentro sul piede forte e tira.",
+      "assistman": "Non segna, fa segnare. E lo preferisce.",
+      "rapace": "Sta in area e aspetta l'errore. Non sbaglia.",
+      "falsonueve": "Si abbassa, apre lo spazio, poi ci entra lui.",
+      "torre": "Tiene palla e fa salire tutti. Di testa non perde."
+    },
+    "chooseRoleText": "Tocca la posizione in cui vuoi giocare.",
+    "chooseNumberText": "Da 1 a 99. Scegli il tuo.",
+    "rolesShort": {
+      "POR": "POR",
+      "DC": "DC",
+      "TZ": "TZ",
+      "MED": "MED",
+      "MEZ": "MEZ",
+      "ALA": "ALA",
+      "PUN": "PUN"
+    }
+  },
+  "duello": {
+    "title": "Più o Meno",
+    "who": "Chi ha",
+    "pick": "Tocca il giocatore che pensi sia quello giusto",
+    "right": "Risposte giuste",
+    "gameOver": "Catena spezzata",
+    "oneMore": "Continua la catena",
+    "oneMoreDesc": "Guarda un annuncio e riparti da dove eri",
+    "roles": {
+      "POR": "Portiere",
+      "DIF": "Difensore",
+      "CEN": "Centrocampista",
+      "ATT": "Attaccante"
+    },
+    "params": {
+      "g": "più gol in carriera",
+      "a": "più assist in carriera",
+      "pr": "più presenze in carriera",
+      "t": "più trofei vinti",
+      "c": "più presenze in nazionale",
+      "ng": "più gol in nazionale",
+      "ucl": "più Champions vinte",
+      "lg": "più campionati vinti",
+      "bd": "più Palloni d'Oro",
+      "r": "più cartellini rossi",
+      "h": "più centimetri di altezza",
+      "cl": "giocato in più club",
+      "ws": "giocato più Mondiali",
+      "bs": "più gol in una sola stagione",
+      "cs": "più porte inviolate"
+    }
+  },
+  "foot": {
+    "howto": "Come si gioca",
+    "data": "I dati",
+    "privacy": "Privacy"
+  }
+}

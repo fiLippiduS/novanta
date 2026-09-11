@@ -1,0 +1,220 @@
+/* NOVANTA — ingresso */
+
+.hub {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  padding-block: var(--s-6) var(--s-5);
+  flex: 1;
+}
+
+/* ---------- testata ---------- */
+
+.hub__head {
+  position: relative;
+  text-align: center;
+  padding-block: var(--s-6) var(--s-4);
+}
+
+.hub__tagline { margin-bottom: var(--s-3); color: var(--chalk-3); }
+
+.hub__mark {
+  font-size: var(--t-hero);
+  line-height: 0.8;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* il fantasma di stampa sul titolo: due passaggi fuori registro */
+.hub__word {
+  position: relative;
+  display: inline-block;
+  color: var(--chalk);
+  text-shadow:
+    calc(var(--misreg) * -1) var(--misreg) 0 var(--lime-glow),
+    var(--misreg) calc(var(--misreg) * -1) 0 rgba(255, 90, 60, 0.16);
+  animation: word-settle 900ms var(--e-spring) both;
+}
+
+@keyframes word-settle {
+  from { letter-spacing: 0.24em; opacity: 0; filter: blur(6px); }
+  to   { letter-spacing: var(--track-display); opacity: 1; filter: none; }
+}
+
+.hub__sub {
+  margin-top: var(--s-3);
+  font-size: var(--t-sm);
+  letter-spacing: 0.02em;
+}
+
+.hub__arc {
+  position: absolute;
+  inset: auto 0 -10px 0;
+  height: 120px;
+  z-index: 1;
+  pointer-events: none;
+}
+.hub__arc svg { width: 100%; height: 100%; }
+
+/* ---------- le tre porte ---------- */
+
+.hub__modes {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.mode {
+  --mode-accent: var(--lime);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-4);
+  width: 100%;
+  text-align: left;
+  padding: var(--s-5);
+  background: linear-gradient(135deg, var(--ink-800) 0%, var(--ink-850) 70%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: inherit;
+  cursor: pointer;
+  transform: rotate(var(--tilt, 0deg));
+  transition:
+    transform var(--d-base) var(--e-spring),
+    border-color var(--d-base) linear,
+    background var(--d-base) linear;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mode:hover,
+.mode:focus-visible {
+  transform: rotate(0deg) translateY(-4px);
+  border-color: color-mix(in srgb, var(--mode-accent) 55%, transparent);
+  background: linear-gradient(135deg, var(--ink-700) 0%, var(--ink-800) 70%);
+  outline: none;
+}
+.mode:hover::before,
+.mode:focus-visible::before { transform: translate(-6px, 6px); opacity: 0.7; }
+.mode:active { transform: rotate(0deg) translateY(0) scale(0.995); }
+
+.mode__index {
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--mode-accent);
+  opacity: 0.85;
+  align-self: start;
+  min-width: 2.2ch;
+}
+
+.mode__body { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+
+.mode__title { font-size: clamp(1.6rem, 5.4vw, 2.3rem); }
+
+.mode__desc {
+  font-size: var(--t-sm);
+  color: var(--chalk-3);
+  line-height: 1.45;
+  max-width: 34ch;
+}
+
+.mode__meta { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-1); }
+
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: rgba(0, 0, 0, 0.25);
+}
+.chip .label { color: var(--chalk-4); }
+.chip strong { font-size: var(--t-sm); color: var(--chalk-2); }
+
+.mode__arrow {
+  font-size: 1.6rem;
+  color: var(--mode-accent);
+  transition: transform var(--d-base) var(--e-spring);
+}
+.mode:hover .mode__arrow { transform: translateX(6px); }
+
+.mode--done .mode__index::after {
+  content: '✓';
+  display: block;
+  font-size: 0.9rem;
+  color: var(--lime);
+}
+
+.mode--soon { opacity: 0.62; }
+
+/* ---------- piede ---------- */
+
+.hub__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: auto;
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+
+.pill {
+  appearance: none;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--chalk-2);
+  font-family: var(--font-ui);
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background var(--d-fast) linear, color var(--d-fast) linear;
+}
+.pill:hover { background: rgba(237, 232, 218, 0.08); color: var(--chalk); }
+.pill:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+
+.hub__legal {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--s-3);
+  font-size: var(--t-xs);
+  color: var(--chalk-4);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hub__legal:hover { color: var(--chalk-2); }
+
+@media (min-width: 46rem) {
+  .hub__modes { gap: var(--s-5); }
+  .mode { padding: var(--s-5) var(--s-6); }
+  .mode__index { font-size: 3.4rem; }
+}
+
+/* I link del piede: in riga sul computer, tutti su una riga sola sotto ai
+   pulsanti sul telefono. Sfilacciati su due righe a destra facevano pena. */
+.hub__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--s-2) var(--s-4);
+}
+.hub__links .hub__legal { white-space: nowrap; }
+
+@media (max-width: 30rem) {
+  .hub__foot { flex-wrap: wrap; }
+  .hub__foot .spacer { display: none; }
+  .hub__links {
+    flex-basis: 100%;
+    justify-content: space-between;
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+}

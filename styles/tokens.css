@@ -1,0 +1,112 @@
+/* NOVANTA — design tokens
+   Uno stadio di notte, stampato male apposta.
+   Un solo accento acceso alla volta. */
+
+:root {
+  /* --- Notte --- */
+  --ink-950: #05080F;
+  --ink-900: #080D18;
+  --ink-850: #0B1220;
+  --ink-800: #0F1728;
+  --ink-700: #162034;
+  --ink-600: #1F2C45;
+  --ink-500: #2C3B58;
+
+  /* --- Gesso e carta --- */
+  --chalk: #EDE8DA;
+  --chalk-2: #C9C3B4;
+  --chalk-3: #8B8779;
+  --chalk-4: #575549;
+
+  /* --- Accenti (uno alla volta) --- */
+  --lime: #C9F24B;
+  --lime-deep: #9CC020;
+  --lime-glow: rgba(201, 242, 75, 0.22);
+
+  --amber: #FFB020;
+  --amber-glow: rgba(255, 176, 32, 0.20);
+
+  --flare: #FF5A3C;
+  --flare-glow: rgba(255, 90, 60, 0.20);
+
+  --sky: #58C7F0;
+
+  /* --- Riflettori --- */
+  --flood: rgba(255, 246, 222, 0.10);
+  --flood-hot: rgba(255, 246, 222, 0.20);
+
+  /* --- Ruoli semantici --- */
+  --bg: var(--ink-950);
+  --surface: var(--ink-850);
+  --surface-2: var(--ink-800);
+  --line: rgba(237, 232, 218, 0.10);
+  --line-strong: rgba(237, 232, 218, 0.22);
+  --text: var(--chalk);
+  --text-dim: var(--chalk-3);
+  --accent: var(--lime);
+  --good: var(--lime);
+  --warn: var(--amber);
+  --bad: var(--flare);
+
+  /* --- Tipografia --- */
+  --font-display: 'Anton', 'Haettenschweiler', 'Arial Narrow', system-ui, sans-serif;
+  --font-ui: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --t-hero: clamp(3.5rem, 13vw, 9rem);
+  --t-xxl: clamp(2.6rem, 8vw, 5rem);
+  --t-xl: clamp(1.9rem, 5.2vw, 3rem);
+  --t-lg: clamp(1.35rem, 3.4vw, 1.85rem);
+  --t-md: 1.0625rem;
+  --t-sm: 0.875rem;
+  --t-xs: 0.75rem;
+  --t-micro: 0.6875rem;
+
+  --track-display: -0.02em;
+  --track-label: 0.16em;
+
+  /* --- Ritmo --- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+
+  --r-sm: 4px;
+  --r-md: 10px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  --shell: 62rem;
+
+  /* --- Movimento --- */
+  --e-spring: cubic-bezier(0.18, 1.32, 0.42, 1);
+  --e-out: cubic-bezier(0.16, 0.84, 0.28, 1);
+  --e-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --d-fast: 140ms;
+  --d-base: 220ms;
+  --d-slow: 320ms;
+  --d-scene: 420ms;
+
+  /* --- Stampa fuori registro (la firma visiva) --- */
+  --misreg: 3px;
+  --grain: 0.055;
+}
+
+/* Il tema chiaro non esiste: il gioco è ambientato di notte, sempre.
+   Dichiariamo comunque color-scheme per i controlli nativi. */
+:root { color-scheme: dark; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --d-fast: 1ms; --d-base: 1ms; --d-slow: 1ms; --d-scene: 1ms;
+    --e-spring: linear; --e-out: linear; --e-in: linear;
+  }
+}
+
+/* grana di stampa, generata inline: nessuna richiesta di rete */
+:root {
+  --grain-src: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}

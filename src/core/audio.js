@@ -1,0 +1,90 @@
+/* Suoni generati al volo: nessun file audio da scaricare,
+   nessun byte in più sul primo caricamento. */
+
+import * as store from './storage.js';
+
+let ctx = null;
+let master = null;
+let enabled = true;
+
+export function init() {
+  enabled = store.get('sound') !== false;
+  const unlock = () => {
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      ctx = new AC();
+      master = ctx.createGain();
+      master.gain.value = 0.22;
+      master.connect(ctx.destination);
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+  };
+  ['pointerdown', 'keydown'].forEach((e) =>
+    addEventListener(e, unlock, { once: false, passive: true }));
+}
+
+export function setEnabled(v) {
+  enabled = v;
+  store.save({ sound: v });
+}
+
+export function isEnabled() { return enabled; }
+
+function tone({ freq = 440, to = null, dur = 0.12, type = 'sine', gain = 1, delay = 0 }) {
+  if (!enabled || !ctx) return;
+  const t0 = ctx.currentTime + delay;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  if (to) osc.frequency.exponentialRampToValueAtTime(to, t0 + dur);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  osc.connect(g).connect(master);
+  osc.start(t0);
+  osc.stop(t0 + dur + 0.02);
+}
+
+function noise({ dur = 0.18, gain = 0.5, hp = 400, delay = 0 }) {
+  if (!enabled || !ctx) return;
+  const t0 = ctx.currentTime + delay;
+  const n = Math.floor(ctx.sampleRate * dur);
+  const buf = ctx.createBuffer(1, n, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ctx.createBufferSource();
+  src.buffer = buf;
+  const filt = ctx.createBiquadFilter();
+  filt.type = 'highpass';
+  filt.frequency.value = hp;
+  const g = ctx.createGain();
+  g.gain.value = gain;
+  src.connect(filt).connect(g).connect(master);
+  src.start(t0);
+}
+
+export const sfx = {
+  hit: () => tone({ freq: 620, to: 980, dur: 0.11, type: 'triangle', gain: 0.5 }),
+  miss: () => tone({ freq: 180, to: 90, dur: 0.16, type: 'sawtooth', gain: 0.22 }),
+  dup: () => tone({ freq: 420, dur: 0.07, type: 'sine', gain: 0.25 }),
+  tick: () => tone({ freq: 1200, dur: 0.03, type: 'square', gain: 0.12 }),
+  urgent: () => tone({ freq: 1500, dur: 0.05, type: 'square', gain: 0.2 }),
+  whistle: () => {
+    tone({ freq: 1800, to: 2300, dur: 0.18, type: 'sine', gain: 0.3 });
+    tone({ freq: 2100, to: 1700, dur: 0.16, type: 'sine', gain: 0.2, delay: 0.2 });
+  },
+  kick: () => { noise({ dur: 0.07, gain: 0.7, hp: 800 }); tone({ freq: 140, to: 60, dur: 0.1, type: 'sine', gain: 0.6 }); },
+  goal: () => {
+    noise({ dur: 0.5, gain: 0.35, hp: 300 });
+    [392, 494, 587, 784].forEach((f, i) =>
+      tone({ freq: f, dur: 0.34, type: 'triangle', gain: 0.34, delay: i * 0.055 }));
+  },
+  save: () => { noise({ dur: 0.14, gain: 0.6, hp: 1200 }); tone({ freq: 110, to: 70, dur: 0.2, type: 'square', gain: 0.3 }); },
+  post: () => tone({ freq: 1400, to: 900, dur: 0.5, type: 'sine', gain: 0.4 }),
+  record: () => [523, 659, 784, 1047].forEach((f, i) =>
+    tone({ freq: f, dur: 0.26, type: 'triangle', gain: 0.36, delay: i * 0.075 })),
+  over: () => [330, 262, 196].forEach((f, i) =>
+    tone({ freq: f, dur: 0.4, type: 'sawtooth', gain: 0.18, delay: i * 0.13 })),
+};

@@ -1,0 +1,130 @@
+/* PIÙ O MENO */
+
+.duello { display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
+
+/* Su telefono i due contendenti stanno uno sopra l'altro con il parametro in
+   mezzo: affiancati, su trecentosettanta pixel, i nomi si accavallavano.
+   Da schermo largo tornano a sinistra e destra. */
+.arena {
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  align-items: stretch;
+  gap: var(--s-2);
+  margin-block: auto;
+}
+
+/* ---------- il parametro, in mezzo ---------- */
+
+.arena__vs {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 2px;
+  text-align: center;
+  padding-block: var(--s-3);
+}
+.arena__who { color: var(--chalk-4); }
+.arena__param {
+  font-size: clamp(1.05rem, 3.8vw, 1.7rem);
+  line-height: 1.02;
+  color: var(--chalk);
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.7);
+}
+/* una riga di gesso che separa i due contendenti */
+.arena__vs { position: relative; }
+.arena__vs::before, .arena__vs::after {
+  content: '';
+  position: absolute;
+  height: 1px;
+  width: 22%;
+  top: 50%;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+.arena__vs::before { left: 0; }
+.arena__vs::after { right: 0; }
+
+.arena__slot { display: flex; min-width: 0; min-height: 0; }
+
+/* ---------- le carte ---------- */
+
+.dcard {
+  --role-c: var(--chalk-3);
+  flex: 1;
+  display: grid;
+  align-content: center;
+  gap: var(--s-2);
+  min-width: 0;
+  padding: var(--s-4) var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: linear-gradient(150deg,
+    color-mix(in srgb, var(--role-c) 12%, transparent), var(--ink-850) 65%);
+  color: var(--text);
+  text-align: left;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: transform var(--d-base) var(--e-spring),
+              border-color var(--d-base) linear, filter var(--d-base) linear;
+}
+.dcard:hover:not(:disabled) { transform: translateY(-4px); border-color: var(--role-c); }
+.dcard:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+.dcard:disabled { cursor: default; }
+
+.dcard__top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-2); }
+.dcard__role { color: var(--role-c); }
+.dcard__nat {
+  color: var(--chalk-4);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dcard__name {
+  font-size: clamp(1.05rem, 4.4vw, 1.9rem);
+  line-height: 0.98;
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.dcard__club { color: var(--chalk-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.dcard__value { margin-top: var(--s-3); min-height: 2.6em; display: flex; align-items: center; }
+.dcard__num {
+  font-size: clamp(1.9rem, 8vw, 3.2rem);
+  line-height: 1;
+  color: var(--chalk);
+}
+.dcard__num--wait { color: var(--chalk-4); }
+
+.dcard--win {
+  border-color: var(--lime);
+  background: linear-gradient(150deg, var(--lime-glow), var(--ink-800) 65%);
+}
+.dcard--win .dcard__num { color: var(--lime); }
+.dcard--lose { filter: saturate(0.5) brightness(0.78); }
+.dcard--wrong { border-color: var(--flare); animation: shake-x 420ms var(--e-out); }
+.dcard--wrong .dcard__num { color: var(--flare); }
+
+.duello__hint { text-align: center; color: var(--chalk-4); min-height: 1.2em; }
+.duello .commentary { text-align: center; }
+
+@media (min-width: 34rem) {
+  .arena {
+    grid-template-rows: none;
+    grid-template-columns: 1fr minmax(6rem, 10rem) 1fr;
+    max-height: 26rem;
+  }
+  .arena__vs { padding-block: var(--s-4); }
+  .arena__vs::before, .arena__vs::after {
+    height: 100%;
+    width: 1px;
+    top: 0;
+    background: linear-gradient(180deg, transparent, var(--line), transparent);
+  }
+}
+
+@media (min-width: 46rem) {
+  .arena { gap: var(--s-5); }
+  .dcard { padding: var(--s-5); gap: var(--s-3); }
+}

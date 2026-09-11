@@ -1,0 +1,93 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>NOVANTA — generatore immagini</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&display=swap">
+<body style="background:#05080F;color:#EDE8DA;font-family:Archivo,sans-serif;padding:20px">
+<p id="log">…</p>
+<script>
+const INK='#05080F', INK2='#0B1220', CHALK='#EDE8DA', LIME='#C9F24B', FLARE='#FF5A3C';
+
+function grain(ctx,w,h,alpha){
+  const img=ctx.createImageData(w,h), d=img.data;
+  for(let i=0;i<d.length;i+=4){const v=Math.random()*255;d[i]=d[i+1]=d[i+2]=v;d[i+3]=alpha;}
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  c.getContext('2d').putImageData(img,0,0);
+  ctx.globalCompositeOperation='overlay';ctx.drawImage(c,0,0);ctx.globalCompositeOperation='source-over';
+}
+
+/* fondo comune: notte di stadio con l'alone dei riflettori */
+function night(ctx,w,h){
+  ctx.fillStyle=INK;ctx.fillRect(0,0,w,h);
+  const g=ctx.createRadialGradient(w*0.5,h*0.1,0,w*0.5,h*0.1,h*1.3);
+  g.addColorStop(0,'rgba(255,246,222,0.16)');g.addColorStop(0.45,'rgba(255,246,222,0.04)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='rgba(237,232,218,0.05)';ctx.lineWidth=1;
+  for(let x=0;x<w;x+=Math.round(w/28)){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=Math.round(w/28)){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+}
+
+/* titolo fuori registro: l'ombra rossa e quella verde sfalsate, come la stampa */
+function misreg(ctx,text,x,y,size){
+  ctx.font=size+'px Anton, Impact, sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  ctx.globalAlpha=0.55;ctx.fillStyle=FLARE;ctx.fillText(text,x-size*0.018,y+size*0.012);
+  ctx.fillStyle=LIME;ctx.fillText(text,x+size*0.016,y-size*0.010);
+  ctx.globalAlpha=1;ctx.fillStyle=CHALK;ctx.fillText(text,x,y);
+}
+
+function og(){
+  const w=1200,h=630,c=document.createElement('canvas');c.width=w;c.height=h;
+  const ctx=c.getContext('2d');
+  night(ctx,w,h);
+  /* arco del cerchio di centrocampo, tratteggiato */
+  ctx.setLineDash([10,14]);ctx.strokeStyle='rgba(237,232,218,0.22)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(w/2,h*0.70,330,Math.PI,0);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle=LIME;ctx.beginPath();ctx.arc(w/2,h*0.70,9,0,7);ctx.fill();
+
+  ctx.fillStyle='#C9C3B4';ctx.font='600 26px Archivo, sans-serif';
+  ctx.textAlign='center';ctx.letterSpacing='8px';
+  ctx.fillText('IL CALCIO CHE TI RICORDI',w/2,150);
+  ctx.letterSpacing='0px';
+  misreg(ctx,'NOVANTA',w/2,300,150);
+  ctx.fillStyle=CHALK;ctx.font='400 34px Archivo, sans-serif';
+  ctx.fillText('Sei sfide. Novanta secondi alla volta.',w/2,362);
+  ctx.fillStyle='#8B8779';ctx.font='600 24px Archivo, sans-serif';ctx.letterSpacing='4px';
+  ctx.fillText('LA ROSA · RIGORI · ASTA · PIÙ O MENO · CARRIERA · IL NOVANTESIMO',w/2,h-70);
+  ctx.letterSpacing='0px';
+  grain(ctx,w,h,16);
+  return c;
+}
+
+function icon(size,radius){
+  const c=document.createElement('canvas');c.width=size;c.height=size;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle=INK2;
+  const r=radius*size;
+  ctx.beginPath();ctx.moveTo(r,0);ctx.arcTo(size,0,size,size,r);ctx.arcTo(size,size,0,size,r);
+  ctx.arcTo(0,size,0,0,r);ctx.arcTo(0,0,size,0,r);ctx.fill();
+  const g=ctx.createRadialGradient(size/2,size*0.12,0,size/2,size*0.12,size);
+  g.addColorStop(0,'rgba(255,246,222,0.18)');g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g;ctx.fill();
+  ctx.font=(size*0.60)+'px Anton, Impact, sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle=FLARE;ctx.globalAlpha=0.6;ctx.fillText('90',size/2-size*0.015,size*0.56+size*0.01);
+  ctx.globalAlpha=1;ctx.fillStyle=LIME;ctx.fillText('90',size/2,size*0.56);
+  return c;
+}
+
+async function send(name,canvas){
+  await fetch('http://localhost:8099/save?name='+name,{method:'POST',body:canvas.toDataURL('image/png')});
+}
+
+(async ()=>{
+  await document.fonts.load('150px Anton');
+  await document.fonts.load('600 26px Archivo');
+  await document.fonts.ready;
+  await send('og.png',og());
+  await send('icon-512.png',icon(512,0.22));
+  await send('icon-192.png',icon(192,0.22));
+  await send('apple-touch-icon.png',icon(180,0.0001));
+  document.getElementById('log').textContent='fatto';
+})();
+</script>

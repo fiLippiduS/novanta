@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /tools/
+
+# La mappa del sito va indicata con l'indirizzo completo, altrimenti
+# i motori di ricerca la ignorano. Cambialo insieme al dominio.
+Sitemap: https://novanta.game/sitemap.xml

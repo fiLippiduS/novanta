@@ -1,0 +1,2678 @@
+{
+ "version": 1,
+ "clubs": [
+  {
+   "id": "juventus",
+   "name": "Juventus",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "inter",
+   "name": "Inter",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#1E4FBF",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "milan",
+   "name": "Milan",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "napoli",
+   "name": "Napoli",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#63B3E8",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "roma",
+   "name": "Roma",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#8E1F3A",
+    "#C9A227"
+   ]
+  },
+  {
+   "id": "lazio",
+   "name": "Lazio",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "atalanta",
+   "name": "Atalanta",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#1E4FBF",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "fiorentina",
+   "name": "Fiorentina",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#6B3FA0",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "bologna",
+   "name": "Bologna",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "torino",
+   "name": "Torino",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#7A4A2B",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "udinese",
+   "name": "Udinese",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "sassuolo",
+   "name": "Sassuolo",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "genoa",
+   "name": "Genoa",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "cagliari",
+   "name": "Cagliari",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "lecce",
+   "name": "Lecce",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "empoli",
+   "name": "Empoli",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "frosinone",
+   "name": "Frosinone",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "cesena",
+   "name": "Cesena",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "catanzaro",
+   "name": "Catanzaro",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#F2C61A",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "pescara",
+   "name": "Pescara",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "ternana",
+   "name": "Ternana",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#1E8A47"
+   ]
+  },
+  {
+   "id": "avellino",
+   "name": "Avellino",
+   "country": "Italia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "man-city",
+   "name": "Manchester City",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "liverpool",
+   "name": "Liverpool",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#D22030",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "arsenal",
+   "name": "Arsenal",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "man-utd",
+   "name": "Manchester United",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#D22030",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "chelsea",
+   "name": "Chelsea",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "tottenham",
+   "name": "Tottenham",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "newcastle",
+   "name": "Newcastle",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "aston-villa",
+   "name": "Aston Villa",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#8E1F3A",
+    "#63B3E8"
+   ]
+  },
+  {
+   "id": "everton",
+   "name": "Everton",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#132A63",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "west-ham",
+   "name": "West Ham",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#8E1F3A",
+    "#63B3E8"
+   ]
+  },
+  {
+   "id": "brighton",
+   "name": "Brighton",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "leeds",
+   "name": "Leeds",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "southampton",
+   "name": "Southampton",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "norwich",
+   "name": "Norwich",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#1E8A47"
+   ]
+  },
+  {
+   "id": "ipswich",
+   "name": "Ipswich",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "preston",
+   "name": "Preston",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "blackpool",
+   "name": "Blackpool",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#E8741E",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "port-vale",
+   "name": "Port Vale",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "rochdale",
+   "name": "Rochdale",
+   "country": "Inghilterra",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "real-madrid",
+   "name": "Real Madrid",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#EFEAE0",
+    "#C9A227"
+   ]
+  },
+  {
+   "id": "barcelona",
+   "name": "Barcelona",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#8E1F3A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "atletico",
+   "name": "Atlético Madrid",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "sevilla",
+   "name": "Siviglia",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "villarreal",
+   "name": "Villarreal",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#F2C61A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "real-sociedad",
+   "name": "Real Sociedad",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "athletic",
+   "name": "Athletic Bilbao",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "betis",
+   "name": "Betis",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "valencia",
+   "name": "Valencia",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#E8741E"
+   ]
+  },
+  {
+   "id": "celta",
+   "name": "Celta Vigo",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "osasuna",
+   "name": "Osasuna",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "getafe",
+   "name": "Getafe",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "granada",
+   "name": "Granada",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "eibar",
+   "name": "Eibar",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#8E1F3A",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "racing",
+   "name": "Racing Santander",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#1E8A47"
+   ]
+  },
+  {
+   "id": "lugo",
+   "name": "Lugo",
+   "country": "Spagna",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "bayern",
+   "name": "Bayern",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "dortmund",
+   "name": "Borussia Dortmund",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#F2C61A",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "leipzig",
+   "name": "Lipsia",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "leverkusen",
+   "name": "Leverkusen",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "francoforte",
+   "name": "Eintracht",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#0D0F14",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "stoccarda",
+   "name": "Stoccarda",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "wolfsburg",
+   "name": "Wolfsburg",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "brema",
+   "name": "Werder Brema",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "friburgo",
+   "name": "Friburgo",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "mainz",
+   "name": "Magonza",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "bochum",
+   "name": "Bochum",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "st-pauli",
+   "name": "St. Pauli",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#7A4A2B",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "magdeburgo",
+   "name": "Magdeburgo",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "rostock",
+   "name": "Hansa Rostock",
+   "country": "Germania",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "psg",
+   "name": "Paris Saint-Germain",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 1,
+   "colors": [
+    "#132A63",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "marsiglia",
+   "name": "Marsiglia",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#63B3E8"
+   ]
+  },
+  {
+   "id": "lione",
+   "name": "Lione",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "monaco",
+   "name": "Monaco",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "lille",
+   "name": "Lilla",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "nizza",
+   "name": "Nizza",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "rennes",
+   "name": "Rennes",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "lens",
+   "name": "Lens",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#F2C61A",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "nantes",
+   "name": "Nantes",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#1E8A47"
+   ]
+  },
+  {
+   "id": "strasburgo",
+   "name": "Strasburgo",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "tolosa",
+   "name": "Tolosa",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#6B3FA0",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "auxerre",
+   "name": "Auxerre",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "guingamp",
+   "name": "Guingamp",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "bastia",
+   "name": "Bastia",
+   "country": "Francia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "benfica",
+   "name": "Benfica",
+   "country": "Portogallo",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "porto",
+   "name": "Porto",
+   "country": "Portogallo",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "sporting",
+   "name": "Sporting",
+   "country": "Portogallo",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "braga",
+   "name": "Braga",
+   "country": "Portogallo",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "vitoria",
+   "name": "Vitória Guimarães",
+   "country": "Portogallo",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "moreirense",
+   "name": "Moreirense",
+   "country": "Portogallo",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "ajax",
+   "name": "Ajax",
+   "country": "Olanda",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "psv",
+   "name": "PSV",
+   "country": "Olanda",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "feyenoord",
+   "name": "Feyenoord",
+   "country": "Olanda",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "az",
+   "name": "AZ Alkmaar",
+   "country": "Olanda",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "twente",
+   "name": "Twente",
+   "country": "Olanda",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "go-ahead",
+   "name": "Go Ahead Eagles",
+   "country": "Olanda",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#F2C61A",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "bruges",
+   "name": "Club Bruges",
+   "country": "Belgio",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E4FBF",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "anderlecht",
+   "name": "Anderlecht",
+   "country": "Belgio",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#6B3FA0",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "gent",
+   "name": "Gent",
+   "country": "Belgio",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "union-sg",
+   "name": "Union SG",
+   "country": "Belgio",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "celtic",
+   "name": "Celtic",
+   "country": "Scozia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "rangers",
+   "name": "Rangers",
+   "country": "Scozia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#1E4FBF",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "hearts",
+   "name": "Hearts",
+   "country": "Scozia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "aberdeen",
+   "name": "Aberdeen",
+   "country": "Scozia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "galatasaray",
+   "name": "Galatasaray",
+   "country": "Turchia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "fenerbahce",
+   "name": "Fenerbahçe",
+   "country": "Turchia",
+   "confed": "UEFA",
+   "tier": 2,
+   "colors": [
+    "#F2C61A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "besiktas",
+   "name": "Beşiktaş",
+   "country": "Turchia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "trabzonspor",
+   "name": "Trabzonspor",
+   "country": "Turchia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#8E1F3A",
+    "#63B3E8"
+   ]
+  },
+  {
+   "id": "olympiakos",
+   "name": "Olympiakos",
+   "country": "Grecia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "panathinaikos",
+   "name": "Panathinaikos",
+   "country": "Grecia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "paok",
+   "name": "PAOK",
+   "country": "Grecia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "aek",
+   "name": "AEK Atene",
+   "country": "Grecia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "zenit",
+   "name": "Zenit",
+   "country": "Russia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "spartak",
+   "name": "Spartak Mosca",
+   "country": "Russia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "shakhtar",
+   "name": "Shakhtar",
+   "country": "Ucraina",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#E8741E",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "dinamo-kiev",
+   "name": "Dinamo Kiev",
+   "country": "Ucraina",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#63B3E8"
+   ]
+  },
+  {
+   "id": "dinamo-zagabria",
+   "name": "Dinamo Zagabria",
+   "country": "Croazia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "hajduk",
+   "name": "Hajduk Spalato",
+   "country": "Croazia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "stella-rossa",
+   "name": "Stella Rossa",
+   "country": "Serbia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "partizan",
+   "name": "Partizan",
+   "country": "Serbia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "salisburgo",
+   "name": "Salisburgo",
+   "country": "Austria",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "rapid-vienna",
+   "name": "Rapid Vienna",
+   "country": "Austria",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "basilea",
+   "name": "Basilea",
+   "country": "Svizzera",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "young-boys",
+   "name": "Young Boys",
+   "country": "Svizzera",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#F2C61A",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "lugano",
+   "name": "Lugano",
+   "country": "Svizzera",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "copenaghen",
+   "name": "Copenaghen",
+   "country": "Danimarca",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "midtjylland",
+   "name": "Midtjylland",
+   "country": "Danimarca",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#0D0F14",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "malmo",
+   "name": "Malmö",
+   "country": "Svezia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "hammarby",
+   "name": "Hammarby",
+   "country": "Svezia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "bodo",
+   "name": "Bodø/Glimt",
+   "country": "Norvegia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "rosenborg",
+   "name": "Rosenborg",
+   "country": "Norvegia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "legia",
+   "name": "Legia Varsavia",
+   "country": "Polonia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "lech",
+   "name": "Lech Poznań",
+   "country": "Polonia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "slavia",
+   "name": "Slavia Praga",
+   "country": "Cechia",
+   "confed": "UEFA",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "sparta",
+   "name": "Sparta Praga",
+   "country": "Cechia",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "cfr-cluj",
+   "name": "CFR Cluj",
+   "country": "Romania",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "steaua",
+   "name": "FCSB",
+   "country": "Romania",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "ferencvaros",
+   "name": "Ferencváros",
+   "country": "Ungheria",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "maccabi",
+   "name": "Maccabi Haifa",
+   "country": "Israele",
+   "confed": "UEFA",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "apoel",
+   "name": "APOEL",
+   "country": "Cipro",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E4FBF",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "shamrock",
+   "name": "Shamrock Rovers",
+   "country": "Irlanda",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "valletta",
+   "name": "Valletta",
+   "country": "Malta",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "hb",
+   "name": "HB Tórshavn",
+   "country": "Fær Øer",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#0D0F14",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "kalju",
+   "name": "Nõmme Kalju",
+   "country": "Estonia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "riga",
+   "name": "Riga FC",
+   "country": "Lettonia",
+   "confed": "UEFA",
+   "tier": 5,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "flamengo",
+   "name": "Flamengo",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 2,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "palmeiras",
+   "name": "Palmeiras",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 2,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "corinthians",
+   "name": "Corinthians",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "sao-paulo",
+   "name": "São Paulo",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "santos",
+   "name": "Santos",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "gremio",
+   "name": "Grêmio",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#63B3E8",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "internacional",
+   "name": "Internacional",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "botafogo",
+   "name": "Botafogo",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "fluminense",
+   "name": "Fluminense",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#8E1F3A",
+    "#1E8A47"
+   ]
+  },
+  {
+   "id": "cruzeiro",
+   "name": "Cruzeiro",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "bahia",
+   "name": "Bahia",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "chapecoense",
+   "name": "Chapecoense",
+   "country": "Brasile",
+   "confed": "CONMEBOL",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "boca",
+   "name": "Boca Juniors",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 2,
+   "colors": [
+    "#132A63",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "river",
+   "name": "River Plate",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 2,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "racing-avellaneda",
+   "name": "Racing Club",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "independiente",
+   "name": "Independiente",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "san-lorenzo",
+   "name": "San Lorenzo",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#8E1F3A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "velez",
+   "name": "Vélez Sarsfield",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "estudiantes",
+   "name": "Estudiantes",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "newells",
+   "name": "Newell's Old Boys",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "rosario",
+   "name": "Rosario Central",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "banfield",
+   "name": "Banfield",
+   "country": "Argentina",
+   "confed": "CONMEBOL",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "penarol",
+   "name": "Peñarol",
+   "country": "Uruguay",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#F2C61A",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "nacional-uru",
+   "name": "Nacional",
+   "country": "Uruguay",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "defensor",
+   "name": "Defensor Sporting",
+   "country": "Uruguay",
+   "confed": "CONMEBOL",
+   "tier": 5,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "colo-colo",
+   "name": "Colo-Colo",
+   "country": "Cile",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "universidad",
+   "name": "Universidad de Chile",
+   "country": "Cile",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "atletico-nacional",
+   "name": "Atlético Nacional",
+   "country": "Colombia",
+   "confed": "CONMEBOL",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "millonarios",
+   "name": "Millonarios",
+   "country": "Colombia",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "america-cali",
+   "name": "América de Cali",
+   "country": "Colombia",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "ldu",
+   "name": "LDU Quito",
+   "country": "Ecuador",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "barcelona-sc",
+   "name": "Barcelona SC",
+   "country": "Ecuador",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#F2C61A",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "olimpia",
+   "name": "Olimpia",
+   "country": "Paraguay",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "cerro",
+   "name": "Cerro Porteño",
+   "country": "Paraguay",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "alianza",
+   "name": "Alianza Lima",
+   "country": "Perù",
+   "confed": "CONMEBOL",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "bolivar",
+   "name": "Bolívar",
+   "country": "Bolivia",
+   "confed": "CONMEBOL",
+   "tier": 5,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "caracas",
+   "name": "Caracas FC",
+   "country": "Venezuela",
+   "confed": "CONMEBOL",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "america-mx",
+   "name": "Club América",
+   "country": "Messico",
+   "confed": "CONCACAF",
+   "tier": 3,
+   "colors": [
+    "#F2C61A",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "chivas",
+   "name": "Guadalajara",
+   "country": "Messico",
+   "confed": "CONCACAF",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "tigres",
+   "name": "Tigres UANL",
+   "country": "Messico",
+   "confed": "CONCACAF",
+   "tier": 3,
+   "colors": [
+    "#F2C61A",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "monterrey",
+   "name": "Monterrey",
+   "country": "Messico",
+   "confed": "CONCACAF",
+   "tier": 3,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "pumas",
+   "name": "Pumas UNAM",
+   "country": "Messico",
+   "confed": "CONCACAF",
+   "tier": 4,
+   "colors": [
+    "#132A63",
+    "#C9A227"
+   ]
+  },
+  {
+   "id": "cruz-azul",
+   "name": "Cruz Azul",
+   "country": "Messico",
+   "confed": "CONCACAF",
+   "tier": 4,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "inter-miami",
+   "name": "Inter Miami",
+   "country": "Stati Uniti",
+   "confed": "CONCACAF",
+   "tier": 3,
+   "colors": [
+    "#2AA8A0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "la-galaxy",
+   "name": "LA Galaxy",
+   "country": "Stati Uniti",
+   "confed": "CONCACAF",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "seattle",
+   "name": "Seattle Sounders",
+   "country": "Stati Uniti",
+   "confed": "CONCACAF",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#132A63"
+   ]
+  },
+  {
+   "id": "atlanta-utd",
+   "name": "Atlanta United",
+   "country": "Stati Uniti",
+   "confed": "CONCACAF",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "nycfc",
+   "name": "New York City",
+   "country": "Stati Uniti",
+   "confed": "CONCACAF",
+   "tier": 4,
+   "colors": [
+    "#63B3E8",
+    "#E8741E"
+   ]
+  },
+  {
+   "id": "portland",
+   "name": "Portland Timbers",
+   "country": "Stati Uniti",
+   "confed": "CONCACAF",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#C9A227"
+   ]
+  },
+  {
+   "id": "toronto",
+   "name": "Toronto FC",
+   "country": "Canada",
+   "confed": "CONCACAF",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "montreal",
+   "name": "CF Montréal",
+   "country": "Canada",
+   "confed": "CONCACAF",
+   "tier": 5,
+   "colors": [
+    "#1E4FBF",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "saprissa",
+   "name": "Saprissa",
+   "country": "Costa Rica",
+   "confed": "CONCACAF",
+   "tier": 5,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "olimpia-hon",
+   "name": "Olimpia",
+   "country": "Honduras",
+   "confed": "CONCACAF",
+   "tier": 5,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "al-hilal",
+   "name": "Al-Hilal",
+   "country": "Arabia Saudita",
+   "confed": "AFC",
+   "tier": 2,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "al-nassr",
+   "name": "Al-Nassr",
+   "country": "Arabia Saudita",
+   "confed": "AFC",
+   "tier": 2,
+   "colors": [
+    "#F2C61A",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "al-ittihad",
+   "name": "Al-Ittihad",
+   "country": "Arabia Saudita",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#0D0F14",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "al-ahli-sa",
+   "name": "Al-Ahli",
+   "country": "Arabia Saudita",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "al-sadd",
+   "name": "Al-Sadd",
+   "country": "Qatar",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "al-duhail",
+   "name": "Al-Duhail",
+   "country": "Qatar",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "al-ain",
+   "name": "Al-Ain",
+   "country": "Emirati",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "shabab",
+   "name": "Shabab Al-Ahli",
+   "country": "Emirati",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "urawa",
+   "name": "Urawa Reds",
+   "country": "Giappone",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "kashima",
+   "name": "Kashima Antlers",
+   "country": "Giappone",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#8E1F3A",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "gamba",
+   "name": "Gamba Osaka",
+   "country": "Giappone",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#132A63",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "yokohama",
+   "name": "Yokohama F. Marinos",
+   "country": "Giappone",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#EFEAE0",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "sanfrecce",
+   "name": "Sanfrecce Hiroshima",
+   "country": "Giappone",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#6B3FA0",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "jeonbuk",
+   "name": "Jeonbuk Motors",
+   "country": "Corea del Sud",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#1E8A47",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "ulsan",
+   "name": "Ulsan HD",
+   "country": "Corea del Sud",
+   "confed": "AFC",
+   "tier": 3,
+   "colors": [
+    "#132A63",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "fc-seoul",
+   "name": "FC Seoul",
+   "country": "Corea del Sud",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#0D0F14",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "shanghai",
+   "name": "Shanghai Port",
+   "country": "Cina",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#D22030",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "beijing",
+   "name": "Beijing Guoan",
+   "country": "Cina",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "guangzhou",
+   "name": "Guangzhou FC",
+   "country": "Cina",
+   "confed": "AFC",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "mumbai",
+   "name": "Mumbai City",
+   "country": "India",
+   "confed": "AFC",
+   "tier": 5,
+   "colors": [
+    "#63B3E8",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "bengaluru",
+   "name": "Bengaluru FC",
+   "country": "India",
+   "confed": "AFC",
+   "tier": 5,
+   "colors": [
+    "#132A63",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "persib",
+   "name": "Persib Bandung",
+   "country": "Indonesia",
+   "confed": "AFC",
+   "tier": 5,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "buriram",
+   "name": "Buriram United",
+   "country": "Thailandia",
+   "confed": "AFC",
+   "tier": 5,
+   "colors": [
+    "#1E4FBF",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "melbourne",
+   "name": "Melbourne Victory",
+   "country": "Australia",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#132A63",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "sydney",
+   "name": "Sydney FC",
+   "country": "Australia",
+   "confed": "AFC",
+   "tier": 4,
+   "colors": [
+    "#2AA8A0",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "perth",
+   "name": "Perth Glory",
+   "country": "Australia",
+   "confed": "AFC",
+   "tier": 5,
+   "colors": [
+    "#6B3FA0",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "al-ahly",
+   "name": "Al-Ahly",
+   "country": "Egitto",
+   "confed": "CAF",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "zamalek",
+   "name": "Zamalek",
+   "country": "Egitto",
+   "confed": "CAF",
+   "tier": 3,
+   "colors": [
+    "#EFEAE0",
+    "#D22030"
+   ]
+  },
+  {
+   "id": "pyramids",
+   "name": "Pyramids FC",
+   "country": "Egitto",
+   "confed": "CAF",
+   "tier": 4,
+   "colors": [
+    "#2AA8A0",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "wydad",
+   "name": "Wydad Casablanca",
+   "country": "Marocco",
+   "confed": "CAF",
+   "tier": 3,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "raja",
+   "name": "Raja Casablanca",
+   "country": "Marocco",
+   "confed": "CAF",
+   "tier": 4,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "as-far",
+   "name": "AS FAR",
+   "country": "Marocco",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "esperance",
+   "name": "Espérance Tunisi",
+   "country": "Tunisia",
+   "confed": "CAF",
+   "tier": 4,
+   "colors": [
+    "#8E1F3A",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "etoile",
+   "name": "Étoile du Sahel",
+   "country": "Tunisia",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "mamelodi",
+   "name": "Mamelodi Sundowns",
+   "country": "Sudafrica",
+   "confed": "CAF",
+   "tier": 3,
+   "colors": [
+    "#F2C61A",
+    "#1E4FBF"
+   ]
+  },
+  {
+   "id": "orlando",
+   "name": "Orlando Pirates",
+   "country": "Sudafrica",
+   "confed": "CAF",
+   "tier": 4,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "kaizer",
+   "name": "Kaizer Chiefs",
+   "country": "Sudafrica",
+   "confed": "CAF",
+   "tier": 4,
+   "colors": [
+    "#C9A227",
+    "#0D0F14"
+   ]
+  },
+  {
+   "id": "jsk",
+   "name": "JS Kabylie",
+   "country": "Algeria",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#F2C61A",
+    "#1E8A47"
+   ]
+  },
+  {
+   "id": "cra",
+   "name": "CR Belouizdad",
+   "country": "Algeria",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "simba",
+   "name": "Simba SC",
+   "country": "Tanzania",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "gor",
+   "name": "Gor Mahia",
+   "country": "Kenya",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#1E8A47",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "enyimba",
+   "name": "Enyimba",
+   "country": "Nigeria",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#EFEAE0"
+   ]
+  },
+  {
+   "id": "asante",
+   "name": "Asante Kotoko",
+   "country": "Ghana",
+   "confed": "CAF",
+   "tier": 5,
+   "colors": [
+    "#D22030",
+    "#F2C61A"
+   ]
+  },
+  {
+   "id": "tp-mazembe",
+   "name": "TP Mazembe",
+   "country": "Congo",
+   "confed": "CAF",
+   "tier": 4,
+   "colors": [
+    "#0D0F14",
+    "#EFEAE0"
+   ]
+  }
+ ]
+}

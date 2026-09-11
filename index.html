@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NOVANTA — il gioco del calcio</title>
+<meta name="description" content="Sei sfide di calcio: nomina la rosa, batti il portiere, vinci l'asta, scegli chi ha fatto di più, vivi una carriera, risolvi il novantesimo.">
+<meta name="theme-color" content="#05080F">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="canonical" href="https://novanta.game/">
+<meta name="apple-mobile-web-app-title" content="NOVANTA">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Anteprima quando il link viene incollato su WhatsApp, Telegram, X.
+     Senza immagine il messaggio sembra spam e nessuno lo apre.
+     Gli indirizzi assoluti vanno cambiati insieme al dominio vero. -->
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="NOVANTA — il calcio che ti ricordi">
+<meta property="og:description" content="Sei sfide. Novanta secondi alla volta. Quanti giocatori di quella squadra ti ricordi davvero?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://novanta.game/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://novanta.game/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NOVANTA — il calcio che ti ricordi">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NOVANTA — il calcio che ti ricordi">
+<meta name="twitter:description" content="Sei sfide di calcio. Novanta secondi alla volta.">
+<meta name="twitter:image" content="https://novanta.game/assets/og.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/motion.css">
+<link rel="stylesheet" href="styles/hub.css">
+<link rel="stylesheet" href="styles/squad.css">
+<link rel="stylesheet" href="styles/arcade.css">
+<link rel="stylesheet" href="styles/daily.css">
+<link rel="stylesheet" href="styles/asta.css">
+<link rel="stylesheet" href="styles/carriera.css">
+<link rel="stylesheet" href="styles/duello.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div id="app">
+    <noscript>
+      <div class="shell" style="padding-block:4rem">
+        <h1 class="t-xl">Serve JavaScript</h1>
+        <p class="dim">NOVANTA è un gioco: senza JavaScript non c'è partita.</p>
+      </div>
+    </noscript>
+  </div>
+
+  <div id="overlay-root"></div>
+
+  <script type="module" src="src/main.js"></script>
+
+  <!-- Statistiche di traffico. Cloudflare Web Analytics non usa cookie e non
+       segue le persone da un sito all'altro: per questo può stare fuori dal
+       consenso. Prendi il token dal pannello Cloudflare, alla voce Web
+       Analytics, incollalo qui sotto e togli i commenti.
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "IL-TUO-TOKEN"}'></script>
+  -->
+</body>
+</html>

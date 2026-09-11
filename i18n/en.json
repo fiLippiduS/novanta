@@ -1,0 +1,520 @@
+{
+  "common": {
+    "back": "Back",
+    "play": "Play",
+    "retry": "Play again",
+    "close": "Close",
+    "cancel": "Cancel",
+    "best": "Best",
+    "score": "Score",
+    "coins": "Coins",
+    "share": "Share",
+    "copied": "Copied",
+    "sound": "Sound",
+    "language": "Language",
+    "soon": "Soon",
+    "of": "of"
+  },
+  "hub": {
+    "tagline": "The football you remember",
+    "sub": "Six challenges. Ninety seconds at a time.",
+    "streak": "Streak",
+    "days": "days",
+    "squadTitle": "The Squad",
+    "squadDesc": "Ninety seconds to name as many players from one team as you can.",
+    "arcadeTitle": "Penalties",
+    "arcadeDesc": "One shot at a time. A keeper that learns you.",
+    "dailyTitle": "The Ninetieth",
+    "dailyDesc": "Five rounds. Same challenge for everyone, today.",
+    "dailyDone": "Done today",
+    "nextIn": "Next in",
+    "playedTimes": "{n} games",
+    "noRecord": "no record yet",
+    "games": "Games",
+    "astaTitle": "Auction",
+    "astaDesc": "Twenty credits against a bot who knows his football. Build the five and play it.",
+    "carrieraTitle": "Career",
+    "carrieraDesc": "Sixteen years old, a small club. See how far you get.",
+    "duelloTitle": "Higher",
+    "duelloDesc": "Two players, one number. Who did more? One mistake and it is over."
+  },
+  "squad": {
+    "title": "The Squad",
+    "getReady": "Get ready",
+    "go": "Go",
+    "placeholder": "Type a player…",
+    "found": "Named",
+    "missed": "You missed",
+    "timeUp": "Time up",
+    "newRecord": "New best",
+    "youNamed": "You named {n} of {tot}",
+    "again": "Another team",
+    "sameAgain": "Try this one again",
+    "addTime": "+30 seconds",
+    "addTimeDesc": "Watch an ad and pick up where you left off",
+    "hint": "Hint",
+    "hintDesc": "Reveal the initials of a player you're missing",
+    "hintGiven": "Starts with {letters}",
+    "duplicate": "Already said",
+    "perfect": "Full squad"
+  },
+  "arcade": {
+    "title": "Penalties",
+    "round": "Shot",
+    "aim": "Aim",
+    "power": "Power",
+    "curve": "Curve",
+    "tapAim": "Tap to stop the aim",
+    "tapPower": "Tap for power",
+    "tapCurve": "Tap to curve it, or wait",
+    "goal": "Goal",
+    "saved": "Saved",
+    "post": "Post",
+    "out": "Wide",
+    "gameOver": "That's it",
+    "scored": "Goals scored",
+    "keeperSays": "The keeper",
+    "oneMore": "One more chance",
+    "oneMoreDesc": "The keeper gives you one. Once only.",
+    "streak": "Streak"
+  },
+  "daily": {
+    "title": "The Ninetieth",
+    "soon": "Coming soon",
+    "soonDesc": "Five rounds, the same challenge for everyone on earth. Try The Squad meanwhile.",
+    "round": "Round",
+    "of": "of",
+    "intruderPrompt": "Which one didn't play with the other three?",
+    "whichTeamPrompt": "Which team is this lot?",
+    "teammatesPrompt": "Were they ever teammates?",
+    "dripPrompt": "Which team? Every extra name is worth fewer points",
+    "yes": "Yes",
+    "no": "No",
+    "nextClue": "One more name",
+    "correct": "Right",
+    "wrong": "Wrong",
+    "wasTeam": "It was {team} {season}",
+    "notTeammates": "They never played together",
+    "wereTeammates": "Together at {team} {season}",
+    "done": "Ninetieth done",
+    "total": "Score",
+    "streakNow": "Streak of {n}",
+    "streakStart": "Streak started",
+    "streakLost": "Streak broken",
+    "shareCta": "Share your result",
+    "shared": "Copied to clipboard",
+    "comeBack": "Come back tomorrow",
+    "alreadyPlayed": "You already played today",
+    "yourScore": "Today's score: {n}",
+    "nextIn": "Next challenge in {t}"
+  },
+  "consent": {
+    "text": "We use cookies for the ads that keep this game alive.",
+    "allow": "Accept",
+    "deny": "Essential only",
+    "privacy": "Privacy"
+  },
+  "commentary": {
+    "squadStart": [
+      "Ninety seconds. Go.",
+      "Clock starts now.",
+      "Show me what you remember."
+    ],
+    "squadHit": [
+      "Got him.",
+      "Correct.",
+      "He was there.",
+      "One of theirs.",
+      "Nice.",
+      "That one was buried deep."
+    ],
+    "squadStreak": [
+      "You're not stopping.",
+      "One after another.",
+      "You're emptying the bench.",
+      "Some memory."
+    ],
+    "squadDup": [
+      "Already said.",
+      "You've got him.",
+      "Him again?"
+    ],
+    "squadMiss": [
+      "Never played there.",
+      "Wrong team.",
+      "Not that one.",
+      "Not in this squad."
+    ],
+    "squadEnd": [
+      "You knew the rest, admit it.",
+      "Look at them. You knew them all.",
+      "Tomorrow you do better."
+    ],
+    "squadRecord": [
+      "That's your best.",
+      "Better than ever.",
+      "You beat yourself."
+    ],
+    "arcadeStart": [
+      "On the spot.",
+      "The stadium goes quiet.",
+      "All on this one."
+    ],
+    "arcadeGoal": [
+      "In!",
+      "Never saw it.",
+      "Perfect corner.",
+      "Goal.",
+      "Nothing he could do."
+    ],
+    "arcadeSave": [
+      "Saved.",
+      "He read it.",
+      "He got there.",
+      "He was waiting for you."
+    ],
+    "arcadePost": [
+      "Post!",
+      "One centimetre.",
+      "Off the woodwork."
+    ],
+    "arcadeOut": [
+      "High.",
+      "Way wide.",
+      "Over the bar."
+    ],
+    "arcadeHot": [
+      "You're feeling it.",
+      "The keeper's getting nervous.",
+      "You can't miss."
+    ],
+    "dailyRight": [
+      "Right.",
+      "Got it.",
+      "You knew that.",
+      "Easy, wasn't it?",
+      "Correct."
+    ],
+    "dailyWrong": [
+      "No.",
+      "Not him.",
+      "Wrong.",
+      "Fair guess, but no."
+    ],
+    "dailyEnd": [
+      "End of the ninetieth.",
+      "Full time.",
+      "That's it."
+    ],
+    "astaOpen": [
+      "Opening at one.",
+      "Who wants him?",
+      "On the table."
+    ],
+    "astaYouLead": [
+      "Yours, for now.",
+      "You're ahead.",
+      "Anyone else?"
+    ],
+    "astaBotBid": [
+      "The bot raises.",
+      "He won't let you have him.",
+      "The bot goes up."
+    ],
+    "astaWonYou": [
+      "Got him.",
+      "He's yours.",
+      "Good buy."
+    ],
+    "astaWonBot": [
+      "He took that one.",
+      "Gone to the bot.",
+      "You lose this one."
+    ],
+    "astaBroke": [
+      "You can't raise any more.",
+      "You need the credits for the rest."
+    ],
+    "matchWin": [
+      "Match won.",
+      "Squad built well.",
+      "You made the right call at the auction."
+    ],
+    "matchLoss": [
+      "The bot bought better.",
+      "Match lost.",
+      "You were short up front."
+    ],
+    "matchDraw": [
+      "It ends level.",
+      "Nothing between them.",
+      "A point each."
+    ],
+    "matchYellow": [
+      "Booking.",
+      "Yellow card.",
+      "The referee reaches for his pocket."
+    ],
+    "matchRed": [
+      "Red card!",
+      "Sent off.",
+      "They're a man down.",
+      "He should have known better."
+    ],
+    "matchKick": [
+      "Under way.",
+      "Kick-off.",
+      "Here we go."
+    ],
+    "duelStart": [
+      "Here we go.",
+      "Which of the two?",
+      "One of them. Choose."
+    ],
+    "duelRight": [
+      "Right.",
+      "Correct.",
+      "You knew it.",
+      "Got it."
+    ],
+    "duelHot": [
+      "You are not missing.",
+      "Long chain.",
+      "You know them all."
+    ],
+    "duelWrong": [
+      "No.",
+      "It was the other one.",
+      "Wrong.",
+      "Fair guess, but no."
+    ]
+  },
+  "asta": {
+    "title": "Auction",
+    "intro": "Twenty credits. Five roles. An opponent who knows his football.",
+    "rules1": "Players go up one at a time. Five seconds to raise, then he's sold.",
+    "rules2": "You must finish with 1 keeper, 2 defenders, 1 midfielder and 1 forward. Always keep a credit for the slots you still have.",
+    "start": "Start the auction",
+    "you": "You",
+    "bot": "The Bot",
+    "credits": "Credits",
+    "lot": "Lot",
+    "price": "Price",
+    "raise": "Raise",
+    "leading": "You're leading",
+    "botLeading": "The bot is leading",
+    "uncontested": "Nobody can outbid you",
+    "botUncontested": "You don't need this role any more",
+    "sold": "Sold",
+    "soldTo": "to {who} for {n}",
+    "noCredits": "Out of credits for this role",
+    "roles": {
+      "POR": "Goalkeeper",
+      "DIF": "Defender",
+      "CEN": "Midfielder",
+      "ATT": "Forward"
+    },
+    "rolesShort": {
+      "POR": "GK",
+      "DIF": "DEF",
+      "CEN": "MID",
+      "ATT": "FWD"
+    },
+    "rating": "Rating",
+    "squadsReady": "Squads complete",
+    "playMatch": "Play the match",
+    "scout": "The scout's notebook",
+    "scoutDesc": "Watch an ad and see how far the bot will go on the next players",
+    "scoutTitle": "How far the bot will go",
+    "scoutMax": "up to {n}",
+    "matchTitle": "Five-a-side",
+    "vs": "vs",
+    "win": "You won",
+    "loss": "You lost",
+    "draw": "Draw",
+    "again": "New auction",
+    "spent": "Spent",
+    "left": "Left over",
+    "record": "Wins",
+    "yourSquad": "Your squad",
+    "botSquad": "The bot's squad",
+    "yoursFor": "Yours for {n}",
+    "maxBid": "You can go up to {n}",
+    "assigning": "He takes him for {n}",
+    "yellow": "Booked",
+    "red": "Sent off",
+    "secondYellow": "Second yellow",
+    "kickoff": "Kick-off",
+    "fullTime": "Full time",
+    "menDown": "down to {n}",
+    "secondYellowShort": "2nd yellow",
+    "avg": "Squad average",
+    "pens": "Penalties",
+    "penResult": "{a}-{b} on penalties"
+  },
+  "carriera": {
+    "title": "Career",
+    "new": "New career",
+    "continue": "Continue",
+    "restart": "Start over",
+    "intro": "Sixteen years old, a small club and thirty years ahead.",
+    "introText": "Choose who you are, then make a decision a year. The rest just happens.",
+    "yourName": "Your name",
+    "namePlaceholder": "First and last name",
+    "chooseRole": "What kind of player",
+    "chooseStyle": "What kind of {role}",
+    "chooseNumber": "The number",
+    "chooseNation": "Where you're from",
+    "chooseClub": "Where it starts",
+    "chooseClubText": "Three clubs want you. None of them will win anything this year.",
+    "begin": "Begin",
+    "season": "Season",
+    "age": "years old",
+    "at": "at",
+    "apps": "Apps",
+    "goals": "Goals",
+    "assists": "Assists",
+    "clean": "Clean sheets",
+    "rating": "Average rating",
+    "position": "Finished",
+    "overall": "Ability",
+    "career": "Career",
+    "cabinet": "Trophy cabinet",
+    "empty": "Still empty",
+    "morale": "Morale",
+    "fitness": "Condition",
+    "fame": "Fame",
+    "tec": "Technique",
+    "fis": "Body",
+    "men": "Mind",
+    "vel": "Pace",
+    "decisions": "This year's choices",
+    "whatHappened": "What happened",
+    "playSeason": "Play the season",
+    "nextSeason": "Next season",
+    "market": "The market",
+    "marketText": "Who wants you next year.",
+    "stay": "Stay where you are",
+    "loan": "on loan",
+    "tier": [
+      "Elite",
+      "Big club",
+      "Top flight",
+      "Lower table",
+      "Small town"
+    ],
+    "won": "You won",
+    "retire": "Retire",
+    "retired": "Career over",
+    "endTitle": "The end",
+    "endText": "{name}, {age} years old. {apps} games, {goals} goals, {assists} assists.",
+    "noTrophies": "No trophies. But you played.",
+    "trophyNames": {
+      "campionato": "League title",
+      "coppa": "National cup",
+      "supercoppa": "Super cup",
+      "continentale": "Continental cup",
+      "promozione": "Promotion",
+      "nazionale": "International title"
+    },
+    "roles": {
+      "POR": "Goalkeeper",
+      "DC": "Centre-back",
+      "TZ": "Full-back",
+      "MED": "Holding midfielder",
+      "MEZ": "Box-to-box",
+      "ALA": "Winger",
+      "PUN": "Striker"
+    },
+    "styles": {
+      "volante": "Sweeper keeper",
+      "linea": "Line keeper",
+      "rigorista": "Penalty stopper",
+      "marcatore": "Man marker",
+      "costruttore": "Ball-playing defender",
+      "libero": "Libero",
+      "fluidificante": "Overlapping full-back",
+      "bloccato": "Stay-at-home full-back",
+      "braccetto": "Inverted full-back",
+      "diga": "Destroyer",
+      "regista": "Deep-lying playmaker",
+      "incursore": "Late runner",
+      "tuttocampista": "All-rounder",
+      "saltatore": "Take-on merchant",
+      "rientrante": "Inverted winger",
+      "assistman": "Creator",
+      "rapace": "Poacher",
+      "falsonueve": "False nine",
+      "torre": "Target man"
+    },
+    "styleHint": {
+      "volante": "Comes off his line, plays with his feet, makes big mistakes.",
+      "linea": "Never leaves the line and saves everything.",
+      "rigorista": "Has studied penalty takers for years. Keeps a notebook.",
+      "marcatore": "Nothing gets past his man.",
+      "costruttore": "Builds from the back, always looking for the line.",
+      "libero": "Steps out with the ball when nobody expects it.",
+      "fluidificante": "Up and down the flank for ninety minutes.",
+      "bloccato": "Never crosses halfway. Never concedes.",
+      "braccetto": "A defender who becomes a midfielder mid-game.",
+      "diga": "Wins the ball, gives it simple.",
+      "regista": "Sees the pass three seconds before anyone else.",
+      "incursore": "Arrives in the box with nobody noticing.",
+      "tuttocampista": "Runs more than anyone and is needed everywhere.",
+      "saltatore": "One on one, always. Sometimes it works.",
+      "rientrante": "Cuts inside onto the strong foot and shoots.",
+      "assistman": "Doesn't score, makes others score. Prefers it that way.",
+      "rapace": "Waits in the box for the mistake. Never misses.",
+      "falsonueve": "Drops off, opens the space, then runs into it.",
+      "torre": "Holds it up and brings everyone forward. Wins every header."
+    },
+    "chooseRoleText": "Tap the position you want to play.",
+    "chooseNumberText": "From 1 to 99. Pick yours.",
+    "rolesShort": {
+      "POR": "GK",
+      "DC": "CB",
+      "TZ": "FB",
+      "MED": "DM",
+      "MEZ": "CM",
+      "ALA": "W",
+      "PUN": "ST"
+    }
+  },
+  "duello": {
+    "title": "Higher",
+    "who": "Who has",
+    "pick": "Tap the player you think it is",
+    "right": "Correct answers",
+    "gameOver": "Chain broken",
+    "oneMore": "Keep the chain going",
+    "oneMoreDesc": "Watch an ad and carry on from where you were",
+    "roles": {
+      "POR": "Goalkeeper",
+      "DIF": "Defender",
+      "CEN": "Midfielder",
+      "ATT": "Forward"
+    },
+    "params": {
+      "g": "more career goals",
+      "a": "more career assists",
+      "pr": "more career appearances",
+      "t": "more trophies won",
+      "c": "more international caps",
+      "ng": "more international goals",
+      "ucl": "more Champions League titles",
+      "lg": "more league titles",
+      "bd": "more Ballon d'Or wins",
+      "r": "more red cards",
+      "h": "more centimetres of height",
+      "cl": "played for more clubs",
+      "ws": "played more World Cups",
+      "bs": "more goals in a single season",
+      "cs": "more clean sheets"
+    }
+  },
+  "foot": {
+    "howto": "How to play",
+    "data": "The data",
+    "privacy": "Privacy"
+  }
+}

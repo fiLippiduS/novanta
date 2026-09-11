@@ -1,0 +1,284 @@
+/* ASTA */
+
+.asta { display: flex; flex-direction: column; gap: var(--s-4); flex: 1; }
+
+/* ---------- schermata iniziale ---------- */
+
+.asta__intro { display: grid; gap: var(--s-3); padding: var(--s-6) var(--s-5); }
+.asta__lead { font-size: var(--t-lg); color: var(--chalk); max-width: 28ch; line-height: 1.25; }
+.asta__intro .dim { font-size: var(--t-sm); max-width: 46ch; }
+.asta__intro .btn { margin-top: var(--s-2); }
+.asta__fine { font-size: var(--t-xs); }
+
+.rolebar { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-block: var(--s-2); }
+
+.rolechip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  border: 1px solid currentColor;
+  font-size: var(--t-micro);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rolechip--POR { color: var(--amber); }   /* porta: arancione */
+.rolechip--DIF { color: var(--lime); }    /* difesa: verde */
+.rolechip--CEN { color: var(--sky); }     /* centrocampo: blu */
+.rolechip--ATT { color: var(--flare); }   /* attacco: rosso */
+.rolechip__n { opacity: 0.7; }
+
+/* ---------- i due pannelli ---------- */
+
+.asta__board { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+
+.tpanel {
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--ink-850);
+  transition: background var(--d-base) linear, border-color var(--d-base) linear;
+}
+.tpanel--you { --panel: var(--lime); }
+.tpanel--bot { --panel: var(--flare); }
+.tpanel--bid {
+  border-color: var(--flare);
+  background: color-mix(in srgb, var(--flare) 12%, var(--ink-850));
+}
+
+.tpanel__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-2); }
+.tpanel__credits { font-family: var(--font-display); font-size: 1.5rem; color: var(--panel); }
+
+.tpanel__slots { display: flex; gap: 5px; margin-top: var(--s-2); }
+.tslot {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--r-pill);
+  background: rgba(237, 232, 218, 0.10);
+}
+.tslot--full { background: var(--panel); }
+.tslot--POR.tslot--full { background: var(--amber); }
+.tslot--DIF.tslot--full { background: var(--lime); }
+.tslot--CEN.tslot--full { background: var(--sky); }
+.tslot--ATT.tslot--full { background: var(--flare); }
+
+/* ---------- il lotto all'asta ---------- */
+
+.asta__stage {
+  flex: 1;
+  display: grid;
+  align-content: center;
+}
+
+.lotcard {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  --role-color: var(--lime);
+  border-color: color-mix(in srgb, var(--role-color) 40%, transparent);
+}
+.lotcard__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.lotcard__name {
+  font-size: clamp(1.9rem, 8vw, 3.2rem);
+  line-height: 0.92;
+  color: var(--chalk);
+}
+.lotcard__tag { font-size: var(--t-sm); margin: 0; }
+
+.lotcard__rating { display: flex; align-items: baseline; gap: var(--s-2); }
+.lotcard__rating strong { font-family: var(--font-display); font-size: 1.7rem; color: var(--role-color); }
+
+.lotcard__price { display: flex; align-items: baseline; gap: var(--s-3); flex-wrap: wrap; }
+.lotprice { font-size: 2.6rem; line-height: 1; color: var(--chalk); }
+.lotcard__cap { margin-left: auto; color: var(--chalk-4); }
+
+/* nessuno può contendere il giocatore: la carta lo dice, ma il cronometro
+   scorre lo stesso e l'assegnazione si vede */
+.lotcard--uncontested .lotcount { opacity: 0.55; }
+.lotcard--uncontested .asta__raise { opacity: 0.35; }
+
+/* il conto alla rovescia del rilancio */
+.lotcount {
+  justify-self: center;
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--role-color);
+  letter-spacing: 0;
+}
+.lotcount--urgent { color: var(--flare); animation: tick-urgent 900ms var(--e-out) infinite; }
+
+.lotcard__status { min-height: 1.2em; }
+.lotcard__status[data-tone="good"] { color: var(--lime); }
+.lotcard__status[data-tone="warn"] { color: var(--amber); }
+.lotcard__status[data-tone="bad"] { color: var(--flare); }
+
+.asta__raise { margin-top: var(--s-1); }
+.lotcard--mine .asta__raise { --btn-bg: var(--ink-700); --btn-fg: var(--lime); }
+
+.lotcard--won { border-color: var(--lime); }
+.lotcard--lost { border-color: var(--flare); opacity: 0.85; }
+.lotcard__sold { margin: 0; color: var(--chalk-2); }
+.lotcard--won .lotcard__sold { color: var(--lime); }
+.lotcard--lost .lotcard__sold { color: var(--flare); }
+
+/* ---------- taccuino dell'osservatore ---------- */
+
+.scout { display: grid; gap: var(--s-2); }
+.scout__row { display: flex; align-items: center; gap: var(--s-3); }
+.scout__name { flex: 1; font-weight: 600; font-size: var(--t-sm); }
+.scout__max { color: var(--amber); white-space: nowrap; }
+
+/* ---------- le due rose ---------- */
+
+.asta__ready { display: grid; gap: var(--s-4); }
+.squads { display: grid; grid-template-columns: 1fr; gap: var(--s-4); }
+
+.sq {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--ink-850);
+}
+.sq--you { border-color: color-mix(in srgb, var(--lime) 35%, transparent); }
+.sq__row { display: flex; align-items: center; gap: var(--s-3); }
+.sq__name { flex: 1; font-weight: 600; font-size: var(--t-sm); }
+.sq__paid { color: var(--chalk-3); font-size: var(--t-sm); }
+.sq__foot {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding-top: var(--s-2); border-top: 1px solid var(--line);
+}
+
+/* ---------- il tabellino ---------- */
+
+.mcard__clock {
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  color: var(--chalk-3);
+  min-width: 3.4ch;
+  text-align: right;
+}
+.mcard__clock--end { color: var(--chalk); }
+
+.mcard {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--ink-850);
+  overflow: hidden;
+}
+
+/* Su telefono la testata sta su due righe: schiacciare nome, cronometro e
+   punteggio su una sola riga tagliava il nome dell'avversario. */
+.mcard__head {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    'comp comp comp'
+    'vs clock score';
+  align-items: center;
+  gap: var(--s-1) var(--s-3);
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-800);
+}
+.mcard__comp { grid-area: comp; }
+.mcard__clock { grid-area: clock; }
+.mcard__score { grid-area: score; }
+.mcard__vs { grid-area: vs; }
+.mcard__vs {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  text-transform: uppercase;
+  letter-spacing: var(--track-display);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mcard__score { font-size: 2rem; line-height: 1; color: var(--chalk); }
+.mcard--win .mcard__score { color: var(--lime); }
+.mcard--loss .mcard__score { color: var(--flare); }
+.mcard--draw .mcard__score { color: var(--amber); }
+
+.mcard__events {
+  display: grid;
+  gap: var(--s-1);
+  padding: var(--s-4) var(--s-5);
+  border-left: 3px solid var(--lime);
+  min-height: 4rem;
+}
+
+.mrow { display: flex; align-items: center; gap: var(--s-3); min-height: 1.9rem; }
+.mrow__min { min-width: 3ch; font-size: var(--t-sm); color: var(--chalk-4); }
+
+/* il segno accanto al minuto dice subito di che si tratta:
+   pallone pieno il gol, rettangolo il cartellino */
+.mrow__mark { flex: 0 0 auto; display: block; }
+.mrow__mark--goal {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: 1.5px solid currentColor;
+}
+.mrow__mark--yellow, .mrow__mark--red {
+  width: 7px; height: 10px; border-radius: 1.5px;
+  transform: rotate(8deg);
+}
+.mrow__mark--yellow { background: var(--amber); }
+.mrow__mark--red { background: var(--flare); }
+
+.mrow__name {
+  font-family: var(--font-display);
+  font-size: var(--t-md);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mrow__tag { flex: 0 0 auto; margin-left: auto; padding-left: var(--s-3); color: var(--chalk-4); }
+
+/* i rigori: righe più strette, e chi sbaglia ha il segno vuoto e barrato */
+.mrow--sep { margin-top: var(--s-2); padding-top: var(--s-2); border-top: 1px dashed var(--line); }
+.mrow--pen .mrow__min { min-width: 2ch; }
+.mrow__mark--miss {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: 1.5px solid var(--chalk-4);
+}
+.mrow--missed .mrow__name { color: var(--chalk-4); text-decoration: line-through; }
+.mcard__pens { margin: 0; padding: 0 var(--s-5) var(--s-4); color: var(--amber); }
+.mcard__clock--pens { color: var(--amber); }
+
+.sq__ovr {
+  min-width: 2.4ch;
+  text-align: right;
+  font-weight: 700;
+  color: var(--chalk);
+}
+.sq__avg { font-size: 1.25rem; color: var(--lime); }
+
+.mrow--home { color: var(--lime); }
+.mrow--home .mrow__mark--goal { background: currentColor; }
+.mrow--away { color: var(--flare); }
+
+/* un cartellino non è un gol: il nome resta leggibile ma non urla */
+.mrow--yellow .mrow__name, .mrow--red .mrow__name { color: var(--chalk-2); }
+.mrow--red .mrow__name { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+/* ---------- larghezza da tavolo ---------- */
+
+@media (min-width: 32rem) {
+  .mcard__head {
+    grid-template-columns: auto 1fr auto auto;
+    grid-template-areas: 'comp vs clock score';
+  }
+}
+
+@media (min-width: 46rem) {
+  .squads { grid-template-columns: 1fr 1fr; }
+  .lotprice { font-size: 3.4rem; }
+  .mcard__score { font-size: 2.6rem; }
+}
