@@ -214,9 +214,11 @@ fermando da solo, e mai dove sta prendendo una decisione o riavviando di slancio
 
 ### Statistiche di traffico
 
-In fondo a `index.html` c'è lo spazio per Cloudflare Web Analytics, già scritto
-e commentato. Non usa cookie e non profila nessuno, quindi può stare fuori dal
-consenso. Il token si prende dal pannello Cloudflare, alla voce Web Analytics.
+Il sito usa Google Analytics 4, caricato da `analytics.js`. Parte in modalità
+consenso negato: finché l'utente non accetta il banner, Google riceve solo un
+segnale aggregato senza cookie. Quando accetta, `src/consent/cmp.js` chiama
+`window.novantaConsensoConcesso()` e la raccolta passa a piena. Il codice di
+misurazione sta in cima ad `analytics.js`, è l'unico punto da toccare.
 
 ---
 

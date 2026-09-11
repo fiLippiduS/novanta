@@ -22,6 +22,11 @@ export function hasConsent() { return external || consentState() === 'all'; }
 
 function record(value) {
   try { localStorage.setItem(KEY, value); } catch { /* ignora */ }
+  /* Le statistiche partono senza cookie e ci restano finché non si accetta:
+     è questa riga che le sblocca, e non c'è nessun'altra strada. */
+  if (value === 'all' && typeof window.novantaConsensoConcesso === 'function') {
+    window.novantaConsensoConcesso();
+  }
 }
 
 /** true se abbiamo bisogno di chiedere: mai chiesto prima */
