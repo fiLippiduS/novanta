@@ -154,13 +154,12 @@ versione precedente con **Rollback** se qualcosa va storto.
 
 ## 8. Prima di andare online: le sostituzioni da fare
 
-Nel progetto ci sono cinque punti scritti con un indirizzo di esempio. Vanno
-cambiati tutti con il dominio vero, altrimenti l'anteprima dei link e la mappa
-del sito puntano nel vuoto.
+Gli indirizzi assoluti del progetto sono già scritti con il dominio vero,
+`instascope.app`. Se un giorno cambi dominio, questi sono i file da toccare.
 
 | File | Cosa cambiare |
 | --- | --- |
-| `index.html` | gli indirizzi `https://novanta.game/` in canonical, Open Graph e Twitter |
+| `index.html` | gli indirizzi `https://instascope.app/` in canonical, Open Graph e Twitter |
 | `sitemap.xml` | tutti gli indirizzi elencati |
 | `robots.txt` | la riga `Sitemap:` |
 | `come-si-gioca.html`, `dati.html` | il canonical in cima |

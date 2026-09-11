@@ -32,7 +32,7 @@
     "noRecord": "nessun record",
     "games": "Partite",
     "astaTitle": "Asta",
-    "astaDesc": "Venti crediti contro un bot che sa di calcio. Costruisci i cinque e giocatela.",
+    "astaDesc": "Venti crediti contro un avversario che sa di calcio. Costruisci i cinque e giocatela.",
     "carrieraTitle": "Carriera",
     "carrieraDesc": "Sedici anni, una squadra di provincia. Vedi dove arrivi.",
     "duelloTitle": "Più o Meno",
@@ -217,9 +217,9 @@
       "Nessuno rilancia?"
     ],
     "astaBotBid": [
-      "Il bot rilancia.",
-      "Non te lo lascia.",
-      "Il bot alza."
+      "L'avversario rilancia.",
+      "Non ci sta.",
+      "L'avversario alza."
     ],
     "astaWonYou": [
       "Preso.",
@@ -227,9 +227,9 @@
       "Buon colpo."
     ],
     "astaWonBot": [
-      "Se l'è preso lui.",
-      "Andato al bot.",
-      "Questo lo perdi."
+      "Ti è sfuggito.",
+      "Andato all'avversario.",
+      "Peccato."
     ],
     "astaBroke": [
       "Non puoi più rilanciare.",
@@ -287,6 +287,16 @@
       "Era l'altro.",
       "Sbagliato.",
       "Ci stava, ma no."
+    ],
+    "astaDuoBid": [
+      "Rilancio.",
+      "Si alza.",
+      "Non ci sta."
+    ],
+    "astaDuoWon": [
+      "Aggiudicato.",
+      "Se lo porta a casa.",
+      "Affare fatto."
     ]
   },
   "asta": {
@@ -296,15 +306,12 @@
     "rules2": "Devi chiudere con 1 portiere, 2 difensori, 1 centrocampista e 1 attaccante. Tieni sempre un credito per i posti che ti restano.",
     "start": "Comincia l'asta",
     "you": "Tu",
-    "bot": "Il Bot",
     "credits": "Crediti",
     "lot": "Lotto",
     "price": "Prezzo",
     "raise": "Rilancia",
     "leading": "Sei in testa",
-    "botLeading": "Il bot è in testa",
     "uncontested": "Nessuno può contendertelo",
-    "botUncontested": "Non ti serve più questo ruolo",
     "sold": "Aggiudicato",
     "soldTo": "a {who} per {n}",
     "noCredits": "Crediti finiti per questo ruolo",
@@ -324,8 +331,8 @@
     "squadsReady": "Rose al completo",
     "playMatch": "Gioca la partita",
     "scout": "Taccuino dell'osservatore",
-    "scoutDesc": "Guarda un annuncio e scopri fin dove il bot è disposto a spingersi sui prossimi giocatori",
-    "scoutTitle": "Fin dove si spinge il bot",
+    "scoutDesc": "Guarda un annuncio e scopri fin dove l'avversario è disposto a spingersi sui prossimi giocatori",
+    "scoutTitle": "Fin dove si spinge l'avversario",
     "scoutMax": "fino a {n}",
     "matchTitle": "Calcio a 5",
     "vs": "contro",
@@ -337,7 +344,6 @@
     "left": "Avanzati",
     "record": "Vittorie",
     "yourSquad": "La tua rosa",
-    "botSquad": "La rosa del bot",
     "yoursFor": "Tuo per {n}",
     "maxBid": "Puoi arrivare a {n}",
     "assigning": "Se lo aggiudica per {n}",
@@ -350,7 +356,28 @@
     "secondYellowShort": "2° giallo",
     "avg": "Media rosa",
     "pens": "Ai rigori",
-    "penResult": "{a}-{b} ai rigori"
+    "penResult": "{a}-{b} ai rigori",
+    "rival": "Avversario",
+    "p1": "Giocatore 1",
+    "p2": "Giocatore 2",
+    "rivalLeading": "L'avversario è in testa",
+    "rivalUncontested": "Non ti serve più questo ruolo",
+    "rivalSquad": "La rosa dell'avversario",
+    "soldMine": "a te per {n}",
+    "soldRival": "all'avversario per {n}",
+    "duoStart": "Due giocatori",
+    "duoDesc": "Uno contro uno sullo stesso dispositivo: otto secondi per rilanciare, il tempo di passarsi il telefono.",
+    "duoLeads": "{who} è in testa",
+    "duoTurn": "Tocca a {who}",
+    "duoRaise": "{who} rilancia",
+    "duoPass": "Passo",
+    "duoUncontested": "Solo {who} ha bisogno di questo ruolo",
+    "duoNoCredits": "{who} non ha più crediti per questo ruolo",
+    "duoSquad": "La rosa di {who}",
+    "duoWin": "Vince {who}",
+    "duoDraw": "Pareggio",
+    "duoHint": "Passa il dispositivo",
+    "result": "Risultato"
   },
   "carriera": {
     "title": "Carriera",

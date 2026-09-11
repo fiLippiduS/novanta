@@ -35,12 +35,36 @@ export async function mount(host, params = {}) {
   /* in sviluppo si può accorciare il tempo di rilancio per arrivare in fondo
      all'asta senza aspettare: ?bid=400 — attivo solo su localhost */
   const devBid = location.hostname === 'localhost' ? Number(params.bid) : 0;
-  const bidMs = devBid > 0 ? devBid : BID_MS;
 
-  const you = createTeam(t('asta.you'), true);
-  const bot = createTeam(t('asta.bot'), false);
-  const brain = createBot(rand);
-  const auction = createAuction(rand, catalog, [you, bot]);
+  /* In due il dispositivo passa di mano a ogni rilancio, e cinque secondi
+     non bastano nemmeno per allungare il braccio: qui il tempo è più lungo. */
+  const DUO_BID_MS = 8000;
+  let bidMs = devBid > 0 ? devBid : BID_MS;
+
+  /* Due modi di giocare: 'solo' contro l'avversario del computer, 'duo' in
+     due sullo stesso dispositivo, passandoselo a ogni rilancio.
+     Le squadre nascono qui perché i nomi cambiano con la modalità. */
+  let mode = params.duo === '1' ? 'duo' : 'solo';
+  let you, rival, brain, auction;
+
+  function setup(m) {
+    mode = m;
+    bidMs = devBid > 0 ? devBid : (m === 'duo' ? DUO_BID_MS : BID_MS);
+    you = createTeam(m === 'duo' ? t('asta.p1') : t('asta.you'), true);
+    rival = createTeam(m === 'duo' ? t('asta.p2') : t('asta.rival'), m === 'duo');
+    brain = createBot(rand);
+    auction = createAuction(rand, catalog, [you, rival]);
+  }
+
+  setup(mode);
+
+  /* In due, chi deve decidere è sempre quello che non è in testa. */
+  function actor() {
+    const c = auction.current;
+    if (!c) return you;
+    if (mode !== 'duo') return you;
+    return c.leader === you ? rival : you;
+  }
 
   const shell = el('div', 'shell asta');
   const bar = topbar({ title: t('asta.title'), onExit: () => go('hub') });
@@ -49,7 +73,7 @@ export async function mount(host, params = {}) {
 
   const comm = createCommentary();
   let raf = null;
-  let botTimer = null;
+  let rivalTimer = null;
   let endTimer = null;
   let scoutUsed = false;
   let matchStop = null;
@@ -79,7 +103,12 @@ export async function mount(host, params = {}) {
 
     const go1 = el('button', 'btn btn--go btn--lg btn--block', t('asta.start'));
     go1.type = 'button';
-    go1.addEventListener('click', () => { audio.sfx.whistle(); startAuction(); });
+    go1.addEventListener('click', () => { audio.sfx.whistle(); startAuction('solo'); });
+
+    const duo = el('button', 'btn btn--ghost btn--block', t('asta.duoStart'));
+    duo.type = 'button';
+    duo.title = t('asta.duoDesc');
+    duo.addEventListener('click', () => { audio.sfx.whistle(); startAuction('duo'); });
 
     const scout = el('button', 'btn btn--reward btn--block', `▶ ${t('asta.scout')}`);
     scout.type = 'button';
@@ -93,12 +122,13 @@ export async function mount(host, params = {}) {
       showScout();
     });
 
-    box.append(go1, scout, el('p', 'asta__fine dim', t('asta.scoutDesc')));
+    box.append(go1, duo, el('p', 'asta__fine dim', t('asta.duoDesc')),
+      scout, el('p', 'asta__fine dim', t('asta.scoutDesc')));
     shell.appendChild(box);
   }
 
   function showScout() {
-    const report = scoutReport(brain, bot, auction.lots, Math.max(0, auction.index));
+    const report = scoutReport(brain, rival, auction.lots, Math.max(0, auction.index));
     const body = el('div', 'scout');
     report.forEach((r) => {
       const row = el('div', 'scout__row');
@@ -129,14 +159,17 @@ export async function mount(host, params = {}) {
   let running = false;
   let stage = null;
   let raiseBtn = null;
+  let passBtn = null;
   let lotCard = null;
 
-  function startAuction() {
+  function startAuction(m) {
+    /* le squadre si rifanno da zero: cambiano i nomi e cambiano i lotti */
+    setup(m);
     shell.textContent = '';
     shell.appendChild(bar.el);
 
     const board = el('div', 'asta__board');
-    board.append(teamPanel(you, 'you'), teamPanel(bot, 'bot'));
+    board.append(teamPanel(you, 'you'), teamPanel(rival, 'rival'));
 
     stage = el('div', 'asta__stage');
     shell.append(board, stage, comm.el);
@@ -163,7 +196,7 @@ export async function mount(host, params = {}) {
   }
 
   function refreshPanels() {
-    [['you', you], ['bot', bot]].forEach(([kind, team]) => {
+    [['you', you], ['rival', rival]].forEach(([kind, team]) => {
       const p = shell.querySelector(`.tpanel--${kind}`);
       if (!p) return;
       p.querySelector('.tpanel__credits').textContent = String(team.credits);
@@ -223,7 +256,14 @@ export async function mount(host, params = {}) {
     raiseBtn.type = 'button';
     raiseBtn.addEventListener('click', onRaise);
 
-    lotCard.append(head, name, tag, ratingBox, priceRow, countEl, status, raiseBtn);
+    /* In due serve un modo di dire "non lo voglio" senza aspettare lo
+       scadere del tempo: si passa, e il giocatore va all'altro. */
+    passBtn = el('button', 'btn btn--ghost btn--block asta__pass', t('asta.duoPass'));
+    passBtn.type = 'button';
+    passBtn.hidden = mode !== 'duo';
+    passBtn.addEventListener('click', () => { if (running) { audio.sfx.over(); closeLot(); } });
+
+    lotCard.append(head, name, tag, ratingBox, priceRow, countEl, status, raiseBtn, passBtn);
     stage.appendChild(lotCard);
     replay(lotCard, 'anim-snap');
 
@@ -235,7 +275,7 @@ export async function mount(host, params = {}) {
     running = true;
     last = performance.now();
     if (!raf) raf = requestAnimationFrame(tick);
-    scheduleBot();
+    scheduleRival();
   }
 
   /* porta arancione, difesa verde, centrocampo blu, attacco rosso */
@@ -251,6 +291,7 @@ export async function mount(host, params = {}) {
   function updateStatus() {
     const c = auction.current;
     if (!c) return;
+    if (mode === 'duo') { updateStatusDuo(c); return; }
     const st = lotCard.__status;
     const mine = c.leader === you;
     const iCanBid = canBid(you, c.role, c.price);
@@ -258,14 +299,14 @@ export async function mount(host, params = {}) {
     if (c.uncontested) {
       /* Nessuno può contendere il giocatore, ma l'assegnazione si vede lo
          stesso: il cronometro scorre e la carta si chiude come le altre. */
-      st.textContent = `${mine ? t('asta.uncontested') : t('asta.botUncontested')} · `
+      st.textContent = `${mine ? t('asta.uncontested') : t('asta.rivalUncontested')} · `
         + t('asta.assigning', { n: c.price });
       st.dataset.tone = mine ? 'good' : 'dim';
     } else if (mine) {
       st.textContent = t('asta.leading');
       st.dataset.tone = 'good';
     } else {
-      st.textContent = iCanBid ? t('asta.botLeading') : t('asta.noCredits');
+      st.textContent = iCanBid ? t('asta.rivalLeading') : t('asta.noCredits');
       st.dataset.tone = iCanBid ? 'warn' : 'bad';
     }
 
@@ -283,41 +324,82 @@ export async function mount(host, params = {}) {
     lotCard.classList.toggle('lotcard--uncontested', Boolean(c.uncontested));
   }
 
+  /* In due nessuno è "tu": si dice sempre il nome di chi ha in mano il
+     dispositivo, altrimenti al terzo lotto non si capisce più chi rilancia. */
+  function updateStatusDuo(c) {
+    const st = lotCard.__status;
+    const turn = actor();
+    const canRaise = canBid(turn, c.role, c.price);
+
+    if (c.uncontested) {
+      st.textContent = `${t('asta.duoUncontested', { who: c.leader.name })} · `
+        + t('asta.assigning', { n: c.price });
+      st.dataset.tone = 'dim';
+    } else if (!canRaise) {
+      st.textContent = t('asta.duoNoCredits', { who: turn.name });
+      st.dataset.tone = 'bad';
+    } else {
+      st.textContent = `${t('asta.duoLeads', { who: c.leader.name })} · ${t('asta.duoHint')}`;
+      st.dataset.tone = 'warn';
+    }
+
+    const cap = maxBid(turn, c.role);
+    lotCard.__cap.textContent = cap > 0 ? t('asta.maxBid', { n: cap }) : '';
+
+    raiseBtn.disabled = Boolean(c.uncontested) || !canRaise;
+    raiseBtn.textContent = c.uncontested
+      ? `✓ ${t('asta.sold')}`
+      : `${t('asta.duoRaise', { who: turn.name })} → ${c.price + 1}`;
+    passBtn.hidden = false;
+    passBtn.disabled = Boolean(c.uncontested);
+    lotCard.classList.toggle('lotcard--mine', c.leader === you);
+    lotCard.classList.toggle('lotcard--duo', true);
+    lotCard.classList.toggle('lotcard--uncontested', Boolean(c.uncontested));
+  }
+
   function onRaise() {
     const c = auction.current;
     if (!c || !running) return;
-    if (!raise(auction, you)) return;
+    const who = actor();
+    if (!raise(auction, who)) return;
     deadline = performance.now() + bidMs;
     priceCounter.set(c.price);
     audio.sfx.hit();
     lastSecond = -1;          // il conto riparte pieno a ogni rilancio
     waveFrom(raiseBtn, roleColor(c.role));
     floatGain(priceCounter.el, `−1`, 'var(--amber)');
-    comm.say('commentary.astaYouLead', 'good');
+    if (mode === 'duo') {
+      const panel = shell.querySelector(who === you ? '.tpanel--you' : '.tpanel--rival');
+      flash(panel, 'tpanel--bid', 500);
+      comm.say('commentary.astaDuoBid');
+    } else {
+      comm.say('commentary.astaYouLead', 'good');
+    }
     updateStatus();
     refreshPanels();
-    scheduleBot();
+    scheduleRival();
   }
 
-  function scheduleBot() {
-    clearTimeout(botTimer);
+  function scheduleRival() {
+    clearTimeout(rivalTimer);
+    if (mode === 'duo') return;      // in due decide una persona, non il computer
     const c = auction.current;
-    if (!c || c.leader === bot || !needs(bot, c.role)) return;
+    if (!c || c.leader === rival || !needs(rival, c.role)) return;
     const remainingOfRole = auction.lots.slice(auction.index).filter((l) => l.role === c.role).length;
-    const call = decide(brain, bot, c, remainingOfRole, rand);
+    const call = decide(brain, rival, c, remainingOfRole, rand);
     if (!call) return;
-    botTimer = setTimeout(() => {
+    rivalTimer = setTimeout(() => {
       if (!running || auction.current !== c) return;
-      if (!raise(auction, bot)) return;
+      if (!raise(auction, rival)) return;
       deadline = performance.now() + bidMs;
       priceCounter.set(c.price);
       audio.sfx.dup();
       lastSecond = -1;
-      const panel = shell.querySelector('.tpanel--bot');
+      const panel = shell.querySelector('.tpanel--rival');
       flash(panel, 'tpanel--bid', 500);
       comm.say('commentary.astaBotBid', 'warn');
       updateStatus();
-      scheduleBot();
+      scheduleRival();
     }, call.delay);
   }
 
@@ -346,21 +428,31 @@ export async function mount(host, params = {}) {
 
   function closeLot() {
     running = false;
-    clearTimeout(botTimer);
+    clearTimeout(rivalTimer);
     const record = settle(auction);
     if (!record) return;
 
     const mine = record.winner === you;
-    audio.sfx[mine ? 'goal' : 'over']();
-    comm.say(mine ? 'commentary.astaWonYou' : 'commentary.astaWonBot', mine ? 'good' : 'bad');
+    if (mode === 'duo') {
+      audio.sfx.goal();
+      comm.say('commentary.astaDuoWon');
+    } else {
+      audio.sfx[mine ? 'goal' : 'over']();
+      comm.say(mine ? 'commentary.astaWonYou' : 'commentary.astaWonBot', mine ? 'good' : 'bad');
+    }
 
-    lotCard.classList.add(mine ? 'lotcard--won' : 'lotcard--lost');
-    const badge = el('p', 'lotcard__sold display t-lg',
-      `${t('asta.sold')} ${t('asta.soldTo', { who: record.winner.name, n: record.price })}`);
+    lotCard.classList.add(mine || mode === 'duo' ? 'lotcard--won' : 'lotcard--lost');
+    /* "Aggiudicato a Tu per 3" era sgrammaticato: in solo si dice a te o
+       all'avversario, in due si dice il nome di chi se l'è preso. */
+    const toWhom = mode === 'duo'
+      ? t('asta.soldTo', { who: record.winner.name, n: record.price })
+      : (mine ? t('asta.soldMine', { n: record.price }) : t('asta.soldRival', { n: record.price }));
+    const badge = el('p', 'lotcard__sold display t-lg', `${t('asta.sold')} ${toWhom}`);
     lotCard.appendChild(badge);
     replay(badge, 'anim-snap');
     raiseBtn.disabled = true;
-    if (!mine) quake(0.6);
+    if (passBtn) passBtn.hidden = true;
+    if (!mine && mode !== 'duo') quake(0.6);
 
     refreshPanels();
     endTimer = setTimeout(nextLot, 1500);
@@ -375,8 +467,10 @@ export async function mount(host, params = {}) {
     stage.textContent = '';
 
     const grid = el('div', 'squads');
-    grid.append(squadColumn(you, t('asta.yourSquad'), 'you'),
-      squadColumn(bot, t('asta.botSquad'), 'bot'));
+    grid.append(
+      squadColumn(you, mode === 'duo' ? t('asta.duoSquad', { who: you.name }) : t('asta.yourSquad'), 'you'),
+      squadColumn(rival, mode === 'duo' ? t('asta.duoSquad', { who: rival.name }) : t('asta.rivalSquad'), 'rival'),
+    );
 
     const cta = el('button', 'btn btn--go btn--lg btn--block', t('asta.playMatch'));
     cta.type = 'button';
@@ -426,7 +520,7 @@ export async function mount(host, params = {}) {
   /* ---------------- la partita ---------------- */
 
   function playMatch() {
-    const result = simulate(rand, you, bot);
+    const result = simulate(rand, you, rival);
     stage.textContent = '';
 
     const card = el('div', 'mcard');
@@ -436,7 +530,9 @@ export async function mount(host, params = {}) {
     const scoreEl = el('strong', 'mcard__score display num', '0–0');
     head.append(
       el('span', 'label mcard__comp', t('asta.matchTitle')),
-      el('span', 'mcard__vs', `${t('asta.vs')} ${bot.name}`),
+      el('span', 'mcard__vs', mode === 'duo'
+        ? `${you.name} ${t('asta.vs')} ${rival.name}`
+        : `${t('asta.vs')} ${rival.name}`),
       clock,
       scoreEl,
     );
@@ -513,7 +609,7 @@ export async function mount(host, params = {}) {
 
   /* ---- i rigori, uno alla volta ---- */
   function runShootout(result, card, list, clock, scoreEl) {
-    const so = shootout(rand, you, bot, {
+    const so = shootout(rand, you, rival, {
       home: new Set(result.sentOff.home), away: new Set(result.sentOff.away),
     });
     clock.textContent = t('asta.pens');
@@ -600,33 +696,59 @@ export async function mount(host, params = {}) {
     const key = result.outcome === 'win' ? 'asta.win'
       : result.outcome === 'loss' ? 'asta.loss' : 'asta.draw';
     card.classList.add(`mcard--${result.outcome}`);
-    comm.say(`commentary.match${result.outcome === 'win' ? 'Win' : result.outcome === 'loss' ? 'Loss' : 'Draw'}`,
-      result.outcome === 'win' ? 'good' : result.outcome === 'loss' ? 'bad' : 'warn');
+    if (mode !== 'duo') {
+      comm.say(`commentary.match${result.outcome === 'win' ? 'Win' : result.outcome === 'loss' ? 'Loss' : 'Draw'}`,
+        result.outcome === 'win' ? 'good' : result.outcome === 'loss' ? 'bad' : 'warn');
+    }
 
-    const s = store.load();
-    const wins = (s.asta?.wins || 0) + (result.outcome === 'win' ? 1 : 0);
     const pens = Boolean(result.shootout);
+    const score = pens
+      ? `${result.shootout.home}–${result.shootout.away}`
+      : `${result.goalsHome}–${result.goalsAway}`;
+
+    /* In due la partita è fra due persone: il record personale e le monete
+       non c'entrano niente e non si toccano. */
+    const s = mode === 'duo' ? null : store.load();
+    const wins = s ? (s.asta?.wins || 0) + (result.outcome === 'win' ? 1 : 0) : 0;
     const coins = result.outcome === 'win' ? (pens ? 22 : 30)
       : result.outcome === 'draw' ? 12 : (pens ? 8 : 5);
-    store.save({
-      asta: { wins, played: (s.asta?.played || 0) + 1 },
-      coins: (s.coins || 0) + coins,
-    });
+    if (s) {
+      store.save({
+        asta: { wins, played: (s.asta?.played || 0) + 1 },
+        coins: (s.coins || 0) + coins,
+      });
+    }
+
+    const avg = (team) => {
+      const men = lineup(team);
+      return Math.round(men.reduce((n, p) => n + p.rating, 0) / Math.max(1, men.length));
+    };
 
     const body = el('div', 'result');
     const row = el('div', 'result__stats');
-    row.append(
-      stat(t('common.score'),
-        pens ? `${result.shootout.home}–${result.shootout.away}`
-          : `${result.goalsHome}–${result.goalsAway}`,
-        result.outcome === 'win' ? 'good' : null),
-      stat(t('asta.record'), wins),
-      stat(t('common.coins'), `+${coins}`, 'warn'),
-    );
+    if (mode === 'duo') {
+      row.append(
+        stat(you.name, avg(you), result.outcome === 'win' ? 'good' : null),
+        stat(t('asta.result'), score),
+        stat(rival.name, avg(rival), result.outcome === 'loss' ? 'good' : null),
+      );
+    } else {
+      row.append(
+        stat(t('asta.result'), score, result.outcome === 'win' ? 'good' : null),
+        stat(t('asta.record'), wins),
+        stat(t('common.coins'), `+${coins}`, 'warn'),
+      );
+    }
     body.append(row);
 
+    const titolo = mode === 'duo'
+      ? (result.outcome === 'draw'
+        ? t('asta.duoDraw')
+        : t('asta.duoWin', { who: result.outcome === 'win' ? you.name : rival.name }))
+      : t(key);
+
     sheet({
-      title: t(key),
+      title: titolo,
       body,
       dismissable: false,
       actions: [
@@ -634,10 +756,12 @@ export async function mount(host, params = {}) {
         shareAction(() => ({
           mode: t('asta.title'),
           grid: result.outcome === 'win' ? '🟩' : result.outcome === 'draw' ? '🟨' : '🟥',
-          rows: [
-            `${result.goalsHome}–${result.goalsAway}${pens ? ` (${result.shootout.home}–${result.shootout.away} dcr)` : ''}`,
-            `${t('asta.record').toLowerCase()} ${wins}`,
-          ],
+          rows: mode === 'duo'
+            ? [`${you.name} ${score} ${rival.name}`]
+            : [
+              `${result.goalsHome}–${result.goalsAway}${pens ? ` (${result.shootout.home}–${result.shootout.away} dcr)` : ''}`,
+              `${t('asta.record').toLowerCase()} ${wins}`,
+            ],
         })),
         { label: t('common.back'), variant: 'btn--ghost', onClick: (c) => { c(); go('hub'); } },
       ],
@@ -651,7 +775,7 @@ export async function mount(host, params = {}) {
       if (matchStop) { matchStop(); return true; }
       if (!running) return false;
       running = false;
-      clearTimeout(botTimer);
+      clearTimeout(rivalTimer);
       return true;
     },
     resume: () => {
@@ -661,7 +785,7 @@ export async function mount(host, params = {}) {
       deadline += now - last;
       last = now;
       running = true;
-      scheduleBot();
+      scheduleRival();
     },
   });
 
@@ -669,7 +793,7 @@ export async function mount(host, params = {}) {
     stopVisibility();
     if (matchStop) matchStop();
     cancelAnimationFrame(raf);
-    clearTimeout(botTimer);
+    clearTimeout(rivalTimer);
     clearTimeout(endTimer);
     comm.destroy();
     document.querySelectorAll('.sheet').forEach((x) => x.remove());
@@ -682,7 +806,7 @@ export async function mount(host, params = {}) {
     shell.textContent = '';
     shell.appendChild(bar.el);
     const board = el('div', 'asta__board');
-    board.append(teamPanel(you, 'you'), teamPanel(bot, 'bot'));
+    board.append(teamPanel(you, 'you'), teamPanel(rival, 'rival'));
     stage = el('div', 'asta__stage');
     shell.append(board, stage, comm.el);
     let lot;

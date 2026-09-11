@@ -6,7 +6,7 @@
 
 import { t } from '../core/i18n.js';
 
-const FALLBACK_URL = 'https://novanta.game';
+const FALLBACK_URL = 'https://instascope.app';
 
 function site() {
   return location.protocol.startsWith('http') ? location.origin : FALLBACK_URL;

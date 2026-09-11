@@ -6,9 +6,10 @@ Un gioco di calcio per il web. Sei modalità, nessun bundler, nessuna dipendenza
 - **Rigori** — un tiro alla volta, una vita sola, un portiere che impara da te.
 - **Più o Meno** — due giocatori veri, un dato in mezzo, e una domanda sola:
   chi ha fatto di più? Si sbaglia una volta e la catena si spezza.
-- **Asta** — venti crediti contro un bot che sa di calcio: costruisci il quintetto
-  e giocati la partita, quaranta minuti che scorrono con gol, ammonizioni ed espulsioni.
-  Se finisce pari, si va ai rigori e si vedono tirare uno per uno.
+- **Asta** — venti crediti contro un avversario che sa di calcio: costruisci il
+  quintetto e giocati la partita, quaranta minuti che scorrono con gol, ammonizioni
+  ed espulsioni. Se finisce pari, si va ai rigori e si vedono tirare uno per uno.
+  Si gioca anche in due sullo stesso dispositivo, passandoselo a ogni rilancio.
 - **Carriera** — da sedicenne in una squadra di provincia fino al ritiro: una scelta
   all'anno, gli imprevisti che capitano, e una bacheca che si riempie o resta vuota.
 - **Il Novantesimo** — cinque round, la stessa sfida per tutti nel mondo, generata dalla data.
@@ -139,7 +140,7 @@ negli appunti.
 NOVANTA · RIGORI
 ⚽⚽⚽🧤
 3 gol segnati · record 7
-https://novanta.game
+https://instascope.app
 ```
 
 Non è un dettaglio estetico. È il motivo per cui un gioco come questo si
