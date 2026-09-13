@@ -33,3 +33,19 @@ export function resolveOutcome(pos, goal, keeper) {
 
   return reached ? SAVE : GOAL;
 }
+
+/**
+ * Quale legno ha colpito: il palo sinistro, il destro o la traversa, e da
+ * che lato (dentro lo specchio o fuori). Serve al suono e al rimbalzo.
+ */
+export function woodwork(pos, goal) {
+  const dl = Math.abs(pos.x - goal.left);
+  const dr = Math.abs(pos.x - goal.right);
+  const dt = Math.abs(pos.y - goal.top);
+  const near = Math.min(dl, dr, dt);
+  if (near >= POST_BAND) return null;
+  if (near === dt) return { part: 'bar', inside: pos.y > goal.top };
+  const part = near === dl ? 'left' : 'right';
+  const inside = part === 'left' ? pos.x > goal.left : pos.x < goal.right;
+  return { part, inside };
+}

@@ -7,7 +7,7 @@
    bundler i nomi dei file non cambiano mai, e una cache aggressiva
    significherebbe servire la versione di ieri a chi ricarica. */
 
-const CACHE = 'novanta-v1';
+const CACHE = 'novanta-v2';
 const CORE = [
   '/',
   '/index.html',

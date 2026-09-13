@@ -1,8 +1,10 @@
-/* Bilingue dal primo giorno: nessuna stringa scritta a mano nelle scene. */
+/* Nessuna stringa scritta a mano nelle scene. Sei lingue: una chiave che
+   manca in una traduzione cade sull'inglese, mai sul nome della chiave. */
 
 import * as store from './storage.js';
 
-export const LANGS = ['it', 'en'];
+export const LANGS = ['it', 'en', 'es', 'fr', 'de', 'pt'];
+export const LANG_NAMES = { it: 'Italiano', en: 'English', es: 'Español', fr: 'Français', de: 'Deutsch', pt: 'Português' };
 let dict = {};
 let current = 'it';
 const listeners = new Set();
@@ -15,14 +17,24 @@ function detect() {
   return nav.find((l) => LANGS.includes(l)) || 'en';
 }
 
+function deepMerge(base, over) {
+  const out = { ...base };
+  for (const [k, v] of Object.entries(over)) {
+    out[k] = v && typeof v === 'object' && !Array.isArray(v) && base[k] && typeof base[k] === 'object'
+      ? deepMerge(base[k], v) : v;
+  }
+  return out;
+}
+
 export async function init() {
   await setLang(detect(), false);
 }
 
 export async function setLang(lang, persist = true) {
   if (!LANGS.includes(lang)) lang = 'en';
-  const res = await fetch(`i18n/${lang}.json`, { cache: 'no-cache' });
-  dict = await res.json();
+  const load = (l) => fetch(`i18n/${l}.json`, { cache: 'no-cache' }).then((r) => r.json());
+  const [own, base] = await Promise.all([load(lang), lang === 'en' || lang === 'it' ? null : load('en')]);
+  dict = base ? deepMerge(base, own) : own;
   current = lang;
   document.documentElement.lang = lang;
   if (persist) store.save({ lang });

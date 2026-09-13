@@ -282,3 +282,4 @@
   .lotprice { font-size: 3.4rem; }
   .mcard__score { font-size: 2.6rem; }
 }
+.asta__duo { display: grid; gap: var(--s-3); padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--r-md); }

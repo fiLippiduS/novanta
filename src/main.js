@@ -19,6 +19,9 @@ async function boot() {
   router.register('asta', () => import('./scenes/asta.js'));
   router.register('carriera', () => import('./scenes/carriera.js'));
   router.register('duello', () => import('./scenes/duello.js'));
+  router.register('chi', () => import('./scenes/chi.js'));
+  router.register('catena', () => import('./scenes/catena.js'));
+  router.register('impostore', () => import('./scenes/impostore.js'));
 
   router.start(document.getElementById('app'));
 

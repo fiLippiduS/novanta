@@ -1,4 +1,4 @@
-/* L'ingresso allo stadio. Tre porte, nient'altro.
+/* L'ingresso allo stadio. Una porta per ogni sfida, nient'altro.
    Se questa schermata non è già diversa dalle altre, il gioco ha fallito qui. */
 
 import { t } from '../core/i18n.js';
@@ -8,7 +8,8 @@ import { go } from '../core/router.js';
 import { el, crest } from '../ui/components.js';
 import { stagger, tilt, waveFrom } from '../ui/motion.js';
 import { msToNextDay, utcDayKey } from '../core/rng.js';
-import { LANGS, lang, setLang } from '../core/i18n.js';
+import { LANGS, LANG_NAMES, lang, setLang } from '../core/i18n.js';
+import * as ads from '../ads/adapter.js';
 
 function hhmmss(ms) {
   const s = Math.max(0, Math.floor(ms / 1000));
@@ -119,20 +120,50 @@ export function mount(host) {
     onGo: () => go('duello'),
   }));
 
-  const car = data.career && data.career.player;
+  const car = data.career && data.career.v === 2 && data.career.player;
   modes.appendChild(modeCard({
     id: 'carriera', index: '05', accent: 'var(--amber)',
     title: t('hub.carrieraTitle'), desc: t('hub.carrieraDesc'),
     meta: car
-      ? [{ label: t('carriera.season'), value: car.seasons.length + 1 },
-         { label: t('carriera.goals'), value: car.totals.goals }]
+      ? [{ label: t('carriera.season'), value: car.seasons.length + (car.retired ? 0 : 1) },
+         { label: t('carriera.cabinet'), value: car.totals.trophies.length }]
       : [{ label: t('carriera.age'), value: 16 }],
     onGo: () => go('carriera'),
   }));
 
+  modes.appendChild(modeCard({
+    id: 'chi', index: '06', accent: 'var(--sky)',
+    title: t('hub.chiTitle'), desc: t('hub.chiDesc'),
+    meta: [
+      { label: t('chi.streak'), value: data.chi.streak || '—' },
+      { label: t('chi.solved'), value: data.chi.solved },
+    ],
+    onGo: () => go('chi'),
+  }));
+
+  modes.appendChild(modeCard({
+    id: 'catena', index: '07', accent: 'var(--lime)',
+    title: t('hub.catenaTitle'), desc: t('hub.catenaDesc'),
+    meta: [
+      { label: t('common.best'), value: data.catena.best || '—' },
+      { label: t('hub.games'), value: data.catena.played + data.catena.parties },
+    ],
+    onGo: () => go('catena'),
+  }));
+
+  modes.appendChild(modeCard({
+    id: 'impostore', index: '08', accent: 'var(--flare)',
+    title: t('hub.impostoreTitle'), desc: t('hub.impostoreDesc'),
+    meta: [
+      { label: t('hub.players'), value: '3–10' },
+      { label: t('hub.rounds'), value: data.impostore.rounds },
+    ],
+    onGo: () => go('impostore'),
+  }));
+
   const doneToday = data.daily.lastDay === utcDayKey();
   const dailyCard = modeCard({
-    id: 'daily', index: '06', accent: 'var(--lime)',
+    id: 'daily', index: '09', accent: 'var(--lime)',
     title: t('hub.dailyTitle'), desc: t('hub.dailyDesc'),
     meta: [
       { label: t('hub.streak'), value: `${data.daily.streak}` },
@@ -149,13 +180,16 @@ export function mount(host) {
   /* --- piede: lingua, audio, note legali --- */
   const foot = el('footer', 'hub__foot');
 
-  const langBtn = el('button', 'pill', lang().toUpperCase());
-  langBtn.type = 'button';
+  /* la lingua si sceglie da un elenco: sei lingue non si scorrono a tocchi */
+  const langBtn = el('select', 'pill pill--select');
   langBtn.setAttribute('aria-label', t('common.language'));
-  langBtn.addEventListener('click', () => {
-    const next = LANGS[(LANGS.indexOf(lang()) + 1) % LANGS.length];
-    setLang(next);
+  LANGS.forEach((code) => {
+    const o = el('option', '', LANG_NAMES[code] || code.toUpperCase());
+    o.value = code;
+    if (code === lang()) o.selected = true;
+    langBtn.appendChild(o);
   });
+  langBtn.addEventListener('change', () => setLang(langBtn.value));
 
   const soundBtn = el('button', 'pill', audio.isEnabled() ? '♪' : '✕');
   soundBtn.type = 'button';
@@ -171,8 +205,13 @@ export function mount(host) {
   const links = el('nav', 'hub__links');
   [
     ['/come-si-gioca', t('foot.howto')],
+    ['/faq', t('foot.faq')],
+    ['/chi-siamo', t('foot.about')],
+    ['/contatti', t('foot.contact')],
     ['/dati', t('foot.data')],
     ['/privacy', t('foot.privacy')],
+    ['/cookie', t('foot.cookie')],
+    ['/terms', t('foot.terms')],
   ].forEach(([href, label]) => {
     const a = el('a', 'hub__legal dim', label);
     a.href = href;
@@ -181,7 +220,11 @@ export function mount(host) {
 
   foot.append(langBtn, soundBtn, el('span', 'spacer'), links);
 
-  shell.append(head, modes, foot);
+  /* un solo spazio pubblicitario, sotto le modalità: mai fra una porta e l'altra */
+  const slot = ads.adSlot('hub');
+  shell.append(head, modes);
+  if (slot) shell.appendChild(slot);
+  shell.appendChild(foot);
   host.appendChild(shell);
 
   stagger(modes.children, 'anim-rise', 70);

@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import {
   createAuction, createTeam, openNext, raise, settle, isComplete,
   maxBid, needs, canBid, slotsLeft, ROLES, NEED, START_CREDITS,
+  buildLots, WEAK_MAX,
 } from '../src/auction/engine.js';
 import { createBot, decide, valuation } from '../src/auction/bot.js';
 import { simulate, shootout, takers, strength, MINUTES } from '../src/auction/match.js';
@@ -235,6 +236,37 @@ console.log('— il tetto di offerta lascia il budget per tutti i ruoli —');
   check('rosa completa spendendo il massimo ogni volta', isComplete(u));
   check('senza sforare i venti crediti', speso <= START_CREDITS && u.credits >= 0,
     `(speso ${speso}, restano ${u.credits})`);
+}
+
+console.log('— forti e deboli escono a caso —');
+{
+  let dup = 0, incompleti = 0;
+  const N = 2000;
+  const top = {};
+  for (const r of ROLES) {
+    const sorted = catalog.filter((p) => p.role === r).map((p) => p.rating).sort((a, b) => b - a);
+    top[r] = sorted[Math.round(sorted.length * 0.2)];
+  }
+  /* il portiere ha due lotti: si contano le tre combinazioni possibili */
+  const casi = { dueForti: 0, dueDeboli: 0, misti: 0 };
+  for (let i = 0; i < N; i++) {
+    const lots = buildLots(seeded(9000 + i), catalog);
+    if (ROLES.some((r) => lots.filter((x) => x.role === r).length !== NEED[r] * 2)) incompleti++;
+    if (new Set(lots.map((x) => x.player.name)).size !== lots.length) dup++;
+    const por = lots.filter((x) => x.role === 'POR').map((x) => x.player.rating);
+    const forti = por.filter((v) => v >= top.POR).length;
+    const deboli = por.filter((v) => v <= WEAK_MAX).length;
+    if (forti === 2) casi.dueForti++;
+    else if (deboli === 2) casi.dueDeboli++;
+    else if (forti === 1 && deboli === 1) casi.misti++;
+  }
+  console.log(`   portieri su ${N} aste: due forti ${casi.dueForti} · due deboli ${casi.dueDeboli} · uno e uno ${casi.misti}`);
+  check('ogni ruolo ha sempre i suoi lotti', incompleti === 0, `(${incompleti})`);
+  check('nessun giocatore due volte nella stessa asta', dup === 0, `(${dup})`);
+  check('capitano due forti nello stesso ruolo', casi.dueForti > N * 0.05, `(${casi.dueForti})`);
+  check('capitano due deboli nello stesso ruolo', casi.dueDeboli > N * 0.05, `(${casi.dueDeboli})`);
+  check('capita anche uno forte e uno debole', casi.misti > N * 0.1, `(${casi.misti})`);
+  check('catalogo ampio', catalog.length >= 3000, `(${catalog.length})`);
 }
 
 console.log(`\n${pass} passati, ${fail} falliti`);

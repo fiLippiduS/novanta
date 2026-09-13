@@ -1,0 +1,120 @@
+/* CHI È? e la scheda del giocatore (usata anche altrove) */
+
+.chi { display: flex; flex-direction: column; gap: var(--s-4); }
+.chi__loading { text-align: center; padding-block: var(--s-7); color: var(--chalk-4); }
+
+.chi__layout { display: grid; gap: var(--s-5); align-items: start; }
+.chi__side { display: grid; gap: var(--s-3); }
+.chi__main { min-width: 0; }
+
+.chi__levels { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.chi__level {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--chalk-3);
+  font: 600 var(--t-sm) var(--font-ui);
+  min-height: 38px;
+  padding-inline: var(--s-3);
+}
+.chi__level.is-on { background: var(--lime); border-color: var(--lime); color: var(--ink-950); }
+
+.chi__lives { display: flex; align-items: center; justify-content: space-between; }
+
+.chi__guesses { display: grid; gap: var(--s-2); }
+.guess { padding: var(--s-2) var(--s-3); border: 1px solid rgba(255,90,60,0.35); border-radius: var(--r-md); background: rgba(255,90,60,0.06); }
+.guess__head { display: flex; gap: var(--s-2); align-items: baseline; }
+.guess__x { color: var(--flare); font-weight: 700; }
+.guess__name { font-weight: 600; }
+.guess__hints { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.ghint {
+  font-size: var(--t-xs);
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  color: var(--chalk-2);
+  white-space: nowrap;
+}
+.ghint--ok { border-color: var(--lime); color: var(--lime); }
+.ghint--no { color: var(--chalk-4); }
+.ghint--mid { border-color: var(--amber); color: var(--amber); }
+
+.chi__actions { display: flex; gap: var(--s-2); }
+.chi__giveup { flex: 1; }
+.chi__answer { display: grid; gap: var(--s-2); margin-bottom: var(--s-2); }
+.chi__wiki { display: inline-block; margin-top: var(--s-3); color: var(--sky); font-size: var(--t-sm); }
+
+/* ---------- la scheda ---------- */
+
+.ibox { padding: var(--s-5) var(--s-4); min-width: 0; }
+.ibox__head { text-align: center; padding-bottom: var(--s-4); border-bottom: 1px solid var(--line); }
+.ibox__kicker { color: var(--chalk-4); }
+.ibox__name { font-size: var(--t-xl); margin-top: var(--s-2); overflow-wrap: anywhere; }
+.ibox__name[data-hidden="1"] { color: var(--chalk-4); letter-spacing: 0.3em; }
+.ibox--solved .ibox__name { color: var(--lime); }
+.ibox--failed .ibox__name { color: var(--flare); }
+
+.ibox__facts { display: grid; gap: 2px; padding-block: var(--s-3); }
+.ibox__row { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--s-3); align-items: center; min-height: 34px; }
+.ibox__key { color: var(--chalk-4); }
+.ibox__val { min-width: 0; font-weight: 500; }
+
+.ibox__band {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-top: var(--s-4);
+  padding: 7px var(--s-3);
+  border-radius: 6px;
+  background: rgba(88,199,240,0.1);
+  color: var(--sky);
+  text-align: center;
+}
+.ibox__band-note { font-size: var(--t-micro); color: var(--chalk-4); letter-spacing: 0.04em; text-transform: none; }
+
+.ibox__table { display: grid; }
+.ibox__spell {
+  display: grid;
+  grid-template-columns: 5.6rem minmax(0, 1fr) auto;
+  gap: var(--s-2);
+  align-items: center;
+  min-height: 36px;
+  padding: 3px var(--s-2);
+  border-bottom: 1px solid var(--line);
+  border-radius: 4px;
+  transition: background var(--d-base) linear;
+}
+.ibox__years { color: var(--chalk-3); font-size: var(--t-sm); }
+.ibox__club { display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+.ibox__club .club__name { overflow: hidden; text-overflow: ellipsis; }
+.ibox__loan { color: var(--chalk-4); }
+.ibox__spell--loan .ibox__club { color: var(--chalk-2); }
+.ibox__spell--youth { color: var(--chalk-3); }
+.ibox__apps { color: var(--chalk-2); font-size: var(--t-sm); text-align: right; }
+.ibox__spell--shared { background: rgba(201,242,75,0.16); box-shadow: inset 3px 0 0 var(--lime); }
+
+.ibox__honours { display: grid; gap: 2px; margin-top: var(--s-2); }
+.hon { display: grid; grid-template-columns: 14px 4.6rem minmax(0, 1fr); gap: var(--s-2); align-items: start; padding: 5px var(--s-2); }
+.hon__medal { width: 12px; height: 12px; margin-top: 4px; border-radius: 50%; background: #E8B84A; box-shadow: 0 0 0 2px rgba(232,184,74,0.25); }
+.hon--runnerup .hon__medal { background: #C9CDD4; box-shadow: 0 0 0 2px rgba(201,205,212,0.22); }
+.hon--third .hon__medal, .hon--semifinal .hon__medal { background: #C07A45; box-shadow: 0 0 0 2px rgba(192,122,69,0.22); }
+.hon__year { color: var(--chalk-3); font-size: var(--t-sm); }
+.hon__main { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; min-width: 0; }
+.hon__comp { font-weight: 600; }
+.hon__group { color: var(--chalk-3); font-size: var(--t-sm); }
+.hon__result { color: var(--chalk-4); }
+.hon__more { margin-top: var(--s-2); }
+.hon__more summary { cursor: pointer; padding: var(--s-2); color: var(--chalk-3); }
+
+@media (min-width: 56rem) {
+  .chi__layout { grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.9fr); }
+  .chi__main { order: 1; }
+  .chi__side { order: 2; position: sticky; top: var(--s-4); }
+}
+
+@media (max-width: 30rem) {
+  .ibox { padding: var(--s-4) var(--s-3); }
+  .ibox__row { grid-template-columns: 6.2rem 1fr; }
+  .ibox__spell { grid-template-columns: 4.9rem minmax(0, 1fr) auto; font-size: 0.94rem; }
+  .hon { grid-template-columns: 12px 4rem minmax(0, 1fr); }
+}

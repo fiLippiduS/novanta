@@ -15,7 +15,7 @@ import { createRig, updateRig, drawRig, setState, handPositions, lookAt } from '
 import { createKeeper, decide, remember, isPerfectCorner } from '../arcade/keeper.js';
 import { createShot, updateShot, advance, ballAt, PHASE } from '../arcade/shot.js';
 import * as R from '../arcade/render.js';
-import { resolveOutcome, GOAL as O_GOAL, SAVE as O_SAVE, POST as O_POST } from '../arcade/outcome.js';
+import { resolveOutcome, woodwork, GOAL as O_GOAL, SAVE as O_SAVE, POST as O_POST } from '../arcade/outcome.js';
 import * as ads from '../ads/adapter.js';
 import { shareAction, grid } from '../ui/share.js';
 import { onHidden } from '../core/visibility.js';
@@ -98,6 +98,8 @@ export function mount(host) {
   let last = performance.now();
   let resolveAt = 0;
   let resultLabel = null;
+  let rebound = null;     // la palla che torna indietro dal legno
+  let woodFlash = null;   // il legno colpito che vibra per un attimo
   const history = [];   // un quadretto per tiro, per il messaggio da condividere
 
   function newShot() {
@@ -106,6 +108,8 @@ export function mount(host) {
     plan = null;
     trail = [];
     resultLabel = null;
+    rebound = null;
+    woodFlash = null;
     phaseLocked = false;
     verdict.textContent = '';
     verdict.className = 'arcade__verdict display';
@@ -208,19 +212,126 @@ export function mount(host) {
         show(t('arcade.saved'), 'bad');
         comm.say('commentary.arcadeSave', 'bad');
       } else if (outcome === O_POST) {
-        audio.sfx.post();
+        const hit = woodwork(pos, g) || { part: pos.y < g.top + 20 ? 'bar' : pos.x < (g.left + g.right) / 2 ? 'left' : 'right', inside: true };
+        startRebound(pos, hit, shot.power);
+        if (hit.part === 'bar') audio.sfx.bar(); else audio.sfx.post();
         setState(rig, 'beaten');
-        show(t('arcade.post'), 'warn');
-        comm.say('commentary.arcadePost', 'warn');
+        show(t(hit.part === 'bar' ? 'arcade.bar' : 'arcade.post'), 'warn');
+        comm.say(hit.part === 'bar' ? 'commentary.arcadeBar' : 'commentary.arcadePost', 'warn');
       } else {
         audio.sfx.miss();
         setState(rig, 'celebrate');
         show(t('arcade.out'), 'warn');
         comm.say('commentary.arcadeOut', 'warn');
       }
-      quake(0.8);
-      setTimeout(gameOver, 1500);
+      quake(outcome === O_POST ? 1.1 : 0.8);
+      /* dopo un legno si guarda la palla tornare indietro prima del verdetto */
+      setTimeout(gameOver, outcome === O_POST ? 2000 : 1500);
     }
+  }
+
+  /* Il rimbalzo sul legno. La palla vive in uno spazio semplice: quanto è
+     tornata verso il dischetto (depth, 0 sulla linea, 1 sul dischetto), a che
+     altezza da terra (h) e dove sta in orizzontale. Da questi tre numeri si
+     ricava la posizione sullo schermo con la stessa prospettiva del tiro. */
+  function startRebound(pos, hit, power) {
+    const g = R.L.GOAL;
+    const scale0 = 0.58;
+    const kick = 0.75 + power * 0.5;
+    const r = {
+      x: pos.x,
+      depth: 0,
+      h: Math.max(0, (g.bottom - pos.y) / scale0),
+      vx: 0, vd: 0, vh: 0,
+      t: 0,
+      bounces: 0,
+    };
+    const centre = (g.left + g.right) / 2;
+    if (hit.part === 'bar') {
+      if (hit.inside) {
+        /* sotto la traversa: giù secca, rimbalza sulla linea e torna fuori */
+        r.vh = -620 * kick; r.vd = 0.32 * kick; r.vx = (pos.x - centre) * 0.25;
+      } else {
+        /* sopra: si impenna e ricade verso il campo */
+        r.vh = 430 * kick; r.vd = 0.42 * kick; r.vx = (pos.x - centre) * 0.3;
+      }
+    } else {
+      const out = hit.part === 'left' ? -1 : 1;
+      if (hit.inside) {
+        /* palo interno: attraversa lo specchio e schizza fuori */
+        r.vx = -out * (170 + rand() * 90) * kick; r.vd = 0.62 * kick; r.vh = 60 + rand() * 80;
+      } else {
+        /* palo esterno: via di lato, verso il fondo */
+        r.vx = out * (220 + rand() * 90) * kick; r.vd = 0.38 * kick; r.vh = 90 + rand() * 90;
+      }
+    }
+    rebound = r;
+    woodFlash = { part: hit.part, t: 0, y: pos.y, x: pos.x };
+    trail = [];
+  }
+
+  function updateRebound(dt) {
+    if (!rebound) return;
+    const s = dt / 1000;
+    const r = rebound;
+    r.t += dt;
+    r.vh -= 1500 * s;
+    r.h += r.vh * s;
+    r.x += r.vx * s;
+    r.depth = Math.min(1.2, r.depth + r.vd * s);
+    if (r.h <= 0) {
+      r.h = 0;
+      if (Math.abs(r.vh) > 120 && r.bounces < 4) {
+        audio.sfx.bounce(Math.min(1, Math.abs(r.vh) / 700));
+        r.bounces += 1;
+      }
+      r.vh = Math.abs(r.vh) * 0.48;
+      r.vx *= 0.82;
+      r.vd *= 0.85;
+      if (r.vh < 40) r.vh = 0;
+    }
+    if (woodFlash) {
+      woodFlash.t += dt;
+      if (woodFlash.t > 480) woodFlash = null;
+    }
+  }
+
+  function reboundPos() {
+    const g = R.L.GOAL;
+    const r = rebound;
+    const groundY = g.bottom + (R.L.SPOT.y - g.bottom) * r.depth;
+    const scale = 0.58 + 0.42 * r.depth;
+    return { x: r.x, y: groundY - r.h * scale, scale };
+  }
+
+  function drawWoodFlash() {
+    if (!woodFlash) return;
+    const g = R.L.GOAL;
+    const k = 1 - woodFlash.t / 480;
+    /* il legno trema: un tratto chiaro che oscilla e si spegne */
+    const wob = Math.sin(woodFlash.t / 18) * 3 * k;
+    ctx.save();
+    ctx.globalAlpha = 0.85 * k;
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.shadowColor = '#FFFFFF';
+    ctx.shadowBlur = 16 * k;
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    if (woodFlash.part === 'bar') {
+      const a = Math.max(g.left, woodFlash.x - 90);
+      const b = Math.min(g.right, woodFlash.x + 90);
+      ctx.moveTo(a, g.top + wob);
+      ctx.quadraticCurveTo(woodFlash.x, g.top - wob * 2, b, g.top + wob);
+    } else {
+      const x = woodFlash.part === 'left' ? g.left : g.right;
+      const a = Math.max(g.top, woodFlash.y - 70);
+      const b = Math.min(g.bottom, woodFlash.y + 70);
+      ctx.moveTo(x + wob, a);
+      ctx.quadraticCurveTo(x - wob * 2, woodFlash.y, x + wob, b);
+    }
+    ctx.stroke();
+    ctx.restore();
   }
 
   function show(text, tone) {
@@ -348,7 +459,10 @@ export function mount(host) {
 
     /* la testa del portiere segue la palla: durante il volo la guarda,
        prima del tiro tiene d'occhio il dischetto */
-    if (shot && (shot.phase === PHASE.FLIGHT || shot.phase === PHASE.DONE)) {
+    if (rebound) {
+      const b = reboundPos();
+      lookAt(rig, b.x, b.y);
+    } else if (shot && (shot.phase === PHASE.FLIGHT || shot.phase === PHASE.DONE)) {
       const k = Math.min(1, shot.t / shot.flightMs);
       const b = ballAt(shot, k, R.L.SPOT);
       lookAt(rig, b.x, b.y);
@@ -358,6 +472,7 @@ export function mount(host) {
 
     updateRig(rig, dt);
     updateNet(net, dt);
+    updateRebound(dt);
     if (flash > 0) flash = Math.max(0, flash - dt / 420);
     if (fairHint > 0 && shot && shot.phase !== PHASE.AIM) fairHint = Math.max(0, fairHint - dt / 500);
 
@@ -378,7 +493,13 @@ export function mount(host) {
     else if (shot.phase === PHASE.POWER) { R.drawAim(ctx, shot); R.drawPower(ctx, shot); }
     else if (shot.phase === PHASE.CURVE) { R.drawPower(ctx, shot); R.drawCurve(ctx, shot); }
 
-    if (shot.phase === PHASE.FLIGHT || shot.phase === PHASE.DONE) {
+    drawWoodFlash();
+    if (rebound) {
+      const pos = reboundPos();
+      trail.push(pos);
+      if (trail.length > 9) trail.shift();
+      R.drawBall(ctx, pos, trail);
+    } else if (shot.phase === PHASE.FLIGHT || shot.phase === PHASE.DONE) {
       const k = Math.min(1, shot.t / shot.flightMs);
       const pos = ballAt(shot, k, R.L.SPOT);
       trail.push(pos);

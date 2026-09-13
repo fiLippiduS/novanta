@@ -9,3 +9,6 @@
 # roba locale che non deve finire online
 *.log
 node_modules/
+
+# cache delle richieste a Wikipedia: si rigenera
+tools/wiki/cache/

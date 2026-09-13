@@ -1,20 +1,31 @@
 # NOVANTA
 
-Un gioco di calcio per il web. Sei modalità, nessun bundler, nessuna dipendenza.
+Un gioco di calcio per il web. Nove modalità, nessun bundler, nessuna dipendenza.
 
-- **La Rosa** — novanta secondi per nominare più giocatori possibili di una squadra.
+- **La Rosa** — novanta secondi per nominare più giocatori possibili di una rosa:
+  quasi duemila fra club stagione per stagione e nazionali a Mondiali, Europei e
+  Copa América, estratte a caso. A tempo scaduto i mancati restano nella griglia.
 - **Rigori** — un tiro alla volta, una vita sola, un portiere che impara da te.
-- **Più o Meno** — due giocatori veri, un dato in mezzo, e una domanda sola:
-  chi ha fatto di più? Si sbaglia una volta e la catena si spezza.
-- **Asta** — venti crediti contro un avversario che sa di calcio: costruisci il
-  quintetto e giocati la partita, quaranta minuti che scorrono con gol, ammonizioni
-  ed espulsioni. Se finisce pari, si va ai rigori e si vedono tirare uno per uno.
-  Si gioca anche in due sullo stesso dispositivo, passandoselo a ogni rilancio.
-- **Carriera** — da sedicenne in una squadra di provincia fino al ritiro: una scelta
-  all'anno, gli imprevisti che capitano, e una bacheca che si riempie o resta vuota.
+  Palo e traversa hanno il loro suono e la palla rimbalza davvero sul legno.
+- **Asta** — venti crediti per un quintetto, pescati a caso fra campioni, comprimari
+  e giocatori di mezzo su un catalogo di oltre quattromilaseicento giocatori. Contro
+  l'avversario del computer o in due sullo stesso telefono, ognuno col suo nome.
+- **Più o Meno** — due giocatori, un dato, chi ne ha di più? Duemila giocatori e
+  ventidue parametri; al primo errore la catena si spezza.
+- **Carriera** — dai sedici anni al ritiro, con il ruolo che decide doti e numeri,
+  l'allenamento, tre scelte ogni stagione, coppe europee guadagnate in classifica,
+  nazionale e grandi tornei per chi viene dalle dieci nazionali più forti.
+- **Chi è?** — la scheda di una carriera vera senza il nome, cinque vite, la ricerca
+  che suggerisce mentre scrivi.
+- **Catena** — squadra, giocatore, squadra: quaranta secondi a mossa, da soli o
+  fino a dieci passandosi il telefono.
+- **Impostore** — da tre a dieci persone, un telefono, un calciatore che tutti
+  conoscono tranne uno.
 - **Il Novantesimo** — cinque round, la stessa sfida per tutti nel mondo, generata dalla data.
 
-Interfaccia in italiano e inglese. Tutti i progressi restano nel browser dell'utente.
+Interfaccia in italiano, inglese, spagnolo, francese, tedesco e portoghese
+(anche gli eventi della Carriera). Le pagine di testo sono in italiano. Tutti i
+progressi restano nel browser dell'utente.
 
 ## Far partire il gioco
 
@@ -30,58 +41,77 @@ Non serve installare niente. Il gioco è HTML, CSS e moduli ES nativi.
 ## Collaudo
 
 ```bash
-for t in match daily arcade duel asta carriera; do node test/$t.test.mjs || break; done
+for t in test/*.test.mjs; do node "$t" || break; done
 ```
 
 - `match.test.mjs` — il riconoscimento dei nomi: accenti, alias, refusi, omonimi.
 - `daily.test.mjs` — la sfida quotidiana è identica per tutti e mai ambigua, per 365 giorni.
 - `arcade.test.mjs` — il tiro parte sempre, il portiere è difficile ma corretto,
   e la difficoltà cresce davvero.
-- `duel.test.mjs` — nessuna domanda ambigua su trentaseimila confronti, e i quindici
-  parametri escono tutti.
-- `asta.test.mjs` — nessuna rosa resta incompleta, i crediti tornano sempre, e chi compra
-  meglio vince più spesso.
-- `carriera.test.mjs` — mille carriere simulate: nessun numero assurdo, il ruolo conta,
-  la squadra conta, e da giovani si cresce.
+- `duel.test.mjs` — nessuna domanda ambigua su trentaseimila confronti, e tutti i
+  parametri escono.
+- `asta.test.mjs` — nessuna rosa resta incompleta, i crediti tornano sempre, chi compra
+  meglio vince più spesso, e in uno stesso ruolo possono uscire due forti,
+  due deboli o uno e uno.
+- `carriera.test.mjs` — mille carriere simulate: numeri coerenti col ruolo e con gli
+  eventi, coppe solo se conquistate, infortuni che tolgono partite, tre scelte fino
+  all'ultima stagione, e trecento carriere con le stesse scelte tutte diverse.
+- `rosa.test.mjs` — ogni rosa del catalogo esiste, è giocabile e ogni nome si trova.
+- `i18n.test.mjs` — le sei lingue hanno le stesse chiavi e gli stessi segnaposto,
+  e ogni chiave usata nel codice esiste.
 
 Scorciatoie di sviluppo, tutte attive solo su localhost:
 
 | Indirizzo | Cosa fa |
 |---|---|
-| `#/squad?team=milan-1994&secs=10` | round de La Rosa da dieci secondi su una squadra scelta |
+| `#/squad?team=milan-2007&secs=10` | round de La Rosa da dieci secondi su una rosa scelta |
 | `#/asta?bid=400` | rilancio accorciato, per arrivare in fondo all'asta in fretta |
 | `#/asta?skip=1` | assegna le rose e salta al tabellino, per collaudare la partita |
+
+## Rigenerare i dati
+
+I cataloghi vengono da Wikipedia (licenza CC BY-SA 4.0), letta con la sua API
+pubblica. Le risposte restano in `tools/wiki/cache/`, che non si pubblica.
+
+```bash
+node tools/wiki/candidates.mjs && node tools/wiki/rank.mjs
+node tools/wiki/players.mjs 6000 && node tools/wiki/clubs.mjs && node tools/wiki/build.mjs
+node tools/wiki/squads.mjs && node tools/wiki/seasons.mjs && node tools/wiki/rosa.mjs
+node tools/wiki/auction.mjs && node tools/wiki/duel.mjs
+node tools/career/build-events.mjs && node tools/pages/build.mjs
+```
 
 ## Struttura
 
 ```
 index.html            guscio della pagina
 serve.py              server di sviluppo senza cache
-src/core/             router, stato, memoria, seme del giorno, riconoscimento nomi
-src/scenes/           hub, squad, arcade, daily
+src/core/             router, stato, memoria, lingue, seme del giorno, riconoscimento nomi
+src/scenes/           una scena per modalità, più l'ingresso
 src/rounds/           i round della sfida quotidiana
 src/arcade/           portiere, rigorista, tiro, rete, disegno, esito
 src/auction/          regole dell'asta, cervello del bot, simulazione della partita
-src/career/           giocatore, stagione, eventi, sagome dei trofei
+src/career/           giocatore, stagione, eventi, nazioni, filo della carriera, trofei
+src/players/          catalogo Wikipedia, scheda del giocatore, nomi di ruoli e coppe
 src/duel/             parametri del confronto e regola dello scarto
-src/ui/               movimento, componenti, contatore, telecronaca
+src/ui/               componenti, bandiere, ricerca, partecipanti, condivisione
 src/ads/              adattatore pubblicitario (stub in sviluppo, AdSense in produzione)
 src/consent/          consenso: banner di sviluppo e piattaforma certificata di Google
-src/ui/share.js       il risultato da mandare a un amico, uguale in tutte le modalità
 sw.js                 service worker: installabile sulla Home, regge se cade la rete
-manifest.webmanifest  nome, icone e colori quando il gioco vive fuori dal browser
-come-si-gioca.html    le regole delle sei modalità
-dati.html             da dove vengono giocatori e statistiche
-404.html              pagina di errore
+*.html                pagine di testo, generate da tools/pages/
 ads.txt               chi può vendere la pubblicità del sito
-sitemap.xml           mappa per i motori di ricerca
-tools/                generatore delle immagini di anteprima, non si pubblica
-data/squads.json      32 rose curate a mano, 743 giocatori
-data/auction.json     647 giocatori con ruolo e voto, dai fuoriclasse ai comprimari
-data/clubs.json       243 club da 66 paesi, con fascia e colori
-data/duel.json        111 giocatori veri con quindici dati di carriera
-data/events.json      47 fra scelte e imprevisti, in due lingue
-i18n/                 italiano e inglese
+sitemap.xml           mappa per i motori di ricerca, generata insieme alle pagine
+tools/wiki/           dai dati di Wikipedia ai cataloghi del gioco
+tools/career/         eventi della Carriera nelle sei lingue
+tools/pages/          testo e impaginazione delle pagine statiche
+data/players/         5.442 carriere: indice leggero e schede a pezzi
+data/rosa/            1.941 rose: indice e pezzi da cento
+data/auction.json     4.646 giocatori con ruolo e voto
+data/duel.json        2.031 giocatori con i dati del confronto
+data/career/          eventi della Carriera (logica e testi per lingua)
+data/clubs.json       243 club da 66 paesi, con fascia, codice e livello del campionato
+data/squads.json      32 rose curate a mano, per Il Novantesimo
+i18n/                 sei lingue
 styles/               token di design e fogli per scena
 test/                 collaudo senza browser
 _headers              cache e sicurezza per Cloudflare Pages
@@ -120,6 +150,13 @@ Dove compaiono gli annunci, e perché lì:
 | Prima dell'Asta | rewarded | Il taccuino dell'osservatore: fin dove si spinge il bot. Un vantaggio di informazione, non di risorse: il bilanciamento resta intatto. |
 | Fra asta e partita | interstitial | Rottura naturale, il momento in cui l'utente si aspetta una pausa. |
 | Cambio squadra o riavvio | interstitial | Rottura naturale, mai durante un input. |
+| "Mi arrendo" in Chi è? | pausa breve | L'utente chiede la risposta: un annuncio se c'è, poi la risposta in ogni caso. |
+| Giocatore successivo in Chi è? | interstitial, una volta su quattro | Fra una scheda e l'altra. |
+| Fine stagione in Carriera | interstitial, una volta su tre | Fra il resoconto e il mercato. |
+| Nuovo round di Impostore o nuova Catena | interstitial, una volta su tre | A gruppo fermo, fra una partita e l'altra. |
+| In fondo all'ingresso | display | Un solo riquadro, sotto le modalità, con lo spazio riservato. |
+
+Nei primi due minuti di una visita non compare nessun interstitial.
 
 Un interstitial non parte mai due volte entro novanta secondi, e nella maggior
 parte dei punti compare una volta ogni due o tre passaggi, non tutte. La regola
@@ -147,14 +184,14 @@ Non è un dettaglio estetico. È il motivo per cui un gioco come questo si
 diffonde senza comprare pubblicità, ed è la ragione per cui la griglia non
 rivela mai le risposte a chi deve ancora giocare.
 
-Il codice sta tutto in `src/ui/share.js`, e le sei modalità lo usano nello
+Il codice sta tutto in `src/ui/share.js`, e tutte le modalità lo usano nello
 stesso modo.
 
 ## Contenuti e diritti
 
 Nessuna fotografia, nessuno stemma, nessuna maglia. Le squadre sono rappresentate
-da fasce di colore astratte, i giocatori solo dal nome. I dati sono fatti pubblici
-verificati a mano. Il vincolo è diventato lo stile: è la ragione per cui il gioco
+da fasce di colore astratte, i giocatori solo dal nome. I dati vengono da Wikipedia
+e passano per controlli automatici. Il vincolo è diventato lo stile: è la ragione per cui il gioco
 non somiglia agli altri.
 
 
@@ -227,38 +264,34 @@ dominio, senza infrastruttura in più.
 
 ## La Carriera
 
-Si comincia a sedici anni scegliendo chi si è: nome, ruolo fra i sette di un 4-3-3,
-stile, numero e nazione. Lo stile non è un'etichetta: un rapace d'area e un falso
-nueve hanno curve di crescita diverse e producono numeri diversi.
+Si comincia a sedici anni scegliendo chi si è: nome, ruolo toccando il 4-3-3,
+stile, idolo d'infanzia fra cinque per ruolo, numero e nazione con bandiera.
+Ogni ruolo ha le sue sei doti: un portiere lavora su riflessi, presa, uscite e
+rinvio, e a fine anno conta porte inviolate e rigori parati, non gol.
 
-Tre squadre di bassa classifica ti vogliono. Da lì in poi ogni anno sono tre
-decisioni, da zero a due imprevisti che non scegli, una stagione simulata e il
-mercato. La bacheca si riempie di sagome: campionato, coppa, supercoppa, coppa
-continentale, promozione, titolo con la nazionale. Vincere la propria divisione
-con una squadra di provincia è una promozione, non uno scudetto, e viene contata
-come tale.
+Ogni stagione: l'allenamento su una dote (più anni di fila, più cresce), tre
+decisioni fra ruolo, vita e nazionale, da zero a due imprevisti, la stagione
+simulata e il mercato. Gli eventi lasciano segni misurabili (doti, fiducia
+dell'allenatore, minuti, rischio d'infortunio) e quello che raccontano compare nei
+numeri: se un evento parla di dieci partite a secco, il resoconto non dirà zero
+presenze. Le coppe europee si giocano solo con la classifica dell'anno prima, un
+infortunio di due mesi toglie due mesi di partite, il ritiro arriva con l'età.
 
-I numeri sono tarati su mille carriere simulate. Un rapace di primo livello chiude
-intorno ai trecento gol; un difensore centrale sotto i cinquanta; un portiere
-arriva a più di duecento porte inviolate. Dieci anni in una grande valgono circa
-quattro volte i trofei di dieci anni in provincia.
-
+Il motore sta in `src/career/` senza DOM; la scena e i test usano lo stesso filo
+(`runner.js`), così quello che si collauda è quello che si gioca.
 
 ## Più o Meno
 
-Due giocatori veri, un dato in mezzo, e una domanda sola: chi ha fatto di più?
-Chi vince resta in campo e affronta il prossimo, così la catena scorre e non si
-ferma finché non si sbaglia.
+Due giocatori, un dato in mezzo, e una domanda sola: chi ne ha di più? Chi vince
+resta in campo e affronta il prossimo.
 
-I quindici parametri girano a caso: gol, assist, presenze, trofei, presenze e gol
-in nazionale, Champions, campionati, Palloni d'Oro, cartellini rossi, altezza,
-numero di club, Mondiali giocati, gol nella miglior stagione e porte inviolate.
+Centoundici giocatori hanno i totali di tutte le competizioni scritti a mano
+(`tools/wiki/duel-manual.json`); gli altri arrivano da Wikipedia con i numeri che
+l'infobox certifica: presenze e gol in campionato, presenze e gol in nazionale,
+club, prestiti, anni da professionista, altezza, trofei. Le chiavi sono separate:
+un gol in campionato non si confronta mai con un gol in carriera, e un totale con
+un dato mancante non viene usato.
 
-I numeri in `data/duel.json` sono totali di carriera largamente citati e
-arrotondati, curati a mano. Il gioco però non chiede mai quanto vale un dato:
-chiede solo quale dei due è maggiore, e propone una coppia soltanto quando lo
-scarto supera una soglia sia in percentuale sia in valore assoluto. È questo a
-rendere il confronto solido anche con cifre approssimate: ottocentosettanta gol
-contro settecentosessanta è una domanda buona, novecento contro ottocentosettanta
-non viene mai posta. Trentaseimila confronti simulati lo verificano a ogni
-esecuzione dei test.
+Il gioco non chiede mai quanto vale un dato: propone una coppia solo quando lo
+scarto supera una soglia sia in percentuale sia in valore assoluto. Trentaseimila
+confronti simulati lo verificano a ogni esecuzione dei test.

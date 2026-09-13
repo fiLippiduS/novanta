@@ -218,3 +218,20 @@
     margin-top: var(--s-3);
   }
 }
+
+.pill--select {
+  padding-right: var(--s-5);
+  background-image: linear-gradient(45deg, transparent 50%, var(--chalk-3) 50%), linear-gradient(135deg, var(--chalk-3) 50%, transparent 50%);
+  background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.pill--select option { background: var(--ink-900); color: var(--chalk); }
+.hub__links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 2px var(--s-3); }
+.hub__foot { flex-wrap: wrap; }
+@media (max-width: 40rem) {
+  .hub__links { flex-basis: 100%; justify-content: center; }
+  .hub__links .hub__legal { min-height: 36px; padding-inline: var(--s-2); }
+}

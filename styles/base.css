@@ -336,15 +336,35 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* ---- annuncio simulato ---- */
-.adstub { position: fixed; inset: 0; z-index: 1100; display: grid; place-items: center; background: rgba(3,5,10,0.92); }
+.adstub { position: fixed; inset: 0; z-index: 1100; display: grid; place-items: center; padding: var(--s-4); background: rgba(3,5,10,0.94); }
 .adstub__panel {
-  display: grid; gap: var(--s-3); justify-items: center;
-  padding: var(--s-7) var(--s-6);
+  display: grid; gap: var(--s-4); justify-items: center;
+  width: min(26rem, 100%);
+  padding: var(--s-6) var(--s-5);
   border: 1px dashed var(--line-strong);
   border-radius: var(--r-lg);
+  background: var(--ink-850);
   text-align: center;
 }
-.adstub__count { font-size: 3rem; color: var(--amber); }
+.adstub__tag { color: var(--amber); }
+.adstub__bar { width: 100%; height: 6px; border-radius: var(--r-pill); background: var(--ink-600); overflow: hidden; }
+.adstub__fill { display: block; height: 100%; background: var(--amber); transform-origin: left; transform: scaleX(0); }
+.adstub__action { min-width: 12rem; }
+.adstub__note { font-size: var(--t-xs); margin: 0; }
+
+/* riquadro display: spazio riservato, così la pagina non salta */
+.adslot {
+  position: relative;
+  display: grid; place-items: center;
+  min-height: 100px;
+  margin-block: var(--s-5);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-md);
+  background: rgba(15,23,40,0.4);
+  overflow: hidden;
+}
+.adslot__tag { position: absolute; top: 6px; left: 10px; font-size: var(--t-micro); color: var(--chalk-4); }
+.adslot .adsbygoogle { width: 100%; }
 
 /* ---- consenso ---- */
 .consent {

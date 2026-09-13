@@ -31,8 +31,12 @@ export function setEnabled(v) {
 
 export function isEnabled() { return enabled; }
 
+/* silenzio temporaneo (durante un annuncio): non tocca la preferenza salvata */
+let muted = false;
+export function setMuted(v) { muted = Boolean(v); }
+
 function tone({ freq = 440, to = null, dur = 0.12, type = 'sine', gain = 1, delay = 0 }) {
-  if (!enabled || !ctx) return;
+  if (!enabled || muted || !ctx) return;
   const t0 = ctx.currentTime + delay;
   const osc = ctx.createOscillator();
   const g = ctx.createGain();
@@ -48,7 +52,7 @@ function tone({ freq = 440, to = null, dur = 0.12, type = 'sine', gain = 1, dela
 }
 
 function noise({ dur = 0.18, gain = 0.5, hp = 400, delay = 0 }) {
-  if (!enabled || !ctx) return;
+  if (!enabled || muted || !ctx) return;
   const t0 = ctx.currentTime + delay;
   const n = Math.floor(ctx.sampleRate * dur);
   const buf = ctx.createBuffer(1, n, ctx.sampleRate);
@@ -82,7 +86,25 @@ export const sfx = {
       tone({ freq: f, dur: 0.34, type: 'triangle', gain: 0.34, delay: i * 0.055 }));
   },
   save: () => { noise({ dur: 0.14, gain: 0.6, hp: 1200 }); tone({ freq: 110, to: 70, dur: 0.2, type: 'square', gain: 0.3 }); },
-  post: () => tone({ freq: 1400, to: 900, dur: 0.5, type: 'sine', gain: 0.4 }),
+  /* Il legno (che oggi è metallo) suona come una campana stonata: parziali
+     non armoniche che si spengono a velocità diverse, più il colpo sordo
+     del cuoio. La traversa è più lunga e più grave, e vibra di più. */
+  post: () => {
+    noise({ dur: 0.05, gain: 0.8, hp: 1800 });
+    tone({ freq: 160, to: 90, dur: 0.12, type: 'sine', gain: 0.5 });
+    [[610, 0.5, 0.9], [1675, 0.26, 0.55], [2790, 0.15, 0.35], [4020, 0.08, 0.2]]
+      .forEach(([f, g, d]) => tone({ freq: f, to: f * 0.985, dur: d, type: 'sine', gain: g }));
+  },
+  bar: () => {
+    noise({ dur: 0.06, gain: 0.8, hp: 1400 });
+    tone({ freq: 140, to: 80, dur: 0.14, type: 'sine', gain: 0.5 });
+    [[430, 0.5, 1.3], [1190, 0.3, 0.9], [2050, 0.16, 0.6], [3120, 0.08, 0.35]]
+      .forEach(([f, g, d]) => {
+        tone({ freq: f, to: f * 0.98, dur: d, type: 'sine', gain: g });
+        tone({ freq: f * 1.012, to: f * 0.99, dur: d * 0.8, type: 'sine', gain: g * 0.4 });
+      });
+  },
+  bounce: (k = 1) => { tone({ freq: 120, to: 70, dur: 0.08, type: 'sine', gain: 0.35 * k }); noise({ dur: 0.03, gain: 0.25 * k, hp: 900 }); },
   record: () => [523, 659, 784, 1047].forEach((f, i) =>
     tone({ freq: f, dur: 0.26, type: 'triangle', gain: 0.36, delay: i * 0.075 })),
   over: () => [330, 262, 196].forEach((f, i) =>

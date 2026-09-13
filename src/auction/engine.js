@@ -22,25 +22,36 @@ export function totalSlots() {
 /**
  * I lotti: per ogni ruolo servono esattamente due giocatori per posto,
  * uno per partecipante. È questo a garantire che nessuno resti a metà.
- * I giocatori di ogni ruolo vengono ordinati per voto, così le coppie
- * che si affrontano sono sempre di forza simile.
+ *
+ * Il catalogo è largo (campioni e comprimari di ogni epoca). Ogni lotto
+ * estrae prima una fascia, poi un giocatore di quella fascia: un campione
+ * dal quinto più alto, un comprimario dal fondo, o uno di mezzo. Le fasce si
+ * estraggono lotto per lotto, quindi un ruolo può avere un forte e un debole,
+ * due forti da contendersi o due scarti su cui non vale la pena spendere.
  */
+export const WEAK_MAX = 72;
+export const STRONG_SHARE = 0.2;
+export const TIER_ODDS = { strong: 0.35, weak: 0.35 };   // il resto: fascia di mezzo
+
 export function buildLots(rand, catalog) {
   const lots = [];
   for (const role of ROLES) {
     const pool = catalog.filter((p) => p.role === role);
-
-    /* Il catalogo è largo e pieno di comprimari: pescando del tutto a caso
-       capitavano aste intere senza un nome per cui valga la pena litigare.
-       Per ogni posto del ruolo si tira fuori un pezzo grosso dal quarto alto,
-       il resto arriva da tutto il catalogo. Così ogni asta ha il suo colpo
-       e le sue occasioni. */
     const perVoto = [...pool].sort((a, b) => b.rating - a.rating);
-    const alto = perVoto.slice(0, Math.max(NEED[role] * 2, Math.round(perVoto.length * 0.22)));
+    const alto = perVoto.slice(0, Math.max(NEED[role] * 2, Math.round(perVoto.length * STRONG_SHARE)));
+    const basso = pool.filter((p) => p.rating <= WEAK_MAX && !alto.includes(p));
+    const mezzo = pool.filter((p) => !alto.includes(p) && !basso.includes(p));
 
-    const picked = shuffled(rand, alto).slice(0, NEED[role]);
-    const resto = shuffled(rand, pool).filter((p) => !picked.includes(p));
-    while (picked.length < NEED[role] * 2 && resto.length) picked.push(resto.pop());
+    const picked = [];
+    while (picked.length < NEED[role] * 2) {
+      const r = rand();
+      const fascia = r < TIER_ODDS.strong ? alto : r < TIER_ODDS.strong + TIER_ODDS.weak ? basso : mezzo;
+      /* se la fascia estratta è vuota o già esaurita, si pesca da tutto il ruolo */
+      const liberi = fascia.filter((p) => !picked.includes(p));
+      const scelta = liberi.length ? liberi : pool.filter((p) => !picked.includes(p));
+      if (!scelta.length) break;
+      picked.push(scelta[Math.floor(rand() * scelta.length)]);
+    }
 
     picked.sort((a, b) => b.rating - a.rating);
     picked.forEach((player, i) => lots.push({ role, player, pair: Math.floor(i / 2) }));

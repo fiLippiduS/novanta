@@ -12,6 +12,8 @@ import { waveFrom, floatGain, quake, replay, stagger, flash } from '../ui/motion
 import { onHidden } from '../core/visibility.js';
 import * as ads from '../ads/adapter.js';
 import { shareAction } from '../ui/share.js';
+import { roster } from '../ui/roster.js';
+import { countryName } from '../ui/flags.js';
 import {
   createAuction, createTeam, openNext, raise, settle, canBid, maxBid,
   needs, lineup, ROLES, NEED, START_CREDITS, BID_MS,
@@ -22,7 +24,7 @@ import { simulate, shootout, strength, MINUTES } from '../auction/match.js';
 let cachedCatalog = null;
 async function loadCatalog() {
   if (cachedCatalog) return cachedCatalog;
-  const res = await fetch('data/auction.json', { cache: 'force-cache' });
+  const res = await fetch('data/auction.json');
   cachedCatalog = (await res.json()).players;
   return cachedCatalog;
 }
@@ -47,15 +49,16 @@ export async function mount(host, params = {}) {
   let mode = params.duo === '1' ? 'duo' : 'solo';
   let you, rival, brain, auction;
 
-  function setup(m) {
+  function setup(m, names = null) {
     mode = m;
     bidMs = devBid > 0 ? devBid : (m === 'duo' ? DUO_BID_MS : BID_MS);
-    you = createTeam(m === 'duo' ? t('asta.p1') : t('asta.you'), true);
-    rival = createTeam(m === 'duo' ? t('asta.p2') : t('asta.rival'), m === 'duo');
+    you = createTeam(m === 'duo' ? (names && names[0]) || t('asta.p1') : t('asta.you'), true);
+    rival = createTeam(m === 'duo' ? (names && names[1]) || t('asta.p2') : t('asta.rival'), m === 'duo');
     brain = createBot(rand);
     auction = createAuction(rand, catalog, [you, rival]);
   }
 
+  let duoNames = null;
   setup(mode);
 
   /* In due, chi deve decidere è sempre quello che non è in testa. */
@@ -108,7 +111,19 @@ export async function mount(host, params = {}) {
     const duo = el('button', 'btn btn--ghost btn--block', t('asta.duoStart'));
     duo.type = 'button';
     duo.title = t('asta.duoDesc');
-    duo.addEventListener('click', () => { audio.sfx.whistle(); startAuction('duo'); });
+    /* in due si scrivono i nomi: il tabellone e il risultato parlano di voi */
+    const duoBox = el('div', 'asta__duo');
+    duoBox.hidden = true;
+    const names = roster({ min: 2, max: 2, key: 'astaDuo' });
+    const duoGo = el('button', 'btn btn--go btn--block', t('asta.duoGo'));
+    duoGo.type = 'button';
+    duoGo.addEventListener('click', () => { audio.sfx.whistle(); startAuction('duo', names.names()); });
+    duoBox.append(el('p', 'label', t('asta.duoNames')), names.el, duoGo);
+    duo.addEventListener('click', () => {
+      audio.sfx.tick();
+      duoBox.hidden = !duoBox.hidden;
+      if (!duoBox.hidden) duoBox.querySelector('input').focus();
+    });
 
     const scout = el('button', 'btn btn--reward btn--block', `▶ ${t('asta.scout')}`);
     scout.type = 'button';
@@ -122,7 +137,7 @@ export async function mount(host, params = {}) {
       showScout();
     });
 
-    box.append(go1, duo, el('p', 'asta__fine dim', t('asta.duoDesc')),
+    box.append(go1, duo, duoBox, el('p', 'asta__fine dim', t('asta.duoDesc')),
       scout, el('p', 'asta__fine dim', t('asta.scoutDesc')));
     shell.appendChild(box);
   }
@@ -162,9 +177,10 @@ export async function mount(host, params = {}) {
   let passBtn = null;
   let lotCard = null;
 
-  function startAuction(m) {
+  function startAuction(m, names = null) {
     /* le squadre si rifanno da zero: cambiano i nomi e cambiano i lotti */
-    setup(m);
+    if (names) duoNames = names;
+    setup(m, m === 'duo' ? duoNames : null);
     shell.textContent = '';
     shell.appendChild(bar.el);
 
@@ -231,7 +247,8 @@ export async function mount(host, params = {}) {
     );
 
     const name = el('h3', 'lotcard__name display', lot.player.name);
-    const tag = el('p', 'lotcard__tag dim', lot.player.tag);
+    const tag = el('p', 'lotcard__tag dim', lot.player.nation
+      ? `${lot.player.club} · ${countryName(lot.player.nation)}` : lot.player.tag);
 
     const ratingBox = el('div', 'lotcard__rating');
     ratingBox.append(el('span', 'label', t('asta.rating')),

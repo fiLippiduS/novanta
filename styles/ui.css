@@ -1,0 +1,183 @@
+/* Componenti condivisi dalle modalità nuove: ricerca con suggerimenti,
+   bandiere, colori delle squadre, schermate per passarsi il telefono. */
+
+/* ---------- bandiere ---------- */
+
+.nation { display: inline-flex; align-items: center; gap: 0.4em; min-width: 0; }
+.flag {
+  font-family: 'Twemoji Country Flags', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 1.15em;
+  line-height: 1;
+  flex: none;
+}
+.flag--code {
+  font-family: var(--font-ui);
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.18em 0.36em;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  color: var(--chalk-2);
+}
+
+/* ---------- colori della squadra ---------- */
+
+.kit {
+  display: inline-grid;
+  grid-auto-flow: column;
+  width: 0.95em; height: 0.95em;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(237,232,218,0.22);
+  flex: none;
+  vertical-align: -0.12em;
+}
+.kit i { display: block; }
+.club { display: inline-flex; align-items: center; gap: 0.45em; min-width: 0; }
+.club__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- ricerca ---------- */
+
+/* z-index sul contenitore: l'elenco dei suggerimenti deve passare sopra ai
+   pulsanti che seguono, anche quando questi creano un proprio livello */
+.search { position: relative; z-index: 30; }
+.search__field { position: relative; }
+.search__input {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 3rem 0 var(--s-4);
+  border: 2px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-850);
+  color: var(--chalk);
+  font: 500 1.05rem/1 var(--font-ui);
+  outline: none;
+  transition: border-color var(--d-fast) linear, box-shadow var(--d-fast) linear;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search__input::-webkit-search-cancel-button { display: none; }
+.search__input::placeholder { color: var(--chalk-4); }
+.search__input:focus { border-color: var(--lime); box-shadow: 0 0 0 4px var(--lime-glow); }
+.search__input:disabled { opacity: 0.5; }
+.search__clear {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px;
+  border: 0; border-radius: 50%;
+  background: transparent; color: var(--chalk-3);
+  font-size: 1.5rem; cursor: pointer;
+}
+.search__list {
+  position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px);
+  margin: 0; padding: var(--s-1);
+  list-style: none;
+  max-height: min(22rem, 52vh);
+  overflow-y: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-800);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.55);
+  animation: drop-in 160ms var(--e-out) both;
+}
+.search__item {
+  display: flex; align-items: center;
+  min-height: 48px;
+  padding: var(--s-2) var(--s-3);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.search__item.is-active, .search__item:hover { background: rgba(201,242,75,0.12); }
+
+.hit { display: flex; align-items: center; gap: var(--s-3); width: 100%; min-width: 0; }
+.hit__main { display: grid; min-width: 0; flex: 1; }
+.hit__name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hit__meta { font-size: var(--t-xs); color: var(--chalk-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hit__role {
+  flex: none;
+  font: 700 var(--t-micro)/1 var(--font-ui);
+  letter-spacing: 0.08em;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: var(--ink-950);
+}
+.role--POR { --role-c: var(--amber); }
+.role--DIF { --role-c: var(--lime); }
+.role--CEN { --role-c: var(--sky); }
+.role--ATT { --role-c: var(--flare); }
+.hit__role { background: var(--role-c, var(--chalk-3)); }
+
+@keyframes drop-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ---------- vite ---------- */
+
+.lives { display: inline-flex; gap: 6px; align-items: center; }
+.life {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 10px var(--lime-glow);
+  transition: transform var(--d-base) var(--e-spring), background var(--d-base) linear;
+}
+.life--lost { background: var(--ink-600); box-shadow: none; transform: scale(0.72); }
+
+/* ---------- partecipanti (multigiocatore) ---------- */
+
+.roster { display: grid; gap: var(--s-2); }
+.roster__row { display: flex; gap: var(--s-2); align-items: center; }
+.roster__n {
+  flex: none; width: 2rem; text-align: center;
+  font-family: var(--font-display); font-size: 1.3rem; color: var(--chalk-4);
+}
+.roster__input {
+  flex: 1; min-width: 0;
+  min-height: 48px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-850);
+  color: var(--chalk);
+  font: 500 1rem var(--font-ui);
+}
+.roster__input:focus { outline: none; border-color: var(--lime); }
+.roster__del {
+  flex: none; width: 44px; height: 44px;
+  border: 1px solid var(--line); border-radius: 50%;
+  background: transparent; color: var(--chalk-3); font-size: 1.3rem; cursor: pointer;
+}
+.roster__del:disabled { opacity: 0.3; }
+.roster__tools { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); margin-top: var(--s-2); }
+
+/* ---------- passa il telefono ---------- */
+
+.handoff {
+  position: fixed; inset: 0; z-index: 900;
+  display: grid; place-items: center;
+  padding: var(--s-5);
+  background: radial-gradient(ellipse at 50% 30%, var(--ink-700), var(--ink-950) 70%);
+  text-align: center;
+  animation: drop-in 220ms var(--e-out) both;
+}
+.handoff__inner { display: grid; gap: var(--s-4); justify-items: center; width: min(28rem, 100%); }
+.handoff__who { font-size: clamp(2.6rem, 12vw, 5rem); line-height: 0.9; overflow-wrap: anywhere; }
+.handoff__note { color: var(--chalk-3); margin: 0; }
+
+/* ---------- timer ad anello ---------- */
+
+.ring { position: relative; width: 64px; height: 64px; flex: none; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring__track { stroke: var(--ink-600); }
+.ring__arc { stroke: var(--lime); transition: stroke 200ms linear; }
+.ring--warn .ring__arc { stroke: var(--amber); }
+.ring--urgent .ring__arc { stroke: var(--flare); }
+.ring__n {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 1.5rem;
+}
+.ring--urgent .ring__n { color: var(--flare); animation: pulse 500ms ease-in-out infinite alternate; }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.12); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .search__list, .handoff { animation: none; }
+  .ring--urgent .ring__n { animation: none; }
+}

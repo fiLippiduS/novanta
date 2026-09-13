@@ -177,3 +177,22 @@
   background: color-mix(in srgb, var(--amber) 10%, transparent);
 }
 .slot--ghost .slot__n { color: var(--amber); letter-spacing: 0.12em; }
+
+/* ---- a tempo scaduto: la rosa resta visibile, il risultato si apre a richiesta ---- */
+.squad__after {
+  position: sticky;
+  bottom: max(var(--s-3), env(safe-area-inset-bottom));
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--ink-900) 92%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+.squad__afterText { flex: 1; margin: 0; font-size: var(--t-sm); color: var(--chalk-2); }
+.squad__flag { margin-right: 0.35em; font-size: 0.8em; vertical-align: 0.05em; }

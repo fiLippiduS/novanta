@@ -21,6 +21,16 @@
 /data/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
+# gli indici dei cataloghi si ricontrollano sempre: portano la versione
+# con cui si chiedono i pezzi, quindi un indice vecchio non deve restare
+/data/players/index.json
+  ! Cache-Control
+  Cache-Control: public, max-age=0, must-revalidate
+
+/data/rosa/index.json
+  ! Cache-Control
+  Cache-Control: public, max-age=0, must-revalidate
+
 /i18n/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 

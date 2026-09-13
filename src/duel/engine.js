@@ -24,6 +24,14 @@ export const PARAMS = [
   { key: 'ws', minRel: 0, minAbs: 1 },
   { key: 'bs', minRel: 0.15, minAbs: 8 },
   { key: 'cs', minRel: 0.12, minAbs: 45 },
+  /* da Wikipedia: solo campionato, solo quello che l'infobox certifica */
+  { key: 'lp', minRel: 0.12, minAbs: 40 },
+  { key: 'lgl', minRel: 0.15, minAbs: 20 },
+  { key: 'lo', minRel: 0, minAbs: 2 },
+  { key: 'yrs', minRel: 0.2, minAbs: 4 },
+  { key: 'ht', minRel: 0.25, minAbs: 4 },
+  { key: 'aw', minRel: 0.3, minAbs: 3 },
+  { key: 'nt', minRel: 0, minAbs: 1 },
 ];
 
 export const byKey = Object.fromEntries(PARAMS.map((p) => [p.key, p]));

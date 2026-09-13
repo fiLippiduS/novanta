@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contatti — NOVANTA</title>
+<meta name="description" content="Come contattare NOVANTA per segnalare un errore nei dati, proporre una modalità o chiedere informazioni su privacy e pubblicità.">
+<link rel="canonical" href="https://instascope.app/contatti">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Contatti — NOVANTA">
+<meta property="og:description" content="Come contattare NOVANTA per segnalare un errore nei dati, proporre una modalità o chiedere informazioni su privacy e pubblicità.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/contatti">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // In Europa nessun cookie prima del sì: si parte negati e si sale col banner.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  // le partite di collaudo non devono sporcare i numeri veri
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    gtag('config', 'G-HFCC29N242');
+  }
+</script>
+<script src="/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="app"><main class="shell doc">
+  <p class="label">NOVANTA</p>
+  <h1 class="display t-xxl">Contatti</h1>
+  <p class="dim">Leggiamo tutto quello che arriva.</p>
+<h2 class="display">Email</h2>
+  <p>Scrivi a <a href="mailto:ciao@instascope.app">ciao@instascope.app</a>. Rispondiamo di solito entro qualche giorno lavorativo.</p>
+
+  <h2 class="display">Per aiutarci a rispondere prima</h2>
+  <ul>
+    <li><strong>Un dato sbagliato:</strong> indica la modalità, il giocatore o la
+    squadra, il dato che vedi e quello corretto, se possibile con una fonte.</li>
+    <li><strong>Un problema tecnico:</strong> indica il dispositivo, il browser e
+    cosa stavi facendo quando è successo.</li>
+    <li><strong>Privacy e dati personali:</strong> scrivi “Privacy” nell’oggetto.
+    Trovi i dettagli nell’<a href="/privacy">informativa privacy</a>.</li>
+    <li><strong>Pubblicità e collaborazioni:</strong> scrivi “Collaborazioni”
+    nell’oggetto.</li>
+  </ul>
+
+  <h2 class="display">Cosa non ti chiederemo mai</h2>
+  <p>Password, dati di pagamento o documenti. Se ricevi un messaggio che si
+  presenta come NOVANTA e te li chiede, non è nostro.</p>
+  <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
+  <nav class="doc__nav" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
+</main></div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cookie — NOVANTA</title>
+<meta name="description" content="Quali cookie e dati di memoria locale usa NOVANTA, a cosa servono, quanto durano e come cambiare il consenso.">
+<link rel="canonical" href="https://instascope.app/cookie">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Cookie — NOVANTA">
+<meta property="og:description" content="Quali cookie e dati di memoria locale usa NOVANTA, a cosa servono, quanto durano e come cambiare il consenso.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/cookie">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // In Europa nessun cookie prima del sì: si parte negati e si sale col banner.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  // le partite di collaudo non devono sporcare i numeri veri
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    gtag('config', 'G-HFCC29N242');
+  }
+</script>
+<script src="/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="app"><main class="shell doc">
+  <p class="label">NOVANTA</p>
+  <h1 class="display t-xxl">Cookie e memoria locale</h1>
+  <p class="dim">Ultimo aggiornamento: 13 settembre 2026.</p>
+<h2 class="display">In breve</h2>
+  <p>Il gioco funziona senza cookie. Quelli di Google per pubblicità e statistiche
+  vengono usati solo se accetti nel banner del consenso.</p>
+
+  <h2 class="display">Tecnici, sempre attivi</h2>
+  <table>
+    <tr><th>Nome</th><th>Tipo</th><th>A cosa serve</th><th>Durata</th></tr>
+    <tr><td>novanta:v1</td><td>memoria locale</td><td>record, carriera, lingua, audio, nomi dei partecipanti</td><td>finché non la cancelli</td></tr>
+    <tr><td>novanta:consent</td><td>memoria locale</td><td>ricordare la tua scelta sul consenso</td><td>finché non la cancelli</td></tr>
+  </table>
+
+  <h2 class="display">Statistiche, solo con consenso</h2>
+  <table>
+    <tr><th>Nome</th><th>Fornitore</th><th>A cosa serve</th><th>Durata</th></tr>
+    <tr><td>_ga, _ga_*</td><td>Google Analytics</td><td>distinguere le visite in forma statistica</td><td>fino a 2 anni</td></tr>
+  </table>
+
+  <h2 class="display">Pubblicità, solo con consenso</h2>
+  <p>Google AdSense e i partner certificati IAB possono impostare cookie come
+  <em>__gads</em>, <em>__gpi</em>, <em>IDE</em> e <em>NID</em> per mostrare e
+  misurare gli annunci e limitarne la ripetizione. L’elenco aggiornato dei partner e
+  le loro finalità sono visibili nel pannello del consenso.</p>
+
+  <h2 class="display">Cambiare idea</h2>
+  <p>Puoi riaprire il pannello del consenso dal banner oppure cancellare i dati del
+  sito dalle impostazioni del browser: al prossimo accesso la scelta ti verrà
+  chiesta di nuovo. Puoi anche bloccare i cookie di terze parti dal browser; il
+  gioco continuerà a funzionare.</p>
+  <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
+  <nav class="doc__nav" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Termini</a>
+  </nav>
+</main></div>
+</body>
+</html>

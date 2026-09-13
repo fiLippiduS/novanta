@@ -1,0 +1,77 @@
+/* IMPOSTORE */
+
+.impostore { display: flex; flex-direction: column; gap: var(--s-4); }
+@media (min-width: 48rem) { .impostore { max-width: 40rem; margin-inline: auto; width: 100%; } }
+
+.imp__intro { display: grid; gap: var(--s-3); padding: var(--s-6) var(--s-5); }
+.imp__lead { font-size: var(--t-lg); line-height: 1.25; margin: 0; }
+.imp__how { margin: 0; padding-left: 1.2rem; display: grid; gap: 6px; color: var(--chalk-2); }
+.imp__label { margin-top: var(--s-3); color: var(--chalk-3); }
+
+/* ---- rivelazione ---- */
+.imp__reveal { display: grid; justify-items: center; gap: var(--s-4); text-align: center; padding-block: var(--s-6); }
+.imp__step { color: var(--chalk-4); }
+.imp__name { font-size: clamp(3rem, 15vw, 6rem); line-height: 0.9; overflow-wrap: anywhere; }
+.imp__note { color: var(--chalk-3); margin: 0; max-width: 28rem; }
+
+.role-card {
+  display: grid; justify-items: center; gap: var(--s-2);
+  width: min(28rem, 100%);
+  padding: var(--s-6) var(--s-5);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-strong);
+  text-align: center;
+}
+.role-card--innocent { background: linear-gradient(160deg, var(--lime-glow), var(--ink-850) 70%); border-color: rgba(201,242,75,0.5); }
+.role-card--impostor { background: linear-gradient(160deg, var(--flare-glow), var(--ink-850) 70%); border-color: var(--flare); }
+.role-card__title { font-size: clamp(2.2rem, 10vw, 3.6rem); line-height: 0.9; }
+.role-card--innocent .role-card__title { color: var(--lime); }
+.role-card--impostor .role-card__title, .role-card--impostor .role-card__clue { color: var(--flare); }
+.role-card__hint { margin-top: var(--s-3); color: var(--chalk-4); }
+.role-card__player { font-size: clamp(2rem, 9vw, 3.2rem); line-height: 0.95; overflow-wrap: anywhere; }
+.role-card__clue { font-size: clamp(1.9rem, 8.5vw, 3rem); line-height: 1; display: inline-flex; align-items: center; gap: 0.35em; }
+.role-card__clue .kit { width: 0.8em; height: 0.8em; }
+.role-card__meta { display: flex; gap: var(--s-3); align-items: center; color: var(--chalk-2); }
+.role-card__note { color: var(--chalk-3); margin: var(--s-3) 0 0; font-size: var(--t-sm); }
+
+/* ---- discussione ---- */
+.imp__talk { display: grid; gap: var(--s-4); }
+.imp__message { padding: var(--s-4); border-color: var(--amber); color: var(--amber); font-weight: 600; text-align: center; }
+.imp__now { display: grid; justify-items: center; gap: var(--s-2); text-align: center; padding-block: var(--s-5); }
+.imp__speaker { font-size: clamp(2.8rem, 13vw, 5.2rem); line-height: 0.9; color: var(--lime); overflow-wrap: anywhere; }
+.imp__nextup { color: var(--chalk-4); }
+.imp__order { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.imp__order li { display: inline-flex; gap: 6px; align-items: center; padding: 6px 12px; border-radius: var(--r-pill); border: 1px solid var(--line); color: var(--chalk-3); }
+.imp__order li.is-now { border-color: var(--lime); color: var(--chalk); background: rgba(201,242,75,0.1); }
+.imp__pos { color: var(--chalk-4); font-size: var(--t-xs); }
+.imp__gone { text-align: center; color: var(--flare); }
+.imp__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+
+/* ---- voto ---- */
+.imp__vote { display: grid; gap: var(--s-4); text-align: center; }
+.imp__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--s-2); }
+.vote {
+  min-height: 64px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-850);
+  color: var(--chalk);
+  font: 600 1.05rem var(--font-ui);
+  cursor: pointer;
+  transition: transform var(--d-fast) var(--e-spring), border-color var(--d-fast) linear;
+}
+.vote:hover { transform: translateY(-2px); }
+.vote.is-on { border-color: var(--flare); background: rgba(255,90,60,0.12); color: var(--flare); }
+
+/* ---- fine ---- */
+.imp__end { display: grid; gap: var(--s-4); }
+.imp__verdict { display: grid; justify-items: center; gap: var(--s-2); padding: var(--s-6) var(--s-4); text-align: center; }
+.imp__verdict--win { border-color: var(--lime); }
+.imp__verdict--lose { border-color: var(--flare); }
+.imp__verdict h2 { overflow-wrap: anywhere; }
+.imp__clue { font-family: var(--font-display); text-transform: uppercase; font-size: var(--t-lg); color: var(--flare); display: inline-flex; gap: 0.4em; align-items: center; }
+.imp__player { display: grid; justify-items: center; gap: 4px; }
+.imp__scores { margin: 0; padding-left: 1.4rem; display: grid; gap: 6px; }
+.imp__scores li { display: flex; justify-content: space-between; }
+.imp__scores li:first-child { color: var(--lime); font-weight: 700; }
+.clue { display: inline-flex; align-items: center; gap: 0.4em; }

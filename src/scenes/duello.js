@@ -13,6 +13,7 @@ import { quake, floatGain, replay, waveFrom } from '../ui/motion.js';
 import * as ads from '../ads/adapter.js';
 import { shareAction, grid } from '../ui/share.js';
 import { nextRound, firstRound, winnerOf, PARAMS } from '../duel/engine.js';
+import { countryName, flagEmoji, ensureFlagFont } from '../ui/flags.js';
 
 const rand = Math.random;
 const REVEAL_MS = 900;
@@ -21,7 +22,7 @@ const SHIFT_MS = 480;
 let cached = null;
 async function loadPlayers() {
   if (cached) return cached;
-  const res = await fetch('data/duel.json', { cache: 'force-cache' });
+  const res = await fetch('data/duel.json');
   cached = (await res.json()).players;
   return cached;
 }
@@ -31,6 +32,7 @@ const ROLE_COLOR = {
 };
 
 export async function mount(host) {
+  ensureFlagFont();
   const players = await loadPlayers();
 
   const shell = el('div', 'shell duello');
@@ -79,7 +81,7 @@ export async function mount(host) {
     const top = el('div', 'dcard__top');
     top.append(
       el('span', 'dcard__role label', t(`duello.roles.${player.role}`)),
-      el('span', 'dcard__nat label', player.nation),
+      el('span', 'dcard__nat label', /^[A-Z]{2}(-[A-Z]{1,3})?$/.test(player.nation) ? `${flagEmoji(player.nation)} ${countryName(player.nation)}`.trim() : player.nation),
     );
 
     const name = el('strong', 'dcard__name display', player.name);

@@ -4,9 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I dati — NOVANTA</title>
-<meta name="description" content="Da dove vengono i giocatori, le rose e le statistiche di NOVANTA, e come trattiamo gli errori.">
+<meta name="description" content="Da dove vengono le carriere, le rose e le statistiche di NOVANTA, come vengono controllate e come segnalare un errore.">
 <link rel="canonical" href="https://instascope.app/dati">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="I dati — NOVANTA">
+<meta property="og:description" content="Da dove vengono le carriere, le rose e le statistiche di NOVANTA, come vengono controllate e come segnalare un errore.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/dati">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
 <script>
@@ -30,9 +36,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles/tokens.css">
-<link rel="stylesheet" href="styles/base.css">
-<style>.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}.doc a{color:var(--lime)}.doc p{margin-top:var(--s-3)}</style>
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+</style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"></div>
@@ -41,36 +61,59 @@
   <p class="label">NOVANTA</p>
   <h1 class="display t-xxl">Da dove vengono i dati</h1>
   <p class="dim">Una pagina che quasi nessun gioco scrive, e che invece serve.</p>
+<h2 class="display">La fonte: Wikipedia</h2>
+  <p>Le carriere dei calciatori (squadre, anni, presenze e gol in campionato,
+  nazionale, altezza, ruolo, palmarès), le rose delle stagioni dei club e le
+  convocazioni ai Mondiali, agli Europei e alla Copa América vengono dalle pagine
+  di <a href="https://en.wikipedia.org" rel="noopener">Wikipedia</a>, lette
+  attraverso la sua interfaccia pubblica. I testi di Wikipedia sono disponibili con
+  licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" rel="noopener">Creative
+  Commons Attribuzione – Condividi allo stesso modo 4.0</a>; ringraziamo le
+  migliaia di volontari che li scrivono. Nella modalità Chi è? ogni scheda porta
+  al link della pagina originale.</p>
 
-  <h2 class="display">Le rose</h2>
-  <p>Le formazioni di La Rosa sono raccolte a mano, squadra per squadra e stagione
-  per stagione, dalle rose ufficiali di quegli anni. Tengono i giocatori che hanno
-  davvero giocato in quella stagione, non tutti quelli passati dal club.</p>
+  <h2 class="display">I controlli</h2>
+  <ul>
+    <li>Un giocatore entra nel catalogo solo se la sua pagina ha una scheda
+    completa e leggibile; anni impossibili o numeri incoerenti la escludono.</li>
+    <li>Quando un totale non è riportato (per esempio i gol in nazionale), il gioco
+    non lo inventa: quel dato semplicemente non viene usato.</li>
+    <li>Le rose con meno di diciotto giocatori o con nomi ripetuti vengono scartate.</li>
+    <li>I dati si aggiornano periodicamente: per i giocatori in attività i numeri
+    sono quelli dell’ultimo aggiornamento, non quelli di stasera.</li>
+  </ul>
 
-  <h2 class="display">Le statistiche di Più o Meno</h2>
-  <p>Sono totali di carriera largamente documentati: gol, assist, presenze, trofei,
-  presenze e gol in nazionale, Champions, campionati, Palloni d'Oro, cartellini
-  rossi, altezza, numero di club, Mondiali giocati e porte inviolate.</p>
-  <p>Su numeri così, una manciata di unità di differenza fra una fonte e l'altra è
-  normale: dipende da quali coppe si contano e da quali amichevoli. Per questo il
-  gioco non ti chiede mai quanto vale un dato, ti chiede solo quale dei due è più
-  alto, e propone una coppia soltanto quando la distanza fra i due è larga
-  abbastanza da non dipendere dalla fonte. Ottocentosettanta gol contro
-  settecentosessanta è una domanda onesta. Novecento contro ottocentosettantacinque
-  non te la chiediamo.</p>
+  <h2 class="display">Più o Meno e lo scarto</h2>
+  <p>Una manciata di unità di differenza fra una fonte e l’altra è normale: dipende
+  da quali coppe si contano e da quali amichevoli. Per questo il gioco non ti chiede
+  mai quanto vale un dato, ma solo quale dei due è più alto, e propone una coppia
+  soltanto quando la distanza è abbastanza larga da non dipendere dalla fonte. I
+  numeri di campionato presi da Wikipedia non vengono mai confrontati con i totali
+  di tutte le competizioni.</p>
+
+  <h2 class="display">La Carriera è un gioco</h2>
+  <p>Le squadre della Carriera sono reali, ma le stagioni, i trofei e gli eventi
+  sono simulati: non descrivono fatti accaduti.</p>
 
   <h2 class="display">Nomi, colori e stemmi</h2>
-  <p>Usiamo i nomi dei giocatori e delle squadre, che sono fatti, e colori nostri
-  disegnati a mano. Non usiamo stemmi, fotografie, maglie ufficiali né marchi
-  registrati di nessun club, lega o federazione. NOVANTA non è affiliato a nessuno
-  di loro.</p>
+  <p>Usiamo i nomi dei giocatori e delle squadre, che sono fatti, e colori sociali
+  resi con forme nostre. Non usiamo stemmi, fotografie, maglie ufficiali né marchi
+  registrati. NOVANTA non è affiliato a nessun club, lega o federazione.</p>
 
   <h2 class="display">Hai trovato un errore?</h2>
-  <p>Capita, e ci interessa saperlo. Scrivici e correggiamo il dato: ogni
-  correzione vale per tutti quelli che giocano dopo di te.</p>
-
-  <p style="margin-top:var(--s-7)"><a href="/">← Torna al gioco</a> ·
-  <a href="/come-si-gioca">Come si gioca</a></p>
+  <p>Scrivici a <a href="mailto:ciao@instascope.app">ciao@instascope.app</a>: correggiamo il dato e la correzione vale per tutti quelli
+  che giocano dopo di te.</p>
+  <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
+  <nav class="doc__nav" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
 </main></div>
 </body>
 </html>

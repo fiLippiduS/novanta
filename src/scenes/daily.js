@@ -19,7 +19,7 @@ const MAX_PER_ROUND = 200;
 let cached = null;
 async function loadSquads() {
   if (cached) return cached;
-  const res = await fetch('data/squads.json', { cache: 'force-cache' });
+  const res = await fetch('data/squads.json');
   cached = (await res.json()).squads;
   return cached;
 }

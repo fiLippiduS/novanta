@@ -11,52 +11,60 @@ import { createCounter } from '../ui/counter.js';
 import { createCommentary } from '../ui/commentary.js';
 import { waveFrom, floatGain, shake, quake, replay, flash } from '../ui/motion.js';
 import { buildIndex, matchGuess, matchExact, hasLongerCandidate, initialsOf } from '../core/match.js';
-import { rngFor, utcDayKey, shuffled } from '../core/rng.js';
 import * as ads from '../ads/adapter.js';
 import { shareAction, bars } from '../ui/share.js';
 import { onHidden } from '../core/visibility.js';
+import { countryName, flagEmoji, ensureFlagFont } from '../ui/flags.js';
 
 const ROUND_MS = 90_000;
 const BONUS_MS = 30_000;
 
-let cachedSquads = null;
-async function loadSquads() {
-  if (cachedSquads) return cachedSquads;
-  const res = await fetch('data/squads.json', { cache: 'force-cache' });
-  cachedSquads = (await res.json()).squads;
-  return cachedSquads;
+/* Il catalogo: quasi duemila rose fra club stagione per stagione e
+   nazionali ai grandi tornei. Si scarica l'elenco, poi solo il pezzo che
+   contiene la rosa estratta. */
+let indexPromise = null;
+const shards = new Map();
+function loadIndex() {
+  if (!indexPromise) indexPromise = fetch('data/rosa/index.json').then((r) => r.json());
+  return indexPromise;
+}
+async function loadSquad(index, row) {
+  const k = Math.floor(index.squads.indexOf(row) / index.shard);
+  if (!shards.has(k)) shards.set(k, fetch(`data/rosa/s-${k}.json?v=${index.generated}`).then((r) => r.json()));
+  const shard = await shards.get(k);
+  const [id, kind, name, season, league, code, colors] = row;
+  const body = shard[id];
+  const tour = kind === 'nation' ? league : null;
+  return {
+    id, kind, code, colors,
+    name: kind === 'nation' && code ? countryName(code) : name,
+    season,
+    league: tour ? (t(`squad.tour.${tour}`) === `squad.tour.${tour}` ? league : t(`squad.tour.${tour}`)) : league,
+    players: body.players,
+    aliases: body.aliases || {},
+  };
 }
 
-/* Le squadre girano in una rotazione mescolata: si passa da tutte prima di
-   rivederne una, e ogni giro l'ordine è nuovo. Con l'estrazione a caso capitava
-   di ritrovarsi la stessa squadra due partite dopo. */
-function chooseTeam(squads, wanted) {
+/* Estrazione del tutto a caso, con un solo limite: le ultime rose giocate
+   non tornano finché non ne sono passate un bel po'. */
+const RECENT = 120;
+function chooseRow(index, wanted) {
   if (wanted) {
-    const found = squads.find((s) => s.id === wanted);
+    const found = index.squads.find((r) => r[0] === wanted);
     if (found) return found;
   }
-
-  const ids = squads.map((s) => s.id);
-  let queue = (store.get('squad.queue') || []).filter((id) => ids.includes(id));
-
-  if (queue.length === 0) {
-    const rand = () => Math.random();
-    queue = shuffled(rand, ids);
-    // mai ricominciare con la stessa squadra appena giocata
-    const last = store.get('squad.lastTeam');
-    if (queue[0] === last && queue.length > 1) {
-      [queue[0], queue[queue.length - 1]] = [queue[queue.length - 1], queue[0]];
-    }
-  }
-
-  const id = queue.shift();
-  store.save({ squad: { queue, lastTeam: id } });
-  return squads.find((s) => s.id === id) || squads[0];
+  const recent = new Set(store.get('squad.recent') || []);
+  const pool = index.squads.filter((r) => !recent.has(r[0]));
+  const list = pool.length ? pool : index.squads;
+  const row = list[Math.floor(Math.random() * list.length)];
+  store.save({ squad: { recent: [...recent, row[0]].slice(-RECENT), lastTeam: row[0] } });
+  return row;
 }
 
 export async function mount(host, params) {
-  const squads = await loadSquads();
-  const team = chooseTeam(squads, params.team);
+  ensureFlagFont();
+  const catalog = await loadIndex();
+  const team = await loadSquad(catalog, chooseRow(catalog, params.team));
   const index = buildIndex(team.players, team.aliases);
 
   /* in sviluppo si può accorciare il round per collaudare il finale:
@@ -96,9 +104,12 @@ export async function mount(host, params) {
   banner.style.setProperty('--team-a', team.colors[0]);
   banner.style.setProperty('--team-b', team.colors[1] || team.colors[0]);
   const ident = el('div', 'squad__ident');
+  const title = el('h3', 'squad__team display t-xxl', team.name);
+  const flag = team.kind === 'nation' ? flagEmoji(team.code) : '';
+  if (flag) title.prepend(el('span', 'flag squad__flag', flag));
   ident.append(
-    el('h3', 'squad__team display t-xxl', team.name),
-    el('p', 'squad__season label', `${team.season} · ${team.league}`),
+    title,
+    el('p', 'squad__season label', team.kind === 'nation' ? `${team.league} ${team.season}` : `${team.season} · ${team.league}`),
   );
   banner.append(crest(team.colors, 54), ident);
 
@@ -218,7 +229,7 @@ export async function mount(host, params) {
     }
     timerWrap.classList.toggle('timer--urgent', remaining < urgentFrom);
 
-    if (!hintUsed && hintBtn.hidden && remaining < roundMs / 3 && found.size < team.players.length) {
+    if (!ended && !hintUsed && hintBtn.hidden && remaining < roundMs / 3 && found.size < team.players.length) {
       hintBtn.hidden = false;
       replay(hintBtn, 'anim-snap');
     }
@@ -345,7 +356,10 @@ export async function mount(host, params) {
       coins: (s.coins || 0) + found.size,
     });
 
-    revealMissing().then(() => showResults(isRecord, perfect));
+    revealMissing().then(() => {
+      if (perfect || found.size === team.players.length) { showResults(isRecord, perfect); return; }
+      afterBar(isRecord, perfect);
+    });
   }
 
   /* i mancati si rivelano uno alla volta: è il momento che riporta a giocare */
@@ -368,6 +382,22 @@ export async function mount(host, params) {
         if (k >= missing.length) { clearInterval(iv); setTimeout(resolve, 420); }
       }, 110);
     });
+  }
+
+  /* A tempo scaduto la rosa resta sotto gli occhi: i nomi mancati si leggono
+     con calma, e il risultato si apre quando lo chiedi. */
+  let after = null;
+  function afterBar(isRecord, perfect) {
+    if (after) after.remove();
+    after = el('div', 'squad__after');
+    const txt = el('p', 'squad__afterText', t('squad.youNamed', { n: found.size, tot: team.players.length }));
+    const open = el('button', 'btn btn--go', t('squad.results'));
+    open.type = 'button';
+    open.addEventListener('click', () => { after.remove(); after = null; showResults(isRecord, perfect); });
+    after.append(txt, open);
+    shell.appendChild(after);
+    replay(after, 'anim-rise');
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   async function showResults(isRecord, perfect) {
@@ -421,6 +451,13 @@ export async function mount(host, params) {
         go('squad');
       },
     });
+    if (found.size < team.players.length) {
+      actions.push({
+        label: t('squad.seeMissing'),
+        variant: 'btn--ghost',
+        onClick: (close) => { close(); afterBar(isRecord, perfect); },
+      });
+    }
     actions.push(shareAction(() => ({
       mode: t('squad.title'),
       grid: bars(found.size, team.players.length),
@@ -440,6 +477,7 @@ export async function mount(host, params) {
 
   /* ripresa dopo il rewarded: le caselle rivelate tornano vuote */
   function resume() {
+    if (after) { after.remove(); after = null; }
     ended = false;
     running = true;
     remaining = BONUS_MS;

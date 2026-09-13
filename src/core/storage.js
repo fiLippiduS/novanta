@@ -10,11 +10,16 @@ const DEFAULTS = {
   lang: null,            // null = deduci dal browser al primo avvio
   sound: true,
   coins: 0,
-  squad: { best: 0, played: 0, bestTeam: null, queue: [], lastTeam: null },
+  squad: { best: 0, played: 0, bestTeam: null, recent: [], lastTeam: null },
   arcade: { best: 0, played: 0, totalGoals: 0 },
   daily: { lastDay: null, lastScore: 0, streak: 0, freezeUsed: null, results: {} },
   asta: { wins: 0, played: 0 },
   duel: { best: 0, played: 0, total: 0 },
+  catena: { best: 0, played: 0, parties: 0 },
+  party: [],
+  astaDuo: [],
+  impostore: { level: 'famous', rounds: 0, recent: [] },
+  chi: { streak: 0, best: 0, solved: 0, played: 0, level: 'medium', recent: [] },
   career: null,
   seen: { intro: false },
 };

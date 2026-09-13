@@ -4,9 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Come si gioca — NOVANTA</title>
-<meta name="description" content="Le regole delle sei modalità di NOVANTA: La Rosa, Rigori, Asta, Più o Meno, Carriera e Il Novantesimo.">
+<meta name="description" content="Le regole delle nove modalità di NOVANTA: La Rosa, Rigori, Asta, Più o Meno, Carriera, Chi è?, Catena, Impostore e Il Novantesimo.">
 <link rel="canonical" href="https://instascope.app/come-si-gioca">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Come si gioca — NOVANTA">
+<meta property="og:description" content="Le regole delle nove modalità di NOVANTA: La Rosa, Rigori, Asta, Più o Meno, Carriera, Chi è?, Catena, Impostore e Il Novantesimo.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/come-si-gioca">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
 <script>
@@ -30,9 +36,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles/tokens.css">
-<link rel="stylesheet" href="styles/base.css">
-<style>.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}.doc a{color:var(--lime)}.doc p{margin-top:var(--s-3)}.doc ul{margin-top:var(--s-3);padding-left:1.1rem}.doc li{margin-top:var(--s-2)}</style>
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+</style>
 </head>
 <body>
 <div class="sky" aria-hidden="true"></div>
@@ -40,52 +60,90 @@
 <div id="app"><main class="shell doc">
   <p class="label">NOVANTA</p>
   <h1 class="display t-xxl">Come si gioca</h1>
-  <p class="dim">Sei modalità. Nessuna dura più di qualche minuto.</p>
-
-  <h2 class="display">La Rosa</h2>
-  <p>Ti diamo una squadra e un anno. Hai novanta secondi per scrivere più giocatori
-  possibili di quella rosa. Basta il cognome, gli accenti non contano e qualche
-  refuso viene perdonato. Quando il tempo finisce, i nomi che non hai detto si
-  scoprono uno alla volta: è il momento in cui ti accorgi di quello che sapevi.</p>
+  <p class="dim">Nove modalità, da soli o in compagnia. Nessuna dura più di qualche minuto, a parte la Carriera.</p>
+<h2 class="display">La Rosa</h2>
+  <p>Ti diamo una squadra e una stagione: un club in un anno preciso oppure una
+  nazionale a un Mondiale, a un Europeo o a una Copa América. Hai novanta secondi
+  per scrivere più giocatori possibili di quella rosa. Basta il cognome, gli accenti
+  non contano e qualche refuso viene perdonato.</p>
+  <p>Le rose sono quasi duemila e vengono estratte a caso, così la stessa squadra
+  torna in stagioni diverse. Quando il tempo finisce, i nomi che ti sono sfuggiti
+  compaiono nella griglia e restano lì finché non decidi di vedere il risultato.</p>
 
   <h2 class="display">Rigori</h2>
   <p>Un tiro alla volta contro un portiere che impara da te. Il primo tocco ferma
-  la mira, il secondo ferma la potenza. Sbagli una volta e la serie finisce.
-  Il portiere non bara mai: un tiro perfetto all'incrocio entra sempre, almeno
-  finché non hai superato il decimo rigore.</p>
+  la mira, il secondo la potenza, il terzo dà l’effetto. Palo e traversa si sentono
+  e si vedono: la palla rimbalza sul legno e torna in campo. Sbagli una volta e la
+  serie finisce.</p>
 
   <h2 class="display">Asta</h2>
-  <p>Venti crediti contro un avversario che di calcio ne capisce. I giocatori
-  passano uno alla volta, hai cinque secondi per rilanciare, e devi coprire tutti
-  e cinque i ruoli: un portiere, due difensori, un centrocampista, un attaccante.
-  Non puoi spendere tutto sul primo nome, i crediti ti devono bastare fino alla
-  fine. Poi si gioca la partita, minuto per minuto, e si vede chi ha comprato meglio.</p>
-  <p>C'è anche l'asta in due sullo stesso dispositivo. Il telefono passa di mano
-  a ogni rilancio, otto secondi a testa per decidere, e chi non vuole più il
-  giocatore dice passo e lo lascia all'altro. Alla fine le due rose si affrontano
-  come sempre, e vince chi ha comprato meglio.</p>
+  <p>Venti crediti per comprare cinque giocatori: un portiere, due difensori, un
+  centrocampista e un attaccante. I giocatori passano uno alla volta, pescati a
+  caso fra campioni e comprimari: in un ruolo possono capitare due fuoriclasse da
+  contendersi o due riserve, e spendere tutto sul primo nome si paga. Poi le due squadre si affrontano in una partita simulata.</p>
+  <p>Si gioca contro l’avversario del computer oppure in due sullo stesso telefono,
+  ognuno con il proprio nome, passandosi il dispositivo a ogni rilancio.</p>
 
   <h2 class="display">Più o Meno</h2>
-  <p>Due giocatori e un dato in mezzo: gol, assist, trofei, cartellini, presenze
-  in nazionale. Tocchi quello che secondo te ha fatto di più. Chi vince resta e
-  affronta il prossimo. Sbagli una volta e la catena si spezza.</p>
+  <p>Due giocatori e un dato: gol, presenze in campionato, presenze in nazionale,
+  trofei, prestiti, anni da professionista, altezza e altro. Tocchi quello che ne
+  ha di più. Chi vince resta e affronta il prossimo; al primo errore la catena si
+  spezza.</p>
 
   <h2 class="display">Carriera</h2>
-  <p>Cominci a sedici anni in una squadra che non conosce nessuno. Ogni stagione
-  porta scelte, infortuni, litigi e offerte da mezzo mondo. L'obiettivo lo scegli
-  tu: alzare più trofei possibile o segnare più gol di chiunque altro.</p>
+  <p>Crei il tuo giocatore: nome, ruolo sul campo, stile, idolo d’infanzia, numero
+  di maglia e nazionalità. Si comincia a sedici anni in una squadra piccola.</p>
+  <p>Ogni stagione scegli su quale dote lavorare (più anni sulla stessa, più cresce)
+  e prendi tre decisioni legate al tuo ruolo, alla tua vita fuori dal campo e, se
+  arriva la chiamata, alla nazionale. Le statistiche rispettano il ruolo: un portiere
+  conta porte inviolate e rigori parati, un difensore contrasti e duelli aerei, un
+  attaccante gol e assist. Le coppe europee si giocano solo se la classifica
+  dell’anno prima le ha conquistate, gli infortuni tolgono davvero partite, e la
+  carriera finisce quando il fisico lo dice. Due carriere non sono mai uguali.</p>
+
+  <h2 class="display">Chi è?</h2>
+  <p>Vedi la scheda di un calciatore vero, come quella di Wikipedia, ma senza il
+  nome: ruolo, altezza, squadre giovanili e da professionista con presenze e gol,
+  nazionale e palmarès in ordine di tempo. Scrivi nella barra di ricerca, scegli
+  dall’elenco e hai cinque vite. Ogni tentativo sbagliato ti dice se il giocatore
+  che hai scelto ha la stessa nazionalità, lo stesso ruolo, se è nato prima o dopo
+  e quali squadre ha in comune. Puoi anche arrenderti e vedere la risposta.</p>
+
+  <h2 class="display">Catena</h2>
+  <p>Parte una squadra: scrivi un giocatore che ci ha giocato almeno una partita.
+  Poi scrivi un’altra squadra di quel giocatore, poi un altro giocatore di quella
+  squadra, e così via. Nessun nome e nessuna squadra si ripetono, e ogni mossa ha
+  quaranta secondi. Da soli si cerca il record; da due a dieci giocatori ci si
+  passa il telefono e chi resta senza risposta è eliminato.</p>
+
+  <h2 class="display">Impostore</h2>
+  <p>Da tre a dieci persone, un solo telefono. A turno ognuno scopre il proprio
+  ruolo: tutti vedono lo stesso calciatore, tranne l’impostore, che riceve solo un
+  indizio vago. Poi, in un ordine estratto a caso, ognuno dice una parola sul
+  giocatore. Si può passare o andare al voto: se il gruppo espelle un innocente la
+  partita continua, se espelle l’impostore vincono gli altri.</p>
 
   <h2 class="display">Il Novantesimo</h2>
   <p>Cinque domande, le stesse per tutti, che cambiano ogni giorno a mezzanotte.
-  Si gioca una volta sola al giorno e il risultato si condivide come una griglia
-  di quadretti, senza rovinare la sfida a chi deve ancora giocarla.</p>
+  Si gioca una volta al giorno e il risultato si condivide come una griglia di
+  quadretti, senza rovinare la sfida a chi deve ancora giocarla.</p>
 
-  <h2 class="display">Punteggi e monete</h2>
-  <p>Ogni modalità tiene il suo record nel tuo browser. Le monete si accumulano
-  giocando e non si comprano: non esistono acquisti dentro il gioco.</p>
-
-  <p style="margin-top:var(--s-7)"><a href="/">← Torna al gioco</a> ·
-  <a href="/dati">Da dove vengono i dati</a></p>
+  <h2 class="display">Punteggi e annunci</h2>
+  <p>Ogni modalità tiene il suo record nel tuo browser. Gli annunci non compaiono
+  mai durante una partita: solo fra una partita e l’altra, e mai nei primi minuti
+  di una visita. Alcuni aiuti (un suggerimento, trenta secondi in più, un’altra
+  chance) si ottengono guardando un annuncio, sempre per scelta tua.</p>
+  <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
+  <nav class="doc__nav" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
 </main></div>
 </body>
 </html>
