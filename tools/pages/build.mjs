@@ -7,7 +7,10 @@
 import { writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PAGES, NAV, UPDATED } from './content.mjs';
+import { PAGES as TEXT_PAGES, NAV, UPDATED } from './content.mjs';
+import { MODE_PAGES, MODE_NAV } from './modes.mjs';
+
+const PAGES = [...TEXT_PAGES, ...MODE_PAGES];
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = 'https://instascope.app';
@@ -57,6 +60,8 @@ const head = (p) => `<!doctype html>
 .doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
 .doc h3{margin-top:var(--s-5);font-size:1.05rem}
 .doc a{color:var(--lime)}
+.doc a.btn{color:var(--btn-fg,var(--ink-950));text-decoration:none}
+.doc h2 a{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-underline-offset:4px}
 .doc p{margin-top:var(--s-3);line-height:1.6}
 .doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
 .doc li{margin-top:var(--s-2)}
@@ -66,10 +71,16 @@ const head = (p) => `<!doctype html>
 .doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 .doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
 .doc__play{display:inline-block;margin-top:var(--s-5)}
+.doc__play--top{margin-top:var(--s-4)}
+.doc__nav--pages{margin-top:var(--s-4)}
 </style>${p.jsonld ? `\n<script type="application/ld+json">${JSON.stringify(p.jsonld)}</script>` : ''}
 </head>`;
 
-const nav = (slug) => `  <nav class="doc__nav" aria-label="Pagine">
+const nav = (slug) => `  <nav class="doc__nav" aria-label="Le modalità">
+    <strong>Le modalità:</strong>
+${MODE_NAV.filter(([s]) => s !== slug).map(([s, label]) => `    <a href="/${s}">${label}</a>`).join('\n')}
+  </nav>
+  <nav class="doc__nav doc__nav--pages" aria-label="Pagine">
     <a href="/">← Gioca</a>
 ${NAV.filter(([s]) => s !== slug).map(([s, label]) => `    <a href="/${s}">${label}</a>`).join('\n')}
   </nav>`;
@@ -82,9 +93,9 @@ for (const p of PAGES) {
 <div id="app"><main class="shell doc">
   <p class="label">NOVANTA</p>
   <h1 class="display t-xxl">${p.h1 || p.title}</h1>
-  <p class="dim">${p.lead}</p>
+  <p class="dim">${p.lead}</p>${p.play ? `\n  <a class="btn btn--go doc__play doc__play--top" href="${p.play.href}">${p.play.label}</a>` : ''}
 ${p.body.trim()}
-  <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
+  <a class="btn btn--go doc__play" href="${p.play ? p.play.href : '/'}">${p.play ? p.play.label : 'Gioca a NOVANTA'}</a>
 ${nav(p.slug)}
 </main></div>
 </body>

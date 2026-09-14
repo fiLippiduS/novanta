@@ -38,7 +38,7 @@ export const PAGES = [
     lead: 'Nove modalità, da soli o in compagnia. Nessuna dura più di qualche minuto, a parte la Carriera.',
     priority: '0.8',
     body: `
-  <h2 class="display">La Rosa</h2>
+  <h2 class="display"><a href="/quiz-rosa-squadra">La Rosa</a></h2>
   <p>Ti diamo una squadra e una stagione: un club in un anno preciso oppure una
   nazionale a un Mondiale, a un Europeo o a una Copa América. Hai novanta secondi
   per scrivere più giocatori possibili di quella rosa. Basta il cognome, gli accenti
@@ -47,13 +47,13 @@ export const PAGES = [
   torna in stagioni diverse. Quando il tempo finisce, i nomi che ti sono sfuggiti
   compaiono nella griglia e restano lì finché non decidi di vedere il risultato.</p>
 
-  <h2 class="display">Rigori</h2>
+  <h2 class="display"><a href="/gioco-rigori">Rigori</a></h2>
   <p>Un tiro alla volta contro un portiere che impara da te. Il primo tocco ferma
   la mira, il secondo la potenza, il terzo dà l’effetto. Palo e traversa si sentono
   e si vedono: la palla rimbalza sul legno e torna in campo. Sbagli una volta e la
   serie finisce.</p>
 
-  <h2 class="display">Asta</h2>
+  <h2 class="display"><a href="/asta-calcio">Asta</a></h2>
   <p>Venti crediti per comprare cinque giocatori: un portiere, due difensori, un
   centrocampista e un attaccante. I giocatori passano uno alla volta, pescati a
   caso fra campioni e comprimari: in un ruolo possono capitare due fuoriclasse da
@@ -61,13 +61,13 @@ export const PAGES = [
   <p>Si gioca contro l’avversario del computer oppure in due sullo stesso telefono,
   ognuno con il proprio nome, passandosi il dispositivo a ogni rilancio.</p>
 
-  <h2 class="display">Più o Meno</h2>
+  <h2 class="display"><a href="/piu-o-meno-calcio">Più o Meno</a></h2>
   <p>Due giocatori e un dato: gol, presenze in campionato, presenze in nazionale,
   trofei, prestiti, anni da professionista, altezza e altro. Tocchi quello che ne
   ha di più. Chi vince resta e affronta il prossimo; al primo errore la catena si
   spezza.</p>
 
-  <h2 class="display">Carriera</h2>
+  <h2 class="display"><a href="/carriera-calciatore">Carriera</a></h2>
   <p>Crei il tuo giocatore: nome, ruolo sul campo, stile, idolo d’infanzia, numero
   di maglia e nazionalità. Si comincia a sedici anni in una squadra piccola.</p>
   <p>Si avanza di due stagioni alla volta. Ogni volta scegli su quale dote lavorare
@@ -78,7 +78,7 @@ export const PAGES = [
   dell’anno prima le ha conquistate, gli infortuni tolgono davvero partite, e la
   carriera finisce quando il fisico lo dice. Due carriere non sono mai uguali.</p>
 
-  <h2 class="display">Chi è?</h2>
+  <h2 class="display"><a href="/indovina-il-calciatore">Chi è?</a></h2>
   <p>Vedi la scheda di un calciatore vero, come quella di Wikipedia, ma senza il
   nome: ruolo, altezza, squadre giovanili e da professionista con presenze e gol,
   nazionale e palmarès in ordine di tempo. Scrivi nella barra di ricerca, scegli
@@ -86,21 +86,21 @@ export const PAGES = [
   che hai scelto ha la stessa nazionalità, lo stesso ruolo, se è nato prima o dopo
   e quali squadre ha in comune. Puoi anche arrenderti e vedere la risposta.</p>
 
-  <h2 class="display">Catena</h2>
+  <h2 class="display"><a href="/catena-calciatori">Catena</a></h2>
   <p>Parte una squadra: scrivi un giocatore che ci ha giocato almeno una partita.
   Poi scrivi un’altra squadra di quel giocatore, poi un altro giocatore di quella
   squadra, e così via. Nessun nome e nessuna squadra si ripetono, e ogni mossa ha
   quaranta secondi. Da soli si cerca il record; da due a dieci giocatori ci si
   passa il telefono e chi resta senza risposta è eliminato.</p>
 
-  <h2 class="display">Impostore</h2>
+  <h2 class="display"><a href="/impostore-calcio">Impostore</a></h2>
   <p>Da tre a dieci persone, un solo telefono. A turno ognuno scopre il proprio
   ruolo: tutti vedono lo stesso calciatore, tranne l’impostore, che riceve solo un
   indizio vago. Poi, in un ordine estratto a caso, ognuno dice una parola sul
   giocatore. Si può passare o andare al voto: se il gruppo espelle un innocente la
   partita continua, se espelle l’impostore vincono gli altri.</p>
 
-  <h2 class="display">Il Novantesimo</h2>
+  <h2 class="display"><a href="/quiz-calcio-giornaliero">Il Novantesimo</a></h2>
   <p>Cinque domande, le stesse per tutti, che cambiano ogni giorno a mezzanotte.
   Si gioca una volta al giorno e il risultato si condivide come una griglia di
   quadretti, senza rovinare la sfida a chi deve ancora giocarla.</p>

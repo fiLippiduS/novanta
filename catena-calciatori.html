@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catena dei calciatori: squadra, giocatore, squadra — NOVANTA</title>
+<meta name="description" content="Gioco di calcio da soli o in gruppo: collega squadre e giocatori che ci hanno giocato, senza ripetere nessuno, con quaranta secondi a mossa. Fino a dieci giocatori su un telefono.">
+<link rel="canonical" href="https://instascope.app/catena-calciatori">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Catena dei calciatori: squadra, giocatore, squadra — NOVANTA">
+<meta property="og:description" content="Gioco di calcio da soli o in gruppo: collega squadre e giocatori che ci hanno giocato, senza ripetere nessuno, con quaranta secondi a mossa. Fino a dieci giocatori su un telefono.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/catena-calciatori">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // In Europa nessun cookie prima del sì: si parte negati e si sale col banner.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  // le partite di collaudo non devono sporcare i numeri veri
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    gtag('config', 'G-HFCC29N242');
+  }
+</script>
+<script src="/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc a.btn{color:var(--btn-fg,var(--ink-950));text-decoration:none}
+.doc h2 a{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-underline-offset:4px}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+.doc__play--top{margin-top:var(--s-4)}
+.doc__nav--pages{margin-top:var(--s-4)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Catena — NOVANTA","url":"https://instascope.app/catena-calciatori","description":"Gioco di calcio da soli o in gruppo: collega squadre e giocatori che ci hanno giocato, senza ripetere nessuno, con quaranta secondi a mossa. Fino a dieci giocatori su un telefono.","applicationCategory":"GameApplication","genre":"Quiz di calcio","operatingSystem":"Web","inLanguage":["it","en","es","fr","de","pt"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Serve un’app o un account?","acceptedAnswer":{"@type":"Answer","text":"No, si gioca dal browser del telefono o del computer, gratis e senza registrazione."}},{"@type":"Question","name":"Quante persone possono giocare insieme?","acceptedAnswer":{"@type":"Answer","text":"Da due a dieci, passandosi lo stesso telefono."}},{"@type":"Question","name":"Vale anche una sola presenza?","acceptedAnswer":{"@type":"Answer","text":"Sì, basta che il giocatore abbia giocato almeno una partita con quella squadra."}}]}]}</script>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="app"><main class="shell doc">
+  <p class="label">NOVANTA</p>
+  <h1 class="display t-xxl">Catena dei calciatori: squadra, giocatore, squadra</h1>
+  <p class="dim">Parte una squadra. Tu scrivi un giocatore che ci ha giocato, poi un’altra sua squadra, e la catena va avanti.</p>
+  <a class="btn btn--go doc__play doc__play--top" href="/#/catena">Gioca a Catena</a>
+<h2 class="display">Come si gioca</h2>
+  <p>Compare una squadra con il suo nome e i suoi colori. Devi scrivere un
+  calciatore che ci abbia giocato anche una sola partita. Se è giusto, il
+  giocatore entra al centro e ora serve un’altra squadra della sua carriera. Poi
+  un altro giocatore di quella squadra, e così via.</p>
+  <ul>
+    <li><strong>Quaranta secondi</strong> per ogni mossa, e una risposta sbagliata ne toglie cinque;</li>
+    <li>nessuna squadra e nessun giocatore possono <strong>ripetersi</strong>;</li>
+    <li>se una squadra o un giocatore non hanno più collegamenti possibili, la catena si chiude.</li>
+  </ul>
+
+  <h2 class="display">Da soli o in compagnia</h2>
+  <p>Da soli si cerca il record di anelli. In gruppo si gioca da due a dieci
+  persone con un solo telefono: si scrivono i nomi, il gioco dice di chi è il
+  turno e chi viene dopo, e il telefono passa di mano. Chi resta senza risposta
+  allo scadere del tempo è eliminato, e vince l’ultimo rimasto.</p>
+
+  <h2 class="display">Un catalogo enorme</h2>
+  <p>Oltre diecimila calciatori e più di diecimila squadre: dalle grandi europee
+  alle serie minori, dal Sudamerica all’Arabia Saudita. Più calcio conosci, più
+  lunga diventa la catena.</p>
+
+  <h2 class="display">Domande</h2>
+  <details>
+    <summary>Serve un’app o un account?</summary>
+    <p>No, si gioca dal browser del telefono o del computer, gratis e senza registrazione.</p>
+  </details>
+  <details>
+    <summary>Quante persone possono giocare insieme?</summary>
+    <p>Da due a dieci, passandosi lo stesso telefono.</p>
+  </details>
+  <details>
+    <summary>Vale anche una sola presenza?</summary>
+    <p>Sì, basta che il giocatore abbia giocato almeno una partita con quella squadra.</p>
+  </details>
+  <a class="btn btn--go doc__play" href="/#/catena">Gioca a Catena</a>
+  <nav class="doc__nav" aria-label="Le modalità">
+    <strong>Le modalità:</strong>
+    <a href="/indovina-il-calciatore">Chi è?</a>
+    <a href="/impostore-calcio">Impostore</a>
+    <a href="/carriera-calciatore">Carriera</a>
+    <a href="/quiz-rosa-squadra">La Rosa</a>
+    <a href="/gioco-rigori">Rigori</a>
+    <a href="/asta-calcio">Asta</a>
+    <a href="/piu-o-meno-calcio">Più o Meno</a>
+    <a href="/quiz-calcio-giornaliero">Il Novantesimo</a>
+  </nav>
+  <nav class="doc__nav doc__nav--pages" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
+</main></div>
+</body>
+</html>

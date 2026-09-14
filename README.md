@@ -100,12 +100,12 @@ src/ui/               componenti, bandiere, ricerca, partecipanti, condivisione
 src/ads/              adattatore pubblicitario (stub in sviluppo, AdSense in produzione)
 src/consent/          consenso: banner di sviluppo e piattaforma certificata di Google
 sw.js                 service worker: installabile sulla Home, regge se cade la rete
-*.html                pagine di testo, generate da tools/pages/
+*.html                pagine di testo e una pagina per modalità, generate da tools/pages/
 ads.txt               chi può vendere la pubblicità del sito
 sitemap.xml           mappa per i motori di ricerca, generata insieme alle pagine
 tools/wiki/           dai dati di Wikipedia ai cataloghi del gioco
 tools/career/         eventi della Carriera nelle sei lingue
-tools/pages/          testo e impaginazione delle pagine statiche
+tools/pages/          testo delle pagine (content.mjs, modes.mjs) e impaginazione
 data/players/         10.529 carriere e 10.970 club: indice leggero e schede a pezzi
 data/rosa/            1.941 rose: indice e pezzi da cento
 data/auction.json     5.906 giocatori con ruolo e voto

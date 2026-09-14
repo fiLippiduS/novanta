@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asta di calcio: costruisci la squadra con 20 crediti — NOVANTA</title>
+<meta name="description" content="Gioco d’asta calcistica stile fantacalcio: venti crediti per comprare portiere, difensori, centrocampista e attaccante, poi la partita simulata. Contro il computer o in due sullo stesso telefono.">
+<link rel="canonical" href="https://instascope.app/asta-calcio">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Asta di calcio: costruisci la squadra con 20 crediti — NOVANTA">
+<meta property="og:description" content="Gioco d’asta calcistica stile fantacalcio: venti crediti per comprare portiere, difensori, centrocampista e attaccante, poi la partita simulata. Contro il computer o in due sullo stesso telefono.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/asta-calcio">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // In Europa nessun cookie prima del sì: si parte negati e si sale col banner.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  // le partite di collaudo non devono sporcare i numeri veri
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    gtag('config', 'G-HFCC29N242');
+  }
+</script>
+<script src="/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc a.btn{color:var(--btn-fg,var(--ink-950));text-decoration:none}
+.doc h2 a{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-underline-offset:4px}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+.doc__play--top{margin-top:var(--s-4)}
+.doc__nav--pages{margin-top:var(--s-4)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Asta — NOVANTA","url":"https://instascope.app/asta-calcio","description":"Gioco d’asta calcistica stile fantacalcio: venti crediti per comprare portiere, difensori, centrocampista e attaccante, poi la partita simulata. Contro il computer o in due sullo stesso telefono.","applicationCategory":"GameApplication","genre":"Quiz di calcio","operatingSystem":"Web","inLanguage":["it","en","es","fr","de","pt"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"È come il fantacalcio?","acceptedAnswer":{"@type":"Answer","text":"L’idea dell’asta è simile, ma la partita si gioca subito, in pochi minuti."}},{"@type":"Question","name":"Si può giocare con un amico?","acceptedAnswer":{"@type":"Answer","text":"Sì, in due sullo stesso telefono, ognuno con il proprio nome."}},{"@type":"Question","name":"Quanti giocatori ci sono all’asta?","acceptedAnswer":{"@type":"Answer","text":"Quasi seimila, dai campioni ai comprimari."}}]}]}</script>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="app"><main class="shell doc">
+  <p class="label">NOVANTA</p>
+  <h1 class="display t-xxl">Asta di calcio: costruisci la squadra con 20 crediti</h1>
+  <p class="dim">Venti crediti, cinque ruoli, un avversario che non regala niente. Poi si gioca la partita.</p>
+  <a class="btn btn--go doc__play doc__play--top" href="/#/asta">Gioca a Asta</a>
+<h2 class="display">Come funziona l’asta</h2>
+  <p>I giocatori passano uno alla volta, pescati a caso da un catalogo di quasi
+  seimila calciatori di ogni epoca. Hai pochi secondi per rilanciare, e devi
+  completare la squadra: un portiere, due difensori, un centrocampista e un
+  attaccante.</p>
+  <p>In un ruolo possono capitare due fuoriclasse da contendersi o due riserve
+  su cui non vale la pena spendere: il tetto di offerta ti ricorda sempre quanto
+  puoi spendere senza lasciare scoperti gli altri ruoli.</p>
+
+  <h2 class="display">La partita</h2>
+  <p>Finita l’asta, le due squadre si affrontano in una partita simulata minuto
+  per minuto, con gol, ammonizioni ed espulsioni che pesano davvero. Se finisce
+  pari si va ai rigori, tirati uno per uno fino al vincitore.</p>
+
+  <h2 class="display">Contro il computer o in due</h2>
+  <p>L’avversario del computer valuta i giocatori e non si lascia trascinare. In
+  due si gioca sullo stesso telefono: si scrivono i nomi e il dispositivo passa
+  di mano a ogni rilancio.</p>
+
+  <h2 class="display">Domande</h2>
+  <details>
+    <summary>È come il fantacalcio?</summary>
+    <p>L’idea dell’asta è simile, ma la partita si gioca subito, in pochi minuti.</p>
+  </details>
+  <details>
+    <summary>Si può giocare con un amico?</summary>
+    <p>Sì, in due sullo stesso telefono, ognuno con il proprio nome.</p>
+  </details>
+  <details>
+    <summary>Quanti giocatori ci sono all’asta?</summary>
+    <p>Quasi seimila, dai campioni ai comprimari.</p>
+  </details>
+  <a class="btn btn--go doc__play" href="/#/asta">Gioca a Asta</a>
+  <nav class="doc__nav" aria-label="Le modalità">
+    <strong>Le modalità:</strong>
+    <a href="/indovina-il-calciatore">Chi è?</a>
+    <a href="/catena-calciatori">Catena</a>
+    <a href="/impostore-calcio">Impostore</a>
+    <a href="/carriera-calciatore">Carriera</a>
+    <a href="/quiz-rosa-squadra">La Rosa</a>
+    <a href="/gioco-rigori">Rigori</a>
+    <a href="/piu-o-meno-calcio">Più o Meno</a>
+    <a href="/quiz-calcio-giornaliero">Il Novantesimo</a>
+  </nav>
+  <nav class="doc__nav doc__nav--pages" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
+</main></div>
+</body>
+</html>

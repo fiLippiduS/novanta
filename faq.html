@@ -43,6 +43,8 @@
 .doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
 .doc h3{margin-top:var(--s-5);font-size:1.05rem}
 .doc a{color:var(--lime)}
+.doc a.btn{color:var(--btn-fg,var(--ink-950));text-decoration:none}
+.doc h2 a{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-underline-offset:4px}
 .doc p{margin-top:var(--s-3);line-height:1.6}
 .doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
 .doc li{margin-top:var(--s-2)}
@@ -52,6 +54,8 @@
 .doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 .doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
 .doc__play{display:inline-block;margin-top:var(--s-5)}
+.doc__play--top{margin-top:var(--s-4)}
+.doc__nav--pages{margin-top:var(--s-4)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"NOVANTA è gratis?","acceptedAnswer":{"@type":"Answer","text":"Sì, tutte le modalità sono gratuite e non esistono acquisti dentro il gioco. Il sito si sostiene con la pubblicità, che compare solo fra una partita e l’altra o quando scegli tu di guardare un annuncio per avere un aiuto."}},{"@type":"Question","name":"Devo registrarmi?","acceptedAnswer":{"@type":"Answer","text":"No. Non ci sono account, email o password. Record, serie di giorni e preferenze restano salvati nel tuo browser."}},{"@type":"Question","name":"Perché ho perso i miei record?","acceptedAnswer":{"@type":"Answer","text":"I record vivono nella memoria del browser. Se cancelli i dati del sito, usi la navigazione privata o cambi dispositivo, si riparte da zero."}},{"@type":"Question","name":"Si può giocare dal telefono?","acceptedAnswer":{"@type":"Answer","text":"Sì, il gioco è pensato prima di tutto per il telefono. Dal browser puoi anche aggiungerlo alla schermata Home: si apre a tutto schermo come un’app."}},{"@type":"Question","name":"Si può giocare in compagnia?","acceptedAnswer":{"@type":"Answer","text":"Sì. Catena e Impostore si giocano da due a dieci persone con un solo telefono che passa di mano, e l’Asta ha una modalità in due sullo stesso dispositivo."}},{"@type":"Question","name":"Da dove vengono i dati dei giocatori?","acceptedAnswer":{"@type":"Answer","text":"Le carriere, le rose delle stagioni e le convocazioni ai tornei vengono da Wikipedia, elaborate e controllate con regole automatiche. I dettagli sono nella pagina I dati."}},{"@type":"Question","name":"Ho trovato un dato sbagliato: cosa faccio?","acceptedAnswer":{"@type":"Answer","text":"Scrivici a ciao@instascope.app indicando il giocatore e il dato. Correggiamo la fonte, e la correzione vale per tutti."}},{"@type":"Question","name":"Chi è? accetta i soprannomi?","acceptedAnswer":{"@type":"Answer","text":"La ricerca suggerisce i giocatori mentre scrivi: basta scegliere quello giusto dall’elenco. Il nome mostrato è quello con cui il giocatore è conosciuto su Wikipedia."}},{"@type":"Question","name":"Perché in Più o Meno non ci sono pareggi?","acceptedAnswer":{"@type":"Answer","text":"Il gioco propone una coppia solo quando la differenza fra i due numeri è abbastanza larga da non dipendere dalla fonte. Una domanda ambigua non compare mai."}},{"@type":"Question","name":"In che lingue è disponibile?","acceptedAnswer":{"@type":"Answer","text":"Italiano, inglese, spagnolo, francese, tedesco e portoghese. La lingua si cambia dal menu in fondo alla schermata principale."}},{"@type":"Question","name":"Il gioco funziona senza connessione?","acceptedAnswer":{"@type":"Answer","text":"Dopo la prima visita molte parti restano disponibili anche se la rete cade a metà partita, ma per caricare nuove rose e nuove carriere serve la connessione."}},{"@type":"Question","name":"NOVANTA è collegato a club o federazioni?","acceptedAnswer":{"@type":"Answer","text":"No. NOVANTA è un progetto indipendente, non usa stemmi, foto o marchi ufficiali e non è affiliato a nessun club, lega o federazione."}}]}</script>
 </head>
@@ -111,7 +115,19 @@
     <p>No. NOVANTA è un progetto indipendente, non usa stemmi, foto o marchi ufficiali e non è affiliato a nessun club, lega o federazione.</p>
   </details>
   <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
-  <nav class="doc__nav" aria-label="Pagine">
+  <nav class="doc__nav" aria-label="Le modalità">
+    <strong>Le modalità:</strong>
+    <a href="/indovina-il-calciatore">Chi è?</a>
+    <a href="/catena-calciatori">Catena</a>
+    <a href="/impostore-calcio">Impostore</a>
+    <a href="/carriera-calciatore">Carriera</a>
+    <a href="/quiz-rosa-squadra">La Rosa</a>
+    <a href="/gioco-rigori">Rigori</a>
+    <a href="/asta-calcio">Asta</a>
+    <a href="/piu-o-meno-calcio">Più o Meno</a>
+    <a href="/quiz-calcio-giornaliero">Il Novantesimo</a>
+  </nav>
+  <nav class="doc__nav doc__nav--pages" aria-label="Pagine">
     <a href="/">← Gioca</a>
     <a href="/come-si-gioca">Come si gioca</a>
     <a href="/chi-siamo">Chi siamo</a>

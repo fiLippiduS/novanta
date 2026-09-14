@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carriera da calciatore: il gioco dai 16 anni al ritiro — NOVANTA</title>
+<meta name="description" content="Simulatore gratuito di carriera da calciatore: scegli ruolo, stile, idolo e nazione, allenati, prendi decisioni e vinci campionati, coppe europee e Pallone d’Oro. Ogni carriera è diversa.">
+<link rel="canonical" href="https://instascope.app/carriera-calciatore">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Carriera da calciatore: il gioco dai 16 anni al ritiro — NOVANTA">
+<meta property="og:description" content="Simulatore gratuito di carriera da calciatore: scegli ruolo, stile, idolo e nazione, allenati, prendi decisioni e vinci campionati, coppe europee e Pallone d’Oro. Ogni carriera è diversa.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/carriera-calciatore">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // In Europa nessun cookie prima del sì: si parte negati e si sale col banner.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  // le partite di collaudo non devono sporcare i numeri veri
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    gtag('config', 'G-HFCC29N242');
+  }
+</script>
+<script src="/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc a.btn{color:var(--btn-fg,var(--ink-950));text-decoration:none}
+.doc h2 a{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-underline-offset:4px}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+.doc__play--top{margin-top:var(--s-4)}
+.doc__nav--pages{margin-top:var(--s-4)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Carriera — NOVANTA","url":"https://instascope.app/carriera-calciatore","description":"Simulatore gratuito di carriera da calciatore: scegli ruolo, stile, idolo e nazione, allenati, prendi decisioni e vinci campionati, coppe europee e Pallone d’Oro. Ogni carriera è diversa.","applicationCategory":"GameApplication","genre":"Quiz di calcio","operatingSystem":"Web","inLanguage":["it","en","es","fr","de","pt"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"La carriera si salva?","acceptedAnswer":{"@type":"Answer","text":"Sì, resta salvata nel browser e puoi riprenderla quando vuoi."}},{"@type":"Question","name":"Quanto dura una carriera?","acceptedAnswer":{"@type":"Answer","text":"Una dozzina di turni da due stagioni, di solito una ventina di minuti."}},{"@type":"Question","name":"Le squadre sono reali?","acceptedAnswer":{"@type":"Answer","text":"Le squadre sì; stagioni, trofei ed eventi sono simulati."}}]}]}</script>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="app"><main class="shell doc">
+  <p class="label">NOVANTA</p>
+  <h1 class="display t-xxl">Carriera da calciatore: il gioco dai 16 anni al ritiro</h1>
+  <p class="dim">Sedici anni, una squadra piccola e vent’anni di calcio davanti. Ogni scelta cambia la tua storia.</p>
+  <a class="btn btn--go doc__play doc__play--top" href="/#/carriera">Gioca a Carriera</a>
+<h2 class="display">Crea il tuo giocatore</h2>
+  <p>Scegli nome, ruolo toccando la posizione nel 4-3-3, stile di gioco, idolo
+  d’infanzia, numero di maglia e nazionalità. Ogni ruolo ha le sue doti: un
+  portiere allena riflessi, presa e uscite, un centravanti finalizzazione, colpo
+  di testa e posizione.</p>
+
+  <h2 class="display">Due stagioni per turno</h2>
+  <p>A ogni turno scegli su quale dote lavorare e prendi tre decisioni tra
+  centosettantotto situazioni diverse: allenatori, procuratori, infortuni,
+  derby, offerte dall’estero, la nazionale. Poi si giocano due stagioni e si apre
+  il mercato.</p>
+  <ul>
+    <li>Le <strong>statistiche seguono il ruolo</strong>: porte inviolate e rigori parati per il portiere, gol, assist e numeri chiave per gli altri.</li>
+    <li>Le <strong>coppe europee</strong> si giocano solo se la classifica le ha conquistate.</li>
+    <li>Gli <strong>infortuni</strong> tolgono davvero partite, e il ritiro arriva quando l’età lo impone.</li>
+    <li>Chi viene da una delle dieci nazionali più forti può essere chiamato per Mondiali, Europei, Copa América e Nations League.</li>
+  </ul>
+
+  <h2 class="display">Una bacheca tutta tua</h2>
+  <p>Campionati, coppe nazionali, Champions League, Europa League, Conference
+  League, Mondiale per club, capocannoniere, Golden Boy, fino al Pallone d’Oro.
+  Due carriere non sono mai uguali, anche partendo dalle stesse scelte.</p>
+
+  <h2 class="display">Domande</h2>
+  <details>
+    <summary>La carriera si salva?</summary>
+    <p>Sì, resta salvata nel browser e puoi riprenderla quando vuoi.</p>
+  </details>
+  <details>
+    <summary>Quanto dura una carriera?</summary>
+    <p>Una dozzina di turni da due stagioni, di solito una ventina di minuti.</p>
+  </details>
+  <details>
+    <summary>Le squadre sono reali?</summary>
+    <p>Le squadre sì; stagioni, trofei ed eventi sono simulati.</p>
+  </details>
+  <a class="btn btn--go doc__play" href="/#/carriera">Gioca a Carriera</a>
+  <nav class="doc__nav" aria-label="Le modalità">
+    <strong>Le modalità:</strong>
+    <a href="/indovina-il-calciatore">Chi è?</a>
+    <a href="/catena-calciatori">Catena</a>
+    <a href="/impostore-calcio">Impostore</a>
+    <a href="/quiz-rosa-squadra">La Rosa</a>
+    <a href="/gioco-rigori">Rigori</a>
+    <a href="/asta-calcio">Asta</a>
+    <a href="/piu-o-meno-calcio">Più o Meno</a>
+    <a href="/quiz-calcio-giornaliero">Il Novantesimo</a>
+  </nav>
+  <nav class="doc__nav doc__nav--pages" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
+</main></div>
+</body>
+</html>
