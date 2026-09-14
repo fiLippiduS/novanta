@@ -2,7 +2,7 @@
 
 export const AD_CONFIG = {
   // 'ca-pub-XXXXXXXXXXXXXXXX' — lasciare vuoto finché AdSense non approva il sito.
-  publisherId: '',
+  publisherId: 'ca-pub-9665914988223658',
   // true solo per provare gli annunci di prova di Google prima del lancio
   testMode: false,
   // suggerimento di frequenza per gli interstitial di H5 Games Ads
@@ -26,5 +26,7 @@ export const AD_CONFIG = {
 };
 
 export function isLive() {
-  return Boolean(AD_CONFIG.publisherId) && location.protocol.startsWith('http');
+  /* in sviluppo restano gli annunci simulati: niente traffico finto su AdSense */
+  const local = ['localhost', '127.0.0.1'].includes(location.hostname);
+  return Boolean(AD_CONFIG.publisherId) && location.protocol.startsWith('http') && !local;
 }

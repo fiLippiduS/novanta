@@ -30,6 +30,9 @@ const head = (p) => `<!doctype html>
 <meta property="og:type" content="article">
 <meta property="og:url" content="${SITE}/${p.slug}">
 <meta property="og:image" content="${SITE}/assets/og.jpg">
+<!-- Google AdSense: verifica del sito e annunci -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9665914988223658"
+     crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
 <script>

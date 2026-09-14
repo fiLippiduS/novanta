@@ -7,13 +7,13 @@
    Non c'è niente da configurare nel codice: il messaggio si crea e si modifica
    dal pannello AdSense, alla voce Privacy e messaggi. */
 
-import { AD_CONFIG } from '../ads/config.js';
+import { AD_CONFIG, isLive } from '../ads/config.js';
 import { markExternal } from './cmp.js';
 
 const TIMEOUT_MS = 3500;
 
 export function isAvailable() {
-  return Boolean(AD_CONFIG.publisherId);
+  return isLive();
 }
 
 /** true se il consenso è stato gestito da Google e possiamo proseguire. */
