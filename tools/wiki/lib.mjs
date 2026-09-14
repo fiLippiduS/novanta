@@ -32,20 +32,21 @@ export async function getJSON(url, { cache = true } = {}) {
   const file = cacheFile(url);
   if (cache && existsSync(file)) return JSON.parse(readFileSync(file, 'utf8'));
 
-  for (let attempt = 0; attempt < 6; attempt++) {
+  const tries = 12;
+  for (let attempt = 0; attempt < tries; attempt++) {
     const wait = last + PAUSE_MS - Date.now();
     if (wait > 0) await sleep(wait);
     last = Date.now();
     try {
       const res = await fetch(url, { headers: { 'User-Agent': UA, 'Accept-Encoding': 'gzip' } });
-      if (res.status === 429 || res.status >= 500) { await sleep(1500 * (attempt + 1)); continue; }
+      if (res.status === 429 || res.status >= 500) { await sleep(3000 * (attempt + 1)); continue; }
       const json = await res.json();
       if (json.error && json.error.code === 'maxlag') { await sleep(3000); continue; }
       if (json.error) throw new Error(`${json.error.code}: ${json.error.info}`);
       if (cache) writeFileSync(file, JSON.stringify(json));
       return json;
     } catch (e) {
-      if (attempt === 5) throw e;
+      if (attempt === tries - 1) throw e;
       await sleep(1000 * (attempt + 1));
     }
   }
@@ -85,13 +86,13 @@ export async function categoryMembers(category) {
 }
 
 /** visualizzazioni degli ultimi 60 giorni, 50 titoli per richiesta */
-export async function pageviews(titles, onProgress) {
+export async function pageviews(titles, onProgress, days = 60) {
   const out = new Map();
   const groups = chunk(titles, 50);
   for (let i = 0; i < groups.length; i++) {
     let cont = null;
     do {
-      const params = { action: 'query', prop: 'pageviews', pvipdays: '60', titles: groups[i].join('|'), redirects: '1' };
+      const params = { action: 'query', prop: 'pageviews', pvipdays: String(days), titles: groups[i].join('|'), redirects: '1' };
       if (cont) Object.assign(params, cont);
       const j = await api(params);
       const redirects = new Map((j.query?.redirects || []).map((r) => [r.to, r.from]));
@@ -117,10 +118,12 @@ export async function wikitexts(titles, onProgress, size = 20) {
   const out = new Map();
   const groups = chunk(titles, size);
   for (let i = 0; i < groups.length; i++) {
+    /* FRESH=1 rilegge le voci da Wikipedia ignorando la cache: serve per
+       aggiornare i trasferimenti senza riscaricare tutto il resto */
     const j = await api({
       action: 'query', prop: 'revisions', rvprop: 'content', rvslots: 'main',
       titles: groups[i].join('|'), redirects: '1',
-    });
+    }, { cache: !process.env.FRESH });
     const norm = new Map((j.query?.normalized || []).map((n) => [n.to, n.from]));
     const redir = new Map((j.query?.redirects || []).map((r) => [r.to, r.from]));
     for (const p of j.query?.pages || []) {

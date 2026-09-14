@@ -8,9 +8,9 @@ Un gioco di calcio per il web. Nove modalità, nessun bundler, nessuna dipendenz
 - **Rigori** — un tiro alla volta, una vita sola, un portiere che impara da te.
   Palo e traversa hanno il loro suono e la palla rimbalza davvero sul legno.
 - **Asta** — venti crediti per un quintetto, pescati a caso fra campioni, comprimari
-  e giocatori di mezzo su un catalogo di oltre quattromilaseicento giocatori. Contro
+  e giocatori di mezzo su un catalogo di quasi seimila giocatori. Contro
   l'avversario del computer o in due sullo stesso telefono, ognuno col suo nome.
-- **Più o Meno** — due giocatori, un dato, chi ne ha di più? Duemila giocatori e
+- **Più o Meno** — due giocatori, un dato, chi ne ha di più? Oltre duemila giocatori e
   ventidue parametri; al primo errore la catena si spezza.
 - **Carriera** — dai sedici anni al ritiro, con il ruolo che decide doti e numeri,
   l'allenamento, tre scelte ogni stagione, coppe europee guadagnate in classifica,
@@ -72,10 +72,12 @@ Scorciatoie di sviluppo, tutte attive solo su localhost:
 
 I cataloghi vengono da Wikipedia (licenza CC BY-SA 4.0), letta con la sua API
 pubblica. Le risposte restano in `tools/wiki/cache/`, che non si pubblica.
+`FRESH=1` rilegge le voci dei giocatori ignorando la cache: è il modo di
+aggiornare i trasferimenti.
 
 ```bash
 node tools/wiki/candidates.mjs && node tools/wiki/rank.mjs
-node tools/wiki/players.mjs 6000 && node tools/wiki/clubs.mjs && node tools/wiki/build.mjs
+FRESH=1 node tools/wiki/players.mjs 12500 && node tools/wiki/clubs.mjs && node tools/wiki/build.mjs
 node tools/wiki/squads.mjs && node tools/wiki/seasons.mjs && node tools/wiki/rosa.mjs
 node tools/wiki/auction.mjs && node tools/wiki/duel.mjs
 node tools/career/build-events.mjs && node tools/pages/build.mjs
@@ -104,10 +106,10 @@ sitemap.xml           mappa per i motori di ricerca, generata insieme alle pagin
 tools/wiki/           dai dati di Wikipedia ai cataloghi del gioco
 tools/career/         eventi della Carriera nelle sei lingue
 tools/pages/          testo e impaginazione delle pagine statiche
-data/players/         5.442 carriere: indice leggero e schede a pezzi
+data/players/         10.529 carriere e 10.970 club: indice leggero e schede a pezzi
 data/rosa/            1.941 rose: indice e pezzi da cento
-data/auction.json     4.646 giocatori con ruolo e voto
-data/duel.json        2.031 giocatori con i dati del confronto
+data/auction.json     5.906 giocatori con ruolo e voto
+data/duel.json        2.170 giocatori con i dati del confronto
 data/career/          eventi della Carriera (logica e testi per lingua)
 data/clubs.json       243 club da 66 paesi, con fascia, codice e livello del campionato
 data/squads.json      32 rose curate a mano, per Il Novantesimo
@@ -269,9 +271,9 @@ stile, idolo d'infanzia fra cinque per ruolo, numero e nazione con bandiera.
 Ogni ruolo ha le sue sei doti: un portiere lavora su riflessi, presa, uscite e
 rinvio, e a fine anno conta porte inviolate e rigori parati, non gol.
 
-Ogni stagione: l'allenamento su una dote (più anni di fila, più cresce), tre
-decisioni fra ruolo, vita e nazionale, da zero a due imprevisti, la stagione
-simulata e il mercato. Gli eventi lasciano segni misurabili (doti, fiducia
+Si avanza di due stagioni per turno: l'allenamento su una dote (più anni di fila,
+più cresce), tre decisioni fra ruolo, vita e nazionale scelte da 178 situazioni,
+da zero a due imprevisti per stagione, le due stagioni simulate e poi il mercato. Gli eventi lasciano segni misurabili (doti, fiducia
 dell'allenatore, minuti, rischio d'infortunio) e quello che raccontano compare nei
 numeri: se un evento parla di dieci partite a secco, il resoconto non dirà zero
 presenze. Le coppe europee si giocano solo con la classifica dell'anno prima, un

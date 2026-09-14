@@ -232,7 +232,7 @@ const WIN = (h, re) => h.result === 'winner' && re.test(h.comp);
 const clues = {};
 players.forEach(({ p, senior }, id) => {
   const row = index[id];
-  if (row[5] < 50) return;
+  if (row[5] < 42) return;
   const out = [];
 
   /* una squadra con almeno quindici presenze che non sia quella della vita */

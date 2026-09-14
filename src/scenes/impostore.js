@@ -16,7 +16,7 @@ import { roleName } from '../players/terms.js';
 import { roster } from '../ui/roster.js';
 import * as ads from '../ads/adapter.js';
 
-const POOLS = { famous: 65, all: 50 };
+const POOLS = { famous: 65, all: 42 };
 
 let cluesPromise = null;
 function loadClues() {

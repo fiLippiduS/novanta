@@ -70,8 +70,8 @@ export const PAGES = [
   <h2 class="display">Carriera</h2>
   <p>Crei il tuo giocatore: nome, ruolo sul campo, stile, idolo d’infanzia, numero
   di maglia e nazionalità. Si comincia a sedici anni in una squadra piccola.</p>
-  <p>Ogni stagione scegli su quale dote lavorare (più anni sulla stessa, più cresce)
-  e prendi tre decisioni legate al tuo ruolo, alla tua vita fuori dal campo e, se
+  <p>Si avanza di due stagioni alla volta. Ogni volta scegli su quale dote lavorare
+  (più anni sulla stessa, più cresce) e prendi tre decisioni legate al tuo ruolo, alla tua vita fuori dal campo e, se
   arriva la chiamata, alla nazionale. Le statistiche rispettano il ruolo: un portiere
   conta porte inviolate e rigori parati, un difensore contrasti e duelli aerei, un
   attaccante gol e assist. Le coppe europee si giocano solo se la classifica

@@ -166,11 +166,17 @@ export function playSeason(rand, player, club, opts = {}) {
     if (['ALA', 'MEZ'].includes(player.role)) stats.dribbles = poisson(rand, rate('dribbling', player.role === 'ALA' ? 2.4 : 1.1));
   }
 
+  /* tetti da record veri: nemmeno i migliori rifinitori superano un assist
+     ogni partita e mezza, né i bomber più di un gol e poco a partita */
+  stats.assists = Math.min(stats.assists, Math.round(apps * 0.62));
+  stats.goals = Math.min(stats.goals, Math.round(apps * 1.15));
+
   /* quello che gli eventi hanno raccontato deve comparire nei numeri */
   if (apps > 0) {
     if (player.role !== 'POR') stats.goals = Math.max(stats.goals, mods.minGoals || 0);
     stats.assists = Math.max(stats.assists, mods.minAssists || 0);
     if (player.role === 'POR') stats.conceded = Math.max(stats.conceded, mods.minConceded || 0);
+    if (['POR', 'DC', 'TZ'].includes(player.role)) stats.clean = Math.min(apps, Math.max(stats.clean, mods.minClean || 0));
   }
 
   /* ---- voto ---- */

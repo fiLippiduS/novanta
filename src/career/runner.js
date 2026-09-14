@@ -99,30 +99,51 @@ export function readyToPlay(state) {
   return state.pending && state.pending.focus.chosen && state.pending.decisions.every((d) => d.chosen !== null);
 }
 
-/** gli imprevisti, la stagione giocata, e cosa ne viene per l'anno dopo */
-export function finishSeason(state, rand, events) {
+/* Ogni turno copre due stagioni: le scelte si fanno una volta, poi si giocano
+   due anni di fila nella stessa squadra e solo dopo si apre il mercato. Una
+   carriera intera resta ricca di decisioni ma dura la metà dei turni. */
+export const SEASONS_PER_TURN = 2;
+
+function playOne(state, rand, events, mods) {
   const p = state.player;
   const club = state.club;
   const incidents = pickIncidents(rand, events, p, club, state.seen, state.seenAt || {});
   incidents.forEach((ev) => {
-    applyEffects(rand, p, ev.fx, state.pending.mods);
+    applyEffects(rand, p, ev.fx, mods);
     if (!state.seen.includes(ev.id)) state.seen.push(ev.id);
     state.seenAt[ev.id] = p.seasons.length;
   });
-
-  const out = playSeason(rand, p, club, { mods: state.pending.mods });
+  const out = playSeason(rand, p, club, { mods });
   club.cont = out.next.cont;
   club.cwc = out.next.cwc;
   club.lastLeague = out.next.lastLeague;
   club.lastCup = out.next.lastCup;
   club.tier = out.next.tier;
+  return { record: out.record, incidents: incidents.map((e) => e.id), share: out.share };
+}
 
+/**
+ * Le due stagioni del turno. Quello che le scelte hanno raccontato (una
+ * partita giocata, un gol, un infortunio affrettato) riguarda la prima; la
+ * seconda si gioca con quello che la prima ha lasciato: doti, fiducia, forma.
+ */
+export function finishSeason(state, rand, events) {
+  const first = playOne(state, rand, events, state.pending.mods);
+  const seasons = [first];
+  for (let k = 1; k < SEASONS_PER_TURN; k++) {
+    /* l'annuncio del ritiro vale per il turno intero, ma nessuno gioca
+       oltre l'età del ritiro */
+    if (state.player.age > retirementAge(state.player.role)) break;
+    seasons.push(playOne(state, rand, events, {}));
+  }
+  const last = seasons[seasons.length - 1];
   state.lastResult = {
-    record: out.record,
-    incidents: incidents.map((e) => e.id),
+    seasons: seasons.map(({ record, incidents }) => ({ record, incidents })),
+    record: last.record,
+    incidents: seasons.flatMap((x) => x.incidents),
     decisions: state.pending.decisions,
     focus: state.pending.focus.chosen,
-    share: out.share,
+    share: last.share,
   };
   state.pending = null;
   return state.lastResult;

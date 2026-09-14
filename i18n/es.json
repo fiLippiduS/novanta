@@ -531,7 +531,8 @@
     "level": {
       "easy": "Fácil",
       "medium": "Medio",
-      "hard": "Difícil"
+      "hard": "Difícil",
+      "expert": "Experto"
     },
     "hintSameNation": "misma nacionalidad",
     "hintOtherNation": "otra nacionalidad",
@@ -685,7 +686,7 @@
     "lastCareer": "Repasar la carrera de {name}",
     "oldSave": "La carrera guardada era de la versión anterior y no se puede continuar: empieza una nueva.",
     "intro": "Dieciséis años, un club pequeño y veinte años de fútbol por delante.",
-    "introText": "Cada temporada eliges qué entrenar y cómo reaccionar a lo que pasa. Los números de tu puesto dirán cómo fue. Ninguna carrera es igual a otra.",
+    "introText": "Cada dos temporadas eliges qué entrenar y cómo reaccionar a lo que pasa. Los números de tu puesto dirán cómo fue. Ninguna carrera es igual a otra.",
     "yourName": "Cómo te llamas",
     "namePlaceholder": "Nombre y apellido",
     "begin": "Siguiente",
@@ -723,8 +724,8 @@
     "onLoan": "Cedido",
     "trainingLevel": "Entrenamiento: {attr} · nivel {n}",
     "natLine": "{nation}: {caps} partidos · {goals} goles",
-    "decisions": "Las decisiones del año",
-    "focusTitle": "En qué trabajas este año",
+    "decisions": "Las decisiones del bienio",
+    "focusTitle": "En qué trabajas las dos próximas temporadas",
     "focusText": "Cuantos más años seguidos en la misma cualidad, más crece. Las demás crecen menos.",
     "rest": "Recuperación y prevención",
     "restHint": "Mejor forma, menos riesgo de lesión, ninguna cualidad impulsada.",
@@ -736,7 +737,7 @@
       "national": "Selección"
     },
     "choicesLeft": "Faltan {n} decisiones",
-    "playSeason": "Jugar la temporada",
+    "playSeason": "Jugar las dos próximas temporadas",
     "position": "Clasificación",
     "firstDivision": "primera división",
     "secondDivision": "segunda división",
@@ -758,7 +759,7 @@
     "whatHappened": "Lo que pasó",
     "cabinet": "Vitrina",
     "empty": "Todavía vacía",
-    "nextSeason": "Temporada siguiente",
+    "nextSeason": "Avanzar dos años",
     "retire": "Retirarse",
     "finalSeasonNote": "Ha sido la última temporada: aquí termina.",
     "market": "El mercado",
@@ -963,6 +964,7 @@
       "rapace": "Espera el error en el área. No falla.",
       "falsonueve": "Baja, abre el espacio y luego lo ocupa.",
       "torre": "Aguanta el balón y hace subir al equipo. No pierde un balón por alto."
-    }
+    },
+    "turn": "Bienio"
   }
 }

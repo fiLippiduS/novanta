@@ -167,7 +167,7 @@ export function shootout(rand, home, away, sentOff = { home: new Set(), away: ne
   const kick = (s, other, round) => {
     const taker = s.list[(round - 1) % Math.max(1, s.list.length)];
     const keeper = keeperOf(other.team);
-    const p = Math.max(0.42, Math.min(0.94,
+    const p = Math.max(0.42, Math.min(0.88,
       0.76 + (taker.rating - 88) * 0.012 - (keeper.rating - 87) * 0.014));
     const scored = rand() < p;
     if (scored) s.score += 1;
@@ -187,9 +187,10 @@ export function shootout(rand, home, away, sentOff = { home: new Set(), away: ne
     if (sides[0].score !== sides[1].score && round === 5) break;
   }
 
-  // a oltranza, finché uno sbaglia e l'altro no
+  // a oltranza, finché uno sbaglia e l'altro no: come nel regolamento, non
+  // c'è un limite di giri (il tetto serve solo a non girare all'infinito)
   let round = 6;
-  while (sides[0].score === sides[1].score && round < 20) {
+  while (sides[0].score === sides[1].score && round < 400) {
     const a = kick(sides[0], sides[1], round);
     const b = kick(sides[1], sides[0], round);
     if (a !== b) break;

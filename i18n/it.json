@@ -458,7 +458,7 @@
     "lastCareer": "Rivedi la carriera di {name}",
     "oldSave": "La carriera salvata era della versione precedente e non si può riprendere: ne comincia una nuova.",
     "intro": "Sedici anni, una squadra piccola e vent'anni di calcio davanti.",
-    "introText": "Ogni stagione scegli cosa allenare e come reagire a quello che succede. I numeri del tuo ruolo diranno com'è andata. Nessuna carriera è uguale a un'altra.",
+    "introText": "Ogni due stagioni scegli cosa allenare e come reagire a quello che succede. I numeri del tuo ruolo diranno com'è andata. Nessuna carriera è uguale a un'altra.",
     "yourName": "Come ti chiami",
     "namePlaceholder": "Nome e cognome",
     "begin": "Avanti",
@@ -496,8 +496,8 @@
     "onLoan": "In prestito",
     "trainingLevel": "Allenamento: {attr} · livello {n}",
     "natLine": "{nation}: {caps} presenze · {goals} gol",
-    "decisions": "Le scelte dell'anno",
-    "focusTitle": "Su cosa lavori quest'anno",
+    "decisions": "Le scelte del biennio",
+    "focusTitle": "Su cosa lavori nelle prossime due stagioni",
     "focusText": "Più anni di fila sulla stessa dote, più cresce. Le altre crescono meno.",
     "rest": "Recupero e prevenzione",
     "restHint": "Condizione migliore, meno rischio di infortuni, nessuna dote spinta.",
@@ -509,7 +509,7 @@
       "national": "Nazionale"
     },
     "choicesLeft": "Mancano {n} scelte",
-    "playSeason": "Gioca la stagione",
+    "playSeason": "Gioca le prossime due stagioni",
     "position": "Classifica",
     "firstDivision": "prima divisione",
     "secondDivision": "seconda divisione",
@@ -531,7 +531,7 @@
     "whatHappened": "Quello che è successo",
     "cabinet": "Bacheca",
     "empty": "Ancora vuota",
-    "nextSeason": "Stagione successiva",
+    "nextSeason": "Avanti di due anni",
     "retire": "Ritirati",
     "finalSeasonNote": "È stata l'ultima stagione: si chiude qui.",
     "market": "Il mercato",
@@ -736,7 +736,8 @@
       "rapace": "Sta in area e aspetta l'errore. Non sbaglia.",
       "falsonueve": "Si abbassa, apre lo spazio, poi ci entra lui.",
       "torre": "Tiene palla e fa salire tutti. Di testa non perde."
-    }
+    },
+    "turn": "Biennio"
   },
   "duello": {
     "title": "Più o Meno",
@@ -819,7 +820,8 @@
     "level": {
       "easy": "Facile",
       "medium": "Media",
-      "hard": "Difficile"
+      "hard": "Difficile",
+      "expert": "Esperto"
     },
     "hintSameNation": "stessa nazione",
     "hintOtherNation": "altra nazione",

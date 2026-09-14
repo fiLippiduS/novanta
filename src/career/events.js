@@ -15,7 +15,8 @@ export function context(player, club) {
   const last = player.seasons[player.seasons.length - 1] || null;
   return {
     player, club, nation, year, last,
-    tournamentYear: Boolean(nation && tournamentsIn(year, nation.confed).some((x) => x !== 'nations_league')),
+    /* un turno copre due stagioni: conta un grande torneo in una delle due */
+    tournamentYear: Boolean(nation && [year, year + 1].some((y) => tournamentsIn(y, nation.confed).some((x) => x !== 'nations_league'))),
     abroad: club && player.nation !== club.code,
     eligible: natEligible(player),
   };
@@ -107,11 +108,14 @@ export function pickDecisions(rand, all, player, club, seen, seenAt = {}) {
   const forced = usable.filter((e) => e.forced);
   out.push(...forced.slice(0, 1));
   const role = usable.filter((e) => !e.forced && e.group === 'role');
-  const life = usable.filter((e) => !e.forced && e.group !== 'role');
+  const national = usable.filter((e) => !e.forced && e.group === 'national');
+  const life = usable.filter((e) => !e.forced && e.group !== 'role' && e.group !== 'national');
   out.push(...pickWeighted(rand, role, 1));
+  /* chi gioca in nazionale ha sempre una scelta che la riguarda, se ce n'è */
+  if (out.length < DECISIONS_PER_SEASON) out.push(...pickWeighted(rand, national.filter((e) => !out.includes(e)), 1));
   out.push(...pickWeighted(rand, life.filter((e) => !out.includes(e)), DECISIONS_PER_SEASON - out.length));
   /* se la vita non ha più nulla da proporre, il ruolo ne propone un'altra */
-  if (out.length < DECISIONS_PER_SEASON) out.push(...pickWeighted(rand, role.filter((e) => !out.includes(e)), DECISIONS_PER_SEASON - out.length));
+  if (out.length < DECISIONS_PER_SEASON) out.push(...pickWeighted(rand, [...role, ...national].filter((e) => !out.includes(e)), DECISIONS_PER_SEASON - out.length));
   /* Carriere lunghissime possono esaurire le novità: allora torna una
      situazione già vissuta, purché non negli ultimi due anni. Le scelte ci
      sono sempre, fino all'ultima stagione. */

@@ -35,10 +35,48 @@ const CLUBS = [
   'Club América footballers', 'C.D. Guadalajara footballers',
 ].map((c) => `Category:${c}`);
 
+/* I campionati interi: chi ha giocato almeno una partita nella massima serie.
+   È da qui che arrivano i giocatori meno noti, quelli che fanno la differenza
+   fra un quiz facile e uno vero. */
+const LEAGUES = [
+  'Serie A players', 'Premier League players', 'La Liga players', 'Bundesliga players', 'Ligue 1 players',
+  'Eredivisie players', 'Primeira Liga players', 'Süper Lig players', 'Scottish Premiership players',
+  'Belgian Pro League players', 'Major League Soccer players', 'Saudi Pro League players',
+  'Argentine Primera División players', 'Campeonato Brasileiro Série A players', 'Liga MX players',
+  'Serie B players', 'EFL Championship players', 'Segunda División players', '2. Bundesliga players', 'Ligue 2 players',
+  'Swiss Super League players', 'Austrian Football Bundesliga players', 'Danish Superliga players',
+  'Allsvenskan players', 'Eliteserien players', 'Greek Super League players', 'Russian Premier League players',
+  'Ukrainian Premier League players', 'Croatian Football League players', 'Serbian SuperLiga players',
+  'J1 League players', 'K League 1 players', 'Chinese Super League players', 'Qatar Stars League players',
+  'UAE Pro League players', 'Egyptian Premier League players', 'Uruguayan Primera División players',
+  'Categoría Primera A players', 'Chilean Primera División players',
+].map((c) => `Category:${c}`);
+
+const AFCON = [2000, 2002, 2004, 2006, 2008, 2010, 2012, 2013, 2015, 2017, 2019, 2021, 2023]
+  .map((y) => `Category:${y} Africa Cup of Nations players`);
+const ASIAN = [2000, 2004, 2007, 2011, 2015, 2019, 2023].map((y) => `Category:${y} AFC Asian Cup players`);
+const GOLD = [2002, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019, 2021, 2023].map((y) => `Category:${y} CONCACAF Gold Cup players`);
+
+const MORE_CLUBS = [
+  'Brighton & Hove Albion F.C. players', 'Crystal Palace F.C. players', 'Fulham F.C. players', 'Wolverhampton Wanderers F.C. players',
+  'Leicester City F.C. players', 'Southampton F.C. players', 'Nottingham Forest F.C. players', 'AFC Bournemouth players',
+  'Brentford F.C. players', 'Real Sociedad footballers', 'Celta de Vigo players', 'Girona FC players', 'Deportivo de La Coruña players',
+  'RCD Espanyol footballers', 'Eintracht Frankfurt players', 'VfL Wolfsburg players', 'Borussia Mönchengladbach players',
+  'SC Freiburg players', 'TSG 1899 Hoffenheim players', 'Stade Rennais F.C. players', 'OGC Nice players', 'RC Lens players',
+  'Club Brugge KV players', 'R.S.C. Anderlecht players', 'US Sassuolo Calcio players', 'Hellas Verona FC players',
+  'Cagliari Calcio players', 'US Lecce players', 'Empoli FC players', 'Como 1907 players', 'Brescia Calcio players',
+  'Palermo FC players', 'SS Chievo Verona players', 'Olympiacos F.C. players', 'Panathinaikos F.C. players',
+  'FC Zenit Saint Petersburg players', 'FC Shakhtar Donetsk players', 'FC Dynamo Kyiv players', 'Red Bull Salzburg players',
+  'FC Copenhagen players', 'Grêmio Foot-Ball Porto Alegrense players', 'Sport Club Internacional players',
+  'Clube Atlético Mineiro players', 'Fluminense FC players', 'Botafogo de Futebol e Regatas players',
+  'Club Atlético Independiente footballers', 'Racing Club de Avellaneda footballers', 'Club Nacional de Football players',
+  'Peñarol players', 'Al-Ittihad Club (Jeddah) players', 'Al-Ahli Saudi FC players',
+].map((c) => `Category:${c}`);
+
 const out = { sources: {}, titles: [] };
 const all = new Set();
 
-for (const cat of [...WC, ...EURO, ...COPA, ...CLUBS]) {
+for (const cat of [...WC, ...EURO, ...COPA, ...AFCON, ...ASIAN, ...GOLD, ...CLUBS, ...MORE_CLUBS, ...LEAGUES]) {
   const members = await categoryMembers(cat);
   out.sources[cat] = members.length;
   members.forEach((t) => all.add(t));

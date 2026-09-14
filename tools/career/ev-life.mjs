@@ -172,7 +172,7 @@ export default [
     ] },
   },
   {
-    id: 'y_trial', kind: 'decision', group: 'life', w: 5, when: { ageMax: 19, tierMin: 4, repMin: 6 },
+    id: 'y_trial', kind: 'decision', group: 'life', w: 5, when: { ageMax: 19, tierMin: 4, repMin: 4 },
     o: [
       { fx: { p: 0.4, base: {}, win: { flag: 'bigTrialWon', reputation: 6, morale: 5 }, lose: { morale: -6 } } },
       { fx: { trust: 5 } },

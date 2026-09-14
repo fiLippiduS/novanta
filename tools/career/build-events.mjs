@@ -13,15 +13,18 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..');
 const LANGS = ['it', 'en', 'fr', 'es', 'de', 'pt'];
 
-const sources = ['ev-roles.mjs', 'ev-life.mjs', 'ev-world.mjs'];
+const sources = ['ev-roles.mjs', 'ev-life.mjs', 'ev-world.mjs', 'ev-more.mjs'];
 const all = [];
 for (const f of sources) all.push(...(await import(pathToFileURL(join(HERE, f)))).default);
 
 /* traduzioni aggiuntive: tools/career/text-<lingua>.mjs, stessa forma di it/en */
 const extra = {};
 for (const l of LANGS.slice(2)) {
-  const file = join(HERE, `text-${l}.mjs`);
-  if (existsSync(file)) extra[l] = (await import(pathToFileURL(file))).default;
+  /* più file per lingua: text-fr.mjs, text-fr-2.mjs, ... */
+  for (const name of [`text-${l}.mjs`, `text-${l}-2.mjs`]) {
+    const file = join(HERE, name);
+    if (existsSync(file)) extra[l] = { ...(extra[l] || {}), ...(await import(pathToFileURL(file))).default };
+  }
 }
 
 /* Situazioni che nella vita di un calciatore tornano: un rinnovo, un litigio
@@ -73,7 +76,9 @@ for (const ev of all) {
   if (ids.has(ev.id)) errors.push(`id doppio: ${ev.id}`);
   ids.add(ev.id);
   const entry = { id: ev.id, kind: ev.kind, group: ev.group || null, forced: Boolean(ev.forced), w: ev.w || 1, when: ev.when || {} };
-  if (REPEAT[ev.id]) entry.repeat = REPEAT[ev.id];
+  /* le attese sono in stagioni: con due stagioni per turno si raddoppiano,
+     così una situazione già vissuta torna solo dopo parecchi turni */
+  if (REPEAT[ev.id]) entry.repeat = REPEAT[ev.id] * 2;
   if (ev.kind === 'decision') {
     entry.o = ev.o.map((o) => o.fx);
     ev.o.forEach((o, i) => checkFx(ev, o.fx, `opzione ${i}`));

@@ -24,7 +24,7 @@ import * as ads from '../ads/adapter.js';
 
 const TURN_MS = 40_000;
 const PENALTY_MS = 5_000;
-const MIN_START_PLAYERS = 25;
+const MIN_START_PLAYERS = 40;
 
 function playerHit(p) {
   const row = el('div', `hit role--${p.role}`);
@@ -135,9 +135,15 @@ export async function mount(host) {
     let lastSecond = 40;
     let over = false;
 
-    /* partenza: una squadra con abbastanza giocatori nel catalogo */
+    /* partenza: una squadra con abbastanza giocatori nel catalogo. Il catalogo
+       ora arriva fino alle serie minori: le squadre più rappresentate escono
+       più spesso, così si parte più volentieri da un Milan che da uno Swindon */
     const starters = clubsWithPlayers.filter((c) => (data.clubPlayers.get(c.id) || []).length >= MIN_START_PLAYERS);
-    current = { kind: 'club', club: starters[Math.floor(Math.random() * starters.length)] };
+    const weights = starters.map((c) => (data.clubPlayers.get(c.id) || []).length ** 1.5);
+    let roll = Math.random() * weights.reduce((a, b) => a + b, 0);
+    let startIdx = 0;
+    while (startIdx < starters.length - 1 && roll >= weights[startIdx]) { roll -= weights[startIdx]; startIdx += 1; }
+    current = { kind: 'club', club: starters[startIdx] };
     usedClubs.add(current.club.id);
     chain.push(current);
 

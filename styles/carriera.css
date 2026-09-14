@@ -200,6 +200,11 @@
   border: none;
   background: none;
   cursor: pointer;
+}
+/* L'animazione d'ingresso sta sui figli, non sul pulsante: un'animazione di
+   transform sul pulsante cancellerebbe il translate che lo centra sul punto,
+   e tutto il modulo scivolerebbe in basso a destra. */
+.spot__dot, .spot__k {
   animation: snap-in 320ms var(--e-spring) both;
   animation-delay: calc(var(--i, 0) * 45ms);
 }

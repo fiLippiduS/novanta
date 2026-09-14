@@ -458,7 +458,7 @@
     "lastCareer": "Look back at {name}'s career",
     "oldSave": "Your saved career was from the previous version and cannot be resumed: a new one begins.",
     "intro": "Sixteen, a small club and twenty years of football ahead.",
-    "introText": "Every season you choose what to train and how to react to what happens. The numbers of your role tell how it went. No two careers are alike.",
+    "introText": "Every two seasons you choose what to train and how to react to what happens. The numbers of your role tell how it went. No two careers are alike.",
     "yourName": "Your name",
     "namePlaceholder": "First and last name",
     "begin": "Next",
@@ -496,8 +496,8 @@
     "onLoan": "On loan",
     "trainingLevel": "Training: {attr} · level {n}",
     "natLine": "{nation}: {caps} caps · {goals} goals",
-    "decisions": "This year's choices",
-    "focusTitle": "What you work on this year",
+    "decisions": "Choices for these two years",
+    "focusTitle": "What you work on for the next two seasons",
     "focusText": "The more years in a row on the same skill, the more it grows. The others grow less.",
     "rest": "Recovery and prevention",
     "restHint": "Better fitness, lower injury risk, no skill pushed.",
@@ -509,7 +509,7 @@
       "national": "National team"
     },
     "choicesLeft": "{n} choices left",
-    "playSeason": "Play the season",
+    "playSeason": "Play the next two seasons",
     "position": "League position",
     "firstDivision": "top flight",
     "secondDivision": "second tier",
@@ -531,7 +531,7 @@
     "whatHappened": "What happened",
     "cabinet": "Trophy cabinet",
     "empty": "Still empty",
-    "nextSeason": "Next season",
+    "nextSeason": "Forward two years",
     "retire": "Retire",
     "finalSeasonNote": "That was the last season: it ends here.",
     "market": "Transfer market",
@@ -736,7 +736,8 @@
       "rapace": "Waits in the box for the mistake. Never misses.",
       "falsonueve": "Drops off, opens the space, then runs into it.",
       "torre": "Holds it up and brings everyone forward. Wins every header."
-    }
+    },
+    "turn": "Two seasons"
   },
   "duello": {
     "title": "Higher",
@@ -819,7 +820,8 @@
     "level": {
       "easy": "Easy",
       "medium": "Medium",
-      "hard": "Hard"
+      "hard": "Hard",
+      "expert": "Expert"
     },
     "hintSameNation": "same nation",
     "hintOtherNation": "other nation",

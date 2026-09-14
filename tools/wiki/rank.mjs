@@ -4,9 +4,20 @@
 
 import { pageviews, readJSON, writeJSON, progress, ROOT } from './lib.mjs';
 import { join } from 'node:path';
+import { existsSync } from 'node:fs';
 
 const { titles } = readJSON(join(ROOT, 'tools/wiki/cache/candidates.json'));
-const views = await pageviews(titles, progress('visualizzazioni'));
+
+/* Le visualizzazioni già misurate si tengono (ranked-old.json, sessanta
+   giorni). I candidati nuovi si misurano sull'ultima settimana, che l'API restituisce
+   con una sola richiesta ogni cinquanta titoli, e si riportano alla stessa scala. */
+const OLD = join(ROOT, 'tools/wiki/cache/ranked-old.json');
+const known = new Map(existsSync(OLD) ? readJSON(OLD).map((r) => [r.title, r.views]) : []);
+const fresh = titles.filter((t) => !known.has(t));
+const DAYS = 7;
+const measured = await pageviews(fresh, progress(`visualizzazioni (${fresh.length} nuovi)`), DAYS);
+const views = new Map(known);
+for (const [t, v] of measured) views.set(t, Math.round(v * 60 / DAYS));
 
 const ranked = titles
   .map((t) => ({ title: t, views: views.get(t) || 0 }))

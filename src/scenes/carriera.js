@@ -38,12 +38,13 @@ async function loadData() {
   return cache;
 }
 
-/* quali numeri contano per ciascun ruolo, nell'ordine in cui si mostrano */
+/* quali numeri contano per ciascun ruolo, nell'ordine in cui si mostrano:
+   gol e assist per tutti tranne il portiere, poi i numeri chiave del ruolo */
 const ROLE_STATS = {
   POR: ['apps', 'clean', 'conceded', 'penSaved'],
-  DC: ['apps', 'tackles', 'aerials', 'clean', 'goals'],
-  TZ: ['apps', 'assists', 'keyPasses', 'tackles', 'clean'],
-  MED: ['apps', 'recoveries', 'tackles', 'keyPasses', 'assists'],
+  DC: ['apps', 'goals', 'assists', 'tackles', 'aerials', 'clean'],
+  TZ: ['apps', 'goals', 'assists', 'keyPasses', 'tackles', 'clean'],
+  MED: ['apps', 'goals', 'assists', 'recoveries', 'tackles', 'keyPasses'],
   MEZ: ['apps', 'goals', 'assists', 'keyPasses', 'dribbles'],
   ALA: ['apps', 'goals', 'assists', 'dribbles', 'keyPasses'],
   PUN: ['apps', 'goals', 'assists', 'aerials'],
@@ -383,9 +384,10 @@ export async function mount(host) {
     render();
   }
 
+  /* il turno che sta per cominciare: due stagioni */
   function seasonLabel(p) {
     const end = FIRST_SEASON_END + p.seasons.length;
-    return `${end - 1}/${String(end).slice(2)}`;
+    return `${end - 1}–${String(end + 1).slice(2)}`;
   }
 
   function playerHead() {
@@ -410,7 +412,7 @@ export async function mount(host) {
 
     const line = el('div', 'car__line');
     line.append(
-      statBox(t('carriera.season'), seasonLabel(p)),
+      statBox(t('carriera.turn'), seasonLabel(p)),
       statBox(t('carriera.age'), p.age),
       statBox(t('carriera.overall'), overall(p), 'good'),
       statBox(t('carriera.demand'), clubDemand(club.tier)),
@@ -460,6 +462,7 @@ export async function mount(host) {
     /* l'allenamento: sempre, e sempre sulle doti del ruolo */
     const focus = save.pending.focus;
     const fcard = el('div', 'qcard card halftone misreg card--print qcard--focus');
+    fcard.dataset.anchor = 'focus';
     fcard.append(el('h4', 'qcard__prompt display t-lg', t('carriera.focusTitle')), el('p', 'dim', t('carriera.focusText')));
     const fopts = el('div', 'options');
     focus.options.forEach((a) => {
@@ -472,11 +475,12 @@ export async function mount(host) {
       if (focus.chosen === a) b.classList.add('option--right');
       if (focus.chosen) b.disabled = true;
       b.addEventListener('click', () => {
+        const top = fcard.getBoundingClientRect().top;
         chooseFocus(save, a);
         audio.sfx.hit();
         waveFrom(b, 'var(--lime)');
         persist();
-        render();
+        render({ anchor: 'focus', top });
       });
       fopts.appendChild(b);
     });
@@ -488,6 +492,7 @@ export async function mount(host) {
       const words = tx(slot.id);
       if (!ev || !words.t) return;
       const c = el('div', 'qcard card halftone misreg card--print');
+      c.dataset.anchor = `dec-${idx}`;
       if (ev.group === 'national') c.classList.add('qcard--national');
       if (ev.group === 'role') c.classList.add('qcard--role');
       c.append(el('span', 'qcard__kind label', t(`carriera.kind.${ev.group || 'life'}`)), el('h4', 'qcard__prompt display t-lg', fill(words.t)), el('p', 'dim', fill(words.d)));
@@ -499,11 +504,11 @@ export async function mount(host) {
         if (slot.chosen === i) b.classList.add('option--right');
         if (slot.chosen !== null) b.disabled = true;
         b.addEventListener('click', () => {
+          const top = c.getBoundingClientRect().top;
           const res = chooseOption(save, events, idx, i, rand);
           audio.sfx[res && res.outcome === 'lose' ? 'miss' : 'hit']();
-          waveFrom(b, res && res.outcome === 'lose' ? 'var(--flare)' : 'var(--lime)');
           persist();
-          render();
+          render({ anchor: `dec-${idx}`, top });
         });
         opts.appendChild(b);
       });
@@ -544,10 +549,8 @@ export async function mount(host) {
     }
   }
 
-  function renderResult() {
+  function seasonCard(record, isLast) {
     const p = save.player;
-    const { record, incidents } = save.lastResult;
-
     const card = el('div', 'car__report card halftone misreg card--print');
     card.style.setProperty('--misreg-color', record.club.colors[0]);
     const h = el('div', 'car__reporthead');
@@ -591,18 +594,15 @@ export async function mount(host) {
       const won = el('div', 'car__won');
       won.appendChild(el('p', 'label', t('carriera.won')));
       const row = el('div', 'tbadges');
-      [...record.trophies].sort((a, b) => TROPHY_ORDER.indexOf(a) - TROPHY_ORDER.indexOf(b)).forEach((tr) => row.appendChild(trophyBadge(tr)));
+      [...record.trophies].sort((x, y) => TROPHY_ORDER.indexOf(x) - TROPHY_ORDER.indexOf(y)).forEach((tr) => row.appendChild(trophyBadge(tr)));
       won.appendChild(row);
       card.appendChild(won);
-      audio.sfx.record();
-      quake(1.2);
-      /* la sagoma del trofeo più importante a tutto schermo, per un attimo */
-      showTrophyMoment(record.trophies);
     }
 
     /* crescita: doti e traguardi */
     const growth = el('div', 'car__growth');
-    growth.appendChild(el('p', 'label', t('carriera.growth', { ovr: record.overallAfter, diff: record.overallAfter - record.overall >= 0 ? `+${record.overallAfter - record.overall}` : record.overallAfter - record.overall })));
+    const diff = record.overallAfter - record.overall;
+    growth.appendChild(el('p', 'label', t('carriera.growth', { ovr: record.overallAfter, diff: diff >= 0 ? `+${diff}` : diff })));
     const deltas = el('div', 'deltas');
     Object.entries(record.changes).forEach(([a, d]) => {
       if (!d) return;
@@ -615,25 +615,49 @@ export async function mount(host) {
     /* l'infortunio ha già la sua riga sopra */
     const moments = record.highlights.filter((x) => !x.id.startsWith('injury_'));
     moments.forEach((x) => hl.appendChild(el('li', '', highlightLine(x))));
-    if (save.club.cont) hl.appendChild(el('li', 'good', t('carriera.nextCont', { cup: t(`carriera.trophyNames.${save.club.cont}`) })));
-    if (moments.length || save.club.cont) card.appendChild(hl);
+    const nextCup = isLast && save.club.cont;
+    if (nextCup) hl.appendChild(el('li', 'good', t('carriera.nextCont', { cup: t(`carriera.trophyNames.${save.club.cont}`) })));
+    if (moments.length || nextCup) card.appendChild(hl);
+    return card;
+  }
 
-    stage.appendChild(card);
-    replay(card, 'anim-rise');
-    if (record.trophies.length) stagger(card.querySelectorAll('.tbadge'), 'anim-snap', 120);
+  function incidentsBox(incidents) {
+    const box = el('div', 'car__incidents');
+    box.appendChild(el('h3', 'display t-lg', t('carriera.whatHappened')));
+    incidents.forEach((id) => {
+      const words = tx(id);
+      if (!words.t) return;
+      const c = el('div', 'incident card halftone');
+      c.append(el('strong', 'incident__t display', fill(words.t)), el('p', 'dim', fill(words.d)));
+      box.appendChild(c);
+    });
+    return box;
+  }
 
-    if (incidents.length) {
-      const box = el('div', 'car__incidents');
-      box.appendChild(el('h3', 'display t-lg', t('carriera.whatHappened')));
-      incidents.forEach((id) => {
-        const words = tx(id);
-        if (!words.t) return;
-        const c = el('div', 'incident card halftone');
-        c.append(el('strong', 'incident__t display', fill(words.t)), el('p', 'dim', fill(words.d)));
-        box.appendChild(c);
-      });
-      stage.appendChild(box);
-      stagger(box.querySelectorAll('.incident'), 'anim-rise', 90);
+  function renderResult() {
+    const p = save.player;
+    /* un turno sono due stagioni; i salvataggi di prima ne avevano una */
+    const seasons = save.lastResult.seasons
+      || [{ record: save.lastResult.record, incidents: save.lastResult.incidents }];
+
+    seasons.forEach(({ record, incidents }, i) => {
+      if (incidents.length) {
+        const box = incidentsBox(incidents);
+        stage.appendChild(box);
+        stagger(box.querySelectorAll('.incident'), 'anim-rise', 90);
+      }
+      const card = seasonCard(record, i === seasons.length - 1);
+      stage.appendChild(card);
+      replay(card, 'anim-rise');
+      if (record.trophies.length) stagger(card.querySelectorAll('.tbadge'), 'anim-snap', 120);
+    });
+
+    const allTrophies = seasons.flatMap((x) => x.record.trophies);
+    if (allTrophies.length) {
+      audio.sfx.record();
+      quake(1.2);
+      /* la sagoma del trofeo più importante a tutto schermo, per un attimo */
+      showTrophyMoment(allTrophies);
     }
 
     stage.appendChild(cabinet());
@@ -784,9 +808,12 @@ export async function mount(host) {
 
   /* ---------------- disegno ---------------- */
 
-  function render() {
+  /* Cambiando schermata si riparte dall'alto. Dentro la stessa schermata (una
+     scelta, l'allenamento) la carta toccata resta esattamente dov'era: il
+     resto della pagina si ridisegna senza far saltare la vista. */
+  function render({ anchor = null, top = 0 } = {}) {
     stage.textContent = '';
-    window.scrollTo(0, 0);
+    if (!anchor) window.scrollTo(0, 0);
     if (view !== 'intro' && view !== 'create' && !save) view = 'intro';
     if (view === 'pickclub' && (!save.offersList || save.club)) view = save.club ? 'season' : 'intro';
     if (view === 'result' && !save.lastResult) view = 'season';
@@ -800,6 +827,11 @@ export async function mount(host) {
     else if (view === 'result') renderResult();
     else if (view === 'market') renderMarket();
     else renderEnd();
+
+    if (anchor) {
+      const node = stage.querySelector(`[data-anchor="${anchor}"]`);
+      if (node) window.scrollBy(0, node.getBoundingClientRect().top - top);
+    }
   }
 
   render();

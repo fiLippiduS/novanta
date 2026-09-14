@@ -24,6 +24,8 @@ const LEVELS = {
   easy: { minFame: 66 },
   medium: { minFame: 50 },
   hard: { minFame: 34 },
+  /* il catalogo intero, compresi i giocatori di campionati e anni lontani */
+  expert: { minFame: 12 },
 };
 
 function hitRow(p) {

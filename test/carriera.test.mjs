@@ -39,6 +39,7 @@ function runCareer(seed, opts = {}) {
   const state = newCareer(rand, { name: 'Prova', role, style, number: 9, nation, idol }, clubs);
   signFor(state, pick(rand, state.offersList));
   const log = [];
+  const turns = [];
 
   while (!state.player.retired) {
     const pend = beginSeason(state, rand, events);
@@ -53,7 +54,20 @@ function runCareer(seed, opts = {}) {
     const mods = { ...pend.mods };
     const ready = readyToPlay(state);
     const res = finishSeason(state, rand, events);
-    log.push({ decisions, incidents: res.incidents, ageBefore, clubBefore, record: res.record, mods, ready, focus: res.focus });
+    turns.push({ decisions, seasons: res.seasons.length });
+    /* un turno sono due stagioni: nel registro una riga per stagione, e le
+       scelte (con i loro effetti raccontati) appartengono alla prima */
+    res.seasons.forEach((x, k) => log.push({
+      first: k === 0,
+      decisions: k === 0 ? decisions : [],
+      incidents: x.incidents,
+      ageBefore: ageBefore + k,
+      clubBefore,
+      record: x.record,
+      mods: k === 0 ? mods : {},
+      ready,
+      focus: res.focus,
+    }));
     const list = openMarket(state, rand, clubs);
     if (list && list.length && rand() < 0.4) {
       const o = pick(rand, list);
@@ -61,7 +75,7 @@ function runCareer(seed, opts = {}) {
     }
     if (state.player.age > 45) break;   // rete di sicurezza: non deve mai scattare
   }
-  return { state, log };
+  return { state, log, turns };
 }
 
 console.log('— mille carriere —');
@@ -88,8 +102,8 @@ for (let s = 1; s <= 1000; s++) careers.push({ seed: s, ...runCareer(s) });
       const st = r.stats;
       seasons++;
       if (!entry.ready) notReady++;
-      if (entry.decisions.length < 3) noDecisions++;
-      if (st.apps < 0 || st.apps > 62 || st.goals > 70 || st.assists > 40 || st.goals < 0) impossible++;
+      if (entry.first && entry.decisions.length < 3) noDecisions++;
+      if (st.apps < 0 || st.apps > 62 || st.goals > 70 || st.assists > 40 || st.goals < 0) { impossible++; if (impossible <= 3) console.log('   impossibile:', p.role, JSON.stringify(st), JSON.stringify(entry.mods)); }
       if (p.role === 'POR' && st.goals > 0) gkGoals++;
       if (st.clean > st.apps) gkClean++;
 
@@ -165,6 +179,20 @@ for (let s = 1; s <= 1000; s++) careers.push({ seed: s, ...runCareer(s) });
   check('il Pallone d’Oro è raro', ballon / careers.length < 0.12, `(${ballon})`);
 }
 
+console.log('— due stagioni per turno —');
+{
+  let turns = 0, doubles = 0, turnCounts = [];
+  for (const c of careers) {
+    turns += c.turns.length - 1;
+    doubles += c.turns.slice(0, -1).filter((x) => x.seasons === 2).length;
+    turnCounts.push(c.turns.length);
+  }
+  const avg = turnCounts.reduce((a, b) => a + b, 0) / turnCounts.length;
+  console.log(`   turni per carriera: media ${avg.toFixed(1)} · stagioni doppie ${(doubles / turns * 100).toFixed(1)}%`);
+  check('ogni turno copre due stagioni, tranne a volte l’ultimo', doubles === turns, `(${doubles}/${turns})`);
+  check('una carriera dura una dozzina di turni, non venti', avg >= 8 && avg <= 14, `(${avg.toFixed(1)})`);
+}
+
 console.log('— ogni carriera è diversa —');
 {
   /* stesso ruolo, stessa nazione, stesso idolo: cambia solo il caso */
@@ -179,7 +207,7 @@ console.log('— ogni carriera è diversa —');
   const firstFive = new Set();
   for (let s = 7000; s < 7200; s++) {
     const { log } = runCareer(s, { role: 'POR', nation: 'BR', idol: 'casillas' });
-    firstFive.add(log.slice(0, 5).map((e) => e.decisions.join('+')).join('/'));
+    firstFive.add(log.filter((e) => e.first).slice(0, 5).map((e) => e.decisions.join('+')).join('/'));
   }
   check('anche i primi cinque anni cambiano da una carriera all’altra', firstFive.size >= 190, `(${firstFive.size}/200)`);
 }
@@ -189,7 +217,7 @@ console.log('— scelte fino all’ultimo anno —');
   let lateSeasons = 0, lateWithRealChoices = 0;
   const lifeIds = new Set(events.filter((e) => e.group === 'life').map((e) => e.id));
   for (const { log } of careers.slice(0, 400)) {
-    for (const e of log) {
+    for (const e of log.filter((x) => x.first)) {
       if (e.ageBefore >= 33) {
         lateSeasons++;
         if (e.decisions.length >= 3) lateWithRealChoices++;

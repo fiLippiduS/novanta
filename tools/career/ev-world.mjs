@@ -19,16 +19,16 @@ export default [
     ] },
   },
   {
-    id: 'n_debut', kind: 'decision', group: 'national', w: 6, when: { natCalled: true, natCapsMax: 3 },
+    id: 'n_debut', kind: 'decision', group: 'national', w: 6, when: { natCalled: true, natCapsMax: 14 },
     o: [
       { fx: { p: 0.5, base: { mods: { minCaps: 1 } }, win: { nat: { standing: 4 }, reputation: 3 }, lose: { nat: { standing: -2 }, morale: -3 } } },
       { fx: { nat: { standing: 1 }, mods: { minCaps: 1 } } },
     ],
-    it: { t: 'L’esordio in nazionale', d: 'Stadio pieno, inno, prima presenza. L’allenatore ti dice: «Gioca come nel tuo club».', o: [
+    it: { t: 'La prima da titolare in nazionale', d: 'Stadio pieno, inno, e stavolta parti dall’inizio. L’allenatore ti dice: «Gioca come nel tuo club».', o: [
       { l: 'Osi, come sai fare', rw: 'La tua giocata migliore apre il gol. Il commissario tecnico ti abbraccia al cambio.', rl: 'Due palloni persi nei primi dieci minuti. Esci all’intervallo.' },
       { l: 'Giochi semplice', r: 'Nessun errore, nessuna copertina. La porta resta aperta.' },
     ] },
-    en: { t: 'International debut', d: 'Packed stadium, anthem, first cap. The coach says: “Play like you do for your club.”', o: [
+    en: { t: 'First international start', d: 'Packed stadium, anthem, and this time you start. The coach says: “Play like you do for your club.”', o: [
       { l: 'Be bold, as you are', rw: 'Your best move sets up the goal. The coach hugs you when you come off.', rl: 'Two balls lost in the first ten minutes. You’re off at half-time.' },
       { l: 'Keep it simple', r: 'No mistakes, no headlines. The door stays open.' },
     ] },

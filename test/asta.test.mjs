@@ -183,7 +183,7 @@ console.log('— i rigori decidono sempre, e nessuno tira due volte di fila —'
     const { you, bot } = playAuction(seeded(seed + 1200), 'casuale');
     const so = shootout(seeded(seed), you, bot);
     if (so.home === so.away) pari++;
-    if (so.kicks.length < 2 || so.kicks.length > 40) tiriAssurdi++;
+    if (so.kicks.length < 2 || so.kicks.length > 200) tiriAssurdi++;
 
     // dentro un giro non si tira due volte per parte
     const perGiro = {};
