@@ -235,3 +235,33 @@
   .hub__links { flex-basis: 100%; justify-content: center; }
   .hub__links .hub__legal { min-height: 36px; padding-inline: var(--s-2); }
 }
+
+/* ---------- lingue in cima ---------- */
+.hub__langs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: calc(var(--s-6) * -1);
+  position: relative;
+  z-index: 3;
+}
+.langpill {
+  appearance: none;
+  min-width: 44px;
+  min-height: 36px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--chalk-3);
+  font-family: var(--font-ui);
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background var(--d-fast) linear, color var(--d-fast) linear, border-color var(--d-fast) linear;
+}
+.langpill:hover { color: var(--chalk); background: rgba(237, 232, 218, 0.08); }
+.langpill.is-on { background: var(--lime); border-color: var(--lime); color: var(--ink-950); }
+.langpill:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }

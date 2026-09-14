@@ -58,6 +58,19 @@ export function mount(host) {
   const shell = el('div', 'shell hub');
 
   /* --- testata --- */
+  /* --- in cima: le sei lingue, tutte in vista e a un tocco --- */
+  const langs = el('nav', 'hub__langs');
+  langs.setAttribute('aria-label', t('common.language'));
+  LANGS.forEach((code) => {
+    const b = el('button', `langpill${code === lang() ? ' is-on' : ''}`, code.toUpperCase());
+    b.type = 'button';
+    b.title = LANG_NAMES[code] || code;
+    b.setAttribute('aria-label', LANG_NAMES[code] || code);
+    b.setAttribute('aria-pressed', String(code === lang()));
+    b.addEventListener('click', () => { if (code !== lang()) setLang(code); });
+    langs.appendChild(b);
+  });
+
   const head = el('header', 'hub__head');
   const mark = el('h1', 'hub__mark display');
   mark.innerHTML = '<span class="hub__word">NOVANTA</span>';
@@ -177,19 +190,8 @@ export function mount(host) {
   const clockChip = dailyCard.querySelectorAll('.chip strong')[1];
   const clock = setInterval(() => { clockChip.textContent = hhmmss(msToNextDay()); }, 1000);
 
-  /* --- piede: lingua, audio, note legali --- */
+  /* --- piede: audio, note legali --- */
   const foot = el('footer', 'hub__foot');
-
-  /* la lingua si sceglie da un elenco: sei lingue non si scorrono a tocchi */
-  const langBtn = el('select', 'pill pill--select');
-  langBtn.setAttribute('aria-label', t('common.language'));
-  LANGS.forEach((code) => {
-    const o = el('option', '', LANG_NAMES[code] || code.toUpperCase());
-    o.value = code;
-    if (code === lang()) o.selected = true;
-    langBtn.appendChild(o);
-  });
-  langBtn.addEventListener('change', () => setLang(langBtn.value));
 
   const soundBtn = el('button', 'pill', audio.isEnabled() ? '♪' : '✕');
   soundBtn.type = 'button';
@@ -218,11 +220,11 @@ export function mount(host) {
     links.appendChild(a);
   });
 
-  foot.append(langBtn, soundBtn, el('span', 'spacer'), links);
+  foot.append(soundBtn, el('span', 'spacer'), links);
 
   /* un solo spazio pubblicitario, sotto le modalità: mai fra una porta e l'altra */
   const slot = ads.adSlot('hub');
-  shell.append(head, modes);
+  shell.append(langs, head, modes);
   if (slot) shell.appendChild(slot);
   shell.appendChild(foot);
   host.appendChild(shell);
