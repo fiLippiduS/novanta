@@ -1,6 +1,6 @@
 # NOVANTA
 
-Un gioco di calcio per il web. Nove modalità, nessun bundler, nessuna dipendenza.
+Un gioco di calcio per il web. Dieci modalità, nessun bundler, nessuna dipendenza.
 
 - **La Rosa** — novanta secondi per nominare più giocatori possibili di una rosa:
   quasi duemila fra club stagione per stagione e nazionali a Mondiali, Europei e
@@ -15,6 +15,10 @@ Un gioco di calcio per il web. Nove modalità, nessun bundler, nessuna dipendenz
 - **Carriera** — dai sedici anni al ritiro, con il ruolo che decide doti e numeri,
   l'allenamento, tre scelte ogni stagione, coppe europee guadagnate in classifica,
   nazionale e grandi tornei per chi viene dalle dieci nazionali più forti.
+- **Allenatore** — una panchina in dieci campionati con le rose di oggi: partite
+  minuto per minuto con scelte decisive, classifica giornata per giornata, dodici
+  stili, mercato a trattative (club, procuratore, visite mediche), potenziale e
+  declino realistici, più di quattrocento decisioni, coppe, promozioni ed esonero.
 - **Chi è?** — la scheda di una carriera vera senza il nome, cinque vite, la ricerca
   che suggerisce mentre scrivi.
 - **Catena** — squadra, giocatore, squadra: quaranta secondi a mossa, da soli o
@@ -24,7 +28,7 @@ Un gioco di calcio per il web. Nove modalità, nessun bundler, nessuna dipendenz
 - **Il Novantesimo** — cinque round, la stessa sfida per tutti nel mondo, generata dalla data.
 
 Interfaccia in italiano, inglese, spagnolo, francese, tedesco e portoghese
-(anche gli eventi della Carriera). Le pagine di testo sono in italiano. Tutti i
+(anche gli eventi di Carriera e Allenatore). Le pagine di testo sono in italiano. Tutti i
 progressi restano nel browser dell'utente.
 
 ## Far partire il gioco
@@ -57,6 +61,11 @@ for t in test/*.test.mjs; do node "$t" || break; done
   eventi, coppe solo se conquistate, infortuni che tolgono partite, tre scelte fino
   all'ultima stagione, e trecento carriere con le stesse scelte tutte diverse.
 - `rosa.test.mjs` — ogni rosa del catalogo esiste, è giocabile e ogni nome si trova.
+- `allenatore.test.mjs` — rose vere complete, partite credibili, stili senza padroni,
+  potenziale realistico per età (talenti, giocatori al massimo, declino), crescita col
+  rendimento senza inflazione, classifica corretta, esonero possibile ed evitabile,
+  trattative che vanno in porto o saltano (club, procuratore, visite mediche), salvataggi
+  identici e più di 400 eventi tutti giocabili.
 - `i18n.test.mjs` — le sei lingue hanno le stesse chiavi e gli stessi segnaposto,
   e ogni chiave usata nel codice esiste.
 

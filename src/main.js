@@ -22,6 +22,7 @@ async function boot() {
   router.register('chi', () => import('./scenes/chi.js'));
   router.register('catena', () => import('./scenes/catena.js'));
   router.register('impostore', () => import('./scenes/impostore.js'));
+  router.register('allenatore', () => import('./scenes/allenatore.js'));
 
   router.start(document.getElementById('app'));
 

@@ -89,12 +89,29 @@ export async function categoryMembers(category) {
 export async function pageviews(titles, onProgress, days = 60) {
   const out = new Map();
   const groups = chunk(titles, 50);
+  /* una sola voce "bloccata" dal servizio delle statistiche fa fallire tutto
+     il gruppo: si divide il gruppo a metà finché la voce resta da sola, e
+     quella vale zero */
+  async function query(group, params) {
+    try {
+      return await api(params);
+    } catch (e) {
+      if (!/pvi-/.test(e.message)) throw e;
+      if (group.length === 1) return { query: { pages: [] } };
+      const half = Math.ceil(group.length / 2);
+      for (const part of [group.slice(0, half), group.slice(half)]) {
+        const sub = await pageviews(part, null, days);
+        for (const [k, v] of sub) out.set(k, Math.max(out.get(k) || 0, v));
+      }
+      return { query: { pages: [] } };
+    }
+  }
   for (let i = 0; i < groups.length; i++) {
     let cont = null;
     do {
       const params = { action: 'query', prop: 'pageviews', pvipdays: String(days), titles: groups[i].join('|'), redirects: '1' };
       if (cont) Object.assign(params, cont);
-      const j = await api(params);
+      const j = await query(groups[i], params);
       const redirects = new Map((j.query?.redirects || []).map((r) => [r.to, r.from]));
       for (const p of j.query?.pages || []) {
         if (p.missing || !p.pageviews) continue;

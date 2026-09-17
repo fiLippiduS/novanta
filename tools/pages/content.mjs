@@ -34,8 +34,8 @@ export const PAGES = [
   {
     slug: 'come-si-gioca',
     title: 'Come si gioca',
-    description: 'Le regole delle nove modalità di NOVANTA: La Rosa, Rigori, Asta, Più o Meno, Carriera, Chi è?, Catena, Impostore e Il Novantesimo.',
-    lead: 'Nove modalità, da soli o in compagnia. Nessuna dura più di qualche minuto, a parte la Carriera.',
+    description: 'Le regole delle dieci modalità di NOVANTA: La Rosa, Rigori, Asta, Più o Meno, Carriera, Allenatore, Chi è?, Catena, Impostore e Il Novantesimo.',
+    lead: 'Dieci modalità, da soli o in compagnia. Nessuna dura più di qualche minuto, a parte Carriera e Allenatore.',
     priority: '0.8',
     body: `
   <h2 class="display"><a href="/quiz-rosa-squadra">La Rosa</a></h2>
@@ -77,6 +77,15 @@ export const PAGES = [
   attaccante gol e assist. Le coppe europee si giocano solo se la classifica
   dell’anno prima le ha conquistate, gli infortuni tolgono davvero partite, e la
   carriera finisce quando il fisico lo dice. Due carriere non sono mai uguali.</p>
+
+  <h2 class="display"><a href="/allenatore-calcio">Allenatore</a></h2>
+  <p>Scegli un club vero di dieci campionati, con la rosa di oggi, e uno dei dodici
+  stili di gioco. Prepari formazione e tattica, giochi le partite minuto per minuto
+  e decidi nei momenti che cambiano un risultato; dopo ogni giornata la classifica
+  si aggiorna. Sul mercato tratti con il club, con il giocatore e il suo procuratore,
+  e le visite mediche possono far saltare tutto. I giovani crescono se giocano, i
+  veterani calano, e centinaia di decisioni su spogliatoio, stampa e società hanno
+  conseguenze. Se i risultati non arrivano, la dirigenza ti esonera.</p>
 
   <h2 class="display"><a href="/indovina-il-calciatore">Chi è?</a></h2>
   <p>Vedi la scheda di un calciatore vero, come quella di Wikipedia, ma senza il

@@ -45,7 +45,9 @@
     "impostoreTitle": "Imposteur",
     "impostoreDesc": "Tout le monde connaît le joueur sauf un. Un mot chacun, puis on vote. De trois à dix.",
     "players": "Joueurs",
-    "rounds": "Manches"
+    "rounds": "Manches",
+    "allenatoreTitle": "Entraîneur",
+    "allenatoreDesc": "Effectifs réels, matchs minute par minute, un classement qui bouge. Un banc à garder."
   },
   "squad": {
     "title": "L’Effectif",
@@ -966,5 +968,938 @@
       "torre": "Garde le ballon et fait remonter l’équipe. Gagne tous les duels aériens."
     },
     "turn": "Deux saisons"
+  },
+  "allenatore": {
+    "title": "Entraîneur",
+    "lead": "Un vrai banc, un vrai effectif, une saison entière à mener au bout.",
+    "introText": "Choisis un club parmi dix championnats avec les joueurs d’aujourd’hui. Tu prépares les matchs, tu les joues minute par minute et tu décides dans les moments qui changent un résultat. La direction te juge chaque semaine.",
+    "features": {
+      "squads": "198 clubs et plus de six mille vrais joueurs, titulaires et remplaçants",
+      "match": "Matchs simulés minute par minute, avec des choix décisifs en cours de jeu",
+      "table": "Classement mis à jour après chaque journée",
+      "events": "Des centaines d’imprévus et de décisions avec des conséquences sur ta carrière",
+      "players": "Des notes qui montent et descendent selon ce que les joueurs font sur le terrain"
+    },
+    "new": "Nouvelle carrière",
+    "saveFailTitle": "Sauvegarde impossible",
+    "saveFail": "Le navigateur n’a plus de place pour sauvegarder ta carrière. Libère de l’espace ou quitte la navigation privée.",
+    "tabs": {
+      "hub": "Banc",
+      "squad": "Effectif",
+      "tactics": "Tactique",
+      "market": "Mercato",
+      "table": "Classement",
+      "fixtures": "Calendrier",
+      "coach": "Carrière"
+    },
+    "position": "Place",
+    "points": "Points",
+    "goal": "Objectif",
+    "trust": "Confiance direction",
+    "fans": "Supporters",
+    "ultimatumLine": "Ultimatum : {points} points sur {need} exigés, {left} matchs restants.",
+    "create": {
+      "name": "Comment t’appelles-tu ?",
+      "nameText": "Le nom que liront les journaux.",
+      "namePh": "Prénom et nom",
+      "next": "Suivant",
+      "nation": "D’où viens-tu ?",
+      "nationPh": "Cherche un pays",
+      "style": "Quel football veux-tu jouer ?",
+      "styleText": "Tu peux changer de style, mais l’équipe l’apprend en le jouant : plus tu le gardes, mieux il fonctionne.",
+      "league": "Quel championnat ?",
+      "top": "Première division · {n} équipes",
+      "second": "Deuxième division · {n} équipes",
+      "club": "Choisis ton banc",
+      "clubText": "Les étoiles indiquent la force de l’effectif. Plus il est fort, plus la direction exige.",
+      "confirm": "Objectif de la direction : {objective} (finir {target}e ou mieux). {players} joueurs dans l’effectif.",
+      "stars": "Les meilleurs",
+      "sign": "Tu signes le contrat ?",
+      "signBtn": "Je signe"
+    },
+    "styles": {
+      "tikitaka": {
+        "name": "Tiki-taka",
+        "desc": "Ballon au sol, passes courtes, patience. Il faut de bons pieds au milieu."
+      },
+      "gegenpressing": {
+        "name": "Gegenpressing",
+        "desc": "On presse dès la perte du ballon. Beaucoup de récupérations hautes, beaucoup de fatigue."
+      },
+      "contropiede": {
+        "name": "Contre-attaque",
+        "desc": "On laisse le ballon à l’adversaire et on frappe en vitesse. Il faut des ailiers et des attaquants rapides."
+      },
+      "catenaccio": {
+        "name": "Catenaccio",
+        "desc": "Défense basse et ordonnée, marquage serré, contres. On souffre, mais on encaisse peu."
+      },
+      "totale": {
+        "name": "Football total",
+        "desc": "Tout le monde attaque, tout le monde défend. Spectacle et risques à parts égales."
+      },
+      "fasce": {
+        "name": "Jeu sur les ailes",
+        "desc": "Largeur, centres et têtes. Des latéraux endurants et un avant-centre costaud."
+      },
+      "verticale": {
+        "name": "Direct",
+        "desc": "Ballon long sur l’attaquant et seconds ballons. On saute le milieu."
+      },
+      "equilibrio": {
+        "name": "Équilibré",
+        "desc": "Pas d’excès : une équipe compacte et ordonnée qui s’adapte au match."
+      },
+      "quinti": {
+        "name": "Défense à trois et pistons",
+        "desc": "Trois centraux et deux pistons. Largeur et densité, mais les pistons fatiguent."
+      },
+      "falsonove": {
+        "name": "Faux neuf",
+        "desc": "L’attaquant décroche et libère l’espace pour les appels. Des buts de partout."
+      },
+      "pallainattiva": {
+        "name": "Coups de pied arrêtés",
+        "desc": "Coups francs, corners et longues touches travaillés toute la semaine. Il faut de bons joueurs de tête."
+      },
+      "pullman": {
+        "name": "Le bus devant le but",
+        "desc": "Tout le monde derrière le ballon. Contre plus fort ou pour tenir un avantage."
+      }
+    },
+    "styleBars": {
+      "possession": "Possession",
+      "press": "Pressing",
+      "risk": "Risque",
+      "fatigue": "Fatigue"
+    },
+    "objectives": {
+      "title": "Gagner le championnat",
+      "ucl": "Qualification en Ligue des champions",
+      "europe": "Qualification européenne",
+      "topHalf": "Première moitié du classement",
+      "survival": "Maintien",
+      "promotion": "Montée",
+      "playoff": "Places de barrages",
+      "midTable": "Milieu de tableau",
+      "safe": "Une saison tranquille"
+    },
+    "objectivesShort": {
+      "title": "Titre",
+      "ucl": "Ligue des champions",
+      "europe": "Europe",
+      "topHalf": "Première moitié",
+      "survival": "Maintien",
+      "promotion": "Montée",
+      "playoff": "Barrages",
+      "midTable": "Milieu de tableau",
+      "safe": "Tranquillité"
+    },
+    "loanedOut": "Prêtés ailleurs",
+    "loanedOutText": "Ils reviennent en fin de saison.",
+    "market": {
+      "title": "Mercato",
+      "budget": "Budget",
+      "wageRoom": "Marge salariale",
+      "squadSize": "Effectif",
+      "open": "Mercato ouvert",
+      "closed": "Mercato fermé · réouverture à la {md}e journée",
+      "openOffers": "Mercato · {n} offres",
+      "offersIn": "Offres reçues",
+      "offerLine": "{club} propose {fee} pour {player}",
+      "valueLine": "Valeur {value} · expire à la {md}e journée",
+      "reject": "Refuser",
+      "accept": "Accepter",
+      "search": "Chercher des joueurs",
+      "searchPh": "Nom du joueur",
+      "all": "Tous",
+      "under": "Moins de {n} ans",
+      "anyAge": "Tout âge",
+      "allLeagues": "Tous les championnats",
+      "affordable": "Seulement dans le budget",
+      "none": "Aucun joueur avec ces filtres.",
+      "mood": {
+        "keen": "Intéressé",
+        "maybe": "À convaincre",
+        "no": "Pas intéressé"
+      },
+      "log": "Transferts conclus",
+      "logIn": "{season} · {name} recruté du {club} pour {fee}",
+      "logLoan": "{season} · {name} prêté par le {club} ({fee})",
+      "logOut": "{season} · {name} vendu au {club} pour {fee}",
+      "fromClub": "Joue au {club}",
+      "asking": "Prix demandé",
+      "wage": "Salaire",
+      "contract": "Contrat",
+      "interest": "Envie de venir",
+      "closedNow": "Le mercato est fermé : on ne peut négocier que pendant les fenêtres de transferts.",
+      "done": "Affaire conclue : {name} arrive pour {fee}, salaire {wage} par an.",
+      "doneLoan": "Prêt conclu : {name} arrive pour {fee}, salaire {wage} par an.",
+      "status": {
+        "squadMin": "L’effectif ne peut pas descendre sous les 20 joueurs.",
+        "keeperMin": "Il faut au moins deux gardiens dans l’effectif.",
+        "noBudget": "Budget insuffisant.",
+        "noWages": "Il demande {wage} par an : la masse salariale n’a de place que pour {room}.",
+        "refusedPlayer": "Le joueur ne veut pas venir.",
+        "rejected": "Le club refuse l’offre.",
+        "countered": "Le club fait une contre-offre : il demande {counter}."
+      },
+      "acceptCounter": "J’accepte : {fee}",
+      "walkAway": "J’abandonne",
+      "offerPct": "Proposer {fee}",
+      "loan": "Prêt ({fee})"
+    },
+    "contract": {
+      "renew": "Prolonger : {years} ans à {wage}",
+      "renewed": "Prolongé de {years} ans à {wage} par an.",
+      "refused": "Il ne veut pas prolonger : il faut d’abord réparer la relation.",
+      "noWages": "La masse salariale ne permet pas cette prolongation.",
+      "list": "Mettre sur le marché",
+      "unlist": "Retirer du marché",
+      "listed": "Mis sur le marché : les offres arrivent pendant les fenêtres.",
+      "unlisted": "Retiré du marché.",
+      "release": "Résilier le contrat",
+      "releaseTitle": "Résilier le contrat de {name} ?",
+      "releaseText": "Cela coûte {cost} : la moitié de ce qui reste du contrat.",
+      "releaseYes": "Résilier"
+    },
+    "cupRounds": {
+      "r32": "Seizièmes de finale",
+      "r16": "Huitièmes de finale",
+      "qf": "Quarts de finale",
+      "sf": "Demi-finale",
+      "final": "Finale",
+      "g1": "Groupe · 1re journée",
+      "g2": "Groupe · 2e journée",
+      "g3": "Groupe · 3e journée",
+      "g4": "Groupe · 4e journée",
+      "g5": "Groupe · 5e journée",
+      "g6": "Groupe · 6e journée"
+    },
+    "cup": {
+      "neutral": "Terrain neutre",
+      "pensShort": "t.a.b.",
+      "trophy": "{name} remportée !",
+      "eliminated": "Éliminés",
+      "advanced": "Qualifiés pour le tour suivant",
+      "otherResults": "Tous les résultats du tour",
+      "group": "Groupe {g}",
+      "title": "Coupes",
+      "won": "Remportée",
+      "winner": "Remportée par {club}",
+      "alive": "Toujours en course · {round}",
+      "out": "Éliminés",
+      "afterMd": "après la {n}e journée"
+    },
+    "seasonOver": "Championnat terminé",
+    "seasonOverText": "La dernière journée a été jouée. La direction t’attend pour le verdict.",
+    "seeVerdict": "Le verdict de la saison",
+    "toDecide": "À décider avant le match · {n}",
+    "matchday": "{n}e journée",
+    "home": "À domicile",
+    "away": "À l’extérieur",
+    "derby": "Derby",
+    "theirStyle": "Eux",
+    "strength": "Force",
+    "coachBanned": "Entraîneur suspendu",
+    "unavailable": "Absents",
+    "lineup": "Composition",
+    "quickSim": "Résultat rapide",
+    "decideFirst": "D’abord les décisions",
+    "play": "Jouer le match",
+    "cats": {
+      "board": "Direction",
+      "press": "Presse",
+      "dressing": "Vestiaire",
+      "player": "Joueur",
+      "medical": "Staff médical",
+      "fans": "Supporters",
+      "market": "Mercato",
+      "youth": "Centre de formation",
+      "rival": "Rivaux",
+      "private": "Hors du terrain",
+      "finance": "Finances",
+      "staff": "Staff",
+      "style": "Tactique",
+      "national": "Sélection"
+    },
+    "risk": {
+      "low": "Risque faible",
+      "mid": "Risque moyen",
+      "high": "Risque élevé"
+    },
+    "understood": "Continuer",
+    "change": {
+      "youthIn": "{name} ({value}) monte du centre de formation",
+      "veteranIn": "{name} ({value}) recruté",
+      "trust": "Confiance {value}",
+      "fans": "Supporters {value}",
+      "reputation": "Réputation {value}",
+      "budget": "Budget {value}",
+      "teamMorale": "Moral de l’équipe {value}",
+      "teamForm": "Forme de l’équipe {value}",
+      "teamFitness": "Condition de l’équipe {value}",
+      "seniors": "Cadres {value}",
+      "youngsters": "Jeunes {value}",
+      "familiarity": "Automatismes {value}",
+      "nextMatch": "Effet sur le prochain match",
+      "coachBan": "Suspension : {value} matchs",
+      "academy": "Centre de formation renforcé",
+      "staff": "Staff {value}",
+      "ovr": "{name} : note {value}",
+      "morale": "{name} : moral {value}",
+      "injury": "{name} : absent {value} matchs",
+      "potential": "{name} : potentiel {value}",
+      "bond": "{name} : relation {value}",
+      "newRole": "{name} désormais {role}",
+      "contract": "{name} : contrat {value}",
+      "suspended": "{name} : suspendu {value}",
+      "renew": "{name} : prolongé",
+      "noRenew": "{name} : fin de contrat",
+      "sold": "{name} vendu pour {value}",
+      "loanOut": "{name} prêté",
+      "captain": "{name} capitaine",
+      "penalties": "{name} tireur de penaltys",
+      "youth": "Un jeune rejoint l’équipe première"
+    },
+    "standings": "Classement",
+    "fullTable": "Complet",
+    "pts": "pts",
+    "lastRound": "Résultats · {n}e journée",
+    "inbox": "Actualités",
+    "inboxEmpty": "Aucune actualité pour le moment.",
+    "msg": {
+      "objective": "La direction fixe l’objectif : {objective} (finir {target}e ou mieux). Budget transferts : {budget}.",
+      "newJob": "Bienvenue au {club}. Le groupe t’attend au centre d’entraînement."
+    },
+    "depts": {
+      "POR": "Gardiens",
+      "DIF": "Défenseurs",
+      "CEN": "Milieux",
+      "ATT": "Attaquants"
+    },
+    "squadMoney": "{n} joueurs · salaires {wages} par an · budget {budget}",
+    "years": "ans",
+    "roles": {
+      "POR": "Gardien",
+      "DC": "Défenseur central",
+      "TZ": "Latéral",
+      "MED": "Milieu défensif",
+      "CC": "Milieu central",
+      "TRQ": "Meneur de jeu",
+      "ALA": "Ailier",
+      "PUN": "Avant-centre"
+    },
+    "rolesShort": {
+      "POR": "G",
+      "DC": "DC",
+      "TZ": "LAT",
+      "MED": "MDC",
+      "CC": "MC",
+      "TRQ": "MOC",
+      "ALA": "AIL",
+      "PUN": "BU"
+    },
+    "personality": {
+      "professionista": "Professionnel",
+      "leader": "Leader",
+      "ribelle": "Rebelle",
+      "fragile": "Fragile",
+      "ambizioso": "Ambitieux",
+      "pigro": "Paresseux"
+    },
+    "captain": "Capitaine",
+    "academy": "Formé au club",
+    "fitness": "Condition",
+    "morale": "Moral",
+    "form": "Forme",
+    "affinity": "Adapté au style",
+    "potential": "Potentiel estimé par le staff : {lo}–{hi}",
+    "ovrTrend": "Évolution de la note",
+    "stats": {
+      "apps": "Matchs",
+      "cleanSheets": "Clean sheets",
+      "saves": "Arrêts",
+      "conceded": "Buts encaissés",
+      "penSaved": "Penaltys arrêtés",
+      "goals": "Buts",
+      "assists": "Passes décisives",
+      "tackles": "Tacles",
+      "interceptions": "Interceptions",
+      "aerials": "Duels aériens",
+      "recoveries": "Récupérations",
+      "keyPasses": "Passes clés",
+      "shots": "Tirs",
+      "avg": "Note moyenne"
+    },
+    "contractLine": "Contrat jusqu’en {until} · salaire {wage} par an · valeur {value}",
+    "makeCaptain": "Brassard de capitaine",
+    "makePenalty": "Tireur de penaltys",
+    "tactics": "Tactique",
+    "formation": "Système",
+    "mentality": {
+      "ultradif": "Verrou",
+      "difensiva": "Prudente",
+      "equilibrata": "Équilibrée",
+      "offensiva": "Offensive",
+      "tuttoattacco": "Tous devant"
+    },
+    "mentalityLabel": "Mentalité",
+    "styleLabel": "Style de jeu",
+    "familiarity": "Maîtrise du style",
+    "autoLineup": "Composition choisie par l’adjoint",
+    "styleChangeText": "Changer de style réduit en partie les automatismes : l’équipe a besoin de quelques journées pour l’apprendre.",
+    "fit": "Adapté",
+    "pickFor": "Qui joue {role} ?",
+    "bench": "Banc",
+    "notCalled": "Non convoqués · {n}",
+    "afterMatchday": "après la {n}e",
+    "preseason": "Présaison",
+    "club": "Club",
+    "playedShort": "J",
+    "gdShort": "Diff",
+    "ptsShort": "Pts",
+    "zones": {
+      "ucl": "Ligue des champions",
+      "uel": "Ligue Europa",
+      "uecl": "Ligue Conférence",
+      "up": "Montée",
+      "playoff": "Barrages",
+      "down": "Relégation",
+      "relPlayoff": "Barrage de maintien"
+    },
+    "noRelegationNote": "Dans ce jeu, personne ne descend de deuxième division : la troisième n’existe pas.",
+    "topScorers": "Buteurs",
+    "calendar": "Calendrier",
+    "homeShort": "D",
+    "awayShort": "E",
+    "coachLabel": "Entraîneur",
+    "seasonsDone": "{n} saisons sur le banc",
+    "reputation": "Réputation",
+    "coachStats": {
+      "played": "Matchs",
+      "won": "Victoires",
+      "drawn": "Nuls",
+      "lost": "Défaites",
+      "trophies": "Trophées",
+      "sacked": "Limogeages"
+    },
+    "trophies": "Palmarès",
+    "trophyNames": {
+      "league": "Champion · {league, cup: \"{league}\", ucl: \"Ligue des champions\", uel: \"Ligue Europa\", uecl: \"Ligue Conférence\" }",
+      "league2": "Première place · {league}",
+      "promotion": "Montée depuis la {league}"
+    },
+    "history": "Saisons",
+    "verdicts": {
+      "met": "Objectif atteint",
+      "triumph": "Saison triomphale",
+      "missed": "Objectif manqué",
+      "sacked": "Limogé",
+      "relegatedKept": "Relégué, mais conservé"
+    },
+    "verdictText": {
+      "met": "Objectif demandé : {objective}. Atteint. La direction renouvelle sa confiance.",
+      "triumph": "Objectif demandé : {objective}. Tu as fait bien mieux. Ton nom circule dans les grands clubs.",
+      "missed": "Objectif demandé : {objective} (finir {target}e ou mieux). Tu n’y es pas arrivé : la patience de la direction a des limites.",
+      "sacked": "Objectif demandé : {objective}. La direction a décidé de changer d’entraîneur.",
+      "relegatedKept": "L’équipe descend, mais la direction croit encore en toi pour remonter."
+    },
+    "restart": "Tout recommencer",
+    "restartTitle": "Supprimer la carrière ?",
+    "restartText": "Saisons, trophées et effectif seront perdus. Impossible de revenir en arrière.",
+    "restartYes": "Supprimer et recommencer",
+    "win": "Victoire",
+    "loss": "Défaite",
+    "draw": "Match nul",
+    "ultimatumGiven": "La direction te pose un ultimatum : il faut 5 points lors des 3 prochains matchs.",
+    "ultimatumPassed": "Ultimatum réussi. La direction est de nouveau de ton côté.",
+    "sackedLine": "La direction a tranché : tu es limogé.",
+    "growth": "Qui progresse et qui recule",
+    "growthText": "Les qualités évoluent avec les notes, les statistiques du poste, le temps de jeu et l’âge.",
+    "injuries": "Infirmerie",
+    "injuryLine": "{name} est blessé : {weeks} matchs.",
+    "continue": "Continuer",
+    "seasonLabel": "Saison",
+    "movesTitle": "Montées et relégations",
+    "summerTitle": "L’été",
+    "retiredLine": "Prennent leur retraite : {names}.",
+    "leftLine": "Quittent le club : {names}.",
+    "returnedLine": "De retour de prêt : {names}.",
+    "loanAgainLine": "Prêtés à nouveau pour jouer et progresser : {names}.",
+    "youthLine": "{n} jeunes montent du centre de formation.",
+    "seeOffers": "Les offres",
+    "nextSeason": "Commencer la nouvelle saison",
+    "sackedTitle": "Limogé",
+    "sackedText": "Le {club} t’a démis de tes fonctions. Mais le téléphone sonne encore.",
+    "offers": "Qui te veut",
+    "attrs": {
+      "pace": "Vitesse",
+      "stamina": "Endurance",
+      "strength": "Puissance",
+      "tackling": "Tacle",
+      "marking": "Marquage",
+      "heading": "Jeu de tête",
+      "passing": "Passe",
+      "vision": "Vision",
+      "technique": "Technique",
+      "dribbling": "Dribble",
+      "crossing": "Centres",
+      "finishing": "Finition",
+      "longshots": "Frappe de loin",
+      "positioning": "Placement",
+      "composure": "Sang-froid",
+      "reflexes": "Réflexes",
+      "handling": "Prise de balle",
+      "aerial": "Sorties aériennes",
+      "distribution": "Relance"
+    },
+    "formShort": {
+      "W": "V",
+      "D": "N",
+      "L": "D"
+    },
+    "moraleLevels": {
+      "high": "au top",
+      "ok": "bon",
+      "low": "bas",
+      "bad": "au plus bas"
+    },
+    "onLoan": "Prêté",
+    "loanIn": "Prêt",
+    "live": {
+      "tactics": "Tactique",
+      "skip": "Avance rapide",
+      "ft": "Fin",
+      "possession": "Possession",
+      "shots": "Tirs (cadrés)",
+      "onTarget": "Tirs cadrés",
+      "corners": "Corners",
+      "cards": "Jaunes/rouges",
+      "fouls": "Fautes",
+      "penShort": "pen.",
+      "subsLeft": "Changements {n} · fenêtres {w}",
+      "askAssistant": "Demander à l’adjoint",
+      "assistantSays": "Ton adjoint conseille : « {option} ».",
+      "changeCost": "Chaque changement de style ou de système pendant le match coûte quelques minutes de flottement.",
+      "resume": "Reprendre",
+      "subOut": "{name} sort (condition {fitness}). Changements restants : {subs}.",
+      "subDenied": "Changement impossible : plus de fenêtres ou de changements.",
+      "noSubs": "Aucun changement disponible.",
+      "subTitle": "Qui entre ?",
+      "motm": "Homme du match",
+      "fulltime": "Coup de sifflet final",
+      "lines": {
+        "kickoff": [
+          "C’est parti !",
+          "Coup d’envoi : le match commence."
+        ],
+        "goal": [
+          "BUT ! {player} marque pour le {team} !",
+          "But de {player} ! La tribune du {team} explose.",
+          "{player} ne pardonne pas : but du {team} !"
+        ],
+        "goalAssist": [
+          "BUT ! {assist} centre, {player} conclut pour le {team} !",
+          "Passe de {assist}, but de {player} ! Le {team} marque.",
+          "{player} reprend le ballon de {assist} et marque !"
+        ],
+        "penGoal": [
+          "Penalty transformé par {player} : le ballon d’un côté, le gardien de l’autre.",
+          "{player} ne tremble pas sur le point de penalty."
+        ],
+        "saved": [
+          "Tir de {player}, arrêt de {keeper}.",
+          "{player} tente sa chance, {keeper} capte.",
+          "Frappe de {player}, aucun souci pour {keeper}."
+        ],
+        "bigSave": [
+          "Parade incroyable de {keeper} devant {player} !",
+          "{keeper} s’envole et prive {player} du but !",
+          "Quel arrêt de {keeper} ! {player} n’en revient pas."
+        ],
+        "miss": [
+          "{player} tire au-dessus.",
+          "Tir de {player} à côté.",
+          "{player} tente de loin : non cadré."
+        ],
+        "bigMiss": [
+          "{player} rate le but vide ! Énorme occasion pour le {team}.",
+          "Incroyable : {player} seul face au gardien, et à côté !"
+        ],
+        "woodwork": [
+          "Poteau de {player} !",
+          "Transversale de {player} ! Le {team} n’est pas passé loin."
+        ],
+        "blocked": [
+          "Tir de {player} contré par un défenseur.",
+          "{player} frappe, la défense se jette."
+        ],
+        "yellow": [
+          "Carton jaune pour {player}.",
+          "Jaune pour {player} après une intervention en retard.",
+          "L’arbitre sort le carton jaune : {player}."
+        ],
+        "red": [
+          "Rouge direct pour {player} ! Le {team} à dix.",
+          "{player} expulsé ! Intervention très dure."
+        ],
+        "secondYellow": [
+          "Deuxième jaune pour {player} : dehors ! Le {team} en infériorité.",
+          "{player} commet une nouvelle faute et est expulsé."
+        ],
+        "injury": [
+          "{player} reste au sol : blessé, {weeks} matchs d’absence prévus.",
+          "Mauvaise nouvelle pour le {team} : {player} se blesse."
+        ],
+        "sub": [
+          "Changement au {team} : {in} entre, {out} sort.",
+          "{team} : {out} sort, {in} entre."
+        ],
+        "penalty": [
+          "Penalty !",
+          "L’arbitre désigne le point de penalty !"
+        ],
+        "penSaved": [
+          "{keeper} arrête le penalty de {player} !",
+          "Penalty arrêté ! {keeper} a lu dans le jeu de {player}."
+        ],
+        "penMissed": [
+          "{player} rate son penalty !",
+          "Penalty à côté : {player} manque le cadre."
+        ],
+        "disallowed": [
+          "But refusé à {player} : hors-jeu après la VAR.",
+          "La VAR annule le but de {player}."
+        ],
+        "error": [
+          "Erreur de {player} ! Il offre le ballon à l’adversaire.",
+          "Grosse bourde de {player} à la relance."
+        ],
+        "halftime": [
+          "Mi-temps : {home}–{away}.",
+          "Retour aux vestiaires sur le score de {home}–{away}."
+        ],
+        "fulltime": [
+          "C’est terminé : {home}–{away}.",
+          "Coup de sifflet final : {home}–{away}."
+        ],
+        "added": [
+          "{added} minutes de temps additionnel.",
+          "Temps additionnel : {added} minutes."
+        ],
+        "extratime": [
+          "Direction la prolongation."
+        ],
+        "et-half": [
+          "Changement de côté en prolongation."
+        ],
+        "shootout": [
+          "Tout se jouera aux tirs au but."
+        ],
+        "tactic": "Le {team} change de dispositif : mentalité {mentality}."
+      }
+    },
+    "moments": {
+      "halftime": {
+        "t": "Mi-temps",
+        "d": "Dans le vestiaire, les joueurs te regardent. Que leur dis-tu ?",
+        "o": {
+          "calm": "Calme et rigueur : on suit le plan",
+          "fire": "Coup de gueule : ça ne va pas",
+          "praise": "Bravo : continuez comme ça"
+        },
+        "good": "Le message passe : l’équipe revient remontée.",
+        "bad": "Le discours tombe à plat : certains reviennent nerveux.",
+        "done": "Causerie de la mi-temps faite."
+      },
+      "concededEarly": {
+        "t": "But encaissé très tôt",
+        "d": "Tu es mené d’entrée. Il reste du temps, mais il faut réagir.",
+        "o": {
+          "patience": "Patience : même plan",
+          "pushUp": "Bloc plus haut et plus d’agressivité",
+          "switchCounter": "On passe en contre-attaque"
+        },
+        "done": "Réaction au score décidée."
+      },
+      "redOwn": {
+        "t": "À dix",
+        "d": "Un de tes joueurs a été expulsé. Comment te réorganises-tu ?",
+        "o": {
+          "sacrifice": "{out} sort, {in} entre : on se protège",
+          "dropDeep": "Tout le monde derrière, on défend",
+          "keepGoing": "Rien ne change, on continue"
+        },
+        "done": "Réponse à l’expulsion."
+      },
+      "redOpp": {
+        "t": "Eux à dix",
+        "d": "L’adversaire est réduit à dix. C’est le moment d’en profiter ?",
+        "o": {
+          "allIn": "Tout le monde devant",
+          "patientPossession": "Possession patiente, on les épuise",
+          "wideOverload": "On écarte le jeu sur les ailes"
+        },
+        "done": "Plan pour la supériorité numérique."
+      },
+      "injuryOwn": {
+        "t": "Blessure",
+        "d": "{player} ne peut pas continuer. Qui entre ?",
+        "o": {
+          "likeForLike": "Poste pour poste : {like}",
+          "moreAttack": "Plus d’attaque : entrée de {attackerIn}",
+          "moreDefence": "Plus de couverture : entrée de {defenderIn}"
+        },
+        "done": "Changement forcé sur blessure."
+      },
+      "tiredStar": {
+        "t": "Ton meilleur joueur est fatigué",
+        "d": "{player} est à bout de forces, mais c’est ton joueur le plus fort sur le terrain.",
+        "o": {
+          "subNow": "Il sort maintenant, {in} entre",
+          "keepHim": "Il reste : il peut inventer quelque chose",
+          "freeRole": "Il reste, libéré des tâches défensives"
+        },
+        "good": "Le pari paie : la star fatiguée illumine le match.",
+        "done": "Décision prise sur le joueur fatigué."
+      },
+      "bookedDefender": {
+        "t": "Défenseur averti",
+        "d": "{player} a déjà un carton jaune et fait face à un adversaire très rapide.",
+        "o": {
+          "subBooked": "Je le sors : {in} entre",
+          "careful": "Je lui demande de rester debout",
+          "trust": "Je lui fais confiance : joue ton jeu"
+        },
+        "done": "Décision prise sur le défenseur averti."
+      },
+      "pressure": {
+        "t": "On souffre",
+        "d": "Ces dix dernières minutes, l’adversaire a tiré quatre fois. Ton équipe n’arrive pas à sortir.",
+        "o": {
+          "dropDeep": "Bloc bas pendant un quart d’heure",
+          "pressHigher": "Pressing plus haut pour casser leur rythme",
+          "longBalls": "Ballons longs et seconds ballons"
+        },
+        "done": "Réponse à la pression."
+      },
+      "leadLate": {
+        "t": "Un but d’avance",
+        "d": "Il reste un peu plus de dix minutes et tu mènes d’un but.",
+        "o": {
+          "parkBus": "Le bus devant le but",
+          "keepPlaying": "On continue à jouer",
+          "killGame": "Endormir le match, gagner du temps"
+        },
+        "done": "Gestion de l’avance."
+      },
+      "trailLate": {
+        "t": "Il faut un but",
+        "d": "Le temps presse et tu es mené. Que tentes-tu ?",
+        "o": {
+          "extraStriker": "{out} sort, {in} entre : deux attaquants",
+          "longBallsTall": "Ballons aériens dans la surface",
+          "staysPatient": "Offensifs, mais sans perdre la tête"
+        },
+        "done": "Assaut final décidé."
+      },
+      "drawLate": {
+        "t": "Égalité en fin de match",
+        "d": "Score nul à un quart d’heure de la fin.",
+        "o": {
+          "goForWin": "On va chercher la victoire",
+          "takePoint": "Un point, c’est bien",
+          "setPieces": "Tout sur les coups de pied arrêtés"
+        },
+        "done": "Plan pour la fin de match décidé."
+      },
+      "oppChange": {
+        "t": "L’adversaire change",
+        "d": "Le {opponent} a changé de dispositif. Tu réponds ?",
+        "o": {
+          "mirror": "On couvre les nouveaux espaces",
+          "exploit": "On frappe là où ils se sont découverts",
+          "ignore": "Aucun changement"
+        },
+        "done": "Réponse au changement adverse."
+      },
+      "bigLead": {
+        "t": "Match en main",
+        "d": "Deux buts d’avance : tu peux économiser des forces ou enfoncer le clou.",
+        "o": {
+          "restStars": "On ralentit, on économise",
+          "moreGoals": "Encore des buts : la différence compte",
+          "youngsters": "Du temps de jeu et de la confiance pour les jeunes"
+        },
+        "done": "Avance de deux buts gérée."
+      },
+      "penalty": {
+        "t": "Penalty pour nous",
+        "d": "Qui le tire ?",
+        "done": "Tireur choisi."
+      },
+      "freekick": {
+        "t": "Coup franc aux abords de la surface",
+        "d": "Coup franc bien placé. {taker} est au-dessus du ballon : comment le joue-t-on ?",
+        "o": {
+          "fkDirect": "Frappe directe",
+          "fkCross": "Ballon dans la surface pour les grands",
+          "fkShort": "Combinaison courte travaillée à l’entraînement"
+        },
+        "done": "Coup franc joué."
+      }
+    },
+    "phase": {
+      "talent": "Pépite",
+      "growing": "En progression",
+      "peak": "À son sommet",
+      "declining": "En déclin"
+    },
+    "potShort": "POT {value}",
+    "potRange": "POT {lo}–{hi}",
+    "talks": {
+      "year1": "1 an",
+      "yearsN": "{n} ans",
+      "sort": "Trier",
+      "sortOvr": "Note",
+      "sortPot": "Potentiel",
+      "title": "Négociations",
+      "deadline": "Dernier jour du mercato",
+      "start": "Négocier le transfert",
+      "startLoan": "Demander un prêt · {fee}",
+      "value": "Valeur",
+      "until": "Contrat jusqu’en {year}",
+      "steps": {
+        "club": "Club",
+        "player": "Joueur",
+        "medical": "Visite"
+      },
+      "stage": {
+        "club": "Avec le club",
+        "player": "Avec le joueur",
+        "medicalIssue": "Visite médicale",
+        "signed": "Signé",
+        "collapsed": "Échouée"
+      },
+      "error": {
+        "closed": "Le mercato est fermé : on ne négocie que pendant les fenêtres.",
+        "noLoan": "Le club ne prête pas un joueur aussi important.",
+        "squadFull": "Effectif complet : vends ou libère quelqu’un avant d’acheter.",
+        "own": "C’est déjà ton joueur."
+      },
+      "status": {
+        "noBudget": "Tu n’as pas assez de budget.",
+        "noWages": "La masse salariale n’a de la place que pour {room}.",
+        "invalid": "Coup impossible à ce stade."
+      },
+      "ask": "Prix demandé",
+      "patience": "Patience du club",
+      "playerPatience": "Patience du joueur",
+      "fee": "Ton offre",
+      "bonus": "Bonus aux matchs joués",
+      "bonusNone": "Aucun",
+      "offer": "Offrir {fee}",
+      "clause": "Payer la clause · {fee}",
+      "withdraw": "Abandonner",
+      "wage": "Salaire annuel",
+      "years": "Années",
+      "role": "Rôle promis",
+      "loanTerms": "Prêt d’une saison : tu paies {share} % du salaire.",
+      "costNow": "À payer tout de suite : {fee} plus {agent} à l’agent · marge salariale {room}",
+      "propose": "Proposer le contrat",
+      "medicalAsk": "La visite médicale a trouvé un problème. Que fais-tu ?",
+      "discount": "Demander une remise",
+      "proceed": "Le signer quand même",
+      "walk": "Laisser tomber",
+      "signedTitle": "Transfert conclu",
+      "collapsedTitle": "Négociation échouée",
+      "roles": {
+        "starter": "titulaire",
+        "rotation": "joueur de rotation",
+        "prospect": "remplaçant"
+      },
+      "rolesCap": {
+        "starter": "Titulaire",
+        "rotation": "Rotation",
+        "prospect": "Remplaçant"
+      },
+      "who": {
+        "club": "Club",
+        "agent": "Agent",
+        "you": "Toi",
+        "rival": "Mercato",
+        "medical": "Staff médical",
+        "deal": "Issue"
+      },
+      "reason": {
+        "clubBroke": "Le club a fermé la porte : trop d’offres sous le prix.",
+        "hijacked": "Un autre club a été plus rapide : {club}.",
+        "playerRefused": "Le joueur a dit non.",
+        "medical": "Tu as renoncé après la visite médicale.",
+        "windowClosed": "Le mercato a fermé avant la signature.",
+        "withdrawn": "Tu as abandonné la négociation.",
+        "gone": "Le joueur est déjà parti ailleurs.",
+        "noBudget": "Au moment de signer, l’argent n’était plus là."
+      },
+      "log": {
+        "open": "Le club demande {ask}.",
+        "openLoan": "Pour un prêt, le club demande {ask}.",
+        "untouchable": "« Il n’est pas à vendre. » Pour discuter, il faudrait {ask}.",
+        "clauseInfo": "Il a une clause libératoire de {fee}.",
+        "reluctant": "L’agent prévient : le joueur n’est pas convaincu de venir.",
+        "bid": "Tu offres {fee}.",
+        "bidBonus": "Tu offres {fee} plus {bonus} de bonus aux matchs joués.",
+        "insulted": "Offre insultante : le club s’agace et demande toujours {ask}.",
+        "accepted": "Le club accepte : {fee}.",
+        "counter": "Le club fait une contre-offre : {ask}.",
+        "lastPrice": "Dernier prix : {ask}. Ensuite le club arrête.",
+        "entered": "{club} entre dans la course : le prix monte à {ask}.",
+        "clause": "Tu paies la clause : {fee}.",
+        "clausePaid": "Clause payée : le club ne peut pas s’y opposer.",
+        "demand": "Il veut {wage} par an pendant {years}, comme {role}. Commission : {agent}.",
+        "contract": "Tu proposes {wage} par an pendant {years}, comme {role}.",
+        "agentCounter": "L’agent fait une contre-offre : {wage} par an pendant {years}, comme {role}.",
+        "lastDemand": "Dernière demande : {wage} par an pendant {years}, comme {role}.",
+        "refused": "Trop éloignés : l’agent quitte la table.",
+        "agreed": "Le joueur accepte !",
+        "issue": "La visite révèle un problème physique : {weeks} semaines d’arrêt.",
+        "passed": "Visite médicale réussie.",
+        "noDiscount": "Le club refuse toute remise.",
+        "discount": "Le club accepte la remise : {fee}.",
+        "signed": "Signé : {fee}, {wage} par an pendant {years}.",
+        "signedLoan": "Prêt signé : {fee}, {wage} par an.",
+        "collapsed_clubBroke": "Le club rompt les discussions.",
+        "collapsed_hijacked": "Le joueur rejoint {club}.",
+        "collapsed_playerRefused": "Le joueur refuse.",
+        "collapsed_medical": "Négociation close après la visite.",
+        "collapsed_windowClosed": "Le mercato ferme : transfert annulé.",
+        "collapsed_withdrawn": "Tu te retires de la négociation.",
+        "collapsed_gone": "Le joueur est déjà parti ailleurs.",
+        "collapsed_noBudget": "L’argent n’est plus là."
+      }
+    },
+    "incoming": {
+      "stance": {
+        "wants": "Veut partir",
+        "open": "Réfléchit",
+        "refuses": "Veut rester"
+      },
+      "ask": "Demander {fee}",
+      "result": {
+        "sold": "Vendu pour {fee}.",
+        "raised": "{club} relève son offre : {fee}.",
+        "walkedAway": "{club} se retire.",
+        "playerRefuses": "Le joueur ne veut pas partir.",
+        "upset": "Il voulait partir : il le vit mal.",
+        "upsetOut": "Il voulait partir : il demande maintenant son transfert.",
+        "rejected": "Offre refusée."
+      }
+    },
+    "news": {
+      "title": "Chez les autres clubs",
+      "line": "{to} recrute {name} ({from}) · {fee}"
+    },
+    "bonusPaid": "Bonus pour {name} : {fee}"
   }
 }

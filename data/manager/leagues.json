@@ -1,0 +1,3851 @@
+{
+  "v": 1,
+  "season": "2026–27",
+  "fields": [
+    "name",
+    "birth",
+    "nation",
+    "role",
+    "rating",
+    "number",
+    "side",
+    "height",
+    "caps",
+    "flags",
+    "fame"
+  ],
+  "leagues": [
+    {
+      "id": "ita1",
+      "name": "Serie A",
+      "code": "IT",
+      "level": 1,
+      "teams": 20,
+      "down": 3,
+      "europe": {
+        "ucl": 4,
+        "uel": 1,
+        "uecl": 1
+      },
+      "cup": "Coppa Italia",
+      "lower": "ita2",
+      "clubs": [
+        "atalanta",
+        "bologna-1909",
+        "cagliari",
+        "como-1907",
+        "fiorentina",
+        "frosinone",
+        "genoa-cfc",
+        "inter-milan",
+        "juventus",
+        "lazio",
+        "lecce",
+        "milan",
+        "monza",
+        "napoli",
+        "parma-1913",
+        "roma",
+        "sassuolo",
+        "torino",
+        "udinese",
+        "venezia"
+      ]
+    },
+    {
+      "id": "ita2",
+      "name": "Serie B",
+      "code": "IT",
+      "level": 2,
+      "teams": 20,
+      "up": 2,
+      "playoff": [
+        3,
+        8
+      ],
+      "upper": "ita1",
+      "clubs": [
+        "palermo",
+        "sudtirol",
+        "modena-2018",
+        "mantova-1911",
+        "ascoli-1898",
+        "padova",
+        "avellino-1912",
+        "pisa",
+        "empoli",
+        "arezzo",
+        "cesena",
+        "lr-vicenza",
+        "hellas-verona",
+        "virtus-entella",
+        "benevento",
+        "cremonese",
+        "catanzaro-1929",
+        "juve-stabia",
+        "uc-sampdoria",
+        "carrarese-1908"
+      ]
+    },
+    {
+      "id": "eng1",
+      "name": "Premier League",
+      "code": "GB-ENG",
+      "level": 1,
+      "teams": 20,
+      "down": 3,
+      "europe": {
+        "ucl": 4,
+        "uel": 1,
+        "uecl": 1
+      },
+      "cup": "FA Cup",
+      "lower": "eng2",
+      "clubs": [
+        "arsenal",
+        "aston-villa",
+        "bournemouth",
+        "brentford",
+        "brighton-hove-albion",
+        "chelsea",
+        "coventry-city",
+        "crystal-palace",
+        "everton",
+        "fulham",
+        "hull-city",
+        "ipswich-town",
+        "leeds-united",
+        "liverpool",
+        "manchester-city",
+        "manchester-united",
+        "newcastle-united",
+        "nottingham-forest",
+        "sunderland",
+        "tottenham-hotspur"
+      ]
+    },
+    {
+      "id": "eng2",
+      "name": "Championship",
+      "code": "GB-ENG",
+      "level": 2,
+      "teams": 24,
+      "up": 2,
+      "playoff": [
+        3,
+        6
+      ],
+      "upper": "eng1",
+      "clubs": [
+        "birmingham-city",
+        "blackburn-rovers",
+        "bolton-wanderers",
+        "bristol-city",
+        "burnley",
+        "cardiff-city",
+        "charlton-athletic",
+        "derby-county",
+        "lincoln-city",
+        "norwich-city",
+        "middlesbrough",
+        "millwall",
+        "portsmouth",
+        "preston-north-end",
+        "queens-park-rangers",
+        "sheffield-united",
+        "southampton",
+        "stoke-city",
+        "swansea-city",
+        "watford",
+        "west-bromwich-albion",
+        "west-ham-united",
+        "wolverhampton-wanderers",
+        "wrexham"
+      ]
+    },
+    {
+      "id": "esp1",
+      "name": "LaLiga",
+      "code": "ES",
+      "level": 1,
+      "teams": 20,
+      "down": 3,
+      "europe": {
+        "ucl": 4,
+        "uel": 1,
+        "uecl": 1
+      },
+      "cup": "Copa del Rey",
+      "lower": "esp2",
+      "clubs": [
+        "deportivo-alaves",
+        "athletic-bilbao",
+        "atletico-madrid",
+        "barcelona",
+        "rc-celta-de-vigo",
+        "deportivo-de-a-coruna",
+        "elche",
+        "rcd-espanyol",
+        "getafe",
+        "levante-ud",
+        "malaga",
+        "ca-osasuna",
+        "racing-de-santander",
+        "rayo-vallecano",
+        "real-betis",
+        "real-madrid",
+        "real-sociedad",
+        "sevilla",
+        "valencia",
+        "villarreal"
+      ]
+    },
+    {
+      "id": "esp2",
+      "name": "LaLiga Hypermotion",
+      "code": "ES",
+      "level": 2,
+      "teams": 22,
+      "up": 2,
+      "playoff": [
+        3,
+        6
+      ],
+      "upper": "esp1",
+      "clubs": [
+        "cd-castellon",
+        "sd-eibar",
+        "rcd-mallorca",
+        "cd-tenerife",
+        "ud-las-palmas",
+        "ud-almeria",
+        "real-oviedo",
+        "burgos",
+        "real-sociedad-b",
+        "granada",
+        "ce-sabadell",
+        "cd-leganes",
+        "girona",
+        "rc-celta-fortuna",
+        "sporting-de-gijon",
+        "cd-eldense",
+        "real-valladolid",
+        "andorra",
+        "cadiz",
+        "cordoba",
+        "albacete-balompie",
+        "ad-ceuta"
+      ]
+    },
+    {
+      "id": "ger1",
+      "name": "Bundesliga",
+      "code": "DE",
+      "level": 1,
+      "teams": 18,
+      "down": 2,
+      "relegationPlayoff": 16,
+      "europe": {
+        "ucl": 4,
+        "uel": 1,
+        "uecl": 1
+      },
+      "cup": "DFB-Pokal",
+      "lower": "ger2",
+      "clubs": [
+        "augsburg",
+        "1-union-berlin",
+        "sv-werder-bremen",
+        "borussia-dortmund",
+        "sv-elversberg",
+        "eintracht-frankfurt",
+        "freiburg",
+        "hamburger-sv",
+        "tsg-1899-hoffenheim",
+        "1-koln",
+        "rb-leipzig",
+        "bayer-04-leverkusen",
+        "1-fsv-mainz-05",
+        "borussia-monchengladbach",
+        "bayern-munich",
+        "paderborn-07",
+        "schalke-04",
+        "vfb-stuttgart"
+      ]
+    },
+    {
+      "id": "ger2",
+      "name": "2. Bundesliga",
+      "code": "DE",
+      "level": 2,
+      "teams": 18,
+      "up": 2,
+      "promotionPlayoff": 3,
+      "upper": "ger1",
+      "clubs": [
+        "hertha-bsc",
+        "arminia-bielefeld",
+        "vfl-bochum",
+        "eintracht-braunschweig",
+        "energie-cottbus",
+        "sv-darmstadt-98",
+        "dynamo-dresden",
+        "spvgg-greuther-furth",
+        "hannover-96",
+        "1-heidenheim",
+        "1-kaiserslautern",
+        "karlsruher",
+        "holstein-kiel",
+        "1-magdeburg",
+        "1-nurnberg",
+        "vfl-osnabruck",
+        "st-pauli",
+        "vfl-wolfsburg"
+      ]
+    },
+    {
+      "id": "fra1",
+      "name": "Ligue 1",
+      "code": "FR",
+      "level": 1,
+      "teams": 18,
+      "down": 2,
+      "relegationPlayoff": 16,
+      "europe": {
+        "ucl": 3,
+        "uel": 1,
+        "uecl": 1
+      },
+      "cup": "Coupe de France",
+      "lower": "fra2",
+      "clubs": [
+        "angers-sco",
+        "aj-auxerre",
+        "stade-brestois-29",
+        "le-havre",
+        "le-mans",
+        "rc-lens",
+        "lille-osc",
+        "lorient",
+        "olympique-lyonnais",
+        "olympique-de-marseille",
+        "monaco",
+        "ogc-nice",
+        "paris",
+        "paris-saint-germain",
+        "stade-rennais",
+        "rc-strasbourg-alsace",
+        "toulouse",
+        "es-troyes"
+      ]
+    },
+    {
+      "id": "fra2",
+      "name": "Ligue 2",
+      "code": "FR",
+      "level": 2,
+      "teams": 18,
+      "up": 2,
+      "promotionPlayoff": 3,
+      "upper": "fra1",
+      "clubs": [
+        "saint-etienne",
+        "stade-de-reims",
+        "montpellier-hsc",
+        "red-star",
+        "annecy",
+        "metz",
+        "sochaux-montbeliard",
+        "usl-dunkerque",
+        "en-avant-guingamp",
+        "nancy-lorraine",
+        "rodez-af",
+        "grenoble-foot-38",
+        "dijon-fco",
+        "boulogne",
+        "pau",
+        "clermont-foot-63",
+        "nantes",
+        "stade-lavallois"
+      ]
+    }
+  ],
+  "clubs": {
+    "atalanta": {
+      "id": "atalanta",
+      "title": "Atalanta BC",
+      "name": "Atalanta",
+      "league": "ita1",
+      "strength": 77.9,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 7,
+        "of": 20
+      },
+      "colors": [
+        "#1E71B8",
+        "#000000"
+      ],
+      "ground": "New Balance Arena",
+      "capacity": 23439
+    },
+    "bologna-1909": {
+      "id": "bologna-1909",
+      "title": "Bologna FC 1909",
+      "name": "Bologna",
+      "league": "ita1",
+      "strength": 75.4,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 8,
+        "of": 20
+      },
+      "colors": [
+        "#A21C26",
+        "#1A2F48"
+      ],
+      "ground": null,
+      "capacity": 36532
+    },
+    "cagliari": {
+      "id": "cagliari",
+      "title": "Cagliari Calcio",
+      "name": "Cagliari",
+      "league": "ita1",
+      "strength": 72,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 14,
+        "of": 20
+      },
+      "colors": [
+        "#A6192E",
+        "#002350"
+      ],
+      "ground": "Unipol Domus",
+      "capacity": 16416
+    },
+    "como-1907": {
+      "id": "como-1907",
+      "title": "Como 1907",
+      "name": "Como",
+      "league": "ita1",
+      "strength": 78.1,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 4,
+        "of": 20
+      },
+      "colors": [
+        "#0060A9",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 13602
+    },
+    "fiorentina": {
+      "id": "fiorentina",
+      "title": "ACF Fiorentina",
+      "name": "Fiorentina",
+      "league": "ita1",
+      "strength": 73.2,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 15,
+        "of": 20
+      },
+      "colors": [
+        "#592C82",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 43147
+    },
+    "frosinone": {
+      "id": "frosinone",
+      "title": "Frosinone Calcio",
+      "name": "Frosinone",
+      "league": "ita1",
+      "strength": 69.1,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 2,
+        "of": 20
+      },
+      "colors": [
+        "#EDE8DA",
+        "#0B1220"
+      ],
+      "ground": null,
+      "capacity": 16227
+    },
+    "genoa-cfc": {
+      "id": "genoa-cfc",
+      "title": "Genoa CFC",
+      "name": "Genoa",
+      "league": "ita1",
+      "strength": 71.7,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 16,
+        "of": 20
+      },
+      "colors": [
+        "#A21B30",
+        "#002D62"
+      ],
+      "ground": null,
+      "capacity": 33205
+    },
+    "inter-milan": {
+      "id": "inter-milan",
+      "title": "Inter Milan",
+      "name": "Inter",
+      "league": "ita1",
+      "strength": 83,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 1,
+        "of": 20
+      },
+      "colors": [
+        "#0068A8",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 758178
+    },
+    "juventus": {
+      "id": "juventus",
+      "title": "Juventus FC",
+      "name": "Juventus",
+      "league": "ita1",
+      "strength": 79.8,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 6,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 41507
+    },
+    "lazio": {
+      "id": "lazio",
+      "title": "SS Lazio",
+      "name": "Lazio",
+      "league": "ita1",
+      "strength": 75.8,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 9,
+        "of": 20
+      },
+      "colors": [
+        "#87D8F7",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 70634
+    },
+    "lecce": {
+      "id": "lecce",
+      "title": "US Lecce",
+      "name": "Lecce",
+      "league": "ita1",
+      "strength": 70.1,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 17,
+        "of": 20
+      },
+      "colors": [
+        "#FFD200",
+        "#E4002B"
+      ],
+      "ground": null,
+      "capacity": 31533
+    },
+    "milan": {
+      "id": "milan",
+      "title": "AC Milan",
+      "name": "Milan",
+      "league": "ita1",
+      "strength": 79.7,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 5,
+        "of": 20
+      },
+      "colors": [
+        "#FB090B",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 758178
+    },
+    "monza": {
+      "id": "monza",
+      "title": "AC Monza",
+      "name": "Monza",
+      "league": "ita1",
+      "strength": 68.1,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 3,
+        "of": 20
+      },
+      "colors": [
+        "#E4002B",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 17102
+    },
+    "napoli": {
+      "id": "napoli",
+      "title": "SSC Napoli",
+      "name": "Napoli",
+      "league": "ita1",
+      "strength": 81.6,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 2,
+        "of": 20
+      },
+      "colors": [
+        "#12A0D7",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 54732
+    },
+    "parma-1913": {
+      "id": "parma-1913",
+      "title": "Parma Calcio 1913",
+      "name": "Parma",
+      "league": "ita1",
+      "strength": 70.3,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 12,
+        "of": 20
+      },
+      "colors": [
+        "#FFD200",
+        "#1C4DA1"
+      ],
+      "ground": null,
+      "capacity": 27906
+    },
+    "roma": {
+      "id": "roma",
+      "title": "AS Roma",
+      "name": "Roma",
+      "league": "ita1",
+      "strength": 79.5,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 3,
+        "of": 20
+      },
+      "colors": [
+        "#8E1F2F",
+        "#F0BC42"
+      ],
+      "ground": null,
+      "capacity": 70634
+    },
+    "sassuolo": {
+      "id": "sassuolo",
+      "title": "US Sassuolo Calcio",
+      "name": "Sassuolo",
+      "league": "ita1",
+      "strength": 75.6,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 11,
+        "of": 20
+      },
+      "colors": [
+        "#00A752",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 21584
+    },
+    "torino": {
+      "id": "torino",
+      "title": "Torino FC",
+      "name": "Torino",
+      "league": "ita1",
+      "strength": 74.9,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 13,
+        "of": 20
+      },
+      "colors": [
+        "#881F19",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 27958
+    },
+    "udinese": {
+      "id": "udinese",
+      "title": "Udinese Calcio",
+      "name": "Udinese",
+      "league": "ita1",
+      "strength": 74.3,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 10,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": "Bluenergy Stadium - Stadio Friuli",
+      "capacity": 25132
+    },
+    "venezia": {
+      "id": "venezia",
+      "title": "Venezia FC",
+      "name": "Venezia",
+      "league": "ita1",
+      "strength": 69.8,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 1,
+        "of": 20
+      },
+      "colors": [
+        "#000000",
+        "#F58220"
+      ],
+      "ground": null,
+      "capacity": 12048
+    },
+    "palermo": {
+      "id": "palermo",
+      "title": "Palermo FC",
+      "name": "Palermo",
+      "league": "ita2",
+      "strength": 68,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 4,
+        "of": 20
+      },
+      "colors": [
+        "#F7B6D2",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 36365
+    },
+    "sudtirol": {
+      "id": "sudtirol",
+      "title": "FC Südtirol",
+      "name": "Südtirol",
+      "league": "ita2",
+      "strength": 63.7,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 16,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#FF0000"
+      ],
+      "ground": null,
+      "capacity": 5500
+    },
+    "modena-2018": {
+      "id": "modena-2018",
+      "title": "Modena FC 2018",
+      "name": "Modena",
+      "league": "ita2",
+      "strength": 65.3,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 6,
+        "of": 20
+      },
+      "colors": [
+        "#FFEC00",
+        "#000040"
+      ],
+      "ground": null,
+      "capacity": 21092
+    },
+    "mantova-1911": {
+      "id": "mantova-1911",
+      "title": "Mantova 1911",
+      "name": "Mantova",
+      "league": "ita2",
+      "strength": 62.4,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 11,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 14884
+    },
+    "ascoli-1898": {
+      "id": "ascoli-1898",
+      "title": "Ascoli Calcio 1898 FC",
+      "name": "Ascoli",
+      "league": "ita2",
+      "strength": 61.3,
+      "lastSeason": null,
+      "colors": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "ground": "Stadio Cino e Lillo Del Duca",
+      "capacity": 12461
+    },
+    "padova": {
+      "id": "padova",
+      "title": "Calcio Padova",
+      "name": "Padova",
+      "league": "ita2",
+      "strength": 64.5,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 9,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 32420
+    },
+    "avellino-1912": {
+      "id": "avellino-1912",
+      "title": "US Avellino 1912",
+      "name": "Avellino",
+      "league": "ita2",
+      "strength": 65.4,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 8,
+        "of": 20
+      },
+      "colors": [
+        "#3D8776",
+        "#008000"
+      ],
+      "ground": null,
+      "capacity": 26000
+    },
+    "pisa": {
+      "id": "pisa",
+      "title": "Pisa SC",
+      "name": "Pisa",
+      "league": "ita2",
+      "strength": 66.5,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 20,
+        "of": 20
+      },
+      "colors": [
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 12508
+    },
+    "empoli": {
+      "id": "empoli",
+      "title": "Empoli FC",
+      "name": "Empoli",
+      "league": "ita2",
+      "strength": 62,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 15,
+        "of": 20
+      },
+      "colors": [
+        "#0055A4",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 16800
+    },
+    "arezzo": {
+      "id": "arezzo",
+      "title": "SS Arezzo",
+      "name": "Arezzo",
+      "league": "ita2",
+      "strength": 61.3,
+      "lastSeason": null,
+      "colors": [
+        "#8E3145",
+        "#000000"
+      ],
+      "ground": "Stadio Città di Arezzo, Arezzo, Italy",
+      "capacity": 13128
+    },
+    "cesena": {
+      "id": "cesena",
+      "title": "Cesena FC",
+      "name": "Cesena",
+      "league": "ita2",
+      "strength": 63.7,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 10,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 20194
+    },
+    "lr-vicenza": {
+      "id": "lr-vicenza",
+      "title": "LR Vicenza",
+      "name": "Vicenza",
+      "league": "ita2",
+      "strength": 60.3,
+      "lastSeason": null,
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": "Stadio Romeo Menti",
+      "capacity": 12000
+    },
+    "hellas-verona": {
+      "id": "hellas-verona",
+      "title": "Hellas Verona FC",
+      "name": "Hellas Verona",
+      "league": "ita2",
+      "strength": 68.8,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 19,
+        "of": 20
+      },
+      "colors": [
+        "#FFD700",
+        "#003366"
+      ],
+      "ground": null,
+      "capacity": 39211
+    },
+    "virtus-entella": {
+      "id": "virtus-entella",
+      "title": "Virtus Entella",
+      "name": "Virtus Entella",
+      "league": "ita2",
+      "strength": 62,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 14,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 5535
+    },
+    "benevento": {
+      "id": "benevento",
+      "title": "Benevento Calcio",
+      "name": "Benevento",
+      "league": "ita2",
+      "strength": 61.2,
+      "lastSeason": null,
+      "colors": [
+        "#FFFF00",
+        "#000000"
+      ],
+      "ground": "Stadio Ciro Vigorito",
+      "capacity": 16867
+    },
+    "cremonese": {
+      "id": "cremonese",
+      "title": "US Cremonese",
+      "name": "Cremonese",
+      "league": "ita2",
+      "strength": 66.3,
+      "lastSeason": {
+        "league": "ita1",
+        "pos": 18,
+        "of": 20
+      },
+      "colors": [
+        "#E4002B",
+        "#8E8E8E"
+      ],
+      "ground": "Stadio Giovanni Zini",
+      "capacity": 15191
+    },
+    "catanzaro-1929": {
+      "id": "catanzaro-1929",
+      "title": "US Catanzaro 1929",
+      "name": "Catanzaro",
+      "league": "ita2",
+      "strength": 65,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 5,
+        "of": 20
+      },
+      "colors": [
+        "#FFFF00",
+        "#FF0000"
+      ],
+      "ground": "Stadio Nicola Ceravolo",
+      "capacity": 14650
+    },
+    "juve-stabia": {
+      "id": "juve-stabia",
+      "title": "SS Juve Stabia",
+      "name": "Juve Stabia",
+      "league": "ita2",
+      "strength": 63.7,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 7,
+        "of": 20
+      },
+      "colors": [
+        "#FFD800",
+        "#000084"
+      ],
+      "ground": null,
+      "capacity": 7642
+    },
+    "uc-sampdoria": {
+      "id": "uc-sampdoria",
+      "title": "UC Sampdoria",
+      "name": "Sampdoria",
+      "league": "ita2",
+      "strength": 66.9,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 13,
+        "of": 20
+      },
+      "colors": [
+        "#1B5497",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 33205
+    },
+    "carrarese-1908": {
+      "id": "carrarese-1908",
+      "title": "Carrarese Calcio 1908",
+      "name": "Carrarese",
+      "league": "ita2",
+      "strength": 61.7,
+      "lastSeason": {
+        "league": "ita2",
+        "pos": 12,
+        "of": 20
+      },
+      "colors": [
+        "#0000FF"
+      ],
+      "ground": null,
+      "capacity": 3520
+    },
+    "arsenal": {
+      "id": "arsenal",
+      "title": "Arsenal F.C.",
+      "name": "Arsenal",
+      "league": "eng1",
+      "strength": 83.8,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 1,
+        "of": 20
+      },
+      "colors": [
+        "#EF0107",
+        "#FFFFFF"
+      ],
+      "ground": "Emirates Stadium",
+      "capacity": 60704
+    },
+    "aston-villa": {
+      "id": "aston-villa",
+      "title": "Aston Villa F.C.",
+      "name": "Aston Villa",
+      "league": "eng1",
+      "strength": 80.8,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 4,
+        "of": 20
+      },
+      "colors": [
+        "#670E36",
+        "#95BFE5"
+      ],
+      "ground": "Villa Park",
+      "capacity": 43205
+    },
+    "bournemouth": {
+      "id": "bournemouth",
+      "title": "AFC Bournemouth",
+      "name": "AFC Bournemouth",
+      "league": "eng1",
+      "strength": 76.4,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 6,
+        "of": 20
+      },
+      "colors": [
+        "#DA291C",
+        "#000000"
+      ],
+      "ground": "Dean Court",
+      "capacity": 12357
+    },
+    "brentford": {
+      "id": "brentford",
+      "title": "Brentford F.C.",
+      "name": "Brentford",
+      "league": "eng1",
+      "strength": 75.6,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 9,
+        "of": 20
+      },
+      "colors": [
+        "#E30613",
+        "#FFFFFF"
+      ],
+      "ground": "Brentford Community Stadium",
+      "capacity": 17250
+    },
+    "brighton-hove-albion": {
+      "id": "brighton-hove-albion",
+      "title": "Brighton & Hove Albion F.C.",
+      "name": "Brighton & Hove Albion",
+      "league": "eng1",
+      "strength": 77.6,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 8,
+        "of": 20
+      },
+      "colors": [
+        "#0057B8",
+        "#FFFFFF"
+      ],
+      "ground": "Falmer Stadium",
+      "capacity": 32176
+    },
+    "chelsea": {
+      "id": "chelsea",
+      "title": "Chelsea F.C.",
+      "name": "Chelsea",
+      "league": "eng1",
+      "strength": 78.4,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 10,
+        "of": 20
+      },
+      "colors": [
+        "#034694",
+        "#FFFFFF"
+      ],
+      "ground": "Stamford Bridge",
+      "capacity": 40044
+    },
+    "coventry-city": {
+      "id": "coventry-city",
+      "title": "Coventry City F.C.",
+      "name": "Coventry City",
+      "league": "eng1",
+      "strength": 69.2,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 1,
+        "of": 24
+      },
+      "colors": [
+        "#59CBE8",
+        "#FFFFFF"
+      ],
+      "ground": "Coventry Building Society Arena",
+      "capacity": 32609
+    },
+    "crystal-palace": {
+      "id": "crystal-palace",
+      "title": "Crystal Palace F.C.",
+      "name": "Crystal Palace",
+      "league": "eng1",
+      "strength": 75.5,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 15,
+        "of": 20
+      },
+      "colors": [
+        "#1B458F",
+        "#C4122E"
+      ],
+      "ground": null,
+      "capacity": 25194
+    },
+    "everton": {
+      "id": "everton",
+      "title": "Everton F.C.",
+      "name": "Everton",
+      "league": "eng1",
+      "strength": 74.3,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 13,
+        "of": 20
+      },
+      "colors": [
+        "#003399",
+        "#FFFFFF"
+      ],
+      "ground": "Hill Dickinson Stadium",
+      "capacity": 52769
+    },
+    "fulham": {
+      "id": "fulham",
+      "title": "Fulham F.C.",
+      "name": "Fulham",
+      "league": "eng1",
+      "strength": 75.5,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 11,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": "Craven Cottage",
+      "capacity": 28107
+    },
+    "hull-city": {
+      "id": "hull-city",
+      "title": "Hull City A.F.C.",
+      "name": "Hull City",
+      "league": "eng1",
+      "strength": 71.5,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 6,
+        "of": 24
+      },
+      "colors": [
+        "#F5A12D",
+        "#000000"
+      ],
+      "ground": "MKM Stadium",
+      "capacity": 24983
+    },
+    "ipswich-town": {
+      "id": "ipswich-town",
+      "title": "Ipswich Town F.C.",
+      "name": "Ipswich Town",
+      "league": "eng1",
+      "strength": 70.4,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 2,
+        "of": 24
+      },
+      "colors": [
+        "#0044A9",
+        "#FFFFFF"
+      ],
+      "ground": "Portman Road",
+      "capacity": 30056
+    },
+    "leeds-united": {
+      "id": "leeds-united",
+      "title": "Leeds United F.C.",
+      "name": "Leeds United",
+      "league": "eng1",
+      "strength": 76.4,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 14,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#1D428A"
+      ],
+      "ground": "Elland Road",
+      "capacity": 37633
+    },
+    "liverpool": {
+      "id": "liverpool",
+      "title": "Liverpool F.C.",
+      "name": "Liverpool",
+      "league": "eng1",
+      "strength": 82.9,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 5,
+        "of": 20
+      },
+      "colors": [
+        "#C8102E",
+        "#FFFFFF"
+      ],
+      "ground": "Anfield",
+      "capacity": 61276
+    },
+    "manchester-city": {
+      "id": "manchester-city",
+      "title": "Manchester City F.C.",
+      "name": "Manchester City",
+      "league": "eng1",
+      "strength": 84.1,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 2,
+        "of": 20
+      },
+      "colors": [
+        "#6CABDD",
+        "#FFFFFF"
+      ],
+      "ground": "Etihad Stadium",
+      "capacity": 61038
+    },
+    "manchester-united": {
+      "id": "manchester-united",
+      "title": "Manchester United F.C.",
+      "name": "Manchester United",
+      "league": "eng1",
+      "strength": 83,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 3,
+        "of": 20
+      },
+      "colors": [
+        "#DA291C",
+        "#FFFFFF"
+      ],
+      "ground": "Old Trafford",
+      "capacity": 74158
+    },
+    "newcastle-united": {
+      "id": "newcastle-united",
+      "title": "Newcastle United F.C.",
+      "name": "Newcastle United",
+      "league": "eng1",
+      "strength": 74.5,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 12,
+        "of": 20
+      },
+      "colors": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "ground": "St James' Park",
+      "capacity": 52729
+    },
+    "nottingham-forest": {
+      "id": "nottingham-forest",
+      "title": "Nottingham Forest F.C.",
+      "name": "Nottingham Forest",
+      "league": "eng1",
+      "strength": 73.9,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 16,
+        "of": 20
+      },
+      "colors": [
+        "#DD0000",
+        "#FFFFFF"
+      ],
+      "ground": "City Ground",
+      "capacity": 31212
+    },
+    "sunderland": {
+      "id": "sunderland",
+      "title": "Sunderland A.F.C.",
+      "name": "Sunderland",
+      "league": "eng1",
+      "strength": 78.8,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 7,
+        "of": 20
+      },
+      "colors": [
+        "#EB172B",
+        "#FFFFFF"
+      ],
+      "ground": "Stadium of Light",
+      "capacity": 48095
+    },
+    "tottenham-hotspur": {
+      "id": "tottenham-hotspur",
+      "title": "Tottenham Hotspur F.C.",
+      "name": "Tottenham Hotspur",
+      "league": "eng1",
+      "strength": 77.3,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 17,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#132257"
+      ],
+      "ground": "Tottenham Hotspur Stadium",
+      "capacity": 62850
+    },
+    "birmingham-city": {
+      "id": "birmingham-city",
+      "title": "Birmingham City F.C.",
+      "name": "Birmingham City",
+      "league": "eng2",
+      "strength": 67.2,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 10,
+        "of": 24
+      },
+      "colors": [
+        "#0000FF",
+        "#FFFFFF"
+      ],
+      "ground": "St Andrew's",
+      "capacity": 29409
+    },
+    "blackburn-rovers": {
+      "id": "blackburn-rovers",
+      "title": "Blackburn Rovers F.C.",
+      "name": "Blackburn Rovers",
+      "league": "eng2",
+      "strength": 64.2,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 20,
+        "of": 24
+      },
+      "colors": [
+        "#009EE0",
+        "#FFFFFF"
+      ],
+      "ground": "Ewood Park",
+      "capacity": 31367
+    },
+    "bolton-wanderers": {
+      "id": "bolton-wanderers",
+      "title": "Bolton Wanderers F.C.",
+      "name": "Bolton Wanderers",
+      "league": "eng2",
+      "strength": 64.4,
+      "lastSeason": null,
+      "colors": [
+        "#FFFFFF",
+        "#263C7E"
+      ],
+      "ground": "Toughsheet Community Stadium",
+      "capacity": 28723
+    },
+    "bristol-city": {
+      "id": "bristol-city",
+      "title": "Bristol City F.C.",
+      "name": "Bristol City",
+      "league": "eng2",
+      "strength": 64.9,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 12,
+        "of": 24
+      },
+      "colors": [
+        "#E21A23",
+        "#FFFFFF"
+      ],
+      "ground": "Ashton Gate",
+      "capacity": 27000
+    },
+    "burnley": {
+      "id": "burnley",
+      "title": "Burnley F.C.",
+      "name": "Burnley",
+      "league": "eng2",
+      "strength": 72.4,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 19,
+        "of": 20
+      },
+      "colors": [
+        "#6C1D45",
+        "#99D6EA"
+      ],
+      "ground": "Turf Moor",
+      "capacity": 21944
+    },
+    "cardiff-city": {
+      "id": "cardiff-city",
+      "title": "Cardiff City F.C.",
+      "name": "Cardiff City",
+      "league": "eng2",
+      "strength": 63.9,
+      "lastSeason": null,
+      "colors": [
+        "#0070B5",
+        "#FFFFFF"
+      ],
+      "ground": "Cardiff City Stadium",
+      "capacity": 33316
+    },
+    "charlton-athletic": {
+      "id": "charlton-athletic",
+      "title": "Charlton Athletic F.C.",
+      "name": "Charlton Athletic",
+      "league": "eng2",
+      "strength": 64.8,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 19,
+        "of": 24
+      },
+      "colors": [
+        "#D4021D",
+        "#FFFFFF"
+      ],
+      "ground": "The Valley",
+      "capacity": 27111
+    },
+    "derby-county": {
+      "id": "derby-county",
+      "title": "Derby County F.C.",
+      "name": "Derby County",
+      "league": "eng2",
+      "strength": 67.5,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 8,
+        "of": 24
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": "Pride Park Stadium",
+      "capacity": 33597
+    },
+    "lincoln-city": {
+      "id": "lincoln-city",
+      "title": "Lincoln City F.C.",
+      "name": "Lincoln City",
+      "league": "eng2",
+      "strength": 62.8,
+      "lastSeason": null,
+      "colors": [
+        "#CE131A",
+        "#1C1819"
+      ],
+      "ground": "Sincil Bank",
+      "capacity": 11400
+    },
+    "norwich-city": {
+      "id": "norwich-city",
+      "title": "Norwich City F.C.",
+      "name": "Norwich City",
+      "league": "eng2",
+      "strength": 67.7,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 9,
+        "of": 24
+      },
+      "colors": [
+        "#FFF200",
+        "#00A650"
+      ],
+      "ground": "Carrow Road",
+      "capacity": 27150
+    },
+    "middlesbrough": {
+      "id": "middlesbrough",
+      "title": "Middlesbrough F.C.",
+      "name": "Middlesbrough",
+      "league": "eng2",
+      "strength": 69.2,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 5,
+        "of": 24
+      },
+      "colors": [
+        "#E11B22",
+        "#FFFFFF"
+      ],
+      "ground": "Riverside Stadium",
+      "capacity": 33746
+    },
+    "millwall": {
+      "id": "millwall",
+      "title": "Millwall F.C.",
+      "name": "Millwall",
+      "league": "eng2",
+      "strength": 68.6,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 3,
+        "of": 24
+      },
+      "colors": [
+        "#001D5E",
+        "#FFFFFF"
+      ],
+      "ground": "The Den",
+      "capacity": 20146
+    },
+    "portsmouth": {
+      "id": "portsmouth",
+      "title": "Portsmouth F.C.",
+      "name": "Portsmouth",
+      "league": "eng2",
+      "strength": 63.9,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 18,
+        "of": 24
+      },
+      "colors": [
+        "#001489",
+        "#FFFFFF"
+      ],
+      "ground": "Fratton Park",
+      "capacity": 20867
+    },
+    "preston-north-end": {
+      "id": "preston-north-end",
+      "title": "Preston North End F.C.",
+      "name": "Preston North End",
+      "league": "eng2",
+      "strength": 65,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 14,
+        "of": 24
+      },
+      "colors": [
+        "#FFFFFF",
+        "#0A1F44"
+      ],
+      "ground": "Deepdale",
+      "capacity": 23404
+    },
+    "queens-park-rangers": {
+      "id": "queens-park-rangers",
+      "title": "Queens Park Rangers F.C.",
+      "name": "Queens Park Rangers",
+      "league": "eng2",
+      "strength": 66.5,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 15,
+        "of": 24
+      },
+      "colors": [
+        "#1D5BA4",
+        "#FFFFFF"
+      ],
+      "ground": "Loftus Road Stadium",
+      "capacity": 18439
+    },
+    "sheffield-united": {
+      "id": "sheffield-united",
+      "title": "Sheffield United F.C.",
+      "name": "Sheffield United",
+      "league": "eng2",
+      "strength": 68.4,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 13,
+        "of": 24
+      },
+      "colors": [
+        "#EE2737",
+        "#FFFFFF"
+      ],
+      "ground": "Bramall Lane",
+      "capacity": 32050
+    },
+    "southampton": {
+      "id": "southampton",
+      "title": "Southampton F.C.",
+      "name": "Southampton",
+      "league": "eng2",
+      "strength": 69,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 4,
+        "of": 24
+      },
+      "colors": [
+        "#D71920",
+        "#FFFFFF"
+      ],
+      "ground": "St Mary's Stadium",
+      "capacity": 32384
+    },
+    "stoke-city": {
+      "id": "stoke-city",
+      "title": "Stoke City F.C.",
+      "name": "Stoke City",
+      "league": "eng2",
+      "strength": 66.3,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 17,
+        "of": 24
+      },
+      "colors": [
+        "#E03A3E",
+        "#FFFFFF"
+      ],
+      "ground": "bet365 Stadium",
+      "capacity": 30089
+    },
+    "swansea-city": {
+      "id": "swansea-city",
+      "title": "Swansea City A.F.C.",
+      "name": "Swansea City",
+      "league": "eng2",
+      "strength": 68.2,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 11,
+        "of": 24
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": "Swansea.com Stadium",
+      "capacity": 21000
+    },
+    "watford": {
+      "id": "watford",
+      "title": "Watford F.C.",
+      "name": "Watford",
+      "league": "eng2",
+      "strength": 65.6,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 16,
+        "of": 24
+      },
+      "colors": [
+        "#FBEE23",
+        "#ED2127"
+      ],
+      "ground": "Vicarage Road",
+      "capacity": 22200
+    },
+    "west-bromwich-albion": {
+      "id": "west-bromwich-albion",
+      "title": "West Bromwich Albion F.C.",
+      "name": "West Bromwich Albion",
+      "league": "eng2",
+      "strength": 65.3,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 21,
+        "of": 24
+      },
+      "colors": [
+        "#122F67",
+        "#FFFFFF"
+      ],
+      "ground": "The Hawthorns",
+      "capacity": 26688
+    },
+    "west-ham-united": {
+      "id": "west-ham-united",
+      "title": "West Ham United F.C.",
+      "name": "West Ham United",
+      "league": "eng2",
+      "strength": 71.8,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 18,
+        "of": 20
+      },
+      "colors": [
+        "#7A263A",
+        "#1BB1E7"
+      ],
+      "ground": "London Stadium",
+      "capacity": 62500
+    },
+    "wolverhampton-wanderers": {
+      "id": "wolverhampton-wanderers",
+      "title": "Wolverhampton Wanderers F.C.",
+      "name": "Wolverhampton Wanderers",
+      "league": "eng2",
+      "strength": 71.3,
+      "lastSeason": {
+        "league": "eng1",
+        "pos": 20,
+        "of": 20
+      },
+      "colors": [
+        "#FDB913",
+        "#231F20"
+      ],
+      "ground": "Molineux Stadium",
+      "capacity": 31750
+    },
+    "wrexham": {
+      "id": "wrexham",
+      "title": "Wrexham A.F.C.",
+      "name": "Wrexham",
+      "league": "eng2",
+      "strength": 69.2,
+      "lastSeason": {
+        "league": "eng2",
+        "pos": 7,
+        "of": 24
+      },
+      "colors": [
+        "#D0021B",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 10771
+    },
+    "deportivo-alaves": {
+      "id": "deportivo-alaves",
+      "title": "Deportivo Alavés",
+      "name": "Alavés",
+      "league": "esp1",
+      "strength": 72.9,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 14,
+        "of": 20
+      },
+      "colors": [
+        "#0055A4",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 19840
+    },
+    "athletic-bilbao": {
+      "id": "athletic-bilbao",
+      "title": "Athletic Bilbao",
+      "name": "Athletic Bilbao",
+      "league": "esp1",
+      "strength": 75.6,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 12,
+        "of": 20
+      },
+      "colors": [
+        "#EE2523",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 53289
+    },
+    "atletico-madrid": {
+      "id": "atletico-madrid",
+      "title": "Atlético Madrid",
+      "name": "Atlético Madrid",
+      "league": "esp1",
+      "strength": 82.8,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 4,
+        "of": 20
+      },
+      "colors": [
+        "#CB3524",
+        "#272E61"
+      ],
+      "ground": null,
+      "capacity": 70692
+    },
+    "barcelona": {
+      "id": "barcelona",
+      "title": "FC Barcelona",
+      "name": "Barcelona",
+      "league": "esp1",
+      "strength": 85,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 1,
+        "of": 20
+      },
+      "colors": [
+        "#A50044",
+        "#004D98"
+      ],
+      "ground": null,
+      "capacity": 105000
+    },
+    "rc-celta-de-vigo": {
+      "id": "rc-celta-de-vigo",
+      "title": "RC Celta de Vigo",
+      "name": "Celta",
+      "league": "esp1",
+      "strength": 77.1,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 6,
+        "of": 20
+      },
+      "colors": [
+        "#8AC3EE",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 24870
+    },
+    "deportivo-de-a-coruna": {
+      "id": "deportivo-de-a-coruna",
+      "title": "Deportivo de A Coruña",
+      "name": "Deportivo La Coruña",
+      "league": "esp1",
+      "strength": 71.5,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 2,
+        "of": 22
+      },
+      "colors": [
+        "#0055A4",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 32490
+    },
+    "elche": {
+      "id": "elche",
+      "title": "Elche CF",
+      "name": "Elche",
+      "league": "esp1",
+      "strength": 73.1,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 13,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#05642C"
+      ],
+      "ground": null,
+      "capacity": 33732
+    },
+    "rcd-espanyol": {
+      "id": "rcd-espanyol",
+      "title": "RCD Espanyol",
+      "name": "Espanyol",
+      "league": "esp1",
+      "strength": 74,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 11,
+        "of": 20
+      },
+      "colors": [
+        "#007FC8",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 40000
+    },
+    "getafe": {
+      "id": "getafe",
+      "title": "Getafe CF",
+      "name": "Getafe",
+      "league": "esp1",
+      "strength": 76.3,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 7,
+        "of": 20
+      },
+      "colors": [
+        "#005999",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 16500
+    },
+    "levante-ud": {
+      "id": "levante-ud",
+      "title": "Levante UD",
+      "name": "Levante",
+      "league": "esp1",
+      "strength": 71.9,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 18,
+        "of": 20
+      },
+      "colors": [
+        "#004F9F",
+        "#B4053F"
+      ],
+      "ground": null,
+      "capacity": 26354
+    },
+    "malaga": {
+      "id": "malaga",
+      "title": "Málaga CF",
+      "name": "Málaga",
+      "league": "esp1",
+      "strength": 68.8,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 4,
+        "of": 22
+      },
+      "colors": [
+        "#0084C6",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 30044
+    },
+    "ca-osasuna": {
+      "id": "ca-osasuna",
+      "title": "CA Osasuna",
+      "name": "Osasuna",
+      "league": "esp1",
+      "strength": 71,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 16,
+        "of": 20
+      },
+      "colors": [
+        "#D91A21",
+        "#0A346F"
+      ],
+      "ground": null,
+      "capacity": 23516
+    },
+    "racing-de-santander": {
+      "id": "racing-de-santander",
+      "title": "Racing de Santander",
+      "name": "Racing Santander",
+      "league": "esp1",
+      "strength": 70.1,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 1,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF",
+        "#008A3E"
+      ],
+      "ground": null,
+      "capacity": 22222
+    },
+    "rayo-vallecano": {
+      "id": "rayo-vallecano",
+      "title": "Rayo Vallecano",
+      "name": "Rayo Vallecano",
+      "league": "esp1",
+      "strength": 76.7,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 8,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#E53027"
+      ],
+      "ground": null,
+      "capacity": 14500
+    },
+    "real-betis": {
+      "id": "real-betis",
+      "title": "Real Betis",
+      "name": "Betis",
+      "league": "esp1",
+      "strength": 80.2,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 5,
+        "of": 20
+      },
+      "colors": [
+        "#00954C",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 70000
+    },
+    "real-madrid": {
+      "id": "real-madrid",
+      "title": "Real Madrid CF",
+      "name": "Real Madrid",
+      "league": "esp1",
+      "strength": 84.7,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 2,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#FEBE10"
+      ],
+      "ground": null,
+      "capacity": 83186
+    },
+    "real-sociedad": {
+      "id": "real-sociedad",
+      "title": "Real Sociedad",
+      "name": "Real Sociedad",
+      "league": "esp1",
+      "strength": 77.2,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 10,
+        "of": 20
+      },
+      "colors": [
+        "#0067B1",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 40000
+    },
+    "sevilla": {
+      "id": "sevilla",
+      "title": "Sevilla FC",
+      "name": "Sevilla",
+      "league": "esp1",
+      "strength": 73.6,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 15,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#D81920"
+      ],
+      "ground": null,
+      "capacity": 42714
+    },
+    "valencia": {
+      "id": "valencia",
+      "title": "Valencia CF",
+      "name": "Valencia",
+      "league": "esp1",
+      "strength": 76.7,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 9,
+        "of": 20
+      },
+      "colors": [
+        "#FFFFFF",
+        "#EE3524"
+      ],
+      "ground": null,
+      "capacity": 49430
+    },
+    "villarreal": {
+      "id": "villarreal",
+      "title": "Villarreal CF",
+      "name": "Villarreal",
+      "league": "esp1",
+      "strength": 80.7,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 3,
+        "of": 20
+      },
+      "colors": [
+        "#FFE667",
+        "#005187"
+      ],
+      "ground": null,
+      "capacity": 23008
+    },
+    "cd-castellon": {
+      "id": "cd-castellon",
+      "title": "CD Castellón",
+      "name": "Castellón",
+      "league": "esp2",
+      "strength": 66.5,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 6,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 15500
+    },
+    "sd-eibar": {
+      "id": "sd-eibar",
+      "title": "SD Eibar",
+      "name": "Eibar",
+      "league": "esp2",
+      "strength": 66.1,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 8,
+        "of": 22
+      },
+      "colors": [
+        "#192030"
+      ],
+      "ground": null,
+      "capacity": 8164
+    },
+    "rcd-mallorca": {
+      "id": "rcd-mallorca",
+      "title": "RCD Mallorca",
+      "name": "Mallorca",
+      "league": "esp2",
+      "strength": 69.8,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 17,
+        "of": 20
+      },
+      "colors": [
+        "#E20613",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 25736
+    },
+    "cd-tenerife": {
+      "id": "cd-tenerife",
+      "title": "CD Tenerife",
+      "name": "Tenerife",
+      "league": "esp2",
+      "strength": 62.6,
+      "lastSeason": null,
+      "colors": [
+        "#FFFFFF",
+        "#0000BC"
+      ],
+      "ground": null,
+      "capacity": 22824
+    },
+    "ud-las-palmas": {
+      "id": "ud-las-palmas",
+      "title": "UD Las Palmas",
+      "name": "Las Palmas",
+      "league": "esp2",
+      "strength": 67.8,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 5,
+        "of": 22
+      },
+      "colors": [
+        "#FFE400",
+        "#0055A4"
+      ],
+      "ground": null,
+      "capacity": 32400
+    },
+    "ud-almeria": {
+      "id": "ud-almeria",
+      "title": "UD Almería",
+      "name": "Almería",
+      "league": "esp2",
+      "strength": 68.6,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 3,
+        "of": 22
+      },
+      "colors": [
+        "#EE2E24",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 18311
+    },
+    "real-oviedo": {
+      "id": "real-oviedo",
+      "title": "Real Oviedo",
+      "name": "Oviedo",
+      "league": "esp2",
+      "strength": 65.9,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 20,
+        "of": 20
+      },
+      "colors": [
+        "#0055A4",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 30500
+    },
+    "burgos": {
+      "id": "burgos",
+      "title": "Burgos CF",
+      "name": "Burgos",
+      "league": "esp2",
+      "strength": 65.4,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 7,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 12194
+    },
+    "real-sociedad-b": {
+      "id": "real-sociedad-b",
+      "title": "Real Sociedad B",
+      "name": "San Sebastián B",
+      "league": "esp2",
+      "strength": 63.3,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 15,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 2500
+    },
+    "granada": {
+      "id": "granada",
+      "title": "Granada CF",
+      "name": "Granada",
+      "league": "esp2",
+      "strength": 63.8,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 14,
+        "of": 22
+      },
+      "colors": [
+        "#E4002B",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 21600
+    },
+    "ce-sabadell": {
+      "id": "ce-sabadell",
+      "title": "CE Sabadell FC",
+      "name": "Sabadell",
+      "league": "esp2",
+      "strength": 62.5,
+      "lastSeason": null,
+      "colors": [
+        "#0000FF"
+      ],
+      "ground": null,
+      "capacity": 11908
+    },
+    "cd-leganes": {
+      "id": "cd-leganes",
+      "title": "CD Leganés",
+      "name": "Leganés",
+      "league": "esp2",
+      "strength": 67,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 16,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 14500
+    },
+    "girona": {
+      "id": "girona",
+      "title": "Girona FC",
+      "name": "Girona",
+      "league": "esp2",
+      "strength": 70.8,
+      "lastSeason": {
+        "league": "esp1",
+        "pos": 19,
+        "of": 20
+      },
+      "colors": [
+        "#CD2534",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 14624
+    },
+    "rc-celta-fortuna": {
+      "id": "rc-celta-fortuna",
+      "title": "RC Celta Fortuna",
+      "name": "Celta B",
+      "league": "esp2",
+      "strength": 62.6,
+      "lastSeason": null,
+      "colors": [
+        "#EDE8DA",
+        "#0B1220"
+      ],
+      "ground": "Balaídos",
+      "capacity": 24870
+    },
+    "sporting-de-gijon": {
+      "id": "sporting-de-gijon",
+      "title": "Sporting de Gijón",
+      "name": "Sporting Gijón",
+      "league": "esp2",
+      "strength": 65.6,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 9,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF",
+        "#FF0000"
+      ],
+      "ground": null,
+      "capacity": 29371
+    },
+    "cd-eldense": {
+      "id": "cd-eldense",
+      "title": "CD Eldense",
+      "name": "Eldense",
+      "league": "esp2",
+      "strength": 63.1,
+      "lastSeason": null,
+      "colors": [
+        "#173097"
+      ],
+      "ground": null,
+      "capacity": 5776
+    },
+    "real-valladolid": {
+      "id": "real-valladolid",
+      "title": "Real Valladolid",
+      "name": "Valladolid",
+      "league": "esp2",
+      "strength": 64.5,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 17,
+        "of": 22
+      },
+      "colors": [
+        "#6A1F85",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 27846
+    },
+    "andorra": {
+      "id": "andorra",
+      "title": "FC Andorra",
+      "name": "Andorra",
+      "league": "esp2",
+      "strength": 66.3,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 13,
+        "of": 22
+      },
+      "colors": [
+        "#000055",
+        "#FFD000"
+      ],
+      "ground": null,
+      "capacity": 5108
+    },
+    "cadiz": {
+      "id": "cadiz",
+      "title": "Cádiz CF",
+      "name": "Cádiz",
+      "league": "esp2",
+      "strength": 64.1,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 18,
+        "of": 22
+      },
+      "colors": [
+        "#FFEE00",
+        "#0000FF"
+      ],
+      "ground": "JP Financial Estadio",
+      "capacity": 20724
+    },
+    "cordoba": {
+      "id": "cordoba",
+      "title": "Córdoba CF",
+      "name": "Córdoba",
+      "league": "esp2",
+      "strength": 64.8,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 10,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": "Estadio Bahrain Victorious Nuevo Arcángel de Córdoba",
+      "capacity": 25800
+    },
+    "albacete-balompie": {
+      "id": "albacete-balompie",
+      "title": "Albacete Balompié",
+      "name": "Albacete",
+      "league": "esp2",
+      "strength": 64.1,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 12,
+        "of": 22
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 17524
+    },
+    "ad-ceuta": {
+      "id": "ad-ceuta",
+      "title": "AD Ceuta FC",
+      "name": "Ceuta",
+      "league": "esp2",
+      "strength": 64.6,
+      "lastSeason": {
+        "league": "esp2",
+        "pos": 11,
+        "of": 22
+      },
+      "colors": [
+        "#FEFEFE"
+      ],
+      "ground": "Estadio Alfonso Murube",
+      "capacity": 6500
+    },
+    "augsburg": {
+      "id": "augsburg",
+      "title": "FC Augsburg",
+      "name": "FC Augsburg",
+      "league": "ger1",
+      "strength": 73.6,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 9,
+        "of": 18
+      },
+      "colors": [
+        "#BA3733",
+        "#46714D"
+      ],
+      "ground": "WWK Arena",
+      "capacity": 30660
+    },
+    "1-union-berlin": {
+      "id": "1-union-berlin",
+      "title": "1. FC Union Berlin",
+      "name": "Union Berlin",
+      "league": "ger1",
+      "strength": 73.9,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 11,
+        "of": 18
+      },
+      "colors": [
+        "#EB1923",
+        "#FFFFFF"
+      ],
+      "ground": "Stadion An der Alten Försterei",
+      "capacity": 22012
+    },
+    "sv-werder-bremen": {
+      "id": "sv-werder-bremen",
+      "title": "SV Werder Bremen",
+      "name": "Werder Bremen",
+      "league": "ger1",
+      "strength": 71.2,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 15,
+        "of": 18
+      },
+      "colors": [
+        "#1D9053",
+        "#FFFFFF"
+      ],
+      "ground": "Weserstadion",
+      "capacity": 42100
+    },
+    "borussia-dortmund": {
+      "id": "borussia-dortmund",
+      "title": "Borussia Dortmund",
+      "name": "Borussia Dortmund",
+      "league": "ger1",
+      "strength": 82.5,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 2,
+        "of": 18
+      },
+      "colors": [
+        "#FDE100",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 81365
+    },
+    "sv-elversberg": {
+      "id": "sv-elversberg",
+      "title": "SV Elversberg",
+      "name": "SV Elversberg",
+      "league": "ger1",
+      "strength": 68.7,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 2,
+        "of": 18
+      },
+      "colors": [
+        "#EDE8DA",
+        "#0B1220"
+      ],
+      "ground": null,
+      "capacity": null
+    },
+    "eintracht-frankfurt": {
+      "id": "eintracht-frankfurt",
+      "title": "Eintracht Frankfurt",
+      "name": "Eintracht Frankfurt",
+      "league": "ger1",
+      "strength": 75.2,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 8,
+        "of": 18
+      },
+      "colors": [
+        "#E1000F",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 60100
+    },
+    "freiburg": {
+      "id": "freiburg",
+      "title": "SC Freiburg",
+      "name": "SC Freiburg",
+      "league": "ger1",
+      "strength": 74.7,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 7,
+        "of": 18
+      },
+      "colors": [
+        "#E2001A",
+        "#000000"
+      ],
+      "ground": "Europa-Park Stadion",
+      "capacity": 34700
+    },
+    "hamburger-sv": {
+      "id": "hamburger-sv",
+      "title": "Hamburger SV",
+      "name": "Hamburger SV",
+      "league": "ger1",
+      "strength": 73.2,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 13,
+        "of": 18
+      },
+      "colors": [
+        "#0A3F86",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 57000
+    },
+    "tsg-1899-hoffenheim": {
+      "id": "tsg-1899-hoffenheim",
+      "title": "TSG 1899 Hoffenheim",
+      "name": "TSG Hoffenheim",
+      "league": "ger1",
+      "strength": 77.2,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 5,
+        "of": 18
+      },
+      "colors": [
+        "#1961B5",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 30150
+    },
+    "1-koln": {
+      "id": "1-koln",
+      "title": "1. FC Köln",
+      "name": "1. FC Köln",
+      "league": "ger1",
+      "strength": 72.3,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 14,
+        "of": 18
+      },
+      "colors": [
+        "#ED1C24",
+        "#FFFFFF"
+      ],
+      "ground": "RheinEnergieStadion",
+      "capacity": 49698
+    },
+    "rb-leipzig": {
+      "id": "rb-leipzig",
+      "title": "RB Leipzig",
+      "name": "RB Leipzig",
+      "league": "ger1",
+      "strength": 80.5,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 3,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF",
+        "#DD0741"
+      ],
+      "ground": null,
+      "capacity": 47800
+    },
+    "bayer-04-leverkusen": {
+      "id": "bayer-04-leverkusen",
+      "title": "Bayer 04 Leverkusen",
+      "name": "Bayer Leverkusen",
+      "league": "ger1",
+      "strength": 79,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 6,
+        "of": 18
+      },
+      "colors": [
+        "#E32221",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 30210
+    },
+    "1-fsv-mainz-05": {
+      "id": "1-fsv-mainz-05",
+      "title": "1. FSV Mainz 05",
+      "name": "Mainz 05",
+      "league": "ger1",
+      "strength": 74,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 10,
+        "of": 18
+      },
+      "colors": [
+        "#C3141E",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 33305
+    },
+    "borussia-monchengladbach": {
+      "id": "borussia-monchengladbach",
+      "title": "Borussia Mönchengladbach",
+      "name": "Borussia Mönchengladbach",
+      "league": "ger1",
+      "strength": 73.4,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 12,
+        "of": 18
+      },
+      "colors": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 54057
+    },
+    "bayern-munich": {
+      "id": "bayern-munich",
+      "title": "FC Bayern Munich",
+      "name": "Bayern Munich",
+      "league": "ger1",
+      "strength": 85.1,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 1,
+        "of": 18
+      },
+      "colors": [
+        "#DC052D",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 75024
+    },
+    "paderborn-07": {
+      "id": "paderborn-07",
+      "title": "SC Paderborn 07",
+      "name": "SC Paderborn",
+      "league": "ger1",
+      "strength": 65.8,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 3,
+        "of": 18
+      },
+      "colors": [
+        "#000000"
+      ],
+      "ground": "Home Deluxe Arena",
+      "capacity": 15000
+    },
+    "schalke-04": {
+      "id": "schalke-04",
+      "title": "FC Schalke 04",
+      "name": "Schalke 04",
+      "league": "ger1",
+      "strength": 72.1,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 1,
+        "of": 18
+      },
+      "colors": [
+        "#004D9D",
+        "#FFFFFF"
+      ],
+      "ground": "Veltins-Arena",
+      "capacity": 62273
+    },
+    "vfb-stuttgart": {
+      "id": "vfb-stuttgart",
+      "title": "VfB Stuttgart",
+      "name": "VfB Stuttgart",
+      "league": "ger1",
+      "strength": 77.7,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 4,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF",
+        "#E32219"
+      ],
+      "ground": null,
+      "capacity": null
+    },
+    "hertha-bsc": {
+      "id": "hertha-bsc",
+      "title": "Hertha BSC",
+      "name": "Hertha BSC",
+      "league": "ger2",
+      "strength": 68.7,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 7,
+        "of": 18
+      },
+      "colors": [
+        "#005CA9",
+        "#FFFFFF"
+      ],
+      "ground": "Olympiastadion",
+      "capacity": 74475
+    },
+    "arminia-bielefeld": {
+      "id": "arminia-bielefeld",
+      "title": "Arminia Bielefeld",
+      "name": "Arminia Bielefeld",
+      "league": "ger2",
+      "strength": 64.2,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 13,
+        "of": 18
+      },
+      "colors": [
+        "#0030FF",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 27332
+    },
+    "vfl-bochum": {
+      "id": "vfl-bochum",
+      "title": "VfL Bochum",
+      "name": "VfL Bochum",
+      "league": "ger2",
+      "strength": 67.6,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 9,
+        "of": 18
+      },
+      "colors": [
+        "#005BA4",
+        "#FFFFFF"
+      ],
+      "ground": "Vonovia Ruhrstadion",
+      "capacity": 27599
+    },
+    "eintracht-braunschweig": {
+      "id": "eintracht-braunschweig",
+      "title": "Eintracht Braunschweig",
+      "name": "Eintracht Braunschweig",
+      "league": "ger2",
+      "strength": 63.8,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 15,
+        "of": 18
+      },
+      "colors": [
+        "#FFDD00",
+        "#0044FF"
+      ],
+      "ground": "Eintracht-Stadion",
+      "capacity": 23325
+    },
+    "energie-cottbus": {
+      "id": "energie-cottbus",
+      "title": "FC Energie Cottbus",
+      "name": "Energie Cottbus",
+      "league": "ger2",
+      "strength": 63,
+      "lastSeason": null,
+      "colors": [
+        "#EF0000",
+        "#FFFFFF"
+      ],
+      "ground": "LEAG Energie Stadion",
+      "capacity": 225281
+    },
+    "sv-darmstadt-98": {
+      "id": "sv-darmstadt-98",
+      "title": "SV Darmstadt 98",
+      "name": "Darmstadt 98",
+      "league": "ger2",
+      "strength": 67.3,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 5,
+        "of": 18
+      },
+      "colors": [
+        "#0000FF",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 17810
+    },
+    "dynamo-dresden": {
+      "id": "dynamo-dresden",
+      "title": "Dynamo Dresden",
+      "name": "Dynamo Dresden",
+      "league": "ger2",
+      "strength": 64.4,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 11,
+        "of": 18
+      },
+      "colors": [
+        "#FFCC00",
+        "#000000"
+      ],
+      "ground": "Rudolf-Harbig-Stadion",
+      "capacity": 32085
+    },
+    "spvgg-greuther-furth": {
+      "id": "spvgg-greuther-furth",
+      "title": "SpVgg Greuther Fürth",
+      "name": "Greuther Fürth",
+      "league": "ger2",
+      "strength": 63.9,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 16,
+        "of": 18
+      },
+      "colors": [
+        "#FFEFDD",
+        "#01744D"
+      ],
+      "ground": "Sportpark Ronhof Thomas Sommer",
+      "capacity": 16626
+    },
+    "hannover-96": {
+      "id": "hannover-96",
+      "title": "Hannover 96",
+      "name": "Hannover 96",
+      "league": "ger2",
+      "strength": 69.7,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 4,
+        "of": 18
+      },
+      "colors": [
+        "#00A650",
+        "#000000"
+      ],
+      "ground": "Heinz von Heiden Arena",
+      "capacity": 49000
+    },
+    "1-heidenheim": {
+      "id": "1-heidenheim",
+      "title": "1. FC Heidenheim",
+      "name": "1. FC Heidenheim",
+      "league": "ger2",
+      "strength": 67.2,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 17,
+        "of": 18
+      },
+      "colors": [
+        "#FF0000"
+      ],
+      "ground": null,
+      "capacity": 15000
+    },
+    "1-kaiserslautern": {
+      "id": "1-kaiserslautern",
+      "title": "1. FC Kaiserslautern",
+      "name": "1. FC Kaiserslautern",
+      "league": "ger2",
+      "strength": 67.2,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 6,
+        "of": 18
+      },
+      "colors": [
+        "#E30613",
+        "#FFFFFF"
+      ],
+      "ground": "Fritz-Walter-Stadion",
+      "capacity": 49327
+    },
+    "karlsruher": {
+      "id": "karlsruher",
+      "title": "Karlsruher SC",
+      "name": "Karlsruher SC",
+      "league": "ger2",
+      "strength": 66.1,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 10,
+        "of": 18
+      },
+      "colors": [
+        "#0000FF"
+      ],
+      "ground": "BBBank Wildpark",
+      "capacity": 33180
+    },
+    "holstein-kiel": {
+      "id": "holstein-kiel",
+      "title": "Holstein Kiel",
+      "name": "Holstein Kiel",
+      "league": "ger2",
+      "strength": 65.6,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 12,
+        "of": 18
+      },
+      "colors": [
+        "#0042FF",
+        "#FFFFFF"
+      ],
+      "ground": "Holstein-Stadion",
+      "capacity": 15034
+    },
+    "1-magdeburg": {
+      "id": "1-magdeburg",
+      "title": "1. FC Magdeburg",
+      "name": "1. FC Magdeburg",
+      "league": "ger2",
+      "strength": 65.5,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 14,
+        "of": 18
+      },
+      "colors": [
+        "#0000FF"
+      ],
+      "ground": "Avnet Arena",
+      "capacity": 30098
+    },
+    "1-nurnberg": {
+      "id": "1-nurnberg",
+      "title": "1. FC Nürnberg",
+      "name": "1. FC Nürnberg",
+      "league": "ger2",
+      "strength": 67.2,
+      "lastSeason": {
+        "league": "ger2",
+        "pos": 8,
+        "of": 18
+      },
+      "colors": [
+        "#AD1732",
+        "#000000"
+      ],
+      "ground": "Max-Morlock-Stadion",
+      "capacity": 50000
+    },
+    "vfl-osnabruck": {
+      "id": "vfl-osnabruck",
+      "title": "VfL Osnabrück",
+      "name": "VfL Osnabrück",
+      "league": "ger2",
+      "strength": 63.3,
+      "lastSeason": null,
+      "colors": [
+        "#493AA6"
+      ],
+      "ground": "Stadion an der Bremer Brücke",
+      "capacity": 15741
+    },
+    "st-pauli": {
+      "id": "st-pauli",
+      "title": "FC St. Pauli",
+      "name": "FC St. Pauli",
+      "league": "ger2",
+      "strength": 70.2,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 18,
+        "of": 18
+      },
+      "colors": [
+        "#65423A"
+      ],
+      "ground": null,
+      "capacity": 29546
+    },
+    "vfl-wolfsburg": {
+      "id": "vfl-wolfsburg",
+      "title": "VfL Wolfsburg",
+      "name": "VfL Wolfsburg",
+      "league": "ger2",
+      "strength": 72,
+      "lastSeason": {
+        "league": "ger1",
+        "pos": 16,
+        "of": 18
+      },
+      "colors": [
+        "#65B32E",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 30000
+    },
+    "angers-sco": {
+      "id": "angers-sco",
+      "title": "Angers SCO",
+      "name": "Angers",
+      "league": "fra1",
+      "strength": 68.1,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 13,
+        "of": 18
+      },
+      "colors": [
+        "#000000",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 18752
+    },
+    "aj-auxerre": {
+      "id": "aj-auxerre",
+      "title": "AJ Auxerre",
+      "name": "Auxerre",
+      "league": "fra1",
+      "strength": 67.8,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 15,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF",
+        "#0055A4"
+      ],
+      "ground": null,
+      "capacity": 18541
+    },
+    "stade-brestois-29": {
+      "id": "stade-brestois-29",
+      "title": "Stade Brestois 29",
+      "name": "Brest",
+      "league": "fra1",
+      "strength": 68.8,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 12,
+        "of": 18
+      },
+      "colors": [
+        "#FF0000",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 15220
+    },
+    "le-havre": {
+      "id": "le-havre",
+      "title": "Le Havre AC",
+      "name": "Le Havre",
+      "league": "fra1",
+      "strength": 68.5,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 14,
+        "of": 18
+      },
+      "colors": [
+        "#6CABDD",
+        "#0B2B5C"
+      ],
+      "ground": null,
+      "capacity": 25178
+    },
+    "le-mans": {
+      "id": "le-mans",
+      "title": "Le Mans FC",
+      "name": "Le Mans",
+      "league": "fra1",
+      "strength": 66.2,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 2,
+        "of": 18
+      },
+      "colors": [
+        "#FF0000"
+      ],
+      "ground": null,
+      "capacity": 25064
+    },
+    "rc-lens": {
+      "id": "rc-lens",
+      "title": "RC Lens",
+      "name": "Lens",
+      "league": "fra1",
+      "strength": 76.9,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 2,
+        "of": 18
+      },
+      "colors": [
+        "#FFE500",
+        "#E4002B"
+      ],
+      "ground": null,
+      "capacity": 38223
+    },
+    "lille-osc": {
+      "id": "lille-osc",
+      "title": "Lille OSC",
+      "name": "Lille",
+      "league": "fra1",
+      "strength": 76.6,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 3,
+        "of": 18
+      },
+      "colors": [
+        "#E01E13",
+        "#1C2F5E"
+      ],
+      "ground": null,
+      "capacity": 50186
+    },
+    "lorient": {
+      "id": "lorient",
+      "title": "FC Lorient",
+      "name": "Lorient",
+      "league": "fra1",
+      "strength": 70.4,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 10,
+        "of": 18
+      },
+      "colors": [
+        "#F58220",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 18110
+    },
+    "olympique-lyonnais": {
+      "id": "olympique-lyonnais",
+      "title": "Olympique Lyonnais",
+      "name": "Lyon",
+      "league": "fra1",
+      "strength": 75.8,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 4,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF",
+        "#1D3D8F"
+      ],
+      "ground": null,
+      "capacity": 59186
+    },
+    "olympique-de-marseille": {
+      "id": "olympique-de-marseille",
+      "title": "Olympique de Marseille",
+      "name": "Marseille",
+      "league": "fra1",
+      "strength": 76,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 5,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF",
+        "#2FAEE0"
+      ],
+      "ground": null,
+      "capacity": 67394
+    },
+    "monaco": {
+      "id": "monaco",
+      "title": "AS Monaco FC",
+      "name": "Monaco",
+      "league": "fra1",
+      "strength": 75.8,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 7,
+        "of": 18
+      },
+      "colors": [
+        "#E51B22",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 16360
+    },
+    "ogc-nice": {
+      "id": "ogc-nice",
+      "title": "OGC Nice",
+      "name": "Nice",
+      "league": "fra1",
+      "strength": 70.4,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 16,
+        "of": 18
+      },
+      "colors": [
+        "#E2001A",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 36178
+    },
+    "paris": {
+      "id": "paris",
+      "title": "Paris FC",
+      "name": "Paris FC",
+      "league": "fra1",
+      "strength": 71.7,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 11,
+        "of": 18
+      },
+      "colors": [
+        "#000060"
+      ],
+      "ground": null,
+      "capacity": 20000
+    },
+    "paris-saint-germain": {
+      "id": "paris-saint-germain",
+      "title": "Paris Saint-Germain FC",
+      "name": "Paris Saint-Germain",
+      "league": "fra1",
+      "strength": 81.7,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 1,
+        "of": 18
+      },
+      "colors": [
+        "#004170",
+        "#DA291C"
+      ],
+      "ground": null,
+      "capacity": 47929
+    },
+    "stade-rennais": {
+      "id": "stade-rennais",
+      "title": "Stade Rennais FC",
+      "name": "Rennes",
+      "league": "fra1",
+      "strength": 73.3,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 6,
+        "of": 18
+      },
+      "colors": [
+        "#E13327",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 29778
+    },
+    "rc-strasbourg-alsace": {
+      "id": "rc-strasbourg-alsace",
+      "title": "RC Strasbourg Alsace",
+      "name": "Strasbourg",
+      "league": "fra1",
+      "strength": 72,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 8,
+        "of": 18
+      },
+      "colors": [
+        "#0055A4",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 32300
+    },
+    "toulouse": {
+      "id": "toulouse",
+      "title": "Toulouse FC",
+      "name": "Toulouse",
+      "league": "fra1",
+      "strength": 70.8,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 9,
+        "of": 18
+      },
+      "colors": [
+        "#6A2C91",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 33150
+    },
+    "es-troyes": {
+      "id": "es-troyes",
+      "title": "ES Troyes AC",
+      "name": "Troyes",
+      "league": "fra1",
+      "strength": 64.6,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 1,
+        "of": 18
+      },
+      "colors": [
+        "#0055A4",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 20400
+    },
+    "saint-etienne": {
+      "id": "saint-etienne",
+      "title": "AS Saint-Étienne",
+      "name": "Saint-Étienne",
+      "league": "fra2",
+      "strength": 68.2,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 3,
+        "of": 18
+      },
+      "colors": [
+        "#009639",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 41965
+    },
+    "stade-de-reims": {
+      "id": "stade-de-reims",
+      "title": "Stade de Reims",
+      "name": "Reims",
+      "league": "fra2",
+      "strength": 66,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 6,
+        "of": 18
+      },
+      "colors": [
+        "#E2001A",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 21029
+    },
+    "montpellier-hsc": {
+      "id": "montpellier-hsc",
+      "title": "Montpellier HSC",
+      "name": "Montpellier",
+      "league": "fra2",
+      "strength": 63.1,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 8,
+        "of": 18
+      },
+      "colors": [
+        "#F58220",
+        "#0A2D6E"
+      ],
+      "ground": "Stade de la Mosson",
+      "capacity": 33556
+    },
+    "red-star": {
+      "id": "red-star",
+      "title": "Red Star FC",
+      "name": "Red Star",
+      "league": "fra2",
+      "strength": 64.2,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 4,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF",
+        "#0C6646"
+      ],
+      "ground": null,
+      "capacity": 5600
+    },
+    "annecy": {
+      "id": "annecy",
+      "title": "FC Annecy",
+      "name": "Annecy",
+      "league": "fra2",
+      "strength": 62.2,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 7,
+        "of": 18
+      },
+      "colors": [
+        "#FF0000"
+      ],
+      "ground": null,
+      "capacity": 15714
+    },
+    "metz": {
+      "id": "metz",
+      "title": "FC Metz",
+      "name": "Metz",
+      "league": "fra2",
+      "strength": 66.8,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 18,
+        "of": 18
+      },
+      "colors": [
+        "#8A1538",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 28786
+    },
+    "sochaux-montbeliard": {
+      "id": "sochaux-montbeliard",
+      "title": "FC Sochaux-Montbéliard",
+      "name": "Sochaux",
+      "league": "fra2",
+      "strength": 62.5,
+      "lastSeason": null,
+      "colors": [
+        "#FFFE2A",
+        "#0B1031"
+      ],
+      "ground": null,
+      "capacity": 20005
+    },
+    "usl-dunkerque": {
+      "id": "usl-dunkerque",
+      "title": "USL Dunkerque",
+      "name": "Dunkerque",
+      "league": "fra2",
+      "strength": 63.9,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 10,
+        "of": 18
+      },
+      "colors": [
+        "#000066",
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 4933
+    },
+    "en-avant-guingamp": {
+      "id": "en-avant-guingamp",
+      "title": "En Avant Guingamp",
+      "name": "Guingamp",
+      "league": "fra2",
+      "strength": 61.2,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 11,
+        "of": 18
+      },
+      "colors": [
+        "#FF0000",
+        "#000000"
+      ],
+      "ground": null,
+      "capacity": 19060
+    },
+    "nancy-lorraine": {
+      "id": "nancy-lorraine",
+      "title": "AS Nancy Lorraine",
+      "name": "Nancy",
+      "league": "fra2",
+      "strength": 61.9,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 14,
+        "of": 18
+      },
+      "colors": [
+        "#FFFFFF"
+      ],
+      "ground": null,
+      "capacity": 20087
+    },
+    "rodez-af": {
+      "id": "rodez-af",
+      "title": "Rodez AF",
+      "name": "Rodez",
+      "league": "fra2",
+      "strength": 62.7,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 5,
+        "of": 18
+      },
+      "colors": [
+        "#DD0000"
+      ],
+      "ground": null,
+      "capacity": 5955
+    },
+    "grenoble-foot-38": {
+      "id": "grenoble-foot-38",
+      "title": "Grenoble Foot 38",
+      "name": "Grenoble",
+      "league": "fra2",
+      "strength": 61.5,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 12,
+        "of": 18
+      },
+      "colors": [
+        "#EDE8DA",
+        "#0B1220"
+      ],
+      "ground": null,
+      "capacity": 20068
+    },
+    "dijon-fco": {
+      "id": "dijon-fco",
+      "title": "Dijon FCO",
+      "name": "Dijon",
+      "league": "fra2",
+      "strength": 59.6,
+      "lastSeason": null,
+      "colors": [
+        "#FF0000"
+      ],
+      "ground": "Stade Gaston Gérard",
+      "capacity": 15459
+    },
+    "boulogne": {
+      "id": "boulogne",
+      "title": "US Boulogne",
+      "name": "Boulogne",
+      "league": "fra2",
+      "strength": 59.8,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 15,
+        "of": 18
+      },
+      "colors": [
+        "#000000",
+        "#FF3232"
+      ],
+      "ground": null,
+      "capacity": 9534
+    },
+    "pau": {
+      "id": "pau",
+      "title": "Pau FC",
+      "name": "Pau",
+      "league": "fra2",
+      "strength": 62.8,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 9,
+        "of": 18
+      },
+      "colors": [
+        "#EDE8DA",
+        "#0B1220"
+      ],
+      "ground": null,
+      "capacity": 4031
+    },
+    "clermont-foot-63": {
+      "id": "clermont-foot-63",
+      "title": "Clermont Foot 63",
+      "name": "Clermont",
+      "league": "fra2",
+      "strength": 61.3,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 13,
+        "of": 18
+      },
+      "colors": [
+        "#EDE8DA",
+        "#0B1220"
+      ],
+      "ground": null,
+      "capacity": 17200
+    },
+    "nantes": {
+      "id": "nantes",
+      "title": "FC Nantes",
+      "name": "Nantes",
+      "league": "fra2",
+      "strength": 66.1,
+      "lastSeason": {
+        "league": "fra1",
+        "pos": 17,
+        "of": 18
+      },
+      "colors": [
+        "#FFE500",
+        "#008C45"
+      ],
+      "ground": null,
+      "capacity": 35322
+    },
+    "stade-lavallois": {
+      "id": "stade-lavallois",
+      "title": "Stade Lavallois",
+      "name": "Laval",
+      "league": "fra2",
+      "strength": 60.1,
+      "lastSeason": {
+        "league": "fra2",
+        "pos": 16,
+        "of": 18
+      },
+      "colors": [
+        "#FF6000"
+      ],
+      "ground": null,
+      "capacity": 11107
+    }
+  }
+}

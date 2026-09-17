@@ -167,6 +167,52 @@ const RAW = [
     ],
   },
   {
+    slug: 'allenatore-calcio', route: 'allenatore', name: 'Allenatore',
+    title: 'Allenatore di calcio: la carriera in panchina con le rose vere',
+    description: 'Gioco manageriale di calcio gratuito: guida un club vero di dieci campionati, gioca le partite minuto per minuto, tratta sul mercato, fai crescere i giovani e tieni la panchina. Dal telefono, senza scaricare niente.',
+    lead: 'Un club vero, una rosa vera, una stagione intera. La società ti giudica ogni settimana.',
+    body: `
+  <h2 class="display">Scegli la tua panchina</h2>
+  <p>Centonovantotto club di Serie A, Serie B, Premier League, Championship,
+  Liga, Segunda, Bundesliga, 2. Bundesliga, Ligue 1 e Ligue 2, con più di
+  seimila giocatori delle rose di oggi, titolari e panchina. Scegli nome,
+  nazionalità e uno dei dodici stili di gioco: tiki-taka, gegenpressing,
+  contropiede, catenaccio e gli altri. La società ti dà un obiettivo
+  proporzionato alla squadra.</p>
+
+  <h2 class="display">Partite minuto per minuto</h2>
+  <p>Ogni partita è simulata azione per azione, con modulo, mentalità, fatica,
+  cartellini, infortuni, rigori e VAR. Nei momenti che cambiano un risultato,
+  come un gol subito, un’espulsione o gli ultimi dieci minuti in vantaggio,
+  tocca a te decidere: nessuna scelta è sempre giusta. Dopo ogni giornata la
+  classifica si aggiorna con tutti i risultati.</p>
+
+  <h2 class="display">Mercato a trattative</h2>
+  <ul>
+    <li>Il <strong>club</strong> chiede un prezzo, risponde ai rilanci e perde la pazienza; a volte si inserisce una rivale.</li>
+    <li>Il <strong>giocatore e il procuratore</strong> discutono ingaggio, anni, ruolo promesso e commissione.</li>
+    <li>Le <strong>visite mediche</strong> possono far saltare l’affare all’ultimo momento.</li>
+    <li>Gli altri club comprano e vendono davvero, e le offerte per i tuoi giocatori si possono rilanciare.</li>
+  </ul>
+
+  <h2 class="display">Giocatori che crescono e invecchiano</h2>
+  <p>Ogni giocatore ha un potenziale realistico: i giovani di talento possono
+  diventare campioni se giocano, chi è al massimo resta lì, chi è avanti con
+  gli anni cala. Gol, assist, porte inviolate, contrasti e recuperi spostano il
+  voto, e così le tue decisioni su di loro.</p>
+
+  <h2 class="display">Più di quattrocento decisioni</h2>
+  <p>Spogliatoio, stampa, dirigenza, tifosi, infortuni, vivaio, derby e vita
+  privata: centinaia di situazioni con conseguenze che arrivano anche settimane
+  dopo. Coppe nazionali ed europee, promozioni, retrocessioni, esoneri e
+  offerte da altri club completano la carriera.</p>`,
+    faq: [
+      ['Le rose sono reali?', 'Sì, i giocatori sono quelli delle rose attuali dei dieci campionati; partite, trasferimenti ed eventi sono simulati.'],
+      ['Si può essere esonerati?', 'Sì: se i risultati sono lontani dall’obiettivo arriva un ultimatum e poi l’esonero, ma altri club possono offrirti una panchina.'],
+      ['La carriera si salva?', 'Sì, resta salvata nel browser e riprende dalla giornata in cui l’hai lasciata.'],
+    ],
+  },
+  {
     slug: 'quiz-rosa-squadra', route: 'squad', name: 'La Rosa',
     title: 'Quiz sulla rosa: nomina i giocatori della squadra',
     description: 'Quiz di calcio: hai novanta secondi per nominare più giocatori possibili della rosa di un club in una stagione o di una nazionale a Mondiali, Europei e Copa América. Quasi duemila rose.',
