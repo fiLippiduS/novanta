@@ -12,9 +12,9 @@ import { ROLES, ageOf, valueOf, careerPhase } from '../../manager/players.js';
 import { squadOf } from '../../manager/career.js';
 import {
   search, windowOpen, deadlineDay, acceptOffer, rejectOffer, counterIncoming, openTalks, bidClub, payClause,
-  offerContract, medicalChoice, withdrawTalk, talkById, talksNow, talkPlayer, isOpenTalk, wageRoom, TALK_ROLES, LOAN_WAGE,
+  offerContract, medicalChoice, withdrawTalk, talkById, talksNow, talkPlayer, isOpenTalk, wageRoom, TALK_ROLES, LOAN_WAGE, listOf,
 } from '../../manager/market.js';
-import { button, chip, meter, ovrBadge, roleTag, attrBars, euro, phaseChip, potentialText } from './ui.js';
+import { button, chip, meter, ovrBadge, roleTag, attrBars, euro, phaseChip, potentialText, richText, newsLine } from './ui.js';
 
 const AGES = [0, 21, 24, 28, 32];
 const r1 = (x) => Math.round(x * 10) / 10;
@@ -63,46 +63,80 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
     stage.appendChild(sec);
   }
 
-  /* ---------------- offerte ricevute ---------------- */
+  /* ---------------- le liste e le offerte ricevute ---------------- */
   const offers = (career.offersIn || []).filter((o) => career.players[o.player]);
-  if (offers.length) {
+  const listed = squadOf(career, career.club).filter((p) => !p.loanOut && listOf(p));
+  const offeredIds = [...new Set(offers.map((o) => o.player))];
+  const people = [...new Set([...listed.map((p) => p.id), ...offeredIds])].map((id) => career.players[id]).filter(Boolean);
+  if (people.length) {
     const sec = el('section', 'mcard card');
     sec.appendChild(el('h3', 'mhead display', t('allenatore.market.offersIn')));
-    for (const o of offers) {
-      const p = career.players[o.player];
-      const row = el('div', 'moffer');
-      const txt = el('div', 'moffer__txt');
-      const stance = o.stance || 'open';
-      const tags = el('div', 'mpsheet__tags');
-      tags.append(chip(t(`allenatore.incoming.stance.${stance}`), stance === 'wants' ? 'amber' : stance === 'refuses' ? 'flare' : 'dim'), phaseChip(p, career.season));
-      txt.append(
-        el('strong', '', t('allenatore.market.offerLine', { club: o.clubName, player: p.name, fee: euro(o.fee) })),
-        el('span', 'label', t('allenatore.market.valueLine', { value: euro(valueOf(p, career.season)), md: o.expires + 1 })),
-        tags,
-      );
-      const out = el('p', 'mmarket__out');
-      const acts = el('div', 'moffer__acts moffer__acts--3');
-      const ask = r1(o.fee * 1.2);
-      const done = (res, fallback) => {
-        if (!res) return;
-        if (res.status === 'sold') { audio.sfx.hit(); persist(); rerender(); return; }
-        persist();
-        const key = res.status === 'upset' && res.wantsOut ? 'upsetOut' : res.status;
-        const incomingKeys = ['raised', 'walkedAway', 'playerRefuses', 'upset', 'upsetOut', 'rejected'];
-        out.className = `mmarket__out ${res.status === 'raised' ? '' : 'is-bad'}`;
-        out.textContent = incomingKeys.includes(key) ? t(`allenatore.incoming.result.${key}`, { club: res.club || o.clubName, fee: euro(res.fee || 0) }) : t(`allenatore.market.status.${key || fallback}`);
-        if (['walkedAway', 'upset', 'upsetOut', 'rejected'].includes(key)) setTimeout(rerender, 1400);
-        else if (res.status === 'raised') setTimeout(rerender, 900);
-      };
-      acts.append(
-        button(t('allenatore.market.reject'), 'btn--ghost', () => done(rejectOffer(career, o.id), 'rejected')),
-        button(t('allenatore.incoming.ask', { fee: euro(ask) }), 'btn--ghost', () => done(counterIncoming(career, data, o.id, ask))),
-        button(t('allenatore.market.accept'), 'btn--go', () => done(acceptOffer(career, data, o.id))),
-      );
-      row.append(txt, acts, out);
-      sec.appendChild(row);
+    if (!open) sec.appendChild(el('p', 'dim', t('allenatore.market.offersClosedNote')));
+    for (const p of people) {
+      const mine = offers.filter((o) => o.player === p.id).sort((x, y) => y.fee - x.fee);
+      const group = el('div', 'moffers');
+      const head = el('div', 'moffers__head');
+      const list = listOf(p);
+      head.append(el('strong', 'mhl', p.name), ovrBadge(p.ovr));
+      if (list) head.appendChild(chip(t(`allenatore.listChip.${list}`), list === 'loan' ? 'sky' : 'amber'));
+      head.appendChild(el('span', 'label', mine.length ? t('allenatore.market.nOffers', { n: mine.length }) : t('allenatore.market.noOffersYet')));
+      group.appendChild(head);
+      for (const o of mine) group.appendChild(offerRow(o, p));
+      sec.appendChild(group);
     }
     stage.appendChild(sec);
+  }
+
+  /* un'offerta: chi, quanto, cosa ne pensa il giocatore; rifiuti, chiedi di più o accetti */
+  function offerRow(o, p) {
+    const row = el('div', 'moffer');
+    const txt = el('div', 'moffer__txt');
+    const stance = o.stance || 'open';
+    const tags = el('div', 'mpsheet__tags');
+    tags.append(chip(t(`allenatore.incoming.kind.${o.kind || 'buy'}`), o.kind === 'loan' ? 'sky' : 'lime'), chip(t(`allenatore.incoming.stance.${stance}`), stance === 'wants' ? 'amber' : stance === 'refuses' ? 'flare' : 'dim'));
+    const line = o.kind === 'loan'
+      ? richText('allenatore.market.offerLoanLine', { club: o.clubName, fee: euro(o.fee), share: Math.round((o.wageShare || 0) * 100) }, ['club', 'fee'], 'moffer__line')
+      : richText('allenatore.market.offerBuyLine', { club: o.clubName, fee: euro(o.fee) }, ['club', 'fee'], 'moffer__line');
+    txt.append(line, el('span', 'label', t('allenatore.market.valueLine', { value: euro(valueOf(p, career.season)), md: o.expires + 1 })), tags);
+    const out = el('p', 'mmarket__out');
+    let ask = r1(Math.max(o.fee + 0.1, o.fee * 1.15));
+    const step = Math.max(0.1, r1(o.fee * 0.05));
+    const askBtn = button('', 'btn--ghost');
+    const setAsk = (v) => { ask = r1(Math.max(o.fee + 0.1, v)); askBtn.textContent = t('allenatore.incoming.ask', { fee: euro(ask) }); };
+    setAsk(ask);
+    const done = (res) => {
+      if (!res) return;
+      if (res.status === 'sold' || res.status === 'loaned') { audio.sfx.hit(); persist(); dealDone(res); return; }
+      persist();
+      const key = res.status === 'upset' && res.wantsOut ? 'upsetOut' : res.status;
+      const incomingKeys = ['raised', 'walkedAway', 'playerRefuses', 'upset', 'upsetOut', 'rejected'];
+      out.className = `mmarket__out ${res.status === 'raised' ? '' : 'is-bad'}`;
+      out.textContent = incomingKeys.includes(key) ? t(`allenatore.incoming.result.${key}`, { club: res.club || o.clubName, fee: euro(res.fee || 0) }) : t(`allenatore.market.status.${key}`);
+      if (['walkedAway', 'upset', 'upsetOut', 'rejected'].includes(key)) setTimeout(rerender, 1400);
+      else if (res.status === 'raised') setTimeout(rerender, 900);
+    };
+    const stepRow = el('div', 'moffer__ask');
+    stepRow.append(button('−', 'btn--ghost', () => setAsk(ask - step)), askBtn, button('+', 'btn--ghost', () => setAsk(ask + step)));
+    askBtn.addEventListener('click', () => done(counterIncoming(career, data, o.id, ask)));
+    const acts = el('div', 'moffer__acts');
+    acts.append(
+      button(t('allenatore.market.reject'), 'btn--ghost', () => done(rejectOffer(career, o.id))),
+      button(t('allenatore.market.accept'), 'btn--go', () => done(acceptOffer(career, data, o.id))),
+    );
+    row.append(txt, stepRow, acts, out);
+    return row;
+  }
+
+  /* l'affare fatto: dove va, quanto entra e come si divide */
+  function dealDone(res) {
+    const body = el('div', 'stack');
+    const loan = res.status === 'loaned';
+    body.append(
+      richText(loan ? 'allenatore.deal.loanText' : 'allenatore.deal.soldText', { player: res.name, club: res.clubName, fee: euro(res.fee), share: Math.round((res.wageShare || 0) * 100) }, ['player', 'club', 'fee'], 'mdeal__line'),
+      richText('allenatore.deal.split', { toBudget: euro(res.toBudget), toClub: euro(res.toClub) }, ['toBudget', 'toClub'], 'mdeal__split'),
+      el('p', 'dim', t('allenatore.deal.budgetNow', { budget: euro(club.budget) })),
+    );
+    sheet({ title: t(loan ? 'allenatore.deal.loanTitle' : 'allenatore.deal.soldTitle'), body, actions: [{ label: t('common.close'), variant: 'btn--go', onClick: (c) => { c(); rerender(); } }] });
   }
 
   /* ---------------- ricerca ---------------- */
@@ -186,7 +220,7 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
   if (news.length) {
     const sec2 = el('section', 'mcard card');
     sec2.appendChild(el('h3', 'mhead display', t('allenatore.news.title')));
-    for (const n of news) sec2.appendChild(el('p', 'minbox__i', t('allenatore.news.line', { to: n.toName, name: `${n.name} (${n.ovr})`, from: n.fromName, fee: euro(n.fee) })));
+    for (const n of news) sec2.appendChild(newsLine(n));
     stage.appendChild(sec2);
   }
 
@@ -194,7 +228,8 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
     const log = el('section', 'mcard card');
     log.appendChild(el('h3', 'mhead display', t('allenatore.market.log')));
     for (const x of career.transfers.slice(0, 12)) {
-      log.appendChild(el('p', 'minbox__i', t(x.dir === 'in' ? (x.kind === 'loan' ? 'allenatore.market.logLoan' : 'allenatore.market.logIn') : 'allenatore.market.logOut', { name: x.name, club: clubName(x.from || x.to), fee: euro(x.fee), season: `${x.season}/${String(x.season + 1).slice(2)}` })));
+      const key = x.dir === 'in' ? (x.kind === 'loan' ? 'allenatore.market.logLoan' : 'allenatore.market.logIn') : x.kind === 'loan' ? 'allenatore.market.logLoanOut' : 'allenatore.market.logOut';
+      log.appendChild(richText(key, { name: x.name, club: clubName(x.from || x.to), fee: euro(x.fee), season: `${x.season}/${String(x.season + 1).slice(2)}` }, ['name', 'club', 'fee']));
     }
     stage.appendChild(log);
   }
@@ -205,7 +240,7 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
     let id = talkId || candidate?.talk || null;
     let changed = false;
     /* le scelte in corso restano mentre si ridisegna */
-    const draft = { fee: null, bonus: 0, wage: null, years: null, role: null };
+    const draft = { fee: null, bonus: 0, wage: null, years: null, role: null, round: -1 };
     let status = '';
 
     const fmt = (vars = {}) => {
@@ -353,6 +388,8 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
       }
       const acts = el('div', 'mmarket__offers');
       acts.appendChild(button(t('allenatore.talks.offer', { fee: euro(draft.fee) }), 'btn--go', () => act(bidClub(career, data, talk.id, { fee: draft.fee, bonus: r1(draft.fee * (draft.bonusShare || 0)) }))));
+      /* pareggiare il prezzo chiesto dal club chiude sempre questa fase */
+      if (talk.round > 0 && Math.abs(draft.fee - talk.ask) > 0.001) acts.appendChild(button(t('allenatore.talks.matchAsk', { fee: euro(talk.ask) }), 'btn--ghost', () => { draft.fee = talk.ask; act(bidClub(career, data, talk.id, { fee: talk.ask, bonus: 0 })); }));
       acts.appendChild(button(t('allenatore.talks.withdraw'), 'btn--ghost', () => act(withdrawTalk(career, talk.id))));
       if (talk.clause) acts.appendChild(button(t('allenatore.talks.clause', { fee: euro(talk.clause) }), 'btn--ghost mtalk__wide', () => act(payClause(career, data, talk.id))));
       panel.appendChild(acts);
@@ -362,14 +399,13 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
     function drawPlayer(talk) {
       const panel = el('div', 'mtalk__panel');
       const want = talk.counter || talk.demand;
-      if (draft.wage == null) draft.wage = want.wage;
-      if (draft.years == null) draft.years = want.years;
-      if (draft.role == null) draft.role = want.role;
+      /* a ogni risposta del procuratore la proposta riparte dalla sua ultima richiesta */
+      if (draft.round !== talk.playerRound) { draft.wage = want.wage; draft.years = want.years; draft.role = want.role; draft.round = talk.playerRound; }
       const step = Math.max(0.01, r2(talk.demand.wage * 0.05));
       const info = el('div', 'mtalk__info');
       const pat = el('span', 'mtalk__pat');
       pat.append(el('span', 'label', t('allenatore.talks.playerPatience')), patienceDots(talk.playerPatience, 3));
-      info.appendChild(pat);
+      info.append(richText('allenatore.talks.wants', fmt({ wage: want.wage, years: want.years, role: want.role }), ['wage', 'years', 'role'], 'mtalk__want'), pat);
       panel.appendChild(info);
       panel.appendChild(stepper(t('allenatore.talks.wage'), euro(draft.wage), () => { draft.wage = r2(Math.max(0.01, draft.wage - step)); draw(); }, () => { draft.wage = r2(draft.wage + step); draw(); }));
       if (talk.kind === 'loan') {
@@ -394,6 +430,11 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
         roles.appendChild(b);
       }
       panel.appendChild(roles);
+      /* la stessa regola del motore: pareggiare la richiesta chiude sempre */
+      const RANK = { starter: 2, rotation: 1, prospect: 0 };
+      const years = talk.kind === 'loan' ? 1 : draft.years;
+      const meets = draft.wage >= want.wage - 1e-9 && years === want.years && RANK[draft.role] >= RANK[want.role];
+      panel.appendChild(el('p', `mtalk__meets ${meets ? 'is-ok' : 'is-short'}`, t(meets ? 'allenatore.talks.meets' : 'allenatore.talks.short')));
       panel.appendChild(el('p', 'dim mtalk__note', t('allenatore.talks.costNow', { fee: euro(talk.fee), agent: euro(talk.agentFee), room: euro(Math.max(0, wageRoom(career))) })));
       const acts = el('div', 'mmarket__offers');
       acts.append(

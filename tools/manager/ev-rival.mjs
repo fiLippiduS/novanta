@@ -255,7 +255,7 @@ export default [
   },
   {
     id: 'pv_house_move', cat: 'private', w: 2, repeat: 80,
-    when: { player: { foreign: true } },
+    when: { player: { foreign: true, newSigning: true } },
     o: [
       { fx: { morale: 6, fitness: -3, budget: -0.05 } },
       { fx: { morale: -3 } },

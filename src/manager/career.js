@@ -14,6 +14,7 @@ import { makeFixtures, standings, TIEBREAK, zones, expectedPoints } from './leag
 import { createMatch, simulateToEnd, playerRatings } from './match.js';
 import { setupCups, europeFromTable, closeCupRound } from './cups.js';
 import { windowOpen, expireTalks, worldTransfers, payBonuses } from './market.js';
+import { keyMoments } from './timeline.js';
 
 export const MANAGER_VERSION = 1;
 export const FIRST_SEASON = 2026;
@@ -362,7 +363,9 @@ export function applyMatch(career, match, fixture) {
   const ratings = playerRatings(match);
   const motm = Object.entries(ratings).sort((a, b) => b[1] - a[1])[0]?.[0];
   const scorers = match.events.filter((e) => ['goal', 'penGoal'].includes(e.type)).map((e) => ({ side: e.side, player: e.player, minute: e.minute, pen: e.type === 'penGoal', assist: e.assist }));
-  fixture.info = { scorers, motm, pens: match.shootout ? [match.shootout.home, match.shootout.away] : null };
+  /* gol e rossi con il minuto e il nome, compatti: [minuto, lato, tipo, nome] */
+  const moments = keyMoments(match).map((x) => [x.min, x.side, x.type, x.name]);
+  fixture.info = { scorers, motm, pens: match.shootout ? [match.shootout.home, match.shootout.away] : null, moments };
 
   const userSide = match.sides.find((x) => x.team.id === career.club);
   if (userSide) {
@@ -402,6 +405,8 @@ export function applyMatch(career, match, fixture) {
         else if (ps.yellow) { p.yellows++; if (p.yellows % 5 === 0) p.suspended = Math.max(p.suspended, 1); }
         if (ps.injured) p.injury += 1;
         p.lastRating = r;
+        /* l'ultima partita, per gli eventi che ne parlano (un rigore sbagliato, un errore) */
+        if (side.team.id === career.club) p.lastMatch = { md: career.md, errors: ps.errors || 0, penMissed: ps.penMissed || 0, goals: ps.goals || 0 };
       } else if (side.team.lineup) {
         /* chi resta fuori: i più ambiziosi lo prendono male */
         const important = p.ovr >= teamMorale([p]) && p.ovr >= median(side.team.players.map((x) => x.ovr)) + 3;
@@ -469,7 +474,12 @@ export function closeMatchday(career, data) {
     for (const id of club.squad) {
       const p = career.players[id];
       if (!p) continue;
-      if (p.injury > 0) p.injury--;
+      if (p.injury > 0) {
+        if (p.outSince == null) p.outSince = md;
+        p.injury--;
+        /* rientro da un lungo stop: lo si ricorda per qualche giornata */
+        if (p.injury === 0) { if (md - p.outSince >= 3) p.backMd = { s: career.season, md: md + 1 }; delete p.outSince; }
+      }
       if (p.suspended > 0) p.suspended--;
       recover(p, 7, career.season);
       /* infortuni in allenamento: rari, più probabili per chi è fragile o sfinito */
@@ -873,7 +883,12 @@ export function endSeason(career, data) {
         delete career.players[id];
         continue;
       }
-      if (p.loanOut) {
+      if (p.loanTo) {
+        /* il prestito deciso dall'utente dura una stagione: si torna a casa */
+        p.loanOut = false;
+        if (club.id === career.club) summary.returned.push({ id, name: p.name, listed: false, from: p.loanToName });
+        for (const k of ['loanTo', 'loanToName', 'loanUntil', 'loanWageShare']) delete p[k];
+      } else if (p.loanOut) {
         if (age <= 23 && p.ovr < cut) { if (club.id === career.club) summary.loanAgain.push({ id, name: p.name }); }
         else {
           p.loanOut = false;

@@ -45,7 +45,7 @@ export default [
   },
   {
     id: 'yt_school_exams', cat: 'youth', w: 3, repeat: 60,
-    when: { player: { ageMax: 19 } },
+    when: { player: { ageMin: 18, ageMax: 19 } },
     o: [
       { fx: { fitness: -6, morale: 6, bond: 6 } },
       { fx: { fitness: 3, morale: -4 } },

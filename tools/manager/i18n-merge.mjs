@@ -5,6 +5,14 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const LANGS = ['it', 'en', 'es', 'fr', 'de', 'pt'];
+
+function deepMerge(into, from) {
+  for (const [k, v] of Object.entries(from)) {
+    if (v && typeof v === 'object' && !Array.isArray(v) && into[k] && typeof into[k] === 'object') into[k] = deepMerge({ ...into[k] }, v);
+    else into[k] = v;
+  }
+  return into;
+}
 const HUB = {
   it: { allenatoreTitle: 'Allenatore', allenatoreDesc: 'Rose vere, partite minuto per minuto, la classifica che si muove. Una panchina da tenere.' },
   en: { allenatoreTitle: 'Manager', allenatoreDesc: 'Real squads, minute-by-minute matches, a table that moves. A job to keep.' },
@@ -18,9 +26,11 @@ for (const l of LANGS) {
   const src = new URL(`./i18n/${l}.mjs`, import.meta.url);
   if (!existsSync(src)) { console.log(`${l}: manca tools/manager/i18n/${l}.mjs, salto`); continue; }
   const dict = { ...(await import(src.href)).default };
-  /* i testi del mercato a trattative stanno in un file a parte */
-  const extra = new URL(`./i18n/market-${l}.mjs`, import.meta.url);
-  if (existsSync(extra)) Object.assign(dict, (await import(extra.href)).default);
+  /* i testi del mercato a trattative e della simulazione stanno in file a parte, fusi in profondità */
+  for (const part of ['market', 'sim']) {
+    const extra = new URL(`./i18n/${part}-${l}.mjs`, import.meta.url);
+    if (existsSync(extra)) deepMerge(dict, (await import(extra.href)).default);
+  }
   const file = new URL(`../../i18n/${l}.json`, import.meta.url);
   const json = JSON.parse(readFileSync(file, 'utf8'));
   json.allenatore = dict;

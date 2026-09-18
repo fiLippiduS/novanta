@@ -80,7 +80,9 @@ export function statusTags(p) {
   const box = el('span', 'mstatus');
   if (p.injury) box.appendChild(chip(`✚ ${p.injury}`, 'bad'));
   if (p.suspended) box.appendChild(chip(`▮ ${p.suspended}`, 'warn'));
-  if (p.loanOut) box.appendChild(chip(t('allenatore.onLoan'), 'dim'));
+  if (p.loanOut) box.appendChild(chip(p.loanToName ? t('allenatore.onLoanAt', { club: p.loanToName }) : t('allenatore.onLoan'), 'dim'));
+  else if ((p.flags || []).includes('listed')) box.appendChild(chip(t('allenatore.listChip.transfer'), 'amber'));
+  else if ((p.flags || []).includes('loanListed')) box.appendChild(chip(t('allenatore.listChip.loan'), 'sky'));
   if (p.loanIn) box.appendChild(chip(t('allenatore.loanIn'), 'dim'));
   return box;
 }
@@ -186,4 +188,102 @@ export function pitchSvg() {
     <rect x="37" y="1" width="26" height="8" fill="none" stroke="rgba(237,232,218,0.12)" stroke-width="0.5"/>
     <rect x="37" y="131" width="26" height="8" fill="none" stroke="rgba(237,232,218,0.12)" stroke-width="0.5"/>
   </svg>`;
+}
+
+/**
+ * Un testo tradotto con alcune parti in evidenza: i segnaposto in `strong`
+ * diventano <strong>, così nomi e cifre saltano all'occhio in ogni lingua.
+ */
+export function richText(key, vars = {}, strong = [], cls = 'minbox__i') {
+  const tpl = String(t(key));
+  const p = el('p', cls);
+  let last = 0;
+  tpl.replace(/\{(\w+)\}/g, (m, k, i) => {
+    if (i > last) p.appendChild(document.createTextNode(tpl.slice(last, i)));
+    const v = vars[k] !== undefined ? String(vars[k]) : m;
+    p.appendChild(strong.includes(k) ? el('strong', `mhl mhl--${k}`, v) : document.createTextNode(v));
+    last = i + m.length;
+    return m;
+  });
+  if (last < tpl.length) p.appendChild(document.createTextNode(tpl.slice(last)));
+  return p;
+}
+
+/** una riga di mercato degli altri: chi, da dove, dove, quanto */
+export function newsLine(n) {
+  return richText('allenatore.news.line', { to: n.toName, name: `${n.name} (${n.ovr})`, from: n.fromName, fee: euro(n.fee) }, ['name', 'to', 'fee'], 'minbox__i mnews');
+}
+
+const TL_ICON = { goal: '⚽', penGoal: '⚽', penMissed: '✕', penSaved: '🧤', yellow: '🟨', red: '🟥', secondYellow: '🟥', injury: '✚', disallowed: '⚑', woodwork: '▮', error: '!', sub: '⇄', halftime: '⏸', shootout: '●' };
+
+/** una riga del tabellino: minuto, icona, nome, dettaglio */
+export function timelineRow(x, teams = null) {
+  if (x.type === 'halftime') return el('li', 'mtl__sep label', `${t('allenatore.tl.halftime')} ${x.score ? `${x.score[0]}–${x.score[1]}` : ''}`);
+  if (x.type === 'shootout') return el('li', 'mtl__sep label', t('allenatore.tl.shootout', { home: x.score[0], away: x.score[1] }));
+  const row = el('li', `mtl__i mtl__i--${x.side ? 'a' : 'h'} mtl--${x.type}`);
+  const what = el('span', 'mtl__what');
+  /* di che squadra è: tre lettere, così si legge anche il tabellino in miniatura */
+  if (teams) what.appendChild(el('span', `mtl__team label mtl__team--${x.side ? 'a' : 'h'}`, abbr(teams[x.side ? 1 : 0])));
+  if (x.type === 'sub') {
+    what.append(el('strong', 'mhl', x.in || ''), document.createTextNode(` ${t('allenatore.tl.subFor')} ${x.out || ''}`));
+  } else {
+    what.appendChild(el('strong', 'mhl', x.name || ''));
+    const extra = x.type === 'goal' && x.assist ? t('allenatore.tl.assist', { name: x.assist })
+      : x.type === 'injury' ? ((x.weeks || 1) === 1 ? t('allenatore.tl.injury1') : t('allenatore.tl.injury', { weeks: x.weeks }))
+        : ['goal', 'yellow', 'sub'].includes(x.type) ? '' : t(`allenatore.tl.${x.type}`);
+    if (extra) what.appendChild(el('span', 'mtl__x dim', ` · ${extra}`));
+  }
+  const score = (x.type === 'goal' || x.type === 'penGoal') && x.score ? el('span', 'mtl__score num', `${x.score[0]}–${x.score[1]}`) : el('span', 'mtl__score');
+  row.append(el('span', 'mtl__min num', x.min ? `${x.min}'` : ''), el('span', 'mtl__ic', TL_ICON[x.type] || '·'), what, score);
+  return row;
+}
+
+/** il tabellino completo della partita, casa a sinistra e trasferta a destra */
+export function timelineCard(timeline, { home, away, title = null } = {}) {
+  const card = el('section', 'mcard card mtl');
+  card.appendChild(el('h3', 'mhead display', title || t('allenatore.tl.title')));
+  if (home && away) {
+    const head = el('div', 'mtl__teams label');
+    head.append(el('span', '', home), el('span', '', away));
+    card.appendChild(head);
+  }
+  const list = el('ol', 'mtl__list');
+  if (!timeline.length) list.appendChild(el('li', 'dim', t('allenatore.tl.quiet')));
+  for (const x of timeline) list.appendChild(timelineRow(x, home && away ? [home, away] : null));
+  card.appendChild(list);
+  return card;
+}
+
+/** la sigla di una squadra: le prime tre lettere del nome che conta */
+export function abbr(name = '') {
+  const words = String(name).replace(/^(FC|AC|AS|SS|US|SSC|ACF|UC|CF|RC|RCD|CD|UD|SD|SC|SV|VfB|VfL|TSG|1\.|FSV|OGC|AJ|RB|Real|Racing|Stade|Olympique|Borussia)\s+/i, '').split(/\s+/);
+  return (words[0] || '').slice(0, 3).toUpperCase();
+}
+
+/**
+ * Un risultato di giornata: la squadra che vince in grassetto e, sotto,
+ * chi ha segnato (e chi è stato espulso) con il minuto.
+ */
+export function resultRow(f, clubName, meId) {
+  const wrap = el('div', `mres2 ${f.h === meId || f.a === meId ? 'is-me' : ''}`);
+  const r = el('div', 'mres');
+  const win = f.res ? Math.sign(f.res[0] - f.res[1]) || (f.info?.pens ? Math.sign(f.info.pens[0] - f.info.pens[1]) : 0) : 0;
+  r.append(
+    el(win > 0 ? 'strong' : 'span', `mres__h ${win > 0 ? 'is-win' : ''}`, clubName(f.h)),
+    el('strong', 'mres__s num', f.res ? `${f.res[0]}–${f.res[1]}` : '–'),
+    el(win < 0 ? 'strong' : 'span', `mres__a ${win < 0 ? 'is-win' : ''}`, clubName(f.a)),
+  );
+  wrap.appendChild(r);
+  const moments = f.info?.moments || [];
+  if (moments.length) {
+    const sc = el('div', 'mres__sc');
+    for (const side of [0, 1]) {
+      const col = el('span', `mres__col mres__col--${side ? 'a' : 'h'}`);
+      const items = moments.filter((m) => m[1] === side).map(([min, , type, name]) => `${type === 'red' || type === 'secondYellow' ? '🟥' : '⚽'} ${(name || '').split(' ').slice(-1)[0]} ${min}'${type === 'penGoal' ? ` (${t('allenatore.live.penShort')})` : ''}`);
+      items.forEach((txt, i) => { if (i) col.appendChild(document.createTextNode(' · ')); col.appendChild(el('span', 'mres__who', txt)); });
+      sc.appendChild(col);
+    }
+    wrap.appendChild(sc);
+  }
+  return wrap;
 }

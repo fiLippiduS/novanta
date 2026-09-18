@@ -549,7 +549,8 @@ export function step(state) {
   /* intelligenza dell'altra panchina */
   for (const s of state.sides) if (s.key !== state.user || state.autoUser) aiManager(state, s, state.sides.find((x) => x !== s));
 
-  /* fine dei tempi */
+  /* fine dei tempi: un rigore o una punizione da decidere si batte prima del fischio */
+  if (state.pending) return state.events.slice(before);
   if (state.minute >= limit) endPeriod(state);
   else if (state.user) checkMoments(state);
 

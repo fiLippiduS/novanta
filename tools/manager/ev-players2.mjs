@@ -104,7 +104,7 @@ export default [
   },
   {
     id: 'p2_mistake_repeat', cat: 'player', w: 4, repeat: 25,
-    when: { mdMin: 4, player: { depts: ['DIF', 'POR'], starter: true, formMax: -2 } },
+    when: { mdMin: 4, player: { depts: ['DIF', 'POR'], starter: true, formMax: -2, errorsMin: 3 } },
     o: [
       { fx: { form: 3, fitness: 10, morale: -4 } },
       { odds: { base: 0.45, pers: { leader: 0.15, professionista: 0.15, fragile: -0.25 }, good: { form: 4, attrs: { composure: 2 } }, bad: { form: -3, morale: -10 } } },
@@ -258,7 +258,7 @@ export default [
   },
   {
     id: 'p2_ex_club_return', cat: 'player', w: 3, repeat: 40,
-    when: { player: { rankMax: 10, ageMin: 24 } },
+    when: { player: { rankMax: 10, ageMin: 24, exClubNext: true } },
     o: [
       { fx: { morale: 6, nextMatch: { attack: 1.02 } } },
       { fx: { morale: -4, nextMatch: { discipline: 0.9 } } },
@@ -286,7 +286,7 @@ export default [
   },
   {
     id: 'p2_homesick_again', cat: 'private', w: 2, repeat: 60,
-    when: { player: { foreign: true, moraleMax: 45 } },
+    when: { player: { foreign: true, newLang: true, moraleMax: 45 } },
     o: [
       { fx: { morale: 12, fitness: -5, budget: -0.1 } },
       { fx: { loanOut: true } },
@@ -300,7 +300,7 @@ export default [
   },
   {
     id: 'p2_captain_old_new', cat: 'player', w: 3, repeat: 60,
-    when: { player: { captain: true, ageMin: 33 } },
+    when: { player: { captain: true, ageMin: 33, ageMax: 33 } },
     o: [
       { fx: { morale: -6, bond: 6, teamMorale: 2 } },
       { fx: { morale: 4 } },
@@ -507,7 +507,7 @@ export default [
   },
   {
     id: 'p2_injury_comeback_goal', cat: 'player', w: 2, repeat: 60,
-    when: { last: 'W', player: { avgMin: 7, appsMax: 8, appsMin: 1 } },
+    when: { last: 'W', player: { justBack: true, lastRatingMin: 7, appsMin: 1 } },
     o: [
       { fx: { morale: 10, form: 3 } },
       { fx: { morale: 4, fitness: 5 } },
@@ -535,7 +535,7 @@ export default [
   },
   {
     id: 'p2_foreign_language_joke', cat: 'player', w: 2, repeat: 80,
-    when: { player: { foreign: true, ageMax: 26 } },
+    when: { player: { foreign: true, newLang: true, ageMax: 26 } },
     o: [
       { fx: { morale: 5, teamMorale: 2 } },
       { fx: {} },
@@ -605,7 +605,7 @@ export default [
   },
   {
     id: 'p2_goalkeeper_distribution_error', cat: 'player', w: 2, repeat: 40,
-    when: { last: 'L', player: { roles: ['POR'], starter: true } },
+    when: { last: 'L', player: { roles: ['POR'], starter: true, errorLast: true } },
     o: [
       { fx: { nextMatch: { direct: 1.08, control: 0.97 }, morale: 3 } },
       { fx: { morale: -3, attrs: { distribution: 1 } } },

@@ -17,8 +17,10 @@ Un gioco di calcio per il web. Dieci modalità, nessun bundler, nessuna dipenden
   nazionale e grandi tornei per chi viene dalle dieci nazionali più forti.
 - **Allenatore** — una panchina in dieci campionati con le rose di oggi: partite
   minuto per minuto con scelte decisive, classifica giornata per giornata, dodici
-  stili, mercato a trattative (club, procuratore, visite mediche), potenziale e
-  declino realistici, più di quattrocento decisioni, coppe, promozioni ed esonero.
+  stili, mercato a trattative (club, procuratore, visite mediche), liste
+  trasferimenti e prestiti con offerte da più club, potenziale e declino
+  realistici, più di quattrocento decisioni, coppe, promozioni ed esonero. Dal
+  calendario si simula fino a una data, con tabellini e classifica in diretta.
 - **Chi è?** — la scheda di una carriera vera senza il nome, cinque vite, la ricerca
   che suggerisce mentre scrivi.
 - **Catena** — squadra, giocatore, squadra: quaranta secondi a mossa, da soli o

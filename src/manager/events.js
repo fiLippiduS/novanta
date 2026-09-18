@@ -12,9 +12,35 @@
    I testi stanno in data/manager/text.<lingua>.json con la stessa chiave. */
 
 import { applyPlayerFx, ageOf, valueOf, DEPT } from './players.js';
+import { cashIn } from './market.js';
 import { squadOf, leagueOf, table, rngFor, nextFixture, isDerby, teamMorale, makeYouth, currentStrength, topUpSquad, resetCurve } from './career.js';
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+/* ------------------------------------------------------------------ */
+/* nazionalità: chi è straniero, chi parla un'altra lingua, chi viene   */
+/* da lontano. Il paese è quello del club, non quello dell'allenatore.  */
+/* ------------------------------------------------------------------ */
+
+const EUROPE = new Set('ES IT FR DE GB-ENG GB-SCT GB-WLS GB-NIR NL BE DK PT IE SE CH AT PL HR RS NO TR FI AL SI BA GR UA CZ GE RO HU SK XK BG IS ME LU IL LT RU EE LV AM MK MD MT CY AZ KZ AD FO BY LI SM MC'.split(' '));
+const LANGS = {
+  it: 'IT SM CH MT',
+  en: 'GB-ENG GB-SCT GB-WLS GB-NIR IE US CA AU NZ JM GH NG ZM ZW KE TT BB BM GY KN LC UG SL GM NA ZA MT',
+  es: 'ES AR UY CO CL EC VE MX PY PE DO PA CR BO GQ CU HN SV GT NI PR',
+  fr: 'FR BE CH LU MC SN CI ML CM CD GN BF MQ GP GA TG MG CF CG HT BJ NE TD KM GF MA DZ TN MR',
+  de: 'DE AT CH LU LI',
+};
+const SPEAKS = {};
+for (const [l, list] of Object.entries(LANGS)) for (const c of list.split(' ')) (SPEAKS[c] = SPEAKS[c] || new Set()).add(l);
+const LEAGUE_LANG = { IT: 'it', 'GB-ENG': 'en', ES: 'es', DE: 'de', FR: 'fr' };
+const sameCountry = (nation, code) => nation === code || (code === 'GB-ENG' && /^GB-/.test(nation || ''));
+
+/** straniero rispetto al paese del club */
+export const isForeign = (nation, leagueCode) => Boolean(nation) && !sameCountry(nation, leagueCode);
+/** non parla la lingua del campionato fin da piccolo */
+export const newLanguage = (nation, leagueCode) => !(SPEAKS[nation]?.has(LEAGUE_LANG[leagueCode]));
+/** viene da fuori dall'Europa: voli intercontinentali, un altro mondo */
+export const farAway = (nation) => Boolean(nation) && !EUROPE.has(nation);
 
 /* ------------------------------------------------------------------ */
 /* contesto                                                            */
@@ -96,6 +122,7 @@ export function fits(ev, ctx, career) {
   if (w.window === true && !ctx.windowOpen) return false;
   if (w.window === false && ctx.windowOpen) return false;
   if (w.ultimatum !== undefined && w.ultimatum !== ctx.ultimatum) return false;
+  if (w.coachForeign && !isForeign(career.coach.nation, ctx.league.code)) return false;
   if (w.flag && !career.flags[w.flag]) return false;
   if (w.noFlag && career.flags[w.noFlag]) return false;
   if (w.chainOnly) return false;
@@ -139,7 +166,18 @@ export function candidates(ev, ctx, career) {
     if (f.appsMin !== undefined && p.stats.apps < f.appsMin) return false;
     if (f.avgMin && (!p.stats.apps || p.stats.ratingSum / p.stats.apps < f.avgMin)) return false;
     if (f.avgMax && (!p.stats.apps || p.stats.ratingSum / p.stats.apps > f.avgMax)) return false;
-    if (f.foreign === true && p.nation === career.coach.nation) return false;
+    const code = ctx.league.code;
+    if (f.foreign === true && !isForeign(p.nation, code)) return false;
+    if (f.newLang && (!isForeign(p.nation, code) || !newLanguage(p.nation, code))) return false;
+    if (f.farAway && !farAway(p.nation)) return false;
+    if (f.newSigning && !(p.signedFrom && p.signedSeason === season)) return false;
+    if (f.penMissedLast && p.lastMatch?.md !== career.md - 1) return false;
+    if (f.penMissedLast && !p.lastMatch.penMissed) return false;
+    if (f.errorLast && !(p.lastMatch?.md === career.md - 1 && p.lastMatch.errors > 0)) return false;
+    if (f.errorsMin && (p.stats.errors || 0) < f.errorsMin) return false;
+    if (f.exClubNext && !(ctx.opponent && p.signedFrom === ctx.opponent.id)) return false;
+    if (f.justBack && !(p.backMd && p.backMd.s === season && career.md - p.backMd.md <= 3)) return false;
+    if (f.lastRatingMin && !(p.lastMatch?.md === career.md - 1 && (p.lastRating || 0) >= f.lastRatingMin)) return false;
     if (f.academy && !p.academy && !p.youth) return false;
     if (f.flag && !p.flags.includes(f.flag)) return false;
     if (f.noFlag && p.flags.includes(f.noFlag)) return false;
@@ -380,13 +418,17 @@ export function applyFx(career, data, fx, subject, rand = Math.random) {
     if (fx.sell) {
       /* ceduto: esce dalla rosa, entrano i soldi (una quota del valore) */
       const fee = Math.round(valueOf(subject, career.season) * fx.sell * 10) / 10;
-      club.budget = Math.round((club.budget + fee) * 10) / 10;
+      const money = cashIn(career, fee);
+      career.moved = career.moved || {};
+      career.moved[`${subject.name}|${subject.birth}`] = 'sold';
+      career.inbox.unshift({ id: `out-ev-${subject.id}`, type: 'market', season: career.season, md: career.md, key: 'soldEvent', vars: { player: subject.name, fee, ...money } });
       club.squad = club.squad.filter((id) => id !== subject.id);
       career.tactics.lineup = career.tactics.lineup.filter((id) => id !== subject.id);
       career.tactics.bench = career.tactics.bench.filter((id) => id !== subject.id);
       subject.club = null;
       delete career.players[subject.id];
       changes.push({ kind: 'sold', value: fee, player: subject.id, name: subject.name });
+      changes.push({ kind: 'clubCut', value: money.toClub, name: subject.name });
     } else if (fx.loanOut) {
       subject.loanOut = true;
       career.tactics.lineup = career.tactics.lineup.filter((id) => id !== subject.id);

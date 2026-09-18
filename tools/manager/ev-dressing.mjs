@@ -312,7 +312,7 @@ export default [
   },
   {
     id: 'dr_translator', cat: 'dressing', w: 3, repeat: 80,
-    when: { player: { foreign: true, ageMax: 24 } },
+    when: { player: { foreign: true, newLang: true, ageMax: 24, appsMax: 12 } },
     o: [
       { fx: { budget: -0.1, morale: 6, familiarity: 2, bond: 4 } },
       { fx: { morale: -3 } },
@@ -483,7 +483,7 @@ export default [
   },
   {
     id: 'dr_penalty_miss_consolation', cat: 'dressing', w: 3, repeat: 30,
-    when: { last: 'L', player: { depts: ['ATT', 'CEN'], rankMax: 8 } },
+    when: { last: 'L', player: { depts: ['ATT', 'CEN'], rankMax: 8, penMissedLast: true } },
     o: [
       { fx: { morale: 8, penalties: true } },
       { fx: { morale: -4 } },

@@ -395,7 +395,7 @@ export default [
   },
   {
     id: 'md_rehab_abroad', cat: 'medical', w: 3, repeat: 40,
-    when: { player: { injured: true, rankMax: 10 } },
+    when: { player: { injured: true, rankMax: 10, foreign: true } },
     o: [
       { fx: { injury: -1, bond: -5, budget: -0.2 } },
       { fx: { bond: 5 } },

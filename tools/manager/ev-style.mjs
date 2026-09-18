@@ -219,7 +219,7 @@ export default [
   },
   {
     id: 'nt_break_fatigue', cat: 'national', w: 4, repeat: 20,
-    when: { mdMin: 3, player: { rankMax: 6, capsMin: 5 } },
+    when: { mdMin: 3, player: { rankMax: 6, capsMin: 5, farAway: true } },
     o: [
       { fx: { fitness: 12, form: -1 } },
       { fx: { fitness: -6, form: 1 } },

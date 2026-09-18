@@ -1142,12 +1142,22 @@
         "noWages": "Chiede {wage} l’anno: nel monte ingaggi c’è spazio solo per {room}.",
         "refusedPlayer": "Il giocatore non vuole venire.",
         "rejected": "Il club rifiuta l’offerta.",
-        "countered": "Il club rilancia: chiede {counter}."
+        "countered": "Il club rilancia: chiede {counter}.",
+        "closed": "Il mercato è chiuso: l’offerta è scaduta."
       },
       "acceptCounter": "Accetto: {fee}",
       "walkAway": "Lascio perdere",
       "offerPct": "Offri {fee}",
-      "loan": "Prestito ({fee})"
+      "loan": "Prestito ({fee})",
+      "offersClosedNote": "Il mercato è chiuso: le offerte arrivano quando riapre.",
+      "nOffers": "{n} offerte",
+      "noOffersYet": "Nessuna offerta per ora",
+      "offerBuyLine": "{club} offre {fee}",
+      "offerLoanLine": "{club} lo chiede in prestito: {fee} e il {share}% dell’ingaggio",
+      "newOffer": "Offerta per {player}: {club} mette sul tavolo {fee}.",
+      "newLoanOffer": "Prestito per {player}: {club} offre {fee}.",
+      "goOffers": "Vai alle offerte",
+      "logLoanOut": "{season} · {name} in prestito · {club} · {fee}"
     },
     "contract": {
       "renew": "Rinnova: {years} anni a {wage}",
@@ -1161,7 +1171,14 @@
       "release": "Rescindi il contratto",
       "releaseTitle": "Rescindere con {name}?",
       "releaseText": "Costa {cost}: metà di quello che resta del contratto.",
-      "releaseYes": "Rescindi"
+      "releaseYes": "Rescindi",
+      "listTransfer": "Lista trasferimenti",
+      "listLoan": "Lista prestiti",
+      "unlistBtn": "Togli dalla lista",
+      "listedTransfer": "In lista trasferimenti: {n} offerte già arrivate. Altre arriveranno nei prossimi giorni di mercato.",
+      "listedLoan": "In lista prestiti: {n} offerte già arrivate. Altre arriveranno nei prossimi giorni di mercato.",
+      "listedClosed": "In lista: le offerte arriveranno quando si apre il mercato.",
+      "onLoanAt": "In prestito fino a fine stagione · {club} · paga il {share}% dell’ingaggio."
     },
     "cupRounds": {
       "r32": "Sedicesimi",
@@ -1260,7 +1277,8 @@
       "loanOut": "{name} in prestito",
       "captain": "{name} capitano",
       "penalties": "{name} rigorista",
-      "youth": "Un ragazzo sale in prima squadra"
+      "youth": "Un ragazzo sale in prima squadra",
+      "clubCut": "{value} alla società"
     },
     "standings": "Classifica",
     "fullTable": "Tutta",
@@ -1270,7 +1288,10 @@
     "inboxEmpty": "Nessuna notizia per ora.",
     "msg": {
       "objective": "La società fissa l’obiettivo: {objective} (entro il {target}° posto). Budget per il mercato: {budget}.",
-      "newJob": "Benvenuto al {club}. La squadra ti aspetta al campo."
+      "newJob": "Benvenuto al {club}. La squadra ti aspetta al campo.",
+      "sold": "Cessione: {player} → {club} per {fee}. {toBudget} nel budget di mercato, {toClub} alla società.",
+      "loanedOut": "Prestito: {player} → {club} fino a fine stagione per {fee}. {toBudget} nel budget di mercato, {toClub} alla società. Pagano il {share}% dell’ingaggio.",
+      "soldEvent": "Cessione: {player} per {fee}. {toBudget} nel budget di mercato, {toClub} alla società."
     },
     "depts": {
       "POR": "Portieri",
@@ -1876,8 +1897,14 @@
         "collapsed_windowClosed": "Il mercato chiude: trattativa saltata.",
         "collapsed_withdrawn": "Ti ritiri dalla trattativa.",
         "collapsed_gone": "Il giocatore è già andato altrove.",
-        "collapsed_noBudget": "Non ci sono più i soldi."
-      }
+        "collapsed_noBudget": "Non ci sono più i soldi.",
+        "notInterested": "Il procuratore è chiaro: il giocatore non vuole venire da noi, a nessuna cifra.",
+        "backToDemand": "Con questi anni e questo ruolo non se ne parla: la richiesta resta {wage} l’anno per {years}, da {role}."
+      },
+      "wants": "Chiede {wage} l’anno · {years} · {role}",
+      "meets": "✓ La proposta pareggia la richiesta: firma.",
+      "short": "Sotto la richiesta: può rilanciare o dire di no.",
+      "matchAsk": "Offri {fee}"
     },
     "incoming": {
       "stance": {
@@ -1894,12 +1921,87 @@
         "upset": "Voleva andare: ci resta male.",
         "upsetOut": "Voleva andare: ora chiede la cessione.",
         "rejected": "Offerta rifiutata."
+      },
+      "kind": {
+        "buy": "Acquisto",
+        "loan": "Prestito"
       }
     },
     "news": {
       "title": "Dagli altri club",
       "line": "{to} prende {name} ({from}) · {fee}"
     },
-    "bonusPaid": "Bonus a {name}: {fee}"
+    "bonusPaid": "Bonus a {name}: {fee}",
+    "injuryLine1": "{name} si ferma: una giornata.",
+    "onLoanAt": "In prestito · {club}",
+    "listChip": {
+      "transfer": "In lista trasferimenti",
+      "loan": "In lista prestiti"
+    },
+    "deal": {
+      "soldTitle": "Cessione completata",
+      "loanTitle": "Prestito concluso",
+      "soldText": "{player} è ceduto a titolo definitivo. Acquirente: {club}. Cifra: {fee}.",
+      "loanText": "{player} va in prestito fino a fine stagione. Club: {club}. Cifra: {fee}, più il {share}% dell’ingaggio pagato da loro.",
+      "split": "{toBudget} entrano nel budget di mercato, {toClub} (il 10%) restano alla società.",
+      "budgetNow": "Budget di mercato ora: {budget}."
+    },
+    "tl": {
+      "injury1": "infortunio, una giornata",
+      "title": "La partita",
+      "halftime": "Intervallo",
+      "shootout": "Rigori {home}–{away}",
+      "subFor": "per",
+      "assist": "assist {name}",
+      "injury": "infortunio, {weeks} giornate",
+      "penGoal": "su rigore",
+      "penMissed": "rigore sbagliato",
+      "penSaved": "rigore parato",
+      "red": "espulso",
+      "secondYellow": "doppio giallo",
+      "disallowed": "gol annullato",
+      "woodwork": "palo",
+      "error": "errore",
+      "quiet": "Nessun episodio da segnalare.",
+      "best": "Migliore in campo: {name} ({rating})"
+    },
+    "sim": {
+      "now": "Ultima giornata",
+      "feedEmpty": "Qui compariranno le giornate precedenti.",
+      "whoLabel": "Imprevisti",
+      "who": {
+        "vice": "Decide il vice",
+        "me": "Mi fermo io"
+      },
+      "viceChose": "Il vice ha scelto",
+      "button": "Simula fino a…",
+      "pickTitle": "Simula fino a una data",
+      "pickText": "Partite, coppe, mercato e imprevisti vanno avanti da soli fino alla giornata scelta, compresa. Quando c’è una decisione da prendere la simulazione si ferma e aspetta te.",
+      "to": "Fino al {date} · giornata {n}",
+      "start": "Simula",
+      "progress": "Giornata {n} di {total}",
+      "pause": "Pausa",
+      "resume": "Riprendi",
+      "stop": "Ferma",
+      "decide": "Una decisione da prendere: la simulazione aspetta te",
+      "decided": "Deciso: si può ripartire",
+      "end": {
+        "reached": "Arrivato alla data scelta",
+        "seasonEnd": "La stagione è finita",
+        "sacked": "Sei stato esonerato",
+        "stopped": "Simulazione fermata"
+      },
+      "endText": "Giornate simulate: {n}.",
+      "back": "Torna alla panchina",
+      "feed": "Cronaca",
+      "starting": "Si parte…",
+      "cup": {
+        "trophy": "Coppa vinta!",
+        "out": "Eliminati dalla coppa.",
+        "through": "Passaggio del turno."
+      },
+      "evoUp": "{name} cresce: {delta}, ora {ovr}.",
+      "evoDown": "{name} cala: {delta}, ora {ovr}."
+    }
   }
 }

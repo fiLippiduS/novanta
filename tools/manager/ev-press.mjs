@@ -232,7 +232,7 @@ export default [
   },
   {
     id: 'pr_racism_episode', cat: 'press', w: 3, repeat: 60,
-    when: { mdMin: 2, player: { foreign: true, starter: true } },
+    when: { mdMin: 2, player: { foreign: true, farAway: true, starter: true } },
     o: [
       { fx: { reputation: 4, bond: 15, morale: 6, teamMorale: 5 } },
       { fx: { bond: -10, morale: -10, reputation: -3 } },
@@ -400,7 +400,7 @@ export default [
   },
   {
     id: 'pr_gaffe_language', cat: 'press', w: 2, repeat: 80,
-    when: {},
+    when: { coachForeign: true },
     o: [
       { fx: { fans: 4, reputation: 1 } },
       { fx: { reputation: -1 } },

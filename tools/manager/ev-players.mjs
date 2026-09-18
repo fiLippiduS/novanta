@@ -179,7 +179,7 @@ export default [
   },
   {
     id: 'pl_young_debut', cat: 'youth', w: 6, repeat: 10,
-    when: { player: { ageMax: 19, appsMax: 1, injured: false } },
+    when: { player: { ageMin: 18, ageMax: 18, appsMax: 1, injured: false } },
     o: [
       { odds: { base: 0.55, pers: { professionista: 0.15, ambizioso: 0.15, fragile: -0.25 }, good: { potential: 4, attrs: { role: 2 }, morale: 15, bond: 12, promiseStarts: { need: 1, within: 3 } }, bad: { morale: -14, potential: -2, form: -4 } } },
       { fx: { potential: 1, morale: -3 } },
@@ -368,7 +368,7 @@ export default [
   },
   {
     id: 'pl_homesick', cat: 'private', w: 5, repeat: 25,
-    when: { player: { foreign: true, ageMax: 25, moraleMax: 60 } },
+    when: { player: { foreign: true, newLang: true, ageMax: 25, moraleMax: 60 } },
     o: [
       { fx: { morale: 14, bond: 8, fitness: -6 } },
       { odds: { base: 0.5, pers: { professionista: 0.2, fragile: -0.25 }, good: { morale: 8 }, bad: { morale: -12, form: -4 } } },
@@ -708,7 +708,7 @@ export default [
   },
   {
     id: 'pl_defender_error', cat: 'player', w: 5, repeat: 12,
-    when: { last: 'L', player: { depts: ['DIF'], starter: true } },
+    when: { last: 'L', player: { depts: ['DIF'], starter: true, errorLast: true } },
     o: [
       { fx: { morale: 8, bond: 5 } },
       { odds: { base: 0.5, pers: { professionista: 0.15, fragile: -0.2 }, good: { attrs: { positioning: 2, composure: 2 } }, bad: { morale: -10, form: -3 } } },
@@ -784,7 +784,7 @@ export default [
   },
   {
     id: 'pl_teenage_offer', cat: 'youth', w: 4, repeat: 30,
-    when: { window: true, player: { ageMax: 20, potentialGap: 8 } },
+    when: { window: true, player: { ageMin: 20, ageMax: 20, potentialGap: 8 } },
     o: [
       { fx: { sell: 1.6, youngsters: { morale: -4 }, fans: -4 } },
       { fx: { renew: 4, raise: 0.4, morale: 10, potential: 1 } },

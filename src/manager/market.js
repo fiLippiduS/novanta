@@ -145,9 +145,12 @@ export function quote(career, data, p, clubId) {
 }
 
 /** spazio nel monte ingaggi */
+/** il monte ingaggi: chi è in prestito altrove pesa solo per la parte che paghiamo ancora */
+export const wageBill = (career) => squadOf(career, career.club).reduce((n, p) => n + p.wage * (p.loanOut && p.loanWageShare ? 1 - p.loanWageShare : 1), 0);
+
 export function wageRoom(career) {
   const club = career.clubs[career.club];
-  const bill = squadOf(career, career.club).reduce((n, p) => n + p.wage, 0);
+  const bill = wageBill(career);
   return r2(club.wageBudget * 1.1 - bill);
 }
 
@@ -288,10 +291,31 @@ function maybeRival(career, data, talk, rand) {
   say(talk, 'rival', 'entered', { club: c.name, ask: talk.ask });
 }
 
-function agentStage(talk, rand) {
+/* il centesimo sopra: una richiesta arrotondata per difetto non basterebbe più */
+const up2 = (x) => Math.ceil(x * 100 - 1e-6) / 100;
+/** quanto manca, in ingaggio, perché un contratto convinca: oltre questo limite nessuna cifra basta */
+const MAX_NEED = 0.35;
+
+/**
+ * Il club ha detto sì: parla il procuratore. La richiesta che fa è esattamente
+ * il contratto che il giocatore firma: chi la pareggia chiude, sempre. Se il
+ * giocatore non vuole venire a nessuna condizione lo dice subito, invece di
+ * chiedere cifre che poi rifiuterebbe.
+ */
+function agentStage(career, data, talk, rand) {
   talk.stage = 'player';
   talk.agentFee = talk.kind === 'buy' ? r1(Math.max(0.1, talk.fee * (0.04 + rand() * 0.06))) : 0;
-  say(talk, 'agent', 'demand', { wage: talk.demand.wage, years: talk.demand.years, role: talk.demand.role, agent: talk.agentFee });
+  const p = talkPlayer(career, data, talk);
+  const d = talk.demand;
+  d.market = d.market ?? d.wage;
+  const need = talk.mind - contractBase(talk, p, d.years, d.role);
+  if (need > MAX_NEED) {
+    say(talk, 'agent', 'notInterested');
+    collapse(talk, talk.rival ? 'hijacked' : 'playerRefused');
+    return;
+  }
+  d.wage = up2(d.market * (1 + Math.max(0, need) / 1.5));
+  say(talk, 'agent', 'demand', { wage: d.wage, years: d.years, role: d.role, agent: talk.agentFee });
 }
 
 /**
@@ -321,7 +345,7 @@ export function bidClub(career, data, talkId, { fee, bonus = 0 }) {
     talk.fee = fee;
     talk.bonus = bonus;
     say(talk, 'club', 'accepted', { fee, bonus });
-    agentStage(talk, rand);
+    agentStage(career, data, talk, rand);
     return { status: 'accepted', talk };
   }
   talk.patience -= 1;
@@ -349,7 +373,7 @@ export function payClause(career, data, talkId) {
   talk.bonus = 0;
   say(talk, 'you', 'clause', { fee: talk.fee });
   say(talk, 'club', 'clausePaid', { fee: talk.fee });
-  agentStage(talk, talkRng(career, talk, 'clause'));
+  agentStage(career, data, talk, talkRng(career, talk, 'clause'));
   return { status: 'accepted', talk };
 }
 
@@ -362,7 +386,6 @@ function contractBase(talk, p, years, role) {
   return talk.interest + roleTerm + yearsTerm + (talk.rival ? -0.08 : 0);
 }
 const wageTerm = (wage, demanded) => clamp((wage / demanded - 1) * 1.5, -0.6, 0.35);
-const WAGE_CAP = 1 + 0.35 / 1.5;
 
 /**
  * 2. Il contratto al giocatore: ingaggio (milioni l'anno), anni, ruolo promesso.
@@ -383,30 +406,26 @@ export function offerContract(career, data, talkId, { wage, years, role }) {
   const rand = talkRng(career, talk, 'player');
   say(talk, 'you', 'contract', { wage, years, role });
   const d = talk.demand;
+  const market = d.market ?? d.wage;
+  /* pareggiare la richiesta (o l'ultima controproposta) chiude sempre: stessi anni, ruolo uguale o migliore */
+  const meets = (w) => w && wage >= w.wage - 1e-9 && years === w.years && ROLE_RANK[role] >= ROLE_RANK[w.role];
   const base = contractBase(talk, p, years, role);
-  if (base + wageTerm(wage, d.wage) >= talk.mind) {
+  if (meets(d) || meets(talk.counter) || base + wageTerm(wage, market) >= talk.mind - 1e-9) {
     talk.contract = { wage, years, role };
     talk.counter = null;
     say(talk, 'agent', 'agreed');
     return medical(career, data, talk, rand);
   }
-  /* il procuratore rilancia se l'accordo è possibile, altrimenti si allontana */
+  talk.playerPatience -= 1;
+  if (talk.playerPatience <= 0) { collapse(talk, talk.rival ? 'hijacked' : 'playerRefused'); return { status: 'collapsed', talk }; }
+  /* il procuratore rilancia: sugli anni e sul ruolo proposti se si può, altrimenti torna alla sua richiesta */
   const need = talk.mind - base;
-  const needFull = talk.mind - contractBase(talk, p, d.years, d.role);
-  let counter = null;
-  if (need <= 0.35) counter = { wage: r2(d.wage * (1 + Math.max(need, -0.3) / 1.5) * 1.02 + 0.01), years, role };
-  else if (needFull <= 0.35) counter = { wage: r2(d.wage * (1 + Math.max(needFull, -0.3) / 1.5) * 1.02 + 0.01), years: d.years, role: d.role };
-  if (counter && counter.wage <= r2(d.wage * WAGE_CAP) + 0.02) {
-    talk.playerPatience -= 1;
-    if (talk.playerPatience <= 0) { collapse(talk, talk.rival ? 'hijacked' : 'playerRefused'); return { status: 'collapsed', talk }; }
-    talk.counter = counter;
-    say(talk, 'agent', talk.playerPatience === 1 ? 'lastDemand' : 'agentCounter', { wage: counter.wage, years: counter.years, role: counter.role });
-    return { status: 'countered', talk };
-  }
-  talk.playerPatience -= 2;
-  if (talk.playerPatience <= 0 || needFull > 0.35) { collapse(talk, talk.rival ? 'hijacked' : 'playerRefused'); return { status: 'collapsed', talk }; }
-  say(talk, 'agent', 'refused');
-  return { status: 'refused', talk };
+  const counter = need <= MAX_NEED
+    ? { wage: Math.max(up2(market * (1 + need / 1.5)), r2(wage + 0.01)), years, role }
+    : { wage: d.wage, years: d.years, role: d.role };
+  talk.counter = counter;
+  say(talk, 'agent', talk.playerPatience === 1 ? 'lastDemand' : need <= MAX_NEED ? 'agentCounter' : 'backToDemand', { wage: counter.wage, years: counter.years, role: counter.role });
+  return { status: 'countered', talk };
 }
 
 /* 3. le visite mediche */
@@ -511,6 +530,7 @@ function sign(career, data, candidate, fee, kind, wage, { years = null, agentFee
   signed.flags = (signed.flags || []).filter((f) => f !== 'listed' && f !== 'wantsOut');
   if (kind === 'buy') signed.contract = years ? career.season + years : Math.max(signed.contract, career.season + 3);
   signed.signedFrom = clubId;
+  signed.signedSeason = career.season;
   signed.fee = fee;
   signed.bonusDue = bonus > 0 ? { fee: bonus, apps: 20, club: clubId } : null;
   career.players[signed.id] = signed;
@@ -556,20 +576,60 @@ function refillAfterSale(career, clubId, rand) {
 /* cessioni                                                            */
 /* ------------------------------------------------------------------ */
 
-export function setListed(career, playerId, listed) {
+/** le due liste: in vendita o in prestito (una esclude l'altra) */
+export const LISTS = { transfer: 'listed', loan: 'loanListed' };
+export const listOf = (p) => ((p.flags || []).includes('loanListed') ? 'loan' : (p.flags || []).includes('listed') ? 'transfer' : null);
+
+/** la quota di ogni incasso che resta alla società; il resto va nel budget di mercato */
+export const CLUB_CUT = 0.1;
+
+/** i soldi di una cessione: il 90% nel budget di mercato, il 10% alla società */
+export function cashIn(career, fee) {
+  const club = career.clubs[career.club];
+  const toClub = r1(fee * CLUB_CUT);
+  const toBudget = r1(fee - toClub);
+  club.budget = r1(club.budget + toBudget);
+  club.revenue = r1((club.revenue || 0) + toClub);
+  return { toBudget, toClub };
+}
+
+/**
+ * Mette un giocatore in lista trasferimenti o prestiti (o lo toglie: `mode`
+ * null). Con il mercato aperto le prime offerte arrivano subito, da club
+ * diversi. Accetta anche il vecchio `true/false` per la lista trasferimenti.
+ */
+export function setListed(career, data, playerId, mode) {
+  if (typeof data === 'string') { mode = playerId; playerId = data; data = null; }
+  if (mode === true) mode = 'transfer';
   const p = career.players[playerId];
-  if (!p) return;
-  p.flags = (p.flags || []).filter((f) => f !== 'listed');
-  if (listed) p.flags.push('listed');
+  if (!p) return [];
+  p.flags = (p.flags || []).filter((f) => f !== 'listed' && f !== 'loanListed');
+  /* chi esce dalla lista ritira anche le offerte arrivate per quella lista */
+  career.offersIn = (career.offersIn || []).filter((o) => o.player !== p.id || (mode && o.kind === (mode === 'loan' ? 'loan' : 'buy')));
+  if (!mode) return [];
+  p.flags.push(LISTS[mode]);
+  if (!data || !windowOpen(career)) return [];
+  const rand = mulberry32(fnv1a(`${career.seed}|${career.season}|${career.md}|list|${p.id}|${mode}`));
+  return offersFor(career, data, p, rand, 1 + Math.floor(rand() * (1 + 2.4 * appeal(career, p))));
 }
 
 /* cosa pensa il giocatore dell'offerta: vuole andare, ci pensa, oppure no */
-function stanceOf(career, p, buyer) {
+function stanceOf(career, p, buyer, kind = 'buy') {
   const mine = currentStrength(career, career.club);
+  const age = ageOf(p, career.season);
+  const list = listOf(p);
+  if (kind === 'loan') {
+    /* in prestito si va per giocare: i giovani ci vanno volentieri, i veterani no se si scende troppo */
+    if (list === 'loan' && age <= 23) return 'wants';
+    if (buyer.strength < mine - 12 && age >= 26) return 'refuses';
+    return list === 'loan' || age <= 23 ? 'open' : buyer.strength >= mine - 4 ? 'open' : 'refuses';
+  }
   if ((p.flags || []).includes('wantsOut')) return 'wants';
   if (buyer.strength >= mine + 3 && (p.personality === 'ambizioso' || p.morale < 55)) return 'wants';
+  /* chi sa di essere in lista non si aggrappa: rifiuta solo un salto indietro troppo grande */
+  if (list === 'transfer') return buyer.strength < mine - 8 && age <= 29 ? 'refuses' : buyer.strength >= mine ? 'wants' : 'open';
   if ((p.bond ?? 50) >= 68 && buyer.strength <= mine + 2) return 'refuses';
-  if (buyer.strength < mine - 4 && ageOf(p, career.season) <= 29) return 'refuses';
+  if (buyer.strength < mine - 4 && age <= 29) return 'refuses';
   return 'open';
 }
 
@@ -581,31 +641,44 @@ export function canLetGo(career, p) {
   return null;
 }
 
+/* quanto è appetibile un giocatore sul mercato (0–1): voto, età */
+function appeal(career, p) {
+  const age = ageOf(p, career.season);
+  return clamp((p.ovr - 55) / 25 + (age <= 24 ? 0.2 : 0) - (age >= 32 ? 0.25 : 0), 0.15, 1);
+}
+
+/* l'ultima giornata della finestra in corso: le offerte valgono fino a lì */
+function windowEnd(career) {
+  const half = Math.floor(career.fixtures.length / 2);
+  return career.md <= 1 ? 1 : half + 1;
+}
+
 /**
- * Offerte in arrivo per i giocatori messi sul mercato (e ogni tanto per i
- * migliori anche se non lo sono). Si generano a fine giornata. Ogni club ha
- * un massimo che non dice e una pazienza per le controproposte.
+ * Nuove offerte per un giocatore, da club diversi da quelli che hanno già
+ * offerto. In vendita comprano club del suo livello, in prestito club dove
+ * può giocare titolare.
  */
-export function incomingOffers(career, data) {
-  career.offersIn = (career.offersIn || []).filter((o) => o.expires > career.md && career.players[o.player]);
-  if (!windowOpen(career)) return [];
-  const rand = rngFor(career, 'offers-in');
-  const all = Object.values(data.leagues.clubs).filter((c) => c.id !== career.club);
+function offersFor(career, data, p, rand, n) {
+  const kind = listOf(p) === 'loan' ? 'loan' : 'buy';
+  const taken = new Set((career.offersIn || []).filter((o) => o.player === p.id).map((o) => o.club));
+  const room = 4 - taken.size;
+  if (room <= 0 || n <= 0) return [];
+  const all = Object.values(data.leagues.clubs).filter((c) => c.id !== career.club && !taken.has(c.id) && !/ B$| II$/.test(c.name));
+  let pool = all.filter((c) => (kind === 'loan' ? c.strength >= p.ovr - 13 && c.strength <= p.ovr + 1 : c.strength >= p.ovr - 9 && c.strength <= p.ovr + 10));
+  /* un ragazzo più debole di ogni club nei dati: lo chiedono le squadre più piccole */
+  if (pool.length < 6) pool = [...all].sort((a, b) => Math.abs(a.strength - p.ovr) - Math.abs(b.strength - p.ovr)).slice(0, 14);
+  const value = valueOf(p, career.season);
   const made = [];
-  for (const p of squadOf(career, career.club)) {
-    if (p.loanIn || career.offersIn.some((o) => o.player === p.id)) continue;
-    const listed = (p.flags || []).includes('listed');
-    const wants = (p.flags || []).includes('wantsOut');
-    const chance = listed ? 0.55 : wants ? 0.3 : p.ovr >= currentStrength(career, career.club) + 4 ? 0.05 : 0;
-    if (rand() >= chance) continue;
-    const value = valueOf(p, career.season);
-    const buyers = all.filter((c) => c.strength >= p.ovr - 9 && c.strength <= p.ovr + 12);
-    if (!buyers.length) continue;
-    const buyer = buyers[Math.floor(rand() * buyers.length)];
-    const fee = r1(value * (listed ? 0.7 + rand() * 0.35 : 1.05 + rand() * 0.4));
+  for (let i = 0; i < Math.min(n, room) && pool.length; i++) {
+    const buyer = pool.splice(Math.floor(rand() * pool.length), 1)[0];
+    /* chi è più ricco paga di più; chi prende in prestito paga una quota e parte dell'ingaggio */
+    const rich = clamp(1 + (buyer.strength - p.ovr) * 0.012, 0.85, 1.15);
+    const fee = kind === 'loan' ? r1(Math.max(0.1, value * (0.04 + rand() * 0.07))) : r1(Math.max(0.1, value * (0.62 + rand() * 0.33) * rich));
     const offer = {
-      id: `${p.id}|${career.season}|${career.md}`, player: p.id, club: buyer.id, clubName: buyer.name, fee, expires: career.md + 3,
-      max: r1(fee * (1.08 + rand() * 0.3)), patience: 2, stance: stanceOf(career, p, buyer),
+      id: `${p.id}|${career.season}|${career.md}|${buyer.id}`, player: p.id, club: buyer.id, clubName: buyer.name, kind, fee,
+      wageShare: kind === 'loan' ? Math.round((0.5 + rand() * 0.5) * 20) / 20 : null,
+      expires: windowEnd(career), max: r1(fee * (1.08 + rand() * 0.3)), patience: 2,
+      stance: stanceOf(career, p, buyer, kind),
     };
     career.offersIn.push(offer);
     made.push(offer);
@@ -613,45 +686,111 @@ export function incomingOffers(career, data) {
   return made;
 }
 
-/** Esito: sold | squadMin | keeperMin | playerRefuses | null */
+/**
+ * Offerte in arrivo per i giocatori in lista (e ogni tanto per i migliori o
+ * per chi vuole andare via anche se non lo sono). Si generano a fine
+ * giornata, solo a mercato aperto, e valgono fino alla chiusura della
+ * finestra. Ogni club ha un massimo che non dice e una pazienza.
+ */
+export function incomingOffers(career, data) {
+  const open = windowOpen(career);
+  career.offersIn = (career.offersIn || []).filter((o) => open && o.expires >= career.md && career.players[o.player] && !career.players[o.player].loanOut);
+  if (!open) return [];
+  const rand = rngFor(career, 'offers-in');
+  const made = [];
+  const mine = currentStrength(career, career.club);
+  for (const p of squadOf(career, career.club)) {
+    if (p.loanIn || p.loanOut) continue;
+    const list = listOf(p);
+    const has = career.offersIn.filter((o) => o.player === p.id).length;
+    if (list) {
+      /* in lista: ogni giornata di mercato qualche club si fa avanti */
+      const a = appeal(career, p);
+      let n = 0;
+      if (rand() < 0.35 + 0.45 * a) n++;
+      if (rand() < 0.25 * a) n++;
+      if (!has && !n) n = 1;
+      made.push(...offersFor(career, data, p, rand, n));
+      continue;
+    }
+    if (has) continue;
+    const wants = (p.flags || []).includes('wantsOut');
+    const chance = wants ? 0.3 : p.ovr >= mine + 4 ? 0.05 : 0;
+    if (rand() >= chance) continue;
+    const value = valueOf(p, career.season);
+    const buyers = Object.values(data.leagues.clubs).filter((c) => c.id !== career.club && c.strength >= p.ovr - 9 && c.strength <= p.ovr + 12);
+    if (!buyers.length) continue;
+    const buyer = buyers[Math.floor(rand() * buyers.length)];
+    const fee = r1(value * (1.05 + rand() * 0.4));
+    const offer = {
+      id: `${p.id}|${career.season}|${career.md}|${buyer.id}`, player: p.id, club: buyer.id, clubName: buyer.name, kind: 'buy', fee, wageShare: null,
+      expires: windowEnd(career), max: r1(fee * (1.08 + rand() * 0.3)), patience: 2, stance: stanceOf(career, p, buyer),
+    };
+    career.offersIn.push(offer);
+    made.push(offer);
+  }
+  return made;
+}
+
+/**
+ * Si accetta un'offerta: cessione o prestito. I soldi entrano divisi (90%
+ * budget di mercato, 10% società) e un messaggio lo racconta.
+ * Esito: sold | loaned | closed | squadMin | keeperMin | playerRefuses | null
+ */
 export function acceptOffer(career, data, offerId) {
   const o = (career.offersIn || []).find((x) => x.id === offerId);
   if (!o) return null;
   const p = career.players[o.player];
+  if (!p) return null;
+  if (!windowOpen(career)) return { status: 'closed' };
   const blocked = canLetGo(career, p);
   if (blocked) return { status: blocked };
   if (o.stance === 'refuses') return { status: 'playerRefuses' };
   const club = career.clubs[career.club];
-  club.budget = r1(club.budget + o.fee);
-  club.squad = club.squad.filter((id) => id !== p.id);
+  const money = cashIn(career, o.fee);
   career.tactics.lineup = career.tactics.lineup.filter((id) => id !== p.id);
   career.tactics.bench = career.tactics.bench.filter((id) => id !== p.id);
-  career.moved = career.moved || {};
-  career.moved[keyOf(p)] = o.club;
-  /* se il compratore è nel campionato, il giocatore continua a giocare lì */
-  if (career.clubs[o.club]) {
-    const moved = { ...p, id: `${o.club}:${fnv1a(`${keyOf(p)}|sold|${career.season}`).toString(36)}`, club: o.club, flags: [], bonusDue: null };
-    career.players[moved.id] = moved;
-    career.clubs[o.club].squad.push(moved.id);
-  }
-  delete career.players[p.id];
   career.offersIn = career.offersIn.filter((x) => x.player !== o.player);
-  career.promises = (career.promises || []).filter((x) => x.player !== p.id);
   career.transfers = career.transfers || [];
-  career.transfers.unshift({ season: career.season, md: career.md, dir: 'out', kind: 'buy', name: p.name, to: o.club, fee: o.fee });
+  const loan = o.kind === 'loan';
+  if (loan) {
+    /* in prestito fino a fine stagione: resta nostro, gioca là, torna in estate */
+    p.loanOut = true;
+    p.loanTo = o.club;
+    p.loanToName = o.clubName;
+    p.loanUntil = career.season;
+    p.loanWageShare = o.wageShare || 0;
+    p.flags = (p.flags || []).filter((f) => f !== 'listed' && f !== 'loanListed');
+  } else {
+    club.squad = club.squad.filter((id) => id !== p.id);
+    career.moved = career.moved || {};
+    career.moved[keyOf(p)] = o.club;
+    /* se il compratore è nel campionato, il giocatore continua a giocare lì */
+    if (career.clubs[o.club]) {
+      const moved = { ...p, id: `${o.club}:${fnv1a(`${keyOf(p)}|sold|${career.season}`).toString(36)}`, club: o.club, flags: [], bonusDue: null };
+      career.players[moved.id] = moved;
+      career.clubs[o.club].squad.push(moved.id);
+    }
+    delete career.players[p.id];
+    career.promises = (career.promises || []).filter((x) => x.player !== p.id);
+  }
+  career.transfers.unshift({ season: career.season, md: career.md, dir: 'out', kind: loan ? 'loan' : 'buy', name: p.name, to: o.club, fee: o.fee, ...money });
+  const vars = { player: p.name, club: o.clubName, fee: o.fee, ...money, share: loan ? Math.round((o.wageShare || 0) * 100) : 0 };
+  career.inbox.unshift({ id: `out-${o.id}`, type: 'market', season: career.season, md: career.md, key: loan ? 'loanedOut' : 'sold', vars });
   void data;
-  return { status: 'sold', ...o };
+  return { status: loan ? 'loaned' : 'sold', ...o, ...money, name: p.name };
 }
 
 /**
  * Controproposta a un'offerta ricevuta: se la cifra è entro il massimo del
  * compratore l'affare si chiude, altrimenti rilancia o se ne va.
- * Esito: sold | raised | walkedAway | playerRefuses | squadMin | keeperMin | null
+ * Esito: sold | loaned | raised | walkedAway | playerRefuses | squadMin | keeperMin | closed | null
  */
 export function counterIncoming(career, data, offerId, ask) {
   const o = (career.offersIn || []).find((x) => x.id === offerId);
   if (!o) return null;
   const p = career.players[o.player];
+  if (!windowOpen(career)) return { status: 'closed' };
   const blocked = canLetGo(career, p);
   if (blocked) return { status: blocked };
   if (o.stance === 'refuses') return { status: 'playerRefuses' };
@@ -673,8 +812,9 @@ export function rejectOffer(career, offerId) {
   career.offersIn = career.offersIn.filter((x) => x.id !== offerId);
   const p = career.players[o.player];
   if (!p) return null;
-  /* dire di no a chi voleva andare lascia il segno */
-  if (o.stance === 'wants') {
+  /* dire di no a chi voleva andare lascia il segno (se non restano altre offerte per lui) */
+  const others = career.offersIn.some((x) => x.player === o.player);
+  if (o.stance === 'wants' && !others) {
     p.morale = clamp(p.morale - 10, 0, 100);
     p.bond = clamp((p.bond ?? 50) - 6, 0, 100);
     const rand = mulberry32(fnv1a(`${career.seed}|${o.id}|reject`));
@@ -794,7 +934,7 @@ export function renew(career, playerId) {
   if (!p) return null;
   const terms = renewalTerms(career, p);
   if (!terms.willing) return { status: 'refused' };
-  const bill = squadOf(career, career.club).reduce((n, x) => n + x.wage, 0) - p.wage + terms.wage;
+  const bill = wageBill(career) - p.wage + terms.wage;
   if (bill > career.clubs[career.club].wageBudget * 1.1) return { status: 'noWages' };
   p.contract = career.season + terms.years;
   p.wage = terms.wage;

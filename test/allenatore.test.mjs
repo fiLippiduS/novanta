@@ -18,8 +18,9 @@ import { dueCup, startCupMatch, closeCupRound } from '../src/manager/cups.js';
 import { planWeek, resolve as resolveEvent, fits, candidates, contextOf, applyFx } from '../src/manager/events.js';
 import {
   incomingOffers, search, windowOpen, acceptOffer, release, canLetGo, SQUAD_MIN, openTalks, bidClub, payClause, offerContract,
-  medicalChoice, withdrawTalk, talkById, counterIncoming, rejectOffer, wageRoom, isOpenTalk,
+  medicalChoice, withdrawTalk, talkById, counterIncoming, rejectOffer, wageRoom, isOpenTalk, setListed, listOf, CLUB_CUT,
 } from '../src/manager/market.js';
+import { matchTimeline } from '../src/manager/timeline.js';
 import { mulberry32 } from '../src/core/rng.js';
 
 const currentStrengthOf = (career) => Math.round(squadOf(career, career.club).map((p) => p.ovr).sort((a, b) => b - a).slice(0, 14).reduce((a, b) => a + b, 0) / 14);
@@ -633,7 +634,151 @@ console.log('— mercato —');
     const after = squadOf(career, career.club).filter((p) => !p.loanOut);
     check('dopo una cessione in un evento restano 20 giocatori e due portieri', after.length >= SQUAD_MIN && after.filter((p) => p.role === 'POR').length >= 2);
   }
+  /* la richiesta del procuratore è un impegno: pareggiarla chiude sempre, anche all'ultima occasione */
+  {
+    let tested = 0; let broken = 0; let lastChance = 0; let countered = 0; let counterBroken = 0;
+    for (const cand of pool.slice(0, 80)) {
+      for (const mode of ['demand', 'counter']) {
+        const career = fresh();
+        const club = career.clubs[career.club];
+        club.budget = 400; club.wageBudget = 200;
+        const o = openTalks(career, data, cand);
+        if (!o.talk) continue;
+        const tk = o.talk;
+        let g = 0;
+        while (tk.stage === 'club' && g++ < 10) bidClub(career, data, tk.id, { fee: tk.ask });
+        if (tk.stage !== 'player') continue;
+        const d = { ...tk.demand };
+        if (mode === 'demand') {
+          /* due proposte basse, poi la cifra chiesta all'ultima occasione */
+          offerContract(career, data, tk.id, { wage: d.wage * 0.55, years: d.years, role: d.role });
+          if (tk.stage === 'player') offerContract(career, data, tk.id, { wage: d.wage * 0.6, years: d.years, role: d.role });
+          if (tk.stage !== 'player') continue;
+          if (tk.playerPatience === 1) lastChance++;
+          tested++;
+          const r = offerContract(career, data, tk.id, { wage: d.wage, years: d.years, role: d.role });
+          if (!['signed', 'medicalIssue'].includes(r.status)) broken++;
+        } else {
+          /* una proposta bassa, poi si accetta la controproposta così com'è */
+          const r0 = offerContract(career, data, tk.id, { wage: d.wage * 0.8, years: d.years, role: d.role });
+          if (r0.status !== 'countered') continue;
+          countered++;
+          const c = tk.counter;
+          const r = offerContract(career, data, tk.id, { wage: c.wage, years: c.years, role: c.role });
+          if (!['signed', 'medicalIssue'].includes(r.status)) counterBroken++;
+        }
+      }
+    }
+    check('pareggiare la richiesta del procuratore chiude sempre, anche all’ultima occasione', tested >= 15 && broken === 0 && lastChance >= 5, `(${broken}/${tested}, all’ultima ${lastChance})`);
+    check('accettare la controproposta del procuratore chiude sempre', countered >= 10 && counterBroken === 0, `(${counterBroken}/${countered})`);
+  }
+
+  /* liste trasferimenti e prestiti: più offerte, soldi divisi, messaggio */
+  {
+    const career = fresh();
+    const club = career.clubs[career.club];
+    const outfield = squadOf(career, career.club).filter((x) => x.role !== 'POR').sort((a, b) => b.ovr - a.ovr);
+    const sellers = outfield.slice(4, 9);
+    for (const p of sellers) setListed(career, data, p.id, 'transfer');
+    const offersOf = (p) => career.offersIn.filter((o) => o.player === p.id);
+    check('in lista trasferimenti arrivano subito offerte, da club diversi', sellers.every((p) => offersOf(p).length >= 1 && new Set(offersOf(p).map((o) => o.club)).size === offersOf(p).length && listOf(p) === 'transfer'));
+    /* una giornata di mercato dopo: altre offerte */
+    const nf = nextFixture(career);
+    const m = startUserMatch(career); m.autoUser = true; simulateToEnd(m); applyMatch(career, m, nf.fixture);
+    simulateRest(career); closeMatchday(career, data); incomingOffers(career, data);
+    const alive = sellers.filter((p) => career.players[p.id]);
+    check('con il mercato aperto le offerte continuano ad arrivare', alive.some((p) => offersOf(p).length >= 2), alive.map((p) => offersOf(p).length).join(','));
+    const target = alive.find((p) => offersOf(p).some((o) => o.stance !== 'refuses'));
+    const o = offersOf(target).filter((x) => x.stance !== 'refuses').sort((a, b) => b.fee - a.fee)[0];
+    const budget0 = club.budget; const rev0 = club.revenue || 0;
+    const res = acceptOffer(career, data, o.id);
+    check('la cessione va in porto', res.status === 'sold' && !career.players[target.id]);
+    check(`il ${100 - CLUB_CUT * 100}% dell’incasso va al budget di mercato, il ${CLUB_CUT * 100}% alla società`, Math.abs(club.budget - (budget0 + o.fee * (1 - CLUB_CUT))) < 0.11 && Math.abs(club.revenue - rev0 - o.fee * CLUB_CUT) < 0.11, `(${budget0} → ${club.budget}, fee ${o.fee})`);
+    check('un messaggio racconta cessione e soldi', career.inbox[0].key === 'sold' && career.inbox[0].vars.toBudget === res.toBudget && career.inbox[0].vars.club === o.clubName);
+    check('venduto il giocatore, le altre offerte per lui spariscono', !career.offersIn.some((x) => x.player === target.id));
+    /* il prestito: resta nostro, gioca altrove, torna a fine stagione */
+    const young = squadOf(career, career.club).filter((x) => !x.loanOut && x.role !== 'POR' && ageOf(x, career.season) <= 22).sort((a, b) => a.ovr - b.ovr);
+    let loaned = null;
+    for (const y of young) {
+      setListed(career, data, y.id, 'loan');
+      const lo = offersOf(y).find((x) => x.kind === 'loan' && x.stance !== 'refuses');
+      if (!lo) continue;
+      const r = acceptOffer(career, data, lo.id);
+      if (r.status === 'loaned') { loaned = y; break; }
+    }
+    check('un giovane in lista prestiti parte in prestito', loaned && loaned.loanOut && loaned.loanTo && career.clubs[career.club].squad.includes(loaned.id) && career.inbox[0].key === 'loanedOut');
+    /* a mercato chiuso niente offerte, e quelle vecchie scadono */
+    career.md = 5;
+    incomingOffers(career, data);
+    check('a mercato chiuso le offerte scadono', (career.offersIn || []).length === 0);
+    if (loaned) {
+      career.md = career.fixtures.length;
+      career.phase = 'seasonEnd';
+      const sum = endSeason(career, data);
+      const back = career.players[loaned.id];
+      check('a fine stagione il prestito finisce e il giocatore torna', !back || (!back.loanOut && !back.loanTo && sum.returned.some((x) => x.id === loaned.id)));
+    }
+  }
   void payClause; void talkById; void isOpenTalk;
+}
+
+/* ------------------------------------------------------------------ */
+console.log('— partite: nessuna scelta dopo il fischio, tabellino giusto —');
+{
+  const clubs = Object.entries(leagues.clubs).filter(([, c]) => c.league === 'ita1').map(([id]) => id);
+  let afterWhistle = 0; let lateSetPiece = 0; let timelineOk = 0; let n = 0; let addedOk = true;
+  for (let i = 0; i < 300; i++) {
+    const rand = mulberry32(900 + i);
+    const h = clubs[i % clubs.length]; const a = clubs[(i * 7 + 3) % clubs.length];
+    if (h === a) continue;
+    const m = createMatch({ seed: 5000 + i, home: team(h, 'ita1', rand, null, ':h'), away: team(a, 'ita1', rand, null, ':a'), user: i % 2 ? 'home' : 'away' });
+    let g = 0;
+    while (!m.finished && g++ < 900) {
+      if (m.pending) {
+        if (m.minute >= 89 && ['penalty', 'freekick'].includes(m.pending.id)) lateSetPiece++;
+        decide(m, m.pending.options.find((o) => !o.disabled).id);
+      } else tick(m);
+      if (m.finished && m.pending) afterWhistle++;
+    }
+    n++;
+    const tl = matchTimeline(m);
+    const goals = (side) => tl.filter((x) => x.side === side && ['goal', 'penGoal'].includes(x.type)).length;
+    if (goals(0) === m.sides[0].goals && goals(1) === m.sides[1].goals && tl.every((x) => x.type === 'shootout' || x.type === 'halftime' || x.name || x.in)) timelineOk++;
+    for (const x of tl) if (x.min && !/^\d+(\+\d+)?$/.test(x.min)) addedOk = false;
+  }
+  check('nessuna scelta resta aperta a partita finita', afterWhistle === 0, `(${afterWhistle})`);
+  check('un rigore all’ultimo minuto si decide prima del fischio', lateSetPiece >= 1, `(${lateSetPiece})`);
+  check('il tabellino ha tutti i gol, con nome e minuto', timelineOk === n, `(${timelineOk}/${n})`);
+  check('i minuti di recupero si scrivono 45+2, 90+4', addedOk);
+}
+
+/* ------------------------------------------------------------------ */
+console.log('— eventi verosimili —');
+{
+  const byId = (id) => events.find((e) => e.id === id);
+  const home = { ita1: 'IT', eng1: 'GB-ENG', esp1: 'ES', ger1: 'DE', fra1: 'FR' };
+  let racismLocal = 0; let racismTotal = 0; let langWrong = 0; let langTotal = 0;
+  for (const [lg, code] of Object.entries(home)) {
+    for (const clubId of leagues.leagues.find((l) => l.id === lg).clubs.slice(0, 6)) {
+      const career = newCareer(data, { seed: 12, name: 'Prova', nation: 'IT', style: 'equilibrio', clubId });
+      const ctx = contextOf(career, data);
+      for (const p of candidates(byId('pr_racism_episode'), ctx, career)) {
+        racismTotal++;
+        if (p.nation === code || (code === 'GB-ENG' && p.nation.startsWith('GB-'))) racismLocal++;
+      }
+      for (const p of candidates(byId('dr_translator'), ctx, career)) {
+        langTotal++;
+        const same = { ES: ['AR', 'UY', 'CO', 'MX', 'CL'], FR: ['BE', 'SN', 'CI', 'CM'], DE: ['AT', 'CH'], 'GB-ENG': ['IE', 'US', 'GB-SCT', 'GB-WLS'], IT: ['SM'] }[code];
+        if (p.nation === code || same.includes(p.nation)) langWrong++;
+      }
+    }
+  }
+  check('il razzismo non tocca mai un giocatore del paese del club', racismTotal >= 10 && racismLocal === 0, `(${racismLocal}/${racismTotal})`);
+  check('l’interprete serve solo a chi non parla la lingua del campionato', langTotal >= 10 && langWrong === 0, `(${langWrong}/${langTotal})`);
+  const derbyTalk = ['dr_old_captain_speech', 'dr_rival_friendship'].every((id) => byId(id).when.derbyNext);
+  const afterLoss = ['dr_youngster_cries', 'pl_fragile_confidence', 'pl_social_post', 'pr_captain_press', 'p2_mistake_media_protect'].every((id) => byId(id).when.last === 'L');
+  check('chi parla di derby o di sconfitta arriva solo prima di un derby o dopo una sconfitta', derbyTalk && afterLoss);
+  check('le età scritte nei testi sono quelle vere', byId('pl_young_debut').when.player.ageMin === 18 && byId('pl_young_debut').when.player.ageMax === 18 && byId('p2_captain_old_new').when.player.ageMax === 33);
 }
 
 /* ------------------------------------------------------------------ */
