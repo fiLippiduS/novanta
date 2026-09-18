@@ -133,19 +133,6 @@ export function mount(host) {
     onGo: () => go('duello'),
   }));
 
-  /* la carriera da allenatore vive in un salvataggio a parte: è grande */
-  let mgr = null;
-  try { mgr = JSON.parse(localStorage.getItem('novanta:manager-meta') || 'null'); } catch { mgr = null; }
-  modes.appendChild(modeCard({
-    id: 'allenatore', index: '10', accent: 'var(--lime)',
-    title: t('hub.allenatoreTitle'), desc: t('hub.allenatoreDesc'),
-    meta: mgr
-      ? [{ label: mgr.club, value: mgr.pos ? `${mgr.pos}°` : '—' },
-         { label: t('allenatore.trophies'), value: mgr.trophies || 0 }]
-      : [{ label: t('allenatore.tabs.table'), value: '198' }],
-    onGo: () => go('allenatore'),
-  }));
-
   const car = data.career && data.career.v === 2 && data.career.player;
   modes.appendChild(modeCard({
     id: 'carriera', index: '05', accent: 'var(--amber)',
@@ -199,6 +186,19 @@ export function mount(host) {
   });
   if (doneToday) dailyCard.classList.add('mode--done');
   modes.appendChild(dailyCard);
+
+  /* la carriera da allenatore vive in un salvataggio a parte: è grande */
+  let mgr = null;
+  try { mgr = JSON.parse(localStorage.getItem('novanta:manager-meta') || 'null'); } catch { mgr = null; }
+  modes.appendChild(modeCard({
+    id: 'allenatore', index: '10', accent: 'var(--amber)',
+    title: t('hub.allenatoreTitle'), desc: t('hub.allenatoreDesc'),
+    meta: mgr
+      ? [{ label: mgr.club, value: mgr.pos ? `${mgr.pos}°` : '—' },
+         { label: t('allenatore.trophies'), value: mgr.trophies || 0 }]
+      : [{ label: t('allenatore.tabs.table'), value: '198' }],
+    onGo: () => go('allenatore'),
+  }));
 
   const clockChip = dailyCard.querySelectorAll('.chip strong')[1];
   const clock = setInterval(() => { clockChip.textContent = hhmmss(msToNextDay()); }, 1000);
