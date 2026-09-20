@@ -1206,7 +1206,8 @@
       "winner": "Won by {club}",
       "alive": "Still in · {round}",
       "out": "Knocked out",
-      "afterMd": "after matchday {n}"
+      "afterMd": "after matchday {n}",
+      "toDraw": "To be drawn"
     },
     "seasonOver": "League finished",
     "seasonOverText": "The last matchday has been played. The board is waiting to give its verdict.",
@@ -1403,11 +1404,18 @@
       "drawn": "Drawn",
       "lost": "Lost",
       "trophies": "Trophies",
-      "sacked": "Sackings"
+      "sacked": "Sackings",
+      "ppg": "Points per game",
+      "scored": "Scored",
+      "conceded": "Conceded"
     },
     "trophies": "Trophy cabinet",
     "trophyNames": {
-      "league": "Champions · {league, cup: \"{league}\", ucl: \"Champions League\", uel: \"Europa League\", uecl: \"Conference League\" }",
+      "league": "Champions · {league}",
+      "cup": "{league}",
+      "ucl": "Champions League",
+      "uel": "Europa League",
+      "uecl": "Conference League",
       "league2": "First place · {league}",
       "promotion": "Promoted from {league}"
     },
@@ -1932,6 +1940,21 @@
       "line": "{to} sign {name} from {from} · {fee}"
     },
     "bonusPaid": "Bonus for {name}: {fee}",
+    "seasonTrophies": "Trophies this season",
+    "seasonRecord": "The season in numbers",
+    "boardHappy": "The board is happy: target {target}th, finished {pos}th.",
+    "boardUnhappy": "The board is not happy: target {target}th, finished {pos}th.",
+    "retiredAround": "Also retiring: {names}.",
+    "jobCallsTitle": "They want you",
+    "jobCallsText": "Another club wants you on their bench. You can also stay.",
+    "jobCallTitle": "A call from {club}",
+    "jobCallText": "{club} ({league}) offer you the job. If you accept, you leave your current team.",
+    "jobStay": "I stay here",
+    "jobAccept": "I accept",
+    "callUp": "Call up",
+    "drop": "Stand down",
+    "callAuto": "Let the assistant pick",
+    "benchFull": "Only {n} players fit on the bench: drop one first.",
     "injuryLine1": "{name} is out: one match.",
     "onLoanAt": "On loan · {club}",
     "listChip": {

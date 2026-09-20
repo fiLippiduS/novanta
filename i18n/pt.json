@@ -1206,7 +1206,8 @@
       "winner": "Conquistada pelo {club}",
       "alive": "Em prova · {round}",
       "out": "Eliminados",
-      "afterMd": "depois da {n}.ª jornada"
+      "afterMd": "depois da {n}.ª jornada",
+      "toDraw": "Por sortear"
     },
     "seasonOver": "Campeonato terminado",
     "seasonOverText": "A última jornada foi disputada. A direção espera-te para o veredicto.",
@@ -1403,11 +1404,18 @@
       "drawn": "Empates",
       "lost": "Derrotas",
       "trophies": "Troféus",
-      "sacked": "Despedimentos"
+      "sacked": "Despedimentos",
+      "ppg": "Pontos por jogo",
+      "scored": "Golos marcados",
+      "conceded": "Golos sofridos"
     },
     "trophies": "Palmarés",
     "trophyNames": {
-      "league": "Campeão · {league, cup: \"{league}\", ucl: \"Liga dos Campeões\", uel: \"Liga Europa\", uecl: \"Liga Conferência\" }",
+      "league": "Campeão · {league}",
+      "cup": "{league}",
+      "ucl": "Liga dos Campeões",
+      "uel": "Liga Europa",
+      "uecl": "Liga Conferência",
       "league2": "Primeiro lugar · {league}",
       "promotion": "Subida da {league}"
     },
@@ -1932,6 +1940,21 @@
       "line": "{to} contrata {name} ({from}) · {fee}"
     },
     "bonusPaid": "Prémio para {name}: {fee}",
+    "seasonTrophies": "Títulos da época",
+    "seasonRecord": "O balanço",
+    "boardHappy": "O clube está satisfeito: objetivo {target}º, acabaste {pos}º.",
+    "boardUnhappy": "O clube não está satisfeito: objetivo {target}º, acabaste {pos}º.",
+    "retiredAround": "Também se retiram: {names}.",
+    "jobCallsTitle": "Querem-te",
+    "jobCallsText": "Outro banco quer-te. Também podes ficar.",
+    "jobCallTitle": "A chamada do {club}",
+    "jobCallText": "{club} ({league}) oferece-te o banco. Se aceitares, deixas a tua equipa atual.",
+    "jobStay": "Fico aqui",
+    "jobAccept": "Aceito",
+    "callUp": "Convocar",
+    "drop": "Para a bancada",
+    "callAuto": "Escolhe o adjunto",
+    "benchFull": "No banco cabem {n} jogadores: tira um primeiro.",
     "injuryLine1": "{name} lesionado: um jogo.",
     "onLoanAt": "Emprestado · {club}",
     "listChip": {

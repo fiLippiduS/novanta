@@ -1206,7 +1206,8 @@
       "winner": "Remportée par {club}",
       "alive": "Toujours en course · {round}",
       "out": "Éliminés",
-      "afterMd": "après la {n}e journée"
+      "afterMd": "après la {n}e journée",
+      "toDraw": "À tirer au sort"
     },
     "seasonOver": "Championnat terminé",
     "seasonOverText": "La dernière journée a été jouée. La direction t’attend pour le verdict.",
@@ -1403,11 +1404,18 @@
       "drawn": "Nuls",
       "lost": "Défaites",
       "trophies": "Trophées",
-      "sacked": "Limogeages"
+      "sacked": "Limogeages",
+      "ppg": "Points par match",
+      "scored": "Buts marqués",
+      "conceded": "Buts encaissés"
     },
     "trophies": "Palmarès",
     "trophyNames": {
-      "league": "Champion · {league, cup: \"{league}\", ucl: \"Ligue des champions\", uel: \"Ligue Europa\", uecl: \"Ligue Conférence\" }",
+      "league": "Champion · {league}",
+      "cup": "{league}",
+      "ucl": "Ligue des champions",
+      "uel": "Ligue Europa",
+      "uecl": "Ligue Conférence",
       "league2": "Première place · {league}",
       "promotion": "Montée depuis la {league}"
     },
@@ -1932,6 +1940,21 @@
       "line": "{to} recrute {name} ({from}) · {fee}"
     },
     "bonusPaid": "Bonus pour {name} : {fee}",
+    "seasonTrophies": "Trophées de la saison",
+    "seasonRecord": "Le bilan",
+    "boardHappy": "Le club est satisfait : objectif {target}e, terminé {pos}e.",
+    "boardUnhappy": "Le club n’est pas satisfait : objectif {target}e, terminé {pos}e.",
+    "retiredAround": "Prennent aussi leur retraite : {names}.",
+    "jobCallsTitle": "On vous veut",
+    "jobCallsText": "Un autre banc vous veut. Vous pouvez aussi rester.",
+    "jobCallTitle": "L’appel de {club}",
+    "jobCallText": "{club} ({league}) vous offre le banc. Si vous acceptez, vous quittez votre équipe actuelle.",
+    "jobStay": "Je reste",
+    "jobAccept": "J’accepte",
+    "callUp": "Convoquer",
+    "drop": "En tribune",
+    "callAuto": "L’adjoint choisit",
+    "benchFull": "Le banc compte {n} joueurs : enlevez-en un d’abord.",
     "injuryLine1": "{name} est blessé : un match.",
     "onLoanAt": "Prêté · {club}",
     "listChip": {

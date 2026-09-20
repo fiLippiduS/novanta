@@ -1206,7 +1206,8 @@
       "winner": "Vinta dal {club}",
       "alive": "In corsa · {round}",
       "out": "Eliminati",
-      "afterMd": "dopo la {n}ª giornata"
+      "afterMd": "dopo la {n}ª giornata",
+      "toDraw": "Da sorteggiare"
     },
     "seasonOver": "Campionato finito",
     "seasonOverText": "L’ultima giornata è stata giocata. La società ti aspetta per il verdetto.",
@@ -1403,11 +1404,18 @@
       "drawn": "Pari",
       "lost": "Perse",
       "trophies": "Trofei",
-      "sacked": "Esoneri"
+      "sacked": "Esoneri",
+      "ppg": "Media punti",
+      "scored": "Gol fatti",
+      "conceded": "Gol subiti"
     },
     "trophies": "Bacheca",
     "trophyNames": {
-      "league": "Campione · {league, cup: \"{league}\", ucl: \"Champions League\", uel: \"Europa League\", uecl: \"Conference League\" }",
+      "league": "Campione · {league}",
+      "cup": "{league}",
+      "ucl": "Champions League",
+      "uel": "Europa League",
+      "uecl": "Conference League",
       "league2": "Primo posto · {league}",
       "promotion": "Promozione dalla {league}"
     },
@@ -1932,6 +1940,21 @@
       "line": "{to} prende {name} ({from}) · {fee}"
     },
     "bonusPaid": "Bonus a {name}: {fee}",
+    "seasonTrophies": "Trofei della stagione",
+    "seasonRecord": "Il bilancio",
+    "boardHappy": "La società è soddisfatta: obiettivo {target}°, chiuso {pos}°.",
+    "boardUnhappy": "La società non è soddisfatta: obiettivo {target}°, chiuso {pos}°.",
+    "retiredAround": "Smettono anche: {names}.",
+    "jobCallsTitle": "Ti cercano",
+    "jobCallsText": "Un'altra panchina ti vuole. Puoi restare dove sei.",
+    "jobCallTitle": "La chiamata di {club}",
+    "jobCallText": "{club} ({league}) ti offre la panchina. Se accetti, lasci la squadra di adesso.",
+    "jobStay": "Resto qui",
+    "jobAccept": "Accetto",
+    "callUp": "Convoca",
+    "drop": "In tribuna",
+    "callAuto": "Convoca il vice",
+    "benchFull": "In panchina ci stanno {n} giocatori: prima togline uno.",
     "injuryLine1": "{name} si ferma: una giornata.",
     "onLoanAt": "In prestito · {club}",
     "listChip": {

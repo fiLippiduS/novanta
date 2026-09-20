@@ -617,3 +617,33 @@ strong.mform__i--W, strong.mform__i--D, strong.mform__i--L { width: auto; paddin
 .mtl__team--a { background: rgba(88, 199, 240, 0.14); color: var(--sky); }
 .mres__who { white-space: nowrap; }
 .moffer__ask .btn { min-width: 0; min-height: 0; padding: 8px 0; } .moffer__ask { grid-template-columns: 2.8rem minmax(0, 1fr) 2.8rem; }
+
+/* ------------------------------------------------------------------ */
+/* i colori delle competizioni: si capisce a colpo d'occhio che partita è */
+/* ------------------------------------------------------------------ */
+.comp { position: relative; border-color: color-mix(in srgb, var(--comp) 55%, transparent); }
+.comp--ucl { --comp: #9FB7FF; }
+.comp--uel { --comp: #FF9A3C; }
+.comp--uecl { --comp: #5FE3A1; }
+.comp--cup { --comp: var(--sky); }
+.comp::before { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(180deg, color-mix(in srgb, var(--comp) 16%, transparent), transparent 62%); }
+.mlive.comp { border-radius: 14px; padding: 6px; background: linear-gradient(180deg, color-mix(in srgb, var(--comp) 14%, transparent), transparent 40%); }
+.mlive.comp::before { display: none; }
+.mlive.comp .mlive__board { border-color: color-mix(in srgb, var(--comp) 55%, transparent); }
+.mlive.comp .mlive__goals { color: var(--comp); }
+.mfixture.comp .mfixture__x { color: var(--comp); }
+.mtrophies .tbadges { display: flex; flex-wrap: wrap; gap: var(--s-3); justify-content: center; }
+.mseason__board { margin: 0; padding: 8px 10px; border-radius: 8px; font-weight: 700; }
+.mseason__board.is-good { background: rgba(201, 242, 75, 0.1); color: var(--lime); }
+.mseason__board.is-bad { background: rgba(255, 90, 60, 0.1); color: var(--flare); }
+.mseason__sub { display: block; margin: 10px 0 4px; color: var(--chalk-3); }
+.mcall { min-height: 0; padding: 6px 10px; font-size: 0.72rem; white-space: nowrap; }
+.mcall.is-in { border-color: rgba(201, 242, 75, 0.45); color: var(--lime); }
+.mcall.is-off { opacity: 0.4; pointer-events: none; }
+.mfixture--cup.comp { box-shadow: inset 0 3px 0 var(--comp); }
+.mprow--call { grid-template-columns: auto minmax(0, 1fr) auto auto auto; gap: 8px; }
+.mprow--call .mstatus .mchip { padding: 2px 6px; font-size: 0.62rem; }
+.mfix--cup { grid-template-columns: 1.6rem 3.4rem 1.4rem 16px 1fr auto; row-gap: 2px; }
+.mfix--cup .mfix__comp { grid-column: 2 / -1; color: var(--comp); font-size: 0.58rem; }
+.mfix--cup.comp::before { display: none; }
+.mfix--cup { border-left: 2px solid var(--comp); padding-left: 6px; }

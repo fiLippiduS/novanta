@@ -157,7 +157,7 @@ export default {
   reputation: 'Reputation',
   coachStats: { played: 'Matches', won: 'Won', drawn: 'Drawn', lost: 'Lost', trophies: 'Trophies', sacked: 'Sackings' },
   trophies: 'Trophy cabinet',
-  trophyNames: { league: 'Champions · {league, cup: "{league}", ucl: "Champions League", uel: "Europa League", uecl: "Conference League" }', league2: 'First place · {league}', promotion: 'Promoted from {league}' },
+  trophyNames: { league: 'Champions · {league}', cup: '{league}', ucl: 'Champions League', uel: 'Europa League', uecl: 'Conference League', league2: 'First place · {league}', promotion: 'Promoted from {league}' },
   history: 'Seasons',
   verdicts: { met: 'Target met', triumph: 'Triumphant season', missed: 'Target missed', sacked: 'Sacked', relegatedKept: 'Relegated, but kept on' },
   verdictText: {

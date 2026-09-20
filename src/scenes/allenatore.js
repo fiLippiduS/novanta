@@ -20,10 +20,11 @@ import {
 import { planWeek, resolve, oddsFor } from '../manager/events.js';
 import { adviseMoment, decide, restoreMatch, serializeMatch, tick, playerRatings } from '../manager/match.js';
 import { matchTimeline } from '../manager/timeline.js';
+import { trophySvg, TROPHY_COLOR } from '../career/trophies.js';
 import { dueCup, userTie, startCupMatch, closeCupRound, currentTies, groupTable, roundKey } from '../manager/cups.js';
 import {
   button, chip, clubBadge, meter, ovrBadge, roleTag, playerRow, sparkline, attrBars, formLetters, euro, countryLabel, pitchSvg, fitnessBar, moraleIcon, statusTags, phaseChip,
-  richText, newsLine, timelineCard, resultRow, timelineRow,
+  richText, newsLine, timelineCard, resultRow, timelineRow, tapButton,
 } from './allenatore/ui.js';
 import { mountLive } from './allenatore/live.js';
 import { renderMarket } from './allenatore/market.js';
@@ -426,7 +427,8 @@ export async function mount(host) {
       nf = { ...nf, home, opponent: home ? nf.tie.a : nf.tie.h, md: career.md - 1 };
     }
     const opp = career.clubs[nf.opponent] || data.leagues.clubs[nf.opponent];
-    const card = el('div', `mfixture card anim-rise ${nf.cup ? 'mfixture--cup' : ''}`);
+    const comp = nf.cup ? compOf(nf.cup.id) : null;
+    const card = el('div', `mfixture card anim-rise ${nf.cup ? 'mfixture--cup' : ''} ${comp ? `comp comp--${comp}` : ''}`.trim());
     const rows = table(career, data);
     const oppRow = rows.find((r) => r.id === nf.opponent);
     const meRow = rows.find((r) => r.id === career.club);
@@ -695,7 +697,7 @@ export async function mount(host) {
       grid.appendChild(b);
     }
     body.appendChild(grid);
-    body.appendChild(el('p', 'dim', t('allenatore.contractLine', { until: p.contract, wage: euro(p.wage), value: euro(valueOf(p, career.season)) })));
+    body.appendChild(el('p', 'dim', t('allenatore.contractLine', { until: p.contract, wage: euro(p.wage), value: euro(valueOf(p, career.season, { league: career.league })) })));
     const actions = [];
     if (p.club === career.club && !p.loanIn) {
       const list = listOf(p);
@@ -878,19 +880,49 @@ export async function mount(host) {
     const picker = sheet({ title: t('allenatore.pickFor', { role: t(`allenatore.roles.${role}`) }), body, actions: [{ label: t('common.close'), onClick: (c) => c() }] });
   }
 
+  const BENCH_MAX = 9;
+
   function benchList() {
     const tac = career.tactics;
     const card = el('section', 'msquad card');
-    card.appendChild(el('h3', 'mhead display', t('allenatore.bench')));
+    const head = el('div', 'mtable__head');
+    head.append(el('h3', 'mhead display', `${t('allenatore.bench')} · ${tac.bench.length}/${BENCH_MAX}`), button(t('allenatore.callAuto'), 'btn--ghost mtable__more', () => {
+      tac.benchAuto = true;
+      tac.bench = [];
+      refreshUserLineup(career);
+      persist();
+      render({ keepScroll: true });
+    }));
+    card.appendChild(head);
+    /* le convocazioni: chi è in panchina si può escludere, chi è in tribuna si convoca */
+    const callBtn = (p, called) => {
+      const b = tapButton(t(called ? 'allenatore.drop' : 'allenatore.callUp'), `btn--ghost mcall ${called ? '' : 'is-in'}`, () => {
+        tac.benchAuto = false;
+        if (called) tac.bench = tac.bench.filter((id) => id !== p.id);
+        else if (tac.bench.length < BENCH_MAX) tac.bench.push(p.id);
+        else { callOut.textContent = t('allenatore.benchFull', { n: BENCH_MAX }); return; }
+        persist();
+        render({ keepScroll: true });
+      });
+      if (!called && !available(p)) b.classList.add('is-off');
+      return b;
+    };
+    const callRow = (p, called) => {
+      const row = playerRow(p, career.season, { onClick: () => playerSheet(p.id), right: callBtn(p, called) });
+      row.classList.add('mprow--call');
+      return row;
+    };
     for (const id of tac.bench) {
       const p = career.players[id];
-      if (p) card.appendChild(playerRow(p, career.season, { onClick: () => playerSheet(p.id) }));
+      if (p) card.appendChild(callRow(p, true));
     }
     const out = squadOf(career, career.club).filter((p) => !p.loanOut && !tac.lineup.includes(p.id) && !tac.bench.includes(p.id));
+    const callOut = el('p', 'mmarket__out');
     if (out.length) {
       card.appendChild(el('h4', 'label mtactics__out', t('allenatore.notCalled', { n: out.length })));
-      for (const p of out) card.appendChild(playerRow(p, career.season, { onClick: () => playerSheet(p.id) }));
+      for (const p of out) card.appendChild(callRow(p, false));
     }
+    card.appendChild(callOut);
     return card;
   }
 
@@ -959,6 +991,21 @@ export async function mount(host) {
     calHead.appendChild(el('h3', 'mhead display', t('allenatore.calendar')));
     if (career.phase === 'season' && nextFixture(career)) calHead.appendChild(button(`» ${t('allenatore.sim.button')}`, 'btn--ghost mtable__more', () => simPicker()));
     card.appendChild(calHead);
+    /* le partite di coppa stanno nel calendario come le altre: una riga, il
+       colore della competizione, la data che viene dopo quella giornata */
+    const cupRows = {};
+    for (const cup of Object.values(career.cups || {})) {
+      const comp = cup.id === 'national' ? 'cup' : cup.comp;
+      cup.schedule.forEach((afterMd, round) => {
+        if (round >= cup.rounds.length) return;
+        const label = `${cupName(cup)} · ${t(`allenatore.cupRounds.${cup.rounds[round]}`)}`;
+        const tie = cupTieOf(cup, round);
+        if (!tie && round > cup.round) { (cupRows[afterMd] = cupRows[afterMd] || []).push({ comp, label, unknown: true }); return; }
+        if (!tie) return;
+        const home = tie.h === career.club;
+        (cupRows[afterMd] = cupRows[afterMd] || []).push({ comp, label, home, opp: home ? tie.a : tie.h, res: tie.res, pens: tie.pens });
+      });
+    }
     career.fixtures.forEach((round, md) => {
       const f = round.find((x) => x.h === career.club || x.a === career.club);
       if (!f) return;
@@ -990,11 +1037,47 @@ export async function mount(host) {
         row.addEventListener('click', () => confirmSim(md));
       }
       card.appendChild(row);
+      for (const c of cupRows[md] || []) card.appendChild(cupFixRow(c, md));
     });
     stage.appendChild(card);
     const cups = cupsCard();
     if (cups) stage.appendChild(cups);
     requestAnimationFrame(() => card.querySelector('.is-next')?.scrollIntoView({ block: 'center' }));
+  }
+
+  /* la partita dell'utente in un turno di coppa, se c'è (anche già giocata) */
+  function cupTieOf(cup, round) {
+    if (cup.type === 'groups' && round < 6) {
+      const g = cup.groups.find((x) => x.teams.includes(career.club));
+      return g ? g.fixtures[round].find((f) => f.h === career.club || f.a === career.club) : null;
+    }
+    if (round === cup.round) return userTie(career, cup);
+    const past = cup.history?.[cup.type === 'groups' ? round - 6 : round];
+    if (past) return past.find((f) => f.h === career.club || f.a === career.club) || null;
+    return null;
+  }
+
+  function cupFixRow(c, md) {
+    const row = el('div', `mfix mfix--cup comp comp--${c.comp}`);
+    const date = matchdayDate(career.season, Math.min(md + 0.5, career.fixtures.length - 1), career.fixtures.length);
+    let res = '';
+    let tone = '';
+    if (c.res) {
+      const gf = c.home ? c.res[0] : c.res[1];
+      const ga = c.home ? c.res[1] : c.res[0];
+      res = `${gf}–${ga}`;
+      tone = gf > ga ? 'W' : gf < ga ? 'L' : 'D';
+    }
+    row.append(
+      el('span', 'mfix__md label', '★'),
+      el('span', 'mfix__date label', date.toLocaleDateString(lang(), { day: 'numeric', month: 'short' })),
+      el('span', `mfix__ha label ${c.home ? 'is-home' : ''}`, c.unknown ? '' : t(c.home ? 'allenatore.homeShort' : 'allenatore.awayShort')),
+      c.unknown ? el('span', '') : crest((career.clubs[c.opp] || data.leagues.clubs[c.opp])?.colors || [], 16),
+      el('span', 'mfix__opp', c.unknown ? t('allenatore.cup.toDraw') : clubName(c.opp)),
+      el('strong', `mfix__res num ${tone ? `mform__i--${tone}` : ''}`, res || '·'),
+    );
+    row.appendChild(el('span', 'mfix__comp label', c.label));
+    return row;
   }
 
   function renderCoach() {
@@ -1368,6 +1451,7 @@ export async function mount(host) {
       career,
       data,
       clubName,
+      comp: compOf(cupId),
       onSave: (m) => { career.live = serializeMatch(m); persist(); },
       onFinish: (m) => { if (cupId) finishCup(m, cupId); else finishMatch(m, nf.fixture); },
     });
@@ -1419,22 +1503,34 @@ export async function mount(host) {
     goView('cupReport');
   }
 
+  /* la competizione di una coppa: serve per il colore della partita */
+  function compOf(cupId) {
+    if (!cupId) return null;
+    const cup = career.cups?.[cupId];
+    if (!cup) return null;
+    return cup.id === 'national' ? 'cup' : cup.comp;
+  }
+
   function renderCupReport() {
     const rep = career.cupReport;
     if (!rep) { goView('hub'); return; }
     const cup = career.cups[rep.cupId];
+    const comp = compOf(rep.cupId);
     const mine = rep.results.find((r) => r.h === career.club || r.a === career.club);
     if (mine) {
       const gf = mine.h === career.club ? mine.res[0] : mine.res[1];
       const ga = mine.h === career.club ? mine.res[1] : mine.res[0];
       const tone = rep.trophy || rep.advanced || gf > ga ? 'is-win' : rep.eliminated || gf < ga ? 'is-loss' : 'is-draw';
-      const head = el('section', `mreport__head card ${tone}`);
+      const head = el('section', `mreport__head card ${tone} ${comp ? `comp comp--${comp}` : ''}`.trim());
       head.append(
         el('span', 'label', `${cupName(cup)} · ${t(`allenatore.cupRounds.${rep.round}`)}`),
         el('strong', 'display t-xxl num', `${mine.res[0]}–${mine.res[1]}${mine.pens ? ` (${mine.pens[0]}–${mine.pens[1]} ${t('allenatore.cup.pensShort')})` : ''}`),
         el('span', 'mreport__teams', `${clubName(mine.h)} · ${clubName(mine.a)}`),
       );
-      if (rep.trophy) head.appendChild(el('span', 'display t-xl mreport__good', `🏆 ${t('allenatore.cup.trophy', { name: cupName(cup) })}`));
+      if (rep.trophy) {
+        head.appendChild(el('span', 'display t-xl mreport__good', t('allenatore.cup.trophy', { name: cupName(cup) })));
+        if (!rep.shown) { rep.shown = true; persist(); showTrophyMoment([{ type: rep.trophy.type, league: career.league }]); audio.sfx.win?.(); }
+      }
       else if (rep.eliminated) head.appendChild(el('span', 'display t-lg', t('allenatore.cup.eliminated')));
       else if (rep.advanced) head.appendChild(el('span', 'display t-lg mreport__good', t('allenatore.cup.advanced')));
       if (rep.best) head.appendChild(el('span', 'label', t('allenatore.tl.best', { name: rep.best.name, rating: rep.best.rating.toFixed(1) })));
@@ -1493,7 +1589,45 @@ export async function mount(host) {
   }
 
   /* ---------------------------------------------------------------- */
-  /* 7. resoconto della giornata, fine stagione, offerte               */
+  /* 7. trofei                                                         */
+  /* ---------------------------------------------------------------- */
+
+  /* i trofei dell'Allenatore con le sagome della carriera: la bacheca è una sola */
+  const TROPHY_SHAPE = { league: 'campionato', league2: 'campionato', promotion: 'promozione', cup: 'coppa', ucl: 'ucl', uel: 'uel', uecl: 'uecl' };
+
+  function trophyName(tr) {
+    return t(`allenatore.trophyNames.${tr.type}`, { league: (tr.type === 'cup' ? leagueOf(data, tr.league)?.cup : leagueOf(data, tr.league)?.name) || '' });
+  }
+
+  function trophyBadge(tr) {
+    const shape = TROPHY_SHAPE[tr.type] || 'coppa';
+    const b = el('div', 'tbadge');
+    b.style.color = TROPHY_COLOR[shape] || 'var(--lime)';
+    b.innerHTML = trophySvg(shape, 44);
+    b.appendChild(el('span', 'tbadge__n label', trophyName(tr)));
+    return b;
+  }
+
+  /** la sagoma del trofeo più importante a tutto schermo, per un attimo */
+  function showTrophyMoment(trophies) {
+    const order = ['ucl', 'league', 'uel', 'uecl', 'cup', 'league2', 'promotion'];
+    const best = [...trophies].sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type))[0];
+    if (!best) return;
+    const shape = TROPHY_SHAPE[best.type] || 'coppa';
+    const overlay = el('div', 'trophy-moment');
+    const inner = el('div', 'trophy-moment__inner');
+    inner.style.color = TROPHY_COLOR[shape] || 'var(--lime)';
+    inner.innerHTML = trophySvg(shape, 180);
+    inner.append(el('p', 'trophy-moment__name display', trophyName(best)), el('span', 'label', career.clubs[career.club]?.name || ''));
+    overlay.appendChild(inner);
+    (document.getElementById('overlay-root') || document.body).appendChild(overlay);
+    const close = () => { overlay.classList.add('is-out'); setTimeout(() => overlay.remove(), 300); };
+    overlay.addEventListener('click', close);
+    setTimeout(close, 2400);
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* 7b. resoconto della giornata, fine stagione, offerte              */
   /* ---------------------------------------------------------------- */
 
   function renderReport() {
@@ -1569,9 +1703,51 @@ export async function mount(host) {
     head.append(el('span', 'label', `${t('allenatore.seasonLabel')} ${s.season}/${String(s.season + 1).slice(2)}`), el('strong', 'display t-xxl num', `${s.pos}°`), el('span', 'display t-lg', t(`allenatore.verdicts.${s.verdict}`)), el('p', 'dim', t(`allenatore.verdictText.${s.verdict}`, { target: s.objective.target, objective: t(`allenatore.objectives.${s.objective.id}`) })));
     stage.appendChild(head);
     if (s.trophies.length) {
-      const tro = el('section', 'mcard card');
-      for (const tr of s.trophies) tro.appendChild(el('p', 'mtrophy display t-lg', `🏆 ${t(`allenatore.trophyNames.${tr.type}`, { league: (tr.type === 'cup' ? leagueOf(data, tr.league)?.cup : leagueOf(data, tr.league)?.name) || '' })}`));
+      const tro = el('section', 'mcard card mtrophies');
+      tro.appendChild(el('h3', 'mhead display', t('allenatore.seasonTrophies')));
+      const row = el('div', 'tbadges');
+      for (const tr of s.trophies) row.appendChild(trophyBadge(tr));
+      tro.appendChild(row);
       stage.appendChild(tro);
+      stagger(row.children, 'anim-snap', 140);
+      /* il trofeo più importante a tutto schermo, come in carriera */
+      if (!s.shown) { s.shown = true; showTrophyMoment(s.trophies); audio.sfx.win?.(); }
+    }
+
+    /* il bilancio: partite, punti, marcatori, giudizio della società */
+    const rec = s.record || { p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0 };
+    const bil = el('section', 'mcard card');
+    bil.appendChild(el('h3', 'mhead display', t('allenatore.seasonRecord')));
+    const grid = el('div', 'mpsheet__stats');
+    for (const [k, v] of [['played', rec.p], ['won', rec.w], ['drawn', rec.d], ['lost', rec.l], ['ppg', (s.ppg ?? 0).toFixed(2)], ['scored', rec.gf], ['conceded', rec.ga]]) {
+      const b = el('div', 'mstat');
+      b.append(el('strong', 'display num', String(v)), el('span', 'label', t(`allenatore.coachStats.${k}`)));
+      grid.appendChild(b);
+    }
+    bil.appendChild(grid);
+    const happy = el('p', `mseason__board ${s.boardHappy ? 'is-good' : 'is-bad'}`, t(s.boardHappy ? 'allenatore.boardHappy' : 'allenatore.boardUnhappy', { target: s.objective.target, pos: s.pos }));
+    bil.appendChild(happy);
+    stage.appendChild(bil);
+
+    const sc = s.scorers;
+    if (sc && (sc.league.length || sc.europe.length || sc.cup.length)) {
+      const card = el('section', 'mcard card');
+      card.appendChild(el('h3', 'mhead display', t('allenatore.topScorers')));
+      const block = (key, list) => {
+        if (!list.length) return;
+        card.appendChild(el('h4', 'label mseason__sub', key));
+        for (const x of list) {
+          const r = el('div', `mres ${x.club === career.club ? 'is-me' : ''}`);
+          r.append(el('span', 'mres__h', x.name), el('span', 'mres__a dim', clubName(x.club)), el('strong', 'mres__s num', String(x.g)));
+          card.appendChild(r);
+        }
+      };
+      block(league().name, sc.league);
+      const euro = career.cups?.europe;
+      if (euro) block(t(`allenatore.zones.${euro.comp}`), sc.europe);
+      const nat = career.cups?.national;
+      if (nat) block(nat.name, sc.cup);
+      stage.appendChild(card);
     }
     const moves = el('section', 'mcard card');
     moves.appendChild(el('h3', 'mhead display', t('allenatore.movesTitle')));
@@ -1582,6 +1758,7 @@ export async function mount(host) {
     const squad = el('section', 'mcard card');
     squad.appendChild(el('h3', 'mhead display', t('allenatore.summerTitle')));
     if (s.retired.length) squad.appendChild(el('p', '', t('allenatore.retiredLine', { names: s.retired.map((x) => `${x.name} (${x.age})`).join(', ') })));
+    if (s.retiredAround?.length) squad.appendChild(el('p', 'dim', t('allenatore.retiredAround', { names: s.retiredAround.map((x) => `${x.name} (${x.club}, ${x.age})`).join(', ') })));
     if (s.left.length) squad.appendChild(el('p', '', t('allenatore.leftLine', { names: s.left.map((x) => x.name).join(', ') })));
     if (s.returned?.length) squad.appendChild(el('p', '', t('allenatore.returnedLine', { names: s.returned.map((x) => x.name).join(', ') })));
     if (s.loanAgain?.length) squad.appendChild(el('p', '', t('allenatore.loanAgainLine', { names: s.loanAgain.map((x) => x.name).join(', ') })));
@@ -1591,6 +1768,34 @@ export async function mount(host) {
       for (const p of youth) squad.appendChild(playerRow(p, career.season + 1, { onClick: () => playerSheet(p.id) }));
     }
     stage.appendChild(squad);
+    /* le chiamate di altri club: non arrivano ogni anno */
+    if (s.jobOffers?.length && career.phase !== 'sacked') {
+      const box = el('section', 'mcard card');
+      box.append(el('h3', 'mhead display', t('allenatore.jobCallsTitle')), el('p', 'dim', t('allenatore.jobCallsText')));
+      for (const o of s.jobOffers) {
+        const lg = leagueOf(data, o.league);
+        const b = el('button', 'mclubpick');
+        b.type = 'button';
+        b.append(clubBadge(o, { size: 32, sub: `${flagEmoji(lg.code)} ${lg.name}` }), el('span', 'mclubpick__str display num', String(Math.round(o.strength))));
+        b.addEventListener('click', () => sheet({
+          title: t('allenatore.jobCallTitle', { club: o.name }),
+          body: el('p', 'dim', t('allenatore.jobCallText', { club: o.name, league: lg.name })),
+          actions: [
+            { label: t('allenatore.jobStay'), onClick: (c) => c() },
+            { label: t('allenatore.jobAccept'), variant: 'btn--go', onClick: (c) => {
+              c();
+              takeJob(career, data, o.club);
+              planWeek(career, data, events);
+              persist();
+              history.length = 0;
+              goView('hub');
+            } },
+          ],
+        }));
+        box.appendChild(b);
+      }
+      stage.appendChild(box);
+    }
     const go2 = button(t(career.phase === 'sacked' ? 'allenatore.seeOffers' : 'allenatore.nextSeason'), 'btn--go btn--lg btn--block', () => {
       if (career.phase === 'sacked') { goView('offers'); return; }
       beginNextSeason(career, data);

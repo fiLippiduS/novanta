@@ -1206,7 +1206,8 @@
       "winner": "Gewonnen von {club}",
       "alive": "Noch dabei · {round}",
       "out": "Ausgeschieden",
-      "afterMd": "nach dem {n}. Spieltag"
+      "afterMd": "nach dem {n}. Spieltag",
+      "toDraw": "Wird ausgelost"
     },
     "seasonOver": "Saison beendet",
     "seasonOverText": "Der letzte Spieltag ist gespielt. Der Vorstand erwartet dich zum Urteil.",
@@ -1403,11 +1404,18 @@
       "drawn": "Remis",
       "lost": "Niederlagen",
       "trophies": "Titel",
-      "sacked": "Entlassungen"
+      "sacked": "Entlassungen",
+      "ppg": "Punkte pro Spiel",
+      "scored": "Tore",
+      "conceded": "Gegentore"
     },
     "trophies": "Titelsammlung",
     "trophyNames": {
-      "league": "Meister · {league, cup: \"{league}\", ucl: \"Champions League\", uel: \"Europa League\", uecl: \"Conference League\" }",
+      "league": "Meister · {league}",
+      "cup": "{league}",
+      "ucl": "Champions League",
+      "uel": "Europa League",
+      "uecl": "Conference League",
       "league2": "Erster Platz · {league}",
       "promotion": "Aufstieg aus der {league}"
     },
@@ -1932,6 +1940,21 @@
       "line": "{to} holt {name} ({from}) · {fee}"
     },
     "bonusPaid": "Prämie für {name}: {fee}",
+    "seasonTrophies": "Titel der Saison",
+    "seasonRecord": "Die Bilanz",
+    "boardHappy": "Der Verein ist zufrieden: Ziel Platz {target}, geworden Platz {pos}.",
+    "boardUnhappy": "Der Verein ist nicht zufrieden: Ziel Platz {target}, geworden Platz {pos}.",
+    "retiredAround": "Es hören auch auf: {names}.",
+    "jobCallsTitle": "Man will dich",
+    "jobCallsText": "Eine andere Bank will dich. Du kannst auch bleiben.",
+    "jobCallTitle": "Der Anruf von {club}",
+    "jobCallText": "{club} ({league}) bietet dir den Job. Wenn du annimmst, verlässt du dein Team.",
+    "jobStay": "Ich bleibe",
+    "jobAccept": "Ich nehme an",
+    "callUp": "Nominieren",
+    "drop": "Auf die Tribüne",
+    "callAuto": "Co-Trainer nominiert",
+    "benchFull": "Auf die Bank passen {n} Spieler: nimm zuerst einen raus.",
     "injuryLine1": "{name} fällt aus: ein Spiel.",
     "onLoanAt": "Verliehen · {club}",
     "listChip": {

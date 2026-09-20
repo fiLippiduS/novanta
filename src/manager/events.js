@@ -86,7 +86,7 @@ export function contextOf(career, data) {
 
 export function isWindowOpen(career) {
   const half = Math.floor(career.fixtures.length / 2);
-  return career.md <= 1 || (career.md >= half - 1 && career.md <= half + 1);
+  return career.md <= 2 || (career.md >= half - 1 && career.md <= half + 2);
 }
 
 /* ------------------------------------------------------------------ */
@@ -272,7 +272,7 @@ function instance(career, ev, subject, vars) {
       club: career.clubs[career.club].name,
       opponent: nf ? career.clubs[nf.opponent].name : '',
       coach: career.coach.name,
-      value: subject ? valueOf(subject, career.season) : 0,
+      value: subject ? valueOf(subject, career.season, { league: career.league }) : 0,
     },
   };
 }
@@ -417,7 +417,7 @@ export function applyFx(career, data, fx, subject, rand = Math.random) {
     if (fx.noRenew) { subject.flags = [...new Set([...(subject.flags || []), 'noRenew'])].filter((f) => f !== 'renewed'); changes.push({ kind: 'noRenew', value: 1, player: subject.id }); }
     if (fx.sell) {
       /* ceduto: esce dalla rosa, entrano i soldi (una quota del valore) */
-      const fee = Math.round(valueOf(subject, career.season) * fx.sell * 10) / 10;
+      const fee = Math.round(valueOf(subject, career.season, { league: career.league }) * fx.sell * 10) / 10;
       const money = cashIn(career, fee);
       career.moved = career.moved || {};
       career.moved[`${subject.name}|${subject.birth}`] = 'sold';

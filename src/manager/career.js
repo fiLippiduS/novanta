@@ -7,7 +7,7 @@
    stato resta JSON puro e la stessa carriera, ricaricata, fa le stesse cose. */
 
 import { fnv1a, mulberry32 } from '../core/rng.js';
-import { playerFromRow, emptyStats, evolve, recover, valueOf, wageFor, ageOf, overallOf, applyPlayerFx, careerCurve, revisePotential, ROLE_PIVOT, DEPT } from './players.js';
+import { playerFromRow, emptyStats, evolve, recover, valueOf, wageFor, ageOf, overallOf, applyPlayerFx, careerCurve, revisePotential, retirementAge, rowActive, ROLE_PIVOT, DEPT } from './players.js';
 import { STYLES, FORMATIONS, playerAffinity } from './tactics.js';
 import { autoLineup, aiTactics, available } from './lineup.js';
 import { makeFixtures, standings, TIEBREAK, zones, expectedPoints } from './league.js';
@@ -15,6 +15,7 @@ import { createMatch, simulateToEnd, playerRatings } from './match.js';
 import { setupCups, europeFromTable, closeCupRound } from './cups.js';
 import { windowOpen, expireTalks, worldTransfers, payBonuses } from './market.js';
 import { keyMoments } from './timeline.js';
+import { pickName } from './names.js';
 
 export const MANAGER_VERSION = 1;
 export const FIRST_SEASON = 2026;
@@ -57,8 +58,11 @@ function budgetFor(club, league, reputation) {
 
 function buildClub(data, id, season, moved = {}) {
   const info = data.leagues.clubs[id];
-  /* chi è stato comprato, venduto o svincolato non torna nel club di prima */
-  const rows = data.squads[info.league][id].filter((r) => !moved[`${r[0]}|${r[1]}`] || moved[`${r[0]}|${r[1]}`] === id);
+  /* chi è stato comprato, venduto o svincolato non torna nel club di prima,
+     e chi ha finito la carriera non torna per nessuno */
+  const rows = data.squads[info.league][id]
+    .filter((r) => !moved[`${r[0]}|${r[1]}`] || moved[`${r[0]}|${r[1]}`] === id)
+    .filter((r) => rowActive(r, season));
   const players = rows.map((r) => playerFromRow(r, id, season));
   return { info, players };
 }
@@ -218,11 +222,16 @@ export function refreshUserLineup(career) {
     if (!t.auto) t.lineup.forEach((id, i) => { const p = career.players[id]; if (p && available(p)) locked[i] = id; });
     const { lineup, bench } = autoLineup(players, t.formation, t.style, { rotate: 0.6, locked });
     t.lineup = lineup;
-    t.bench = bench;
+    /* le convocazioni decise a mano restano anche con la formazione automatica */
+    if (t.benchAuto === false) {
+      const onPitch = new Set(lineup);
+      t.bench = t.bench.filter((id) => !onPitch.has(id) && career.players[id] && available(career.players[id])).slice(0, 9);
+    } else t.bench = bench;
   } else {
     const onPitch = new Set(t.lineup);
     t.bench = t.bench.filter((id) => !onPitch.has(id) && career.players[id] && available(career.players[id])).slice(0, 9);
-    if (t.bench.length < 9) {
+    /* le convocazioni decise a mano non si toccano: la panchina resta com'è */
+    if (t.bench.length < 9 && t.benchAuto !== false) {
       const extra = players.filter((p) => available(p) && !onPitch.has(p.id) && !t.bench.includes(p.id)).sort((a, b) => b.ovr - a.ovr);
       for (const p of extra) { if (t.bench.length >= 9) break; t.bench.push(p.id); }
     }
@@ -362,7 +371,8 @@ export function applyMatch(career, match, fixture) {
   fixture.res = [H.goals, A.goals];
   const ratings = playerRatings(match);
   const motm = Object.entries(ratings).sort((a, b) => b[1] - a[1])[0]?.[0];
-  const scorers = match.events.filter((e) => ['goal', 'penGoal'].includes(e.type)).map((e) => ({ side: e.side, player: e.player, minute: e.minute, pen: e.type === 'penGoal', assist: e.assist }));
+  const nameOf = (id) => { for (const s of match.sides) { const p = s.byId.get(id); if (p) return p.name; } return ''; };
+  const scorers = match.events.filter((e) => ['goal', 'penGoal'].includes(e.type)).map((e) => ({ side: e.side, player: e.player, name: nameOf(e.player), minute: e.minute, pen: e.type === 'penGoal', assist: e.assist }));
   /* gol e rossi con il minuto e il nome, compatti: [minuto, lato, tipo, nome] */
   const moments = keyMoments(match).map((x) => [x.min, x.side, x.type, x.name]);
   fixture.info = { scorers, motm, pens: match.shootout ? [match.shootout.home, match.shootout.away] : null, moments };
@@ -603,7 +613,7 @@ export function playerCard(career, id) {
   return {
     ...p,
     age: ageOf(p, career.season),
-    value: valueOf(p, career.season),
+    value: valueOf(p, career.season, { league: career.league }),
     avgRating: p.stats.apps ? Math.round((p.stats.ratingSum / p.stats.apps) * 100) / 100 : null,
     affinity: playerAffinity(p, career.tactics.style),
   };
@@ -675,14 +685,22 @@ function outsideTeam(career, data, id) {
   return { id, name: info.name, players: pool, lineup, bench, formation: t.formation, style: t.style, mentality: 'equilibrata', familiarity: { [t.style]: 60 }, morale: 62 };
 }
 
+/* i nomi già in gioco: in rosa, nelle altre squadre e fra chi se n'è andato */
+function nameTaken(career, name) {
+  if (career.moved && career.moved[name] !== undefined) return true;
+  for (const p of Object.values(career.players)) if (p.name === name) return true;
+  for (const k of Object.keys(career.moved || {})) if (k.startsWith(`${name}|`)) return true;
+  return false;
+}
+
+/** come si chiama un ragazzo del vivaio: nome e cognome veri del suo paese, mai un doppione */
 function youthName(career, clubId, rand) {
-  const pool = squadOf(career, clubId).filter((p) => / /.test(p.name));
-  const nation = career.clubs[clubId] ? mostCommon(pool.map((p) => p.nation)) : null;
-  const same = pool.filter((p) => p.nation === nation);
-  const src = same.length >= 4 ? same : Object.values(career.players).filter((p) => p.nation === nation && / /.test(p.name));
-  const a = src[Math.floor(rand() * src.length)].name.split(' ');
-  const b = src[Math.floor(rand() * src.length)].name.split(' ');
-  return { name: `${a[0]} ${b[b.length - 1]}`, nation };
+  const pool = squadOf(career, clubId).filter((p) => p.nation);
+  /* un ragazzo del vivaio è quasi sempre del paese del club, qualche volta no */
+  const nation = mostCommon(pool.map((p) => p.nation)) || 'IT';
+  const foreign = pool.filter((p) => p.nation !== nation).map((p) => p.nation);
+  const pick = rand() < 0.72 || !foreign.length ? nation : foreign[Math.floor(rand() * foreign.length)];
+  return { name: pickName(rand, pick, (n) => nameTaken(career, n)), nation: pick };
 }
 function mostCommon(list) { const m = {}; list.forEach((x) => { m[x] = (m[x] || 0) + 1; }); return Object.entries(m).sort((a, b) => b[1] - a[1])[0]?.[0] || ''; }
 
@@ -782,7 +800,7 @@ export function endSeason(career, data) {
   const me = rows.find((r) => r.id === career.club);
   const b = career.board;
   const obj = b.objective;
-  const summary = { season: career.season, league: league.id, table: rows, pos: me.pos, pts: me.pts, objective: obj, trophies: [], moves: {}, retired: [], left: [], returned: [], loanAgain: [], youth: [], verdict: null, playoffs: [] };
+  const summary = { season: career.season, league: league.id, table: rows, pos: me.pos, pts: me.pts, objective: obj, trophies: [], moves: {}, retired: [], retiredAround: [], left: [], returned: [], loanAgain: [], youth: [], verdict: null, playoffs: [] };
 
   /* trofei */
   if (me.pos === 1) summary.trophies.push({ type: league.level === 1 ? 'league' : 'league2', league: league.id, season: career.season, club: career.club });
@@ -869,11 +887,16 @@ export function endSeason(career, data) {
       evolve(rngFor(career, `summer-${p.id}`), p, p.loanOut ? loanStats(p, 10) : { ...p.stats }, nextSeason, 1.4);
       revisePotential(rngFor(career, `potential-${p.id}`), p, career.season);
       const age = nextSeason - p.birth;
-      const retireP = age >= 34 ? (age - 33) * (p.role === 'POR' ? 0.12 : 0.2) + (p.ovr < 68 ? 0.1 : 0) : 0;
+      /* si smette all'età scritta nella propria carriera, o poco prima se il fisico non regge */
+      const end = retirementAge(p.name, p.birth, p.role);
+      const retireP = age >= end ? 1 : age >= end - 2 ? 0.35 + (p.ovr < 66 ? 0.2 : 0) : 0;
       const expiring = p.contract <= career.season;
       if (rand() < retireP) {
         club.squad = club.squad.filter((x) => x !== id);
-        if (club.id === career.club) summary.retired.push({ id, name: p.name, age });
+        career.moved = career.moved || {};
+        career.moved[`${p.name}|${p.birth}`] = 'retired';
+        if (club.id === career.club) summary.retired.push({ id, name: p.name, age, ovr: p.ovr });
+        else summary.retiredAround.push({ name: p.name, age, ovr: p.ovr, club: club.name });
         delete career.players[id];
         continue;
       }
@@ -886,12 +909,17 @@ export function endSeason(career, data) {
       if (p.loanTo) {
         /* il prestito deciso dall'utente dura una stagione: si torna a casa */
         p.loanOut = false;
+        career.moved = career.moved || {};
+        career.moved[`${p.name}|${p.birth}`] = club.id;
         if (club.id === career.club) summary.returned.push({ id, name: p.name, listed: false, from: p.loanToName });
         for (const k of ['loanTo', 'loanToName', 'loanUntil', 'loanWageShare']) delete p[k];
       } else if (p.loanOut) {
         if (age <= 23 && p.ovr < cut) { if (club.id === career.club) summary.loanAgain.push({ id, name: p.name }); }
         else {
           p.loanOut = false;
+          /* tornato a casa: da adesso è di questo club, e la copia in prestito non rinasce */
+          career.moved = career.moved || {};
+          career.moved[`${p.name}|${p.birth}`] = club.id;
           /* chi torna e non rientra nei primi 24 finisce sul mercato */
           if (p.ovr < cut && !(p.flags || []).includes('listed')) p.flags = [...(p.flags || []), 'listed'];
           if (club.id === career.club) summary.returned.push({ id, name: p.name, listed: p.ovr < cut });
@@ -921,9 +949,51 @@ export function endSeason(career, data) {
   const intake = clamp(Math.min(2 + Math.floor(rand() * 3), 30 - available), career.flags.academyInvest ? 1 : 0, 4);
   for (let i = 0; i < intake; i++) summary.youth.push(makeYouth(career, career.club, rand, { quality: (career.flags.academyInvest ? 4 : 0) }).id);
 
+  /* il bilancio della stagione: partite, punti, marcatori, giudizio */
+  const rec = summary.record = { ...career.coach.record };
+  const pts = rec.w * 3 + rec.d;
+  summary.ppg = rec.p ? Math.round((pts / rec.p) * 100) / 100 : 0;
+  summary.scorers = {
+    league: leagueScorers(career).slice(0, 5),
+    europe: cupScorers(career, 'europe').slice(0, 3),
+    cup: cupScorers(career, 'national').slice(0, 3),
+  };
+  summary.boardHappy = met && !relegated;
+  summary.retiredAround = summary.retiredAround.sort((a, b) => b.ovr - a.ovr).slice(0, 6);
+
+  /* qualche stagione arriva la chiamata di un altro club: non tutte */
+  const callChance = clamp(0.12 + (career.coach.reputation - 45) * 0.012 + (met ? 0.14 : -0.06) + summary.trophies.length * 0.12, 0, 0.75);
+  if (!b.sacked && rand() < callChance) {
+    summary.jobOffers = jobOffers(career, data, { count: rand() < 0.35 ? 2 : 1, tag: `offers-${career.season}` })
+      .filter((o) => o.strength >= currentStrength(career, career.club) - 6);
+  }
+
   career.lastSeason = summary;
   career.phase = b.sacked ? 'sacked' : 'summer';
   return summary;
+}
+
+/** la classifica marcatori del campionato, dai tabellini di tutte le giornate */
+export function leagueScorers(career) {
+  const count = {};
+  for (const round of career.fixtures) {
+    for (const f of round) {
+      for (const sc of f.info?.scorers || []) {
+        if (!sc.name) continue;
+        const club = sc.side === 'home' ? f.h : f.a;
+        const row = count[sc.name] || (count[sc.name] = { name: sc.name, g: 0, club });
+        row.g++;
+      }
+    }
+  }
+  return Object.values(count).sort((a, b) => b.g - a.g);
+}
+
+/** la classifica marcatori di una coppa: la tiene la coppa, partita per partita */
+export function cupScorers(career, cupId) {
+  const cup = career.cups?.[cupId];
+  if (!cup?.scorers) return [];
+  return Object.entries(cup.scorers).map(([name, x]) => ({ name, g: x.g, club: x.club })).sort((a, b) => b.g - a.g);
 }
 
 /**

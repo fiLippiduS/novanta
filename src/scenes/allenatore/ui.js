@@ -12,6 +12,18 @@ export function button(label, variant = 'btn--ghost', onClick = null) {
   return b;
 }
 
+/* un bottone che sta dentro a un altro bottone: si comporta come un tasto,
+   ma non è un <button> annidato (che il browser non accetta) */
+export function tapButton(label, cls, onClick) {
+  const b = el('span', `btn ${cls}`, label);
+  b.setAttribute('role', 'button');
+  b.tabIndex = 0;
+  const go = (ev) => { ev.preventDefault(); ev.stopPropagation(); if (!b.classList.contains('is-off')) onClick(ev); };
+  b.addEventListener('click', go);
+  b.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') go(ev); });
+  return b;
+}
+
 export function chip(label, tone = '') {
   return el('span', `mchip ${tone ? `mchip--${tone}` : ''}`.trim(), label);
 }

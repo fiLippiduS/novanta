@@ -12,7 +12,7 @@ import { ROLES, ageOf, valueOf, careerPhase } from '../../manager/players.js';
 import { squadOf } from '../../manager/career.js';
 import {
   search, windowOpen, deadlineDay, acceptOffer, rejectOffer, counterIncoming, openTalks, bidClub, payClause,
-  offerContract, medicalChoice, withdrawTalk, talkById, talksNow, talkPlayer, isOpenTalk, wageRoom, TALK_ROLES, LOAN_WAGE, listOf,
+  offerContract, medicalChoice, withdrawTalk, talkById, talksNow, talkPlayer, isOpenTalk, wageRoom, TALK_ROLES, LOAN_WAGE, listOf, leagueIdOf,
 } from '../../manager/market.js';
 import { button, chip, meter, ovrBadge, roleTag, attrBars, euro, phaseChip, potentialText, richText, newsLine } from './ui.js';
 
@@ -97,7 +97,7 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
     const line = o.kind === 'loan'
       ? richText('allenatore.market.offerLoanLine', { club: o.clubName, fee: euro(o.fee), share: Math.round((o.wageShare || 0) * 100) }, ['club', 'fee'], 'moffer__line')
       : richText('allenatore.market.offerBuyLine', { club: o.clubName, fee: euro(o.fee) }, ['club', 'fee'], 'moffer__line');
-    txt.append(line, el('span', 'label', t('allenatore.market.valueLine', { value: euro(valueOf(p, career.season)), md: o.expires + 1 })), tags);
+    txt.append(line, el('span', 'label', t('allenatore.market.valueLine', { value: euro(valueOf(p, career.season, { league: career.league })), md: o.expires + 1 })), tags);
     const out = el('p', 'mmarket__out');
     let ask = r1(Math.max(o.fee + 0.1, o.fee * 1.15));
     const step = Math.max(0.1, r1(o.fee * 0.05));
@@ -282,7 +282,7 @@ export function renderMarket(stage, { career, data, persist, rerender, clubName 
       body.append(top, from);
       if (p) {
         const tags = el('div', 'mpsheet__tags');
-        tags.append(phaseChip(p, career.season), chip(potentialText(p, career.season, { staff }), 'dim'), chip(`${t('allenatore.talks.value')} ${euro(valueOf(p, career.season))}`, 'dim'), chip(t('allenatore.talks.until', { year: p.contract }), 'dim'));
+        tags.append(phaseChip(p, career.season), chip(potentialText(p, career.season, { staff }), 'dim'), chip(`${t('allenatore.talks.value')} ${euro(valueOf(p, career.season, { league: leagueIdOf(career, data, clubId) }))}`, 'dim'), chip(t('allenatore.talks.until', { year: p.contract }), 'dim'));
         body.appendChild(tags);
       }
 

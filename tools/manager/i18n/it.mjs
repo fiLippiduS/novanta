@@ -157,7 +157,7 @@ export default {
   reputation: 'Reputazione',
   coachStats: { played: 'Partite', won: 'Vinte', drawn: 'Pari', lost: 'Perse', trophies: 'Trofei', sacked: 'Esoneri' },
   trophies: 'Bacheca',
-  trophyNames: { league: 'Campione · {league, cup: "{league}", ucl: "Champions League", uel: "Europa League", uecl: "Conference League" }', league2: 'Primo posto · {league}', promotion: 'Promozione dalla {league}' },
+  trophyNames: { league: 'Campione · {league}', cup: '{league}', ucl: 'Champions League', uel: 'Europa League', uecl: 'Conference League', league2: 'Primo posto · {league}', promotion: 'Promozione dalla {league}' },
   history: 'Stagioni',
   verdicts: { met: 'Obiettivo centrato', triumph: 'Stagione trionfale', missed: 'Obiettivo mancato', sacked: 'Esonerato', relegatedKept: 'Retrocesso, ma confermato' },
   verdictText: {

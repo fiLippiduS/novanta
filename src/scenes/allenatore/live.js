@@ -17,7 +17,7 @@ const ICON = {
   injury: '✚', sub: '⇄', penalty: '●', penSaved: '🧤', penMissed: '✕', disallowed: '⚑', error: '!', halftime: '⏸', fulltime: '⏹', kickoff: '▶', added: '+', tactic: '▦', decision: '★', extratime: '⏱', shootout: '●',
 };
 
-export function mountLive(stage, { match, career, clubName, onSave, onFinish }) {
+export function mountLive(stage, { match, career, clubName, onSave, onFinish, comp = null }) {
   const userKey = match.user;
   const me = () => match.sides.find((s) => s.key === userKey);
   const pname = (id) => {
@@ -32,7 +32,7 @@ export function mountLive(stage, { match, career, clubName, onSave, onFinish }) 
   let paused = false;
   let ended = false;
 
-  const root = el('div', 'mlive');
+  const root = el('div', `mlive ${comp ? `comp comp--${comp}` : ''}`.trim());
   stage.appendChild(root);
 
   /* ---------------- tabellone ---------------- */

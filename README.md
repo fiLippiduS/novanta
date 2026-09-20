@@ -17,9 +17,10 @@ Un gioco di calcio per il web. Dieci modalità, nessun bundler, nessuna dipenden
   nazionale e grandi tornei per chi viene dalle dieci nazionali più forti.
 - **Allenatore** — una panchina in dieci campionati con le rose di oggi: partite
   minuto per minuto con scelte decisive, classifica giornata per giornata, dodici
-  stili, mercato a trattative (club, procuratore, visite mediche), liste
-  trasferimenti e prestiti con offerte da più club, potenziale e declino
-  realistici, più di quattrocento decisioni, coppe, promozioni ed esonero. Dal
+  stili, mercato a trattative (club, procuratore, visite mediche), valori di
+  mercato come quelli veri, liste trasferimenti e prestiti con offerte da più
+  club, crescita e declino realistici fino al ritiro, più di quattrocento
+  decisioni, coppe europee con i loro colori, promozioni ed esonero. Dal
   calendario si simula fino a una data, con tabellini e classifica in diretta.
 - **Chi è?** — la scheda di una carriera vera senza il nome, cinque vite, la ricerca
   che suggerisce mentre scrivi.
@@ -94,6 +95,16 @@ node tools/wiki/auction.mjs && node tools/wiki/duel.mjs
 node tools/career/build-events.mjs && node tools/pages/build.mjs
 ```
 
+L'Allenatore aggiunge due passi dopo le rose, in quest'ordine: il banco dei
+nomi (nomi e cognomi veri per nazione, che servono ai ragazzi generati) e il
+vivaio di ogni club (tre giovani per squadra, marcati `p`, che si rigenerano
+senza accumularsi).
+
+```bash
+node tools/manager/names.mjs && node tools/manager/prospects.mjs
+node tools/manager/build-events.mjs && node tools/manager/i18n-merge.mjs
+```
+
 ## Struttura
 
 ```
@@ -116,6 +127,7 @@ ads.txt               chi può vendere la pubblicità del sito
 sitemap.xml           mappa per i motori di ricerca, generata insieme alle pagine
 tools/wiki/           dai dati di Wikipedia ai cataloghi del gioco
 tools/career/         eventi della Carriera nelle sei lingue
+tools/manager/        eventi, testi, nomi e vivai dell'Allenatore
 tools/pages/          testo delle pagine (content.mjs, modes.mjs) e impaginazione
 data/players/         10.529 carriere e 10.970 club: indice leggero e schede a pezzi
 data/rosa/            1.941 rose: indice e pezzi da cento

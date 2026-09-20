@@ -1206,7 +1206,8 @@
       "winner": "Ganada por el {club}",
       "alive": "En carrera · {round}",
       "out": "Eliminados",
-      "afterMd": "tras la jornada {n}"
+      "afterMd": "tras la jornada {n}",
+      "toDraw": "Por sortear"
     },
     "seasonOver": "Liga terminada",
     "seasonOverText": "Se ha jugado la última jornada. La directiva te espera para el veredicto.",
@@ -1403,11 +1404,18 @@
       "drawn": "Empatados",
       "lost": "Perdidos",
       "trophies": "Títulos",
-      "sacked": "Destituciones"
+      "sacked": "Destituciones",
+      "ppg": "Puntos por partido",
+      "scored": "Goles a favor",
+      "conceded": "Goles en contra"
     },
     "trophies": "Vitrina",
     "trophyNames": {
-      "league": "Campeón · {league, cup: \"{league}\", ucl: \"Champions League\", uel: \"Europa League\", uecl: \"Conference League\" }",
+      "league": "Campeón · {league}",
+      "cup": "{league}",
+      "ucl": "Champions League",
+      "uel": "Europa League",
+      "uecl": "Conference League",
       "league2": "Primer puesto · {league}",
       "promotion": "Ascenso desde {league}"
     },
@@ -1932,6 +1940,21 @@
       "line": "{to} ficha a {name} ({from}) · {fee}"
     },
     "bonusPaid": "Variables para {name}: {fee}",
+    "seasonTrophies": "Títulos de la temporada",
+    "seasonRecord": "El balance",
+    "boardHappy": "El club está satisfecho: objetivo {target}º, acabaste {pos}º.",
+    "boardUnhappy": "El club no está satisfecho: objetivo {target}º, acabaste {pos}º.",
+    "retiredAround": "También se retiran: {names}.",
+    "jobCallsTitle": "Te quieren",
+    "jobCallsText": "Otro banquillo te quiere. También puedes quedarte.",
+    "jobCallTitle": "La llamada de {club}",
+    "jobCallText": "{club} ({league}) te ofrece el banquillo. Si aceptas, dejas tu equipo actual.",
+    "jobStay": "Me quedo",
+    "jobAccept": "Acepto",
+    "callUp": "Convocar",
+    "drop": "A la grada",
+    "callAuto": "Que elija el segundo",
+    "benchFull": "En el banquillo caben {n}: quita a uno primero.",
     "injuryLine1": "{name} se lesiona: un partido.",
     "onLoanAt": "Cedido · {club}",
     "listChip": {

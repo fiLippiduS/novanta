@@ -157,7 +157,7 @@ export default {
   reputation: 'Ruf',
   coachStats: { played: 'Spiele', won: 'Siege', drawn: 'Remis', lost: 'Niederlagen', trophies: 'Titel', sacked: 'Entlassungen' },
   trophies: 'Titelsammlung',
-  trophyNames: { league: 'Meister · {league, cup: "{league}", ucl: "Champions League", uel: "Europa League", uecl: "Conference League" }', league2: 'Erster Platz · {league}', promotion: 'Aufstieg aus der {league}' },
+  trophyNames: { league: 'Meister · {league}', cup: '{league}', ucl: 'Champions League', uel: 'Europa League', uecl: 'Conference League', league2: 'Erster Platz · {league}', promotion: 'Aufstieg aus der {league}' },
   history: 'Spielzeiten',
   verdicts: { met: 'Ziel erreicht', triumph: 'Triumphale Saison', missed: 'Ziel verfehlt', sacked: 'Entlassen', relegatedKept: 'Abgestiegen, aber bestätigt' },
   verdictText: {

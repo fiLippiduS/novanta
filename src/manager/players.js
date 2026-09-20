@@ -141,7 +141,8 @@ export function playerFromRow(row, clubId, season) {
     captain: flags.includes('c'),
     loanIn: flags.includes('i'),
     loanOut: flags.includes('o'),
-    youth: flags.includes('y'),
+    youth: flags.includes('y') || flags.includes('p'),
+    academy: flags.includes('p'),
     club: clubId,
     stats: emptyStats(),
     history: [],
@@ -181,6 +182,9 @@ export function careerCurve({ name, birth, role, ovr, fame = 0 }, season) {
     if (precocity > 0.5) mult = Math.max(mult, 0.6 + precocity * 0.35);
   }
   if (fame >= 95) mult *= 1.14; else if (fame > 60) mult *= 1.06;
+  /* un ragazzo di cui non parla nessuno e che non è ancora forte di rado
+     diventa un fenomeno: i gioielli veri si vedono presto */
+  if (fame < 15 && ovr < 66 && age <= 21) mult *= 0.68;
   let growth = 0;
   for (let a = Math.max(15, age); a < Math.floor(peakAge); a++) growth += GROWTH_AT[a] ?? 0;
   /* vicino al vertice si cresce meno: da 85 a 90 è più difficile che da 60 a 65 */
@@ -188,6 +192,8 @@ export function careerCurve({ name, birth, role, ovr, fame = 0 }, season) {
   /* sopra 87 arrivano solo i fenomeni */
   let top = ovr + growth;
   if (top > 87) top = 87 + (top - 87) * 0.55;
+  /* dal nulla non nasce il migliore del mondo: un tetto ai ragazzi sconosciuti */
+  if (fame < 15 && ovr < 70 && age <= 21) top = Math.min(top, 91);
   const potential = age >= declineAge ? ovr : Math.round(clamp(top, ovr, 95));
   return { peakAge, declineAge, potential, talent: Math.round(t * 100) };
 }
@@ -231,21 +237,83 @@ export function emptyStats() {
 export const ageOf = (p, season) => season - p.birth;
 
 /* ------------------------------------------------------------------ */
+/* quando si smette                                                     */
+/* ------------------------------------------------------------------ */
+
+/** la stagione dei dati: le rose vere sono quelle di questa estate */
+export const DATA_SEASON = 2026;
+
+/**
+ * L'età a cui questo giocatore appende le scarpe al chiodo. È sempre la
+ * stessa per lo stesso giocatore, così il mondo resta coerente anche fra
+ * dieci stagioni: i portieri durano di più, e chi nei dati gioca ancora a
+ * quarant'anni non si ritira ieri.
+ */
+export function retirementAge(name, birth, role) {
+  const h = fnv1a(`${name}|${birth}|retire`) % 1000;
+  const base = (role === 'POR' ? 37 : 34) + Math.floor((h / 1000) * 5);
+  return Math.max(base, DATA_SEASON - birth + 1);
+}
+
+/** una riga dei dati è ancora un giocatore in attività in questa stagione? */
+export function rowActive(row, season) {
+  return season - row[1] <= retirementAge(row[0], row[1], row[3]);
+}
+
+/* ------------------------------------------------------------------ */
 /* soldi                                                               */
 /* ------------------------------------------------------------------ */
 
 /** milioni di euro */
-export function valueOf(p, season) {
+/* ------------------------------------------------------------------ */
+/* quanto vale                                                          */
+/* ------------------------------------------------------------------ */
+
+/* Il valore di mercato segue le quotazioni vere: cresce piano fino ai
+   settanta, corre fra i settanta e gli ottanta, e in cima si appiattisce —
+   fra un fuoriclasse e l'altro non ci sono ordini di grandezza. Il resto lo
+   fanno età, contratto e il campionato in cui gioca. */
+const VALUE_KNEE = 78;
+const VALUE_CAP = 220;
+
+/** quanto pesa il campionato sul cartellino: in Inghilterra si paga di più */
+export const LEAGUE_VALUE = { eng1: 1.3, esp1: 1.05, ger1: 1.05, ita1: 1, fra1: 0.95, eng2: 0.62, esp2: 0.5, ger2: 0.5, ita2: 0.45, fra2: 0.45 };
+
+/* la curva dell'età: si vale di più poco prima del picco, e dopo i trenta si scende in fretta */
+function ageValue(age) {
+  if (age <= 18) return 1.55;
+  if (age <= 21) return 1.75;
+  if (age <= 24) return 1.7;
+  if (age <= 26) return 1.5;
+  if (age === 27) return 1.3;
+  if (age === 28) return 1.1;
+  if (age === 29) return 0.9;
+  if (age === 30) return 0.7;
+  if (age === 31) return 0.52;
+  if (age === 32) return 0.38;
+  if (age === 33) return 0.25;
+  if (age === 34) return 0.16;
+  return 0.1;
+}
+
+/**
+ * Il valore in milioni. `opts.league` è il campionato del club che lo ha:
+ * un settanta in Premier costa più di un settanta in Ligue 2.
+ */
+export function valueOf(p, season, opts = {}) {
   const age = ageOf(p, season);
   /* si paga quello che è oggi più una parte di quello che diventerà: tanto più giovane, tanto più conta il futuro */
-  const future = clamp(p.potential - p.ovr, 0, 30) * (age <= 19 ? 0.45 : age <= 21 ? 0.4 : age <= 24 ? 0.3 : 0.15);
-  const base = Math.exp((p.ovr + future - 60) * 0.19) * 0.6;
-  const ageMult = age <= 21 ? 1.5 : age <= 25 ? 1.25 : age <= 28 ? 1 : age <= 30 ? 0.72 : age <= 32 ? 0.45 : 0.25;
-  const pot = 1;
+  const future = clamp((p.potential || p.ovr) - p.ovr, 0, 30) * (age <= 19 ? 0.38 : age <= 21 ? 0.34 : age <= 24 ? 0.26 : 0.12);
+  const level = p.ovr + future;
+  const base = level <= VALUE_KNEE
+    ? Math.exp((level - 60) * 0.2) * 0.45
+    : Math.exp((VALUE_KNEE - 60) * 0.2) * 0.45 * Math.exp((level - VALUE_KNEE) * 0.135);
   /* contratto in scadenza: il club incassa meno, perché a zero lo perderebbe */
   const left = p.contract - season;
-  const contract = left <= 0 ? 0.5 : left === 1 ? 0.7 : left === 2 ? 0.87 : 1;
-  return Math.max(0.05, Math.round(base * ageMult * pot * contract * 20) / 20);
+  const contract = left <= 0 ? 0.45 : left === 1 ? 0.68 : left === 2 ? 0.87 : 1;
+  const league = LEAGUE_VALUE[opts.league] ?? 1;
+  const v = base * ageValue(age) * contract * league;
+  return Math.max(0.05, Math.round(Math.min(v, VALUE_CAP) * 20) / 20);
 }
 
 /** milioni di euro l'anno */
@@ -329,13 +397,13 @@ export function evolve(rand, p, recent, season, scale = 1) {
   let base = 0;
   if (age < peakAge) {
     const rate = age <= 21 ? 0.05 : age <= 24 ? 0.04 : 0.03;
-    base += room * rate * (0.3 + 0.7 * minutesShare) * scale;
+    base += room * rate * (0.15 + 0.85 * minutesShare) * scale;
   }
   if (age >= declineAge) {
     const care = { professionista: 0.7, leader: 0.9, pigro: 1.3, ribelle: 1.15 }[p.personality] || 1;
     base -= (0.08 + (age - declineAge) * 0.06) * scale * care;
   }
-  if (age <= 23 && played < 0.5 * scale) base -= 0.04 * scale; // chi non gioca mai si arrugginisce
+  if (age <= 23 && played < 0.5 * scale) base -= 0.06 * scale; // chi non gioca mai si arrugginisce
 
   /* 2. il rendimento: il voto medio pesa più di tutto */
   const perf = played >= 1 ? clamp((avg - ROLE_PIVOT[p.role]) * 0.38, -0.7, 0.8) * Math.min(1, played / (3 * scale)) * scale : 0;

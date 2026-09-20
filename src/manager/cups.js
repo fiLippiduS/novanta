@@ -9,7 +9,7 @@
 
 import { fnv1a, mulberry32 } from '../core/rng.js';
 import { createMatch, simulateToEnd } from './match.js';
-import { playerFromRow, recover } from './players.js';
+import { playerFromRow, recover, rowActive } from './players.js';
 import { autoLineup, aiTactics } from './lineup.js';
 import { squadOf, currentStrength, leagueOf, rngFor, applyMatch, isDerby } from './career.js';
 
@@ -29,7 +29,9 @@ export function clubInfo(career, data, id) {
 function outsideTeam(career, data, id) {
   const info = data.leagues.clubs[id];
   const moved = career.moved || {};
-  const rows = data.squads[info.league][id].filter((r) => !moved[`${r[0]}|${r[1]}`] || moved[`${r[0]}|${r[1]}`] === id);
+  const rows = data.squads[info.league][id]
+    .filter((r) => !moved[`${r[0]}|${r[1]}`] || moved[`${r[0]}|${r[1]}`] === id)
+    .filter((r) => rowActive(r, career.season));
   const players = rows.map((r) => playerFromRow(r, id, career.season)).filter((p) => !p.loanOut);
   const rand = mulberry32(fnv1a(`${career.seed}|${career.season}|${id}|cupteam`));
   const t = aiTactics(players, rand);
@@ -220,6 +222,17 @@ export function closeCupRound(career, data, cupId, userMatch = null) {
     if (knockout) {
       f.pens = m.shootout ? [m.shootout.home, m.shootout.away] : null;
       f.winner = H.goals > A.goals ? f.h : H.goals < A.goals ? f.a : (m.shootout && m.shootout.home > m.shootout.away ? f.h : f.a);
+    }
+    /* i gol della coppa contano solo per la classifica marcatori della coppa:
+       in Europa segnano anche club che nel campionato dell'utente non esistono */
+    cup.scorers = cup.scorers || {};
+    for (const e of m.events) {
+      if (!['goal', 'penGoal'].includes(e.type)) continue;
+      const side = m.sides.find((x) => x.key === e.side);
+      const p = side?.byId.get(e.player);
+      if (!p) continue;
+      const row = cup.scorers[p.name] || (cup.scorers[p.name] = { g: 0, club: side.team.id });
+      row.g++;
     }
     /* statistiche e squalifiche valgono anche in coppa per chi è nel campionato */
     if (career.clubs[f.h] || career.clubs[f.a]) applyMatch(career, m, { h: f.h, a: f.a, res: null });

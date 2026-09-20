@@ -16,8 +16,9 @@
    trattativa non cambia le risposte. */
 
 import { fnv1a, mulberry32 } from '../core/rng.js';
-import { playerFromRow, valueOf, wageFor, ageOf, emptyStats, careerCurve, DEPT } from './players.js';
+import { playerFromRow, valueOf, wageFor, ageOf, emptyStats, careerCurve, rowActive, DEPT } from './players.js';
 import { squadOf, currentStrength, leagueOf, rngFor } from './career.js';
+import { pickName } from './names.js';
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const r1 = (x) => Math.round(x * 10) / 10;
@@ -38,19 +39,23 @@ const ROLE_RANK = { starter: 2, rotation: 1, prospect: 0 };
 export function windowOpen(career) {
   if (career.phase !== 'season') return false;
   const half = Math.floor(career.fixtures.length / 2);
-  return career.md <= 1 || (career.md >= half - 1 && career.md <= half + 1);
+  return career.md <= 2 || (career.md >= half - 1 && career.md <= half + 2);
 }
 
 /** la finestra in corso, una estiva e una invernale per stagione */
 export function windowTag(career) {
-  return `${career.season}-${career.md <= 1 ? 'summer' : 'winter'}`;
+  return `${career.season}-${career.md <= 2 ? 'summer' : 'winter'}`;
 }
 
 /** l'ultimo giorno della finestra: le trattative aperte stanotte saltano */
 export function deadlineDay(career) {
   if (!windowOpen(career)) return false;
-  const half = Math.floor(career.fixtures.length / 2);
-  return career.md === 1 || career.md === half + 1;
+  return career.md === windowEnd(career);
+}
+
+/** in che campionato gioca un club: serve per il prezzo, non solo per la forza */
+export function leagueIdOf(career, data, clubId) {
+  return career.clubs[clubId]?.league || data.leagues.clubs[clubId]?.league || career.league;
 }
 
 function clubStrength(career, data, clubId) {
@@ -92,7 +97,7 @@ export function search(career, data, filters = {}, limit = 40) {
       for (const r of rows) {
         const [name, birth, , role, rating, , , , , flags] = r;
         if (flags.includes('i') || flags.includes('g')) continue;
-        if (moved[rowKey(name, birth)]) continue;
+        if (moved[rowKey(name, birth)] || !rowActive(r, career.season)) continue;
         if (!pass(name, role, career.season - birth, rating, lg.id)) continue;
         out.push({ row: r, clubId, live: false });
       }
@@ -121,7 +126,7 @@ export function search(career, data, filters = {}, limit = 40) {
 /** quanto chiede il club, quanto vuole il giocatore, e se è disposto a venire */
 export function quote(career, data, p, clubId) {
   const age = ageOf(p, career.season);
-  const value = valueOf(p, career.season);
+  const value = valueOf(p, career.season, { league: leagueIdOf(career, data, clubId) });
   const sellerStr = clubStrength(career, data, clubId);
   const myStr = currentStrength(career, career.club);
   /* i titolari costano di più: la posizione del giocatore nella sua rosa */
@@ -237,7 +242,7 @@ export function openTalks(career, data, candidate, kind = 'buy') {
   if (untouchable) { ask *= 1.5; floorK = 0.95; }
   const sellerLeague = career.clubs[candidate.clubId]?.league || data.leagues.clubs[candidate.clubId].league;
   const clause = kind === 'buy' && leagueOf(data, sellerLeague).code === 'ES'
-    ? r1(Math.max(ask * 1.6, valueOf(p, season) * (2.2 + rand() * 1.2)))
+    ? r1(Math.max(ask * 1.6, valueOf(p, season, { league: sellerLeague }) * (2.2 + rand() * 1.2)))
     : null;
 
   const years = kind === 'loan' ? 1 : age <= 23 ? 5 : age <= 27 ? 4 : age <= 30 ? 3 : age <= 32 ? 2 : 1;
@@ -560,13 +565,13 @@ export function payBonuses(career) {
 function refillAfterSale(career, clubId, rand) {
   const squad = squadOf(career, clubId).filter((p) => !p.loanOut);
   if (squad.length >= 22) return;
-  const src = squad.filter((p) => / /.test(p.name));
+  const src = squad.filter((p) => p.nation);
   if (!src.length) return;
-  const a = src[Math.floor(rand() * src.length)].name.split(' ');
-  const b = src[Math.floor(rand() * src.length)].name.split(' ');
+  const nation = src[Math.floor(rand() * src.length)].nation;
+  const name = pickName(rand, nation, (n) => Object.values(career.players).some((x) => x.name === n) || Boolean(career.moved?.[n]));
   const role = ['DC', 'CC', 'PUN', 'TZ', 'ALA'][Math.floor(rand() * 5)];
   const rating = Math.round(career.clubs[clubId].strength - 10);
-  const p = playerFromRow([`${a[0]} ${b[b.length - 1]}`, career.season - 20 - Math.floor(rand() * 5), src[0].nation, role, rating, 0, '', 180, 0, '', 0], clubId, career.season);
+  const p = playerFromRow([name, career.season - 20 - Math.floor(rand() * 5), nation, role, rating, 0, '', 180, 0, '', 0], clubId, career.season);
   p.recent = emptyStats();
   career.players[p.id] = p;
   career.clubs[clubId].squad.push(p.id);
@@ -606,11 +611,12 @@ export function setListed(career, data, playerId, mode) {
   p.flags = (p.flags || []).filter((f) => f !== 'listed' && f !== 'loanListed');
   /* chi esce dalla lista ritira anche le offerte arrivate per quella lista */
   career.offersIn = (career.offersIn || []).filter((o) => o.player !== p.id || (mode && o.kind === (mode === 'loan' ? 'loan' : 'buy')));
-  if (!mode) return [];
+  if (!mode) { delete p.listedSince; return []; }
   p.flags.push(LISTS[mode]);
-  if (!data || !windowOpen(career)) return [];
-  const rand = mulberry32(fnv1a(`${career.seed}|${career.season}|${career.md}|list|${p.id}|${mode}`));
-  return offersFor(career, data, p, rand, 1 + Math.floor(rand() * (1 + 2.4 * appeal(career, p))));
+  /* i club ci mettono qualche giorno a farsi vivi: le offerte non arrivano mai subito */
+  p.listedSince = career.md;
+  void data;
+  return [];
 }
 
 /* cosa pensa il giocatore dell'offerta: vuole andare, ci pensa, oppure no */
@@ -648,9 +654,9 @@ function appeal(career, p) {
 }
 
 /* l'ultima giornata della finestra in corso: le offerte valgono fino a lì */
-function windowEnd(career) {
+export function windowEnd(career) {
   const half = Math.floor(career.fixtures.length / 2);
-  return career.md <= 1 ? 1 : half + 1;
+  return career.md <= 2 ? 2 : half + 2;
 }
 
 /**
@@ -667,7 +673,7 @@ function offersFor(career, data, p, rand, n) {
   let pool = all.filter((c) => (kind === 'loan' ? c.strength >= p.ovr - 13 && c.strength <= p.ovr + 1 : c.strength >= p.ovr - 9 && c.strength <= p.ovr + 10));
   /* un ragazzo più debole di ogni club nei dati: lo chiedono le squadre più piccole */
   if (pool.length < 6) pool = [...all].sort((a, b) => Math.abs(a.strength - p.ovr) - Math.abs(b.strength - p.ovr)).slice(0, 14);
-  const value = valueOf(p, career.season);
+  const value = valueOf(p, career.season, { league: career.league });
   const made = [];
   for (let i = 0; i < Math.min(n, room) && pool.length; i++) {
     const buyer = pool.splice(Math.floor(rand() * pool.length), 1)[0];
@@ -704,12 +710,15 @@ export function incomingOffers(career, data) {
     const list = listOf(p);
     const has = career.offersIn.filter((o) => o.player === p.id).length;
     if (list) {
-      /* in lista: ogni giornata di mercato qualche club si fa avanti */
+      /* in lista: qualche club si fa vivo nei giorni dopo l'annuncio, se il
+         giocatore interessa. Per uno scarso può non arrivare mai niente. */
+      if (p.listedSince == null) p.listedSince = career.md;
+      if (p.listedSince >= career.md) continue;
       const a = appeal(career, p);
+      const weak = p.ovr < 58 ? 0.3 : p.ovr < 63 ? 0.6 : 1;
       let n = 0;
-      if (rand() < 0.35 + 0.45 * a) n++;
-      if (rand() < 0.25 * a) n++;
-      if (!has && !n) n = 1;
+      if (rand() < (0.12 + 0.5 * a) * weak) n++;
+      if (rand() < 0.2 * a * weak) n++;
       made.push(...offersFor(career, data, p, rand, n));
       continue;
     }
@@ -717,7 +726,7 @@ export function incomingOffers(career, data) {
     const wants = (p.flags || []).includes('wantsOut');
     const chance = wants ? 0.3 : p.ovr >= mine + 4 ? 0.05 : 0;
     if (rand() >= chance) continue;
-    const value = valueOf(p, career.season);
+    const value = valueOf(p, career.season, { league: career.league });
     const buyers = Object.values(data.leagues.clubs).filter((c) => c.id !== career.club && c.strength >= p.ovr - 9 && c.strength <= p.ovr + 12);
     if (!buyers.length) continue;
     const buyer = buyers[Math.floor(rand() * buyers.length)];
@@ -874,7 +883,7 @@ export function worldTransfers(career, data, share = 0.3) {
       if (career.clubs[clubId]) continue;
       for (const r of rows) {
         const [name, birth, , role, rating, , , , , flags] = r;
-        if (flags.includes('i') || flags.includes('g') || moved[rowKey(name, birth)]) continue;
+        if (flags.includes('i') || flags.includes('g') || moved[rowKey(name, birth)] || !rowActive(r, season)) continue;
         if (fits(role, rating, season - birth)) outside.push({ row: r, clubId, live: false });
       }
     }
@@ -883,7 +892,7 @@ export function worldTransfers(career, data, share = 0.3) {
     const pick = pool[Math.floor(rand() * pool.length)];
     const p = pick.live ? pick.p : playerFromRow(pick.row, pick.clubId, season);
     const key = keyOf(p);
-    const fee = r1(valueOf(p, season) * (0.9 + rand() * 0.4));
+    const fee = r1(valueOf(p, season, { league: leagueIdOf(career, data, pick.clubId) }) * (0.9 + rand() * 0.4));
     if (pick.live) {
       const seller = career.clubs[pick.clubId];
       seller.squad = seller.squad.filter((id) => id !== p.id);

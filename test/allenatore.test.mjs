@@ -5,14 +5,14 @@
    che non svuota le rose, salvataggi identici, eventi tutti giocabili. */
 
 import { readFileSync } from 'node:fs';
-import { playerFromRow, DEPT, ROLES, PERSONALITIES, overallOf, ageOf, careerPhase, potentialRange } from '../src/manager/players.js';
+import { playerFromRow, DEPT, ROLES, PERSONALITIES, overallOf, ageOf, careerPhase, potentialRange, valueOf, retirementAge } from '../src/manager/players.js';
 import { autoLineup, aiTactics } from '../src/manager/lineup.js';
 import { STYLE_IDS, STYLES, FORMATIONS } from '../src/manager/tactics.js';
 import { createMatch, simulateToEnd, playerRatings, tick, decide, serializeMatch, restoreMatch } from '../src/manager/match.js';
 import { makeFixtures, standings, zones } from '../src/manager/league.js';
 import {
   newCareer, startUserMatch, applyMatch, simulateRest, closeMatchday, nextFixture, endSeason, beginNextSeason,
-  jobOffers, takeJob, table, squadOf, leagueOf,
+  jobOffers, takeJob, table, squadOf, leagueOf, refreshUserLineup,
 } from '../src/manager/career.js';
 import { dueCup, startCupMatch, closeCupRound } from '../src/manager/cups.js';
 import { planWeek, resolve as resolveEvent, fits, candidates, contextOf, applyFx } from '../src/manager/events.js';
@@ -126,7 +126,13 @@ console.log('— potenziale —');
   check('i portieri durano di più', share(keepers, (p) => careerPhase(p, 2026) === 'declining') < share(old.filter((p) => p.role !== 'POR'), (p) => careerPhase(p, 2026) === 'declining'));
   const stars = all.filter((p) => p.potential >= 90);
   check('i futuri fuoriclasse sono pochi (potenziale 90+)', stars.length >= 3 && stars.length <= 40, `(${stars.length})`);
-  check('i talenti con potenziale 85+ sono giovani famosi o già forti', all.filter((p) => ageOf(p, 2026) <= 21 && p.potential >= 85).every((p) => p.fame >= 55 || p.ovr >= 72));
+  const young85 = all.filter((p) => ageOf(p, 2026) <= 21 && p.potential >= 85);
+  check('i talenti con potenziale 85+ sono giovani famosi, già forti o gioielli del vivaio', young85.every((p) => p.fame >= 55 || p.ovr >= 72 || p.academy));
+  const gems = all.filter((p) => p.academy && p.potential >= 85);
+  const kids = all.filter((p) => p.academy);
+  check('i gioielli nascosti nei vivai sono rari e non diventano i migliori del mondo', kids.length >= 300 && gems.length / kids.length <= 0.06 && gems.every((p) => p.potential <= 91), `(${gems.length}/${kids.length})`);
+  const u21 = all.filter((p) => ageOf(p, 2026) <= 21);
+  check('ogni club ha ragazzi da far crescere', u21.length >= 2000, `(${u21.length})`);
   const phases = new Set(all.map((p) => careerPhase(p, 2026)));
   check('tutte e quattro le fasi esistono: talento, in crescita, al massimo, in declino', ['talent', 'growing', 'peak', 'declining'].every((x) => phases.has(x)));
   const young = group(17, 20).slice(0, 300);
@@ -680,15 +686,26 @@ console.log('— mercato —');
     const outfield = squadOf(career, career.club).filter((x) => x.role !== 'POR').sort((a, b) => b.ovr - a.ovr);
     const sellers = outfield.slice(4, 9);
     for (const p of sellers) setListed(career, data, p.id, 'transfer');
+    /* qualche ragazzo in lista prestiti: i club piccoli li chiedono per farli giocare */
+    const young = squadOf(career, career.club).filter((x) => !x.loanOut && x.role !== 'POR' && ageOf(x, career.season) <= 22 && !sellers.includes(x)).sort((a, b) => b.ovr - a.ovr).slice(0, 4);
+    for (const y of young) setListed(career, data, y.id, 'loan');
     const offersOf = (p) => career.offersIn.filter((o) => o.player === p.id);
-    check('in lista trasferimenti arrivano subito offerte, da club diversi', sellers.every((p) => offersOf(p).length >= 1 && new Set(offersOf(p).map((o) => o.club)).size === offersOf(p).length && listOf(p) === 'transfer'));
-    /* una giornata di mercato dopo: altre offerte */
-    const nf = nextFixture(career);
-    const m = startUserMatch(career); m.autoUser = true; simulateToEnd(m); applyMatch(career, m, nf.fixture);
-    simulateRest(career); closeMatchday(career, data); incomingOffers(career, data);
+    check('mettere in lista non fa arrivare offerte all’istante', sellers.every((p) => offersOf(p).length === 0 && listOf(p) === 'transfer'));
+    /* le giornate di mercato passano: qualche club si fa vivo, non per tutti */
+    const playOne = () => {
+      const nf = nextFixture(career);
+      const m = startUserMatch(career); m.autoUser = true; simulateToEnd(m); applyMatch(career, m, nf.fixture);
+      simulateRest(career); closeMatchday(career, data); incomingOffers(career, data);
+    };
+    playOne();
+    const afterOne = sellers.filter((p) => career.players[p.id] && offersOf(p).length).length;
+    playOne();
     const alive = sellers.filter((p) => career.players[p.id]);
-    check('con il mercato aperto le offerte continuano ad arrivare', alive.some((p) => offersOf(p).length >= 2), alive.map((p) => offersOf(p).length).join(','));
+    const withOffers = alive.filter((p) => offersOf(p).length);
+    check('dopo qualche giornata le offerte arrivano, da club diversi', withOffers.length >= 1 && withOffers.every((p) => new Set(offersOf(p).map((o) => o.club)).size === offersOf(p).length), alive.map((p) => offersOf(p).length).join(','));
+    check('le offerte non arrivano tutte insieme alla prima giornata', afterOne <= withOffers.length, `(${afterOne} → ${withOffers.length})`);
     const target = alive.find((p) => offersOf(p).some((o) => o.stance !== 'refuses'));
+    if (!target) throw new Error('nessuna offerta utilizzabile per la prova di cessione');
     const o = offersOf(target).filter((x) => x.stance !== 'refuses').sort((a, b) => b.fee - a.fee)[0];
     const budget0 = club.budget; const rev0 = club.revenue || 0;
     const res = acceptOffer(career, data, o.id);
@@ -697,10 +714,8 @@ console.log('— mercato —');
     check('un messaggio racconta cessione e soldi', career.inbox[0].key === 'sold' && career.inbox[0].vars.toBudget === res.toBudget && career.inbox[0].vars.club === o.clubName);
     check('venduto il giocatore, le altre offerte per lui spariscono', !career.offersIn.some((x) => x.player === target.id));
     /* il prestito: resta nostro, gioca altrove, torna a fine stagione */
-    const young = squadOf(career, career.club).filter((x) => !x.loanOut && x.role !== 'POR' && ageOf(x, career.season) <= 22).sort((a, b) => a.ovr - b.ovr);
     let loaned = null;
     for (const y of young) {
-      setListed(career, data, y.id, 'loan');
       const lo = offersOf(y).find((x) => x.kind === 'loan' && x.stance !== 'refuses');
       if (!lo) continue;
       const r = acceptOffer(career, data, lo.id);
@@ -753,6 +768,130 @@ console.log('— partite: nessuna scelta dopo il fischio, tabellino giusto —')
 }
 
 /* ------------------------------------------------------------------ */
+console.log('— nomi, età e ritiri in dieci stagioni —');
+{
+  const clubId = Object.keys(leagues.clubs).find((id) => id.includes('fiorentina'));
+  const c = newCareer(data, { seed: 909, name: 'Prova', nation: 'IT', style: 'equilibrio', clubId });
+  let retiredSeasons = 0;
+  const retiredNames = new Set();
+  for (let s = 0; s < 10; s++) {
+    while (c.phase === 'season') {
+      const nf = nextFixture(c);
+      if (nf) { const m = startUserMatch(c); m.autoUser = true; simulateToEnd(m); applyMatch(c, m, nf.fixture); }
+      simulateRest(c);
+      closeMatchday(c, data);
+    }
+    const sum = endSeason(c, data);
+    if (sum.retired.length + sum.retiredAround.length) retiredSeasons++;
+    for (const r of [...sum.retired, ...sum.retiredAround]) retiredNames.add(r.name);
+    if (c.phase === 'sacked') { c.board.sacked = false; c.phase = 'summer'; }
+    beginNextSeason(c, data);
+  }
+  const all = Object.values(c.players);
+  /* lo stesso uomo può comparire due volte solo se è in prestito: una volta
+     nel club che lo ha dato, una nel club dove gioca */
+  const byName = {};
+  for (const p of all) (byName[p.name] = byName[p.name] || []).push(p);
+  const dupes = Object.entries(byName).filter(([, list]) => list.length > 1
+    && !(list.length === 2 && list[0].birth === list[1].birth && list.filter((x) => x.loanOut).length === 1));
+  check('dopo dieci stagioni non ci sono due giocatori con lo stesso nome', dupes.length === 0, dupes.slice(0, 4).map(([n, l]) => `${n}×${l.length}`).join(', '));
+  const ages = all.map((p) => ageOf(p, c.season));
+  check('nessuno gioca oltre i 43 anni', Math.max(...ages) <= 43, `(max ${Math.max(...ages)})`);
+  check('le rose restano giovani come nel calcio vero', Math.min(...ages) <= 19 && ages.reduce((a, b) => a + b, 0) / ages.length < 29, `(media ${(ages.reduce((a, b) => a + b, 0) / ages.length).toFixed(1)})`);
+  check('ogni stagione qualcuno appende le scarpe al chiodo', retiredSeasons >= 8, `(${retiredSeasons}/10)`);
+  check('chi si ritira non torna in campo', all.every((p) => !retiredNames.has(p.name)));
+  const kids = all.filter((p) => ageOf(p, c.season) <= 21);
+  check('nelle rose ci sono sempre giovani da far crescere', kids.length >= 40, `(${kids.length})`);
+}
+
+/* ------------------------------------------------------------------ */
+console.log('— convocazioni —');
+{
+  const clubId = Object.keys(leagues.clubs).find((id) => id.includes('juventus'));
+  const c = newCareer(data, { seed: 21, name: 'Prova', nation: 'IT', style: 'equilibrio', clubId });
+  const t = c.tactics;
+  check('la panchina si riempie da sola all’inizio', t.bench.length === 9);
+  const dropped = t.bench[3];
+  const tribune = squadOf(c, c.club).filter((p) => !p.loanOut && !t.lineup.includes(p.id) && !t.bench.includes(p.id));
+  check('c’è chi resta in tribuna', tribune.length >= 1, `(${tribune.length})`);
+  /* l'utente decide: fuori uno, dentro un altro */
+  t.benchAuto = false;
+  t.bench = t.bench.filter((id) => id !== dropped);
+  t.bench.push(tribune[0].id);
+  refreshUserLineup(c);
+  check('chi convochi resta convocato', t.bench.includes(tribune[0].id) && !t.bench.includes(dropped));
+  check('la panchina scelta a mano non si riempie da sola', t.bench.length === 9);
+  /* con la formazione automatica le convocazioni restano quelle scelte */
+  t.auto = true;
+  refreshUserLineup(c);
+  check('anche con la formazione automatica le convocazioni sono le tue', t.bench.includes(tribune[0].id) || t.lineup.includes(tribune[0].id));
+  /* tornando all'automatico decide il vice */
+  t.benchAuto = true;
+  t.bench = [];
+  refreshUserLineup(c);
+  check('si può tornare alle convocazioni del vice', t.bench.length === 9);
+  check('nessun convocato è anche titolare', t.bench.every((id) => !t.lineup.includes(id)));
+}
+
+/* ------------------------------------------------------------------ */
+console.log('— valori di mercato —');
+{
+  const mk = (ovr, age, { pot = ovr, left = 3 } = {}) => ({ name: `P${ovr}${age}`, ovr, potential: pot, birth: 2026 - age, contract: 2026 + left, role: 'CC' });
+  const v = (p, league) => valueOf(p, 2026, { league });
+  check('un fuoriclasse di 24 anni vale fra 100 e 200 milioni', v(mk(90, 24)) >= 100 && v(mk(90, 24)) <= 200, `(${v(mk(90, 24))})`);
+  check('un titolare da 75 a 25 anni vale fra 8 e 20 milioni', v(mk(75, 25)) >= 8 && v(mk(75, 25)) <= 20, `(${v(mk(75, 25))})`);
+  check('una riserva da 65 a 30 anni costa poco', v(mk(65, 30)) <= 2.5 && v(mk(65, 30)) >= 0.2, `(${v(mk(65, 30))})`);
+  check('nessuno supera il tetto dei valori veri', v(mk(95, 24, { pot: 95 })) <= 220);
+  check('lo stesso giocatore vale meno a 33 anni che a 25', v(mk(80, 33)) < v(mk(80, 25)) * 0.35);
+  check('in Premier si paga di più che in Serie B', v(mk(78, 26), 'eng1') > v(mk(78, 26), 'ita1') && v(mk(78, 26), 'ita1') > v(mk(78, 26), 'ita2') * 1.8);
+  check('un ragazzo con grande potenziale costa più di un coetaneo senza', v(mk(68, 19, { pot: 88 })) > v(mk(68, 19, { pot: 72 })) * 2);
+  check('il contratto in scadenza abbassa il prezzo', v(mk(80, 26, { left: 1 })) < v(mk(80, 26, { left: 4 })) * 0.8);
+  /* il valore cresce sempre con il voto, senza salti assurdi */
+  let rising = true;
+  for (let o = 55; o < 92; o++) if (v(mk(o + 1, 26)) <= v(mk(o, 26))) rising = false;
+  check('più sei forte più vali, senza scalini', rising);
+}
+
+/* ------------------------------------------------------------------ */
+console.log('— resoconto di stagione —');
+{
+  const clubId = Object.keys(leagues.clubs).find((id) => id.includes('napoli'));
+  let withCalls = 0;
+  let summary = null;
+  for (let seed = 0; seed < 4; seed++) {
+    const c = newCareer(data, { seed: 500 + seed, name: 'Prova', nation: 'IT', style: 'tikitaka', clubId });
+    for (let s = 0; s < 2; s++) {
+      while (c.phase === 'season') {
+        const nf = nextFixture(c);
+        if (nf) { const m = startUserMatch(c); m.autoUser = true; simulateToEnd(m); applyMatch(c, m, nf.fixture); }
+        simulateRest(c);
+        closeMatchday(c, data);
+        let cup; let g = 0;
+        while ((cup = dueCup(c)) && g++ < 20) {
+          if (cup.silent) { closeCupRound(c, data, cup.id); continue; }
+          const cm = startCupMatch(c, data, cup.id);
+          cm.autoUser = true;
+          simulateToEnd(cm);
+          closeCupRound(c, data, cup.id, cm);
+        }
+      }
+      const sum = endSeason(c, data);
+      summary = summary || sum;
+      if (sum.jobOffers?.length) withCalls++;
+      if (c.phase === 'sacked') break;
+      beginNextSeason(c, data);
+    }
+  }
+  const rec = summary.record;
+  check('il resoconto conta le partite della stagione', rec.p === rec.w + rec.d + rec.l && rec.p > 30, `(${rec.p})`);
+  check('la media punti torna con vittorie e pareggi', Math.abs(summary.ppg - (rec.w * 3 + rec.d) / rec.p) < 0.02);
+  check('il resoconto dice se la società è soddisfatta', typeof summary.boardHappy === 'boolean');
+  check('c’è la classifica marcatori del campionato', summary.scorers.league.length >= 3 && summary.scorers.league[0].g >= 8, JSON.stringify(summary.scorers.league[0]));
+  check('i marcatori sono in ordine', summary.scorers.league.every((x, i, a) => !i || a[i - 1].g >= x.g));
+  check('le coppe hanno la loro classifica marcatori', summary.scorers.cup.length >= 1 || summary.scorers.europe.length >= 1);
+  check('le chiamate di altri club arrivano qualche stagione, non tutte', withCalls >= 1 && withCalls <= 6, `(${withCalls}/8)`);
+}
+
 console.log('— eventi verosimili —');
 {
   const byId = (id) => events.find((e) => e.id === id);
