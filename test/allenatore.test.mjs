@@ -12,13 +12,13 @@ import { createMatch, simulateToEnd, playerRatings, tick, decide, serializeMatch
 import { makeFixtures, standings, zones } from '../src/manager/league.js';
 import {
   newCareer, startUserMatch, applyMatch, simulateRest, closeMatchday, nextFixture, endSeason, beginNextSeason,
-  jobOffers, takeJob, table, squadOf, leagueOf, refreshUserLineup,
+  jobOffers, takeJob, table, squadOf, leagueOf, refreshUserLineup, repairCareer,
 } from '../src/manager/career.js';
 import { dueCup, startCupMatch, closeCupRound } from '../src/manager/cups.js';
-import { planWeek, resolve as resolveEvent, fits, candidates, contextOf, applyFx } from '../src/manager/events.js';
+import { planWeek, resolve as resolveEvent, fits, candidates, contextOf, applyFx, isDelicate } from '../src/manager/events.js';
 import {
   incomingOffers, search, windowOpen, acceptOffer, release, canLetGo, SQUAD_MIN, openTalks, bidClub, payClause, offerContract,
-  medicalChoice, withdrawTalk, talkById, counterIncoming, rejectOffer, wageRoom, isOpenTalk, setListed, listOf, CLUB_CUT,
+  medicalChoice, withdrawTalk, talkById, counterIncoming, rejectOffer, wageRoom, isOpenTalk, setListed, listOf, CLUB_CUT, renew,
 } from '../src/manager/market.js';
 import { matchTimeline } from '../src/manager/timeline.js';
 import { mulberry32 } from '../src/core/rng.js';
@@ -707,10 +707,10 @@ console.log('— mercato —');
     const target = alive.find((p) => offersOf(p).some((o) => o.stance !== 'refuses'));
     if (!target) throw new Error('nessuna offerta utilizzabile per la prova di cessione');
     const o = offersOf(target).filter((x) => x.stance !== 'refuses').sort((a, b) => b.fee - a.fee)[0];
-    const budget0 = club.budget; const rev0 = club.revenue || 0;
+    const budget0 = club.budget;
     const res = acceptOffer(career, data, o.id);
     check('la cessione va in porto', res.status === 'sold' && !career.players[target.id]);
-    check(`il ${100 - CLUB_CUT * 100}% dell’incasso va al budget di mercato, il ${CLUB_CUT * 100}% alla società`, Math.abs(club.budget - (budget0 + o.fee * (1 - CLUB_CUT))) < 0.11 && Math.abs(club.revenue - rev0 - o.fee * CLUB_CUT) < 0.11, `(${budget0} → ${club.budget}, fee ${o.fee})`);
+    check('tutto l’incasso della cessione va nel budget di mercato', Math.abs(club.budget - (budget0 + o.fee)) < 0.11 && CLUB_CUT === 0, `(${budget0} → ${club.budget}, fee ${o.fee})`);
     check('un messaggio racconta cessione e soldi', career.inbox[0].key === 'sold' && career.inbox[0].vars.toBudget === res.toBudget && career.inbox[0].vars.club === o.clubName);
     check('venduto il giocatore, le altre offerte per lui spariscono', !career.offersIn.some((x) => x.player === target.id));
     /* il prestito: resta nostro, gioca altrove, torna a fine stagione */
@@ -853,6 +853,90 @@ console.log('— valori di mercato —');
 }
 
 /* ------------------------------------------------------------------ */
+console.log('— soldi, ingaggi e salvataggi che non si rompono —');
+{
+  const clubId = Object.keys(leagues.clubs).find((id) => id.includes('bologna'));
+  const c = newCareer(data, { seed: 404, name: 'Prova', nation: 'IT', style: 'equilibrio', clubId });
+  const club = c.clubs[c.club];
+  const wages = squadOf(c, c.club).reduce((n, p) => n + p.wage, 0);
+  check('il budget di mercato basta per un titolare vero', club.budget >= 12, `(${club.budget})`);
+  check('c’è spazio negli ingaggi per chi arriva', wageRoom(c) >= Math.max(1.5, wages * 0.2), `(${wageRoom(c).toFixed(1)} su ${wages.toFixed(1)})`);
+  /* quello che non spendi resta: il budget si porta avanti */
+  club.budget = 40;
+  let guard = 0;
+  while (c.phase === 'season' && guard++ < 60) {
+    const nf = nextFixture(c);
+    if (nf) { const m = startUserMatch(c); m.autoUser = true; simulateToEnd(m); applyMatch(c, m, nf.fixture); }
+    simulateRest(c);
+    closeMatchday(c, data);
+  }
+  const before = c.clubs[c.club].budget;
+  endSeason(c, data);
+  if (c.phase === 'sacked') { c.board.sacked = false; c.phase = 'summer'; }
+  beginNextSeason(c, data);
+  check('il budget non speso resta nella stagione nuova', c.clubs[c.club].budget > before, `(${before} → ${c.clubs[c.club].budget})`);
+  check('la stagione nuova annuncia quanto è rimasto', c.inbox.some((m) => m.key === 'carry' && m.vars.amount > 0));
+
+  /* gli imprevisti di cassa: cambiano il budget e lasciano sempre un messaggio */
+  const c2 = newCareer(data, { seed: 77, name: 'Prova', nation: 'IT', style: 'equilibrio', clubId });
+  let news = 0; let announced = 0;
+  for (let s = 0; s < 3; s++) {
+    let g = 0;
+    while (c2.phase === 'season' && g++ < 60) {
+      const nf = nextFixture(c2);
+      if (nf) { const m = startUserMatch(c2); m.autoUser = true; simulateToEnd(m); applyMatch(c2, m, nf.fixture); }
+      simulateRest(c2);
+      const budgetBefore = c2.clubs[c2.club].budget;
+      const rep = closeMatchday(c2, data);
+      if (rep.finance) {
+        news++;
+        const moved = Math.abs(c2.clubs[c2.club].budget - budgetBefore) > 0.05;
+        if (moved && c2.inbox.some((m) => m.type === 'finance' && m.key === rep.finance.key)) announced++;
+      }
+    }
+    endSeason(c2, data);
+    if (c2.phase === 'sacked') { c2.board.sacked = false; c2.phase = 'summer'; }
+    beginNextSeason(c2, data);
+  }
+  check('ogni tanto la cassa riserva sorprese', news >= 3 && news <= 20, `(${news} in tre stagioni)`);
+  check('ogni sorpresa arriva con un messaggio', news > 0 && announced === news, `(${announced}/${news})`);
+
+  /* una carriera rotta si ripara invece di buttarsi */
+  const broken = JSON.parse(JSON.stringify(c2));
+  const victim = broken.clubs[broken.club].squad[3];
+  broken.tactics.captainId = victim;
+  broken.tactics.penaltyId = victim;
+  delete broken.players[victim];
+  broken.queue = [{ id: 'evento_che_non_esiste_piu', key: 'x', player: null, vars: {} }];
+  broken.offersIn = [{ id: 'vecchia', player: 'nessuno', club: 'x', clubName: 'X', fee: 5, expires: 99, max: 6, patience: 2, stance: 'open' }];
+  broken.md = 999;
+  const res = repairCareer(broken, data, events);
+  check('la riparazione rimette in piedi la carriera', res.ok && res.fixed.length >= 3, res.fixed.join(','));
+  check('spariscono formazione, eventi e offerte fantasma', !broken.tactics.lineup.includes(victim) && broken.tactics.captainId !== victim && !broken.queue.length && !broken.offersIn.length);
+  check('la giornata torna dentro il calendario', broken.md <= broken.fixtures.length);
+  const clean = repairCareer(JSON.parse(JSON.stringify(c2)), data, events);
+  check('una carriera sana non viene toccata', clean.ok && clean.fixed.length === 0, clean.fixed.join(','));
+
+  /* agire su un’offerta per un giocatore che non c’è più non deve rompere niente */
+  const c3 = JSON.parse(JSON.stringify(c2));
+  c3.offersIn = [{ id: 'fantasma', player: 'non-esiste', club: clubId, clubName: 'X', kind: 'buy', fee: 4, expires: 99, max: 5, patience: 2, stance: 'open' }];
+  const a = acceptOffer(c3, data, 'fantasma');
+  c3.offersIn = [{ id: 'fantasma', player: 'non-esiste', club: clubId, clubName: 'X', kind: 'buy', fee: 4, expires: 99, max: 5, patience: 2, stance: 'open' }];
+  const b = counterIncoming(c3, data, 'fantasma', 6);
+  check('le offerte per giocatori spariti si buttano senza errori', a.status === 'gone' && b.status === 'gone' && !c3.offersIn.length);
+  check('anche rinnovo e rescissione reggono un giocatore inesistente', renew(c3, 'non-esiste').status === 'gone' && release(c3, 'non-esiste').status === 'gone');
+
+  /* chi lascia la squadra non resta capitano */
+  const c4 = JSON.parse(JSON.stringify(c2));
+  const cap = squadOf(c4, c4.club).find((p) => !p.loanOut);
+  c4.tactics.captainId = cap.id;
+  c4.tactics.penaltyId = cap.id;
+  c4.clubs[c4.club].budget = 999;
+  release(c4, cap.id);
+  check('chi se ne va perde fascia e rigori', c4.tactics.captainId !== cap.id && c4.tactics.penaltyId !== cap.id && !c4.tactics.lineup.includes(cap.id));
+}
+
+/* ------------------------------------------------------------------ */
 console.log('— resoconto di stagione —');
 {
   const clubId = Object.keys(leagues.clubs).find((id) => id.includes('napoli'));
@@ -917,6 +1001,12 @@ console.log('— eventi verosimili —');
   const derbyTalk = ['dr_old_captain_speech', 'dr_rival_friendship'].every((id) => byId(id).when.derbyNext);
   const afterLoss = ['dr_youngster_cries', 'pl_fragile_confidence', 'pl_social_post', 'pr_captain_press', 'p2_mistake_media_protect'].every((id) => byId(id).when.last === 'L');
   check('chi parla di derby o di sconfitta arriva solo prima di un derby o dopo una sconfitta', derbyTalk && afterLoss);
+  /* il vice non vende: le decisioni che toccano rosa e contratti restano all'allenatore */
+  const delicate = events.filter((e) => isDelicate(e));
+  const selling = events.filter((e) => e.o.some((o) => [o.fx, o.odds?.good, o.odds?.bad].filter(Boolean).some((fx) => fx.sell || fx.loanOut)));
+  check('cessioni e prestiti sono decisioni che il vice non può prendere', selling.length >= 10 && selling.every((e) => isDelicate(e)), `(${selling.length})`);
+  check('anche i contratti restano in mano all’allenatore', delicate.length >= selling.length && events.filter((e) => e.cat === 'market').every((e) => isDelicate(e)));
+  check('il vice decide comunque la gran parte degli imprevisti', delicate.length < events.length * 0.25, `(${delicate.length} su ${events.length})`);
   check('le età scritte nei testi sono quelle vere', byId('pl_young_debut').when.player.ageMin === 18 && byId('pl_young_debut').when.player.ageMax === 18 && byId('p2_captain_old_new').when.player.ageMax === 33);
 }
 
@@ -946,6 +1036,26 @@ console.log('— salvataggio —');
   run(a, 14);
   run(b, 14);
   check('una carriera caricata prosegue identica all’originale', JSON.stringify(a) === JSON.stringify(b));
+  /* stesso seme, stesse stagioni: due carriere gemelle non devono divergere mai */
+  {
+    const twin = (seed) => {
+      const t = newCareer(data, { seed, name: 'Gemella', nation: 'IT', style: 'equilibrio', clubId });
+      for (let s = 0; s < 3; s++) {
+        let g = 0;
+        while (t.phase === 'season' && g++ < 60) {
+          const nf = nextFixture(t);
+          if (nf) { const m = startUserMatch(t); m.autoUser = true; simulateToEnd(m); applyMatch(t, m, nf.fixture); }
+          simulateRest(t);
+          closeMatchday(t, data);
+        }
+        endSeason(t, data);
+        if (t.phase === 'sacked') { t.board.sacked = false; t.phase = 'summer'; }
+        beginNextSeason(t, data);
+      }
+      return JSON.stringify(t);
+    };
+    check('due carriere con lo stesso seme restano identiche per tre stagioni', twin(4242) === twin(4242));
+  }
   check('il salvataggio resta sotto i 2 MB', saved.length < 2 * 1024 * 1024, `(${(saved.length / 1024).toFixed(0)} KB)`);
 }
 

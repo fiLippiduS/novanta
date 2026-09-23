@@ -19,9 +19,11 @@ Un gioco di calcio per il web. Dieci modalità, nessun bundler, nessuna dipenden
   minuto per minuto con scelte decisive, classifica giornata per giornata, dodici
   stili, mercato a trattative (club, procuratore, visite mediche), valori di
   mercato come quelli veri, liste trasferimenti e prestiti con offerte da più
-  club, crescita e declino realistici fino al ritiro, più di quattrocento
-  decisioni, coppe europee con i loro colori, promozioni ed esonero. Dal
-  calendario si simula fino a una data, con tabellini e classifica in diretta.
+  club, budget che si porta avanti di stagione in stagione con gli imprevisti
+  di cassa annunciati, crescita e declino realistici fino al ritiro, più di
+  quattrocento decisioni, coppe europee con i loro colori, promozioni ed
+  esonero. Dal calendario si simula fino a una data, con tabellini e
+  classifica in diretta.
 - **Chi è?** — la scheda di una carriera vera senza il nome, cinque vite, la ricerca
   che suggerisce mentre scrivi.
 - **Catena** — squadra, giocatore, squadra: quaranta secondi a mossa, da soli o

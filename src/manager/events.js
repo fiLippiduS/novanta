@@ -13,7 +13,7 @@
 
 import { applyPlayerFx, ageOf, valueOf, DEPT } from './players.js';
 import { cashIn } from './market.js';
-import { squadOf, leagueOf, table, rngFor, nextFixture, isDerby, teamMorale, makeYouth, currentStrength, topUpSquad, resetCurve } from './career.js';
+import { squadOf, leagueOf, table, rngFor, nextFixture, isDerby, teamMorale, makeYouth, currentStrength, topUpSquad, resetCurve, forgetPlayer } from './career.js';
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
@@ -183,6 +183,20 @@ export function candidates(ev, ctx, career) {
     if (f.noFlag && p.flags.includes(f.noFlag)) return false;
     return true;
   }).sort((a, b) => (rank.get(a.id) - rank.get(b.id)));
+}
+
+/**
+ * Le decisioni che nessuno può prendere al posto dell'allenatore: quelle che
+ * cedono un giocatore, lo mandano in prestito o ne cambiano il contratto.
+ * Durante una simulazione fermano tutto e aspettano.
+ */
+export function isDelicate(ev) {
+  if (!ev) return false;
+  if (ev.cat === 'market') return true;
+  return (ev.o || []).some((o) => {
+    const boxes = [o.fx, o.odds?.good, o.odds?.bad].filter(Boolean);
+    return boxes.some((fx) => fx.sell || fx.loanOut || fx.release || fx.renew || fx.noRenew);
+  });
 }
 
 /* ------------------------------------------------------------------ */
@@ -423,12 +437,10 @@ export function applyFx(career, data, fx, subject, rand = Math.random) {
       career.moved[`${subject.name}|${subject.birth}`] = 'sold';
       career.inbox.unshift({ id: `out-ev-${subject.id}`, type: 'market', season: career.season, md: career.md, key: 'soldEvent', vars: { player: subject.name, fee, ...money } });
       club.squad = club.squad.filter((id) => id !== subject.id);
-      career.tactics.lineup = career.tactics.lineup.filter((id) => id !== subject.id);
-      career.tactics.bench = career.tactics.bench.filter((id) => id !== subject.id);
+      forgetPlayer(career, subject.id);
       subject.club = null;
       delete career.players[subject.id];
       changes.push({ kind: 'sold', value: fee, player: subject.id, name: subject.name });
-      changes.push({ kind: 'clubCut', value: money.toClub, name: subject.name });
     } else if (fx.loanOut) {
       subject.loanOut = true;
       career.tactics.lineup = career.tactics.lineup.filter((id) => id !== subject.id);

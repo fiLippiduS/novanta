@@ -1290,9 +1290,20 @@
     "msg": {
       "objective": "La società fissa l’obiettivo: {objective} (entro il {target}° posto). Budget per il mercato: {budget}.",
       "newJob": "Benvenuto al {club}. La squadra ti aspetta al campo.",
-      "sold": "Cessione: {player} → {club} per {fee}. {toBudget} nel budget di mercato, {toClub} alla società.",
-      "loanedOut": "Prestito: {player} → {club} fino a fine stagione per {fee}. {toBudget} nel budget di mercato, {toClub} alla società. Pagano il {share}% dell’ingaggio.",
-      "soldEvent": "Cessione: {player} per {fee}. {toBudget} nel budget di mercato, {toClub} alla società."
+      "carry": "Il budget non speso resta in cassa: {amount} in più sul mercato. Ora hai {budget}.",
+      "sponsor": "Un nuovo sponsor porta {amount} nel budget di mercato. Ora hai {budget}.",
+      "tv": "Arrivano i diritti televisivi: {amount} sul mercato. Ora hai {budget}.",
+      "merch": "Le maglie vendute valgono {amount} in più sul mercato. Ora hai {budget}.",
+      "euroBonus": "Il premio della coppa europea vale {amount} sul mercato. Ora hai {budget}.",
+      "youthSale": "Un ragazzo del vivaio ceduto altrove porta {amount}. Ora hai {budget}.",
+      "fine": "Multa della federazione: {amount} in meno dal budget. Restano {budget}.",
+      "stadium": "Lavori allo stadio: {amount} in meno dal budget. Restano {budget}.",
+      "tax": "Conguaglio fiscale: {amount} in meno dal budget. Restano {budget}.",
+      "sponsorLost": "Uno sponsor si sfila: {amount} in meno dal budget. Restano {budget}.",
+      "expiring": "{n} contratti scadono a fine stagione: {names}. Se non rinnovi, se ne vanno a zero.",
+      "sold": "Cessione: {player} → {club} per {fee}. Tutto nel budget di mercato.",
+      "loanedOut": "Prestito: {player} → {club} fino a fine stagione per {fee}, tutto nel budget di mercato. Pagano il {share}% dell’ingaggio.",
+      "soldEvent": "Cessione: {player} per {fee}. Tutto nel budget di mercato."
     },
     "depts": {
       "POR": "Portieri",
@@ -1940,6 +1951,13 @@
       "line": "{to} prende {name} ({from}) · {fee}"
     },
     "bonusPaid": "Bonus a {name}: {fee}",
+    "broken": {
+      "title": "Qualcosa si è inceppato",
+      "text": "La schermata non si è potuta disegnare. La carriera è stata rimessa in ordine: riprova. Se succede ancora, puoi ricominciare da capo.",
+      "retry": "Riprova"
+    },
+    "financeTitle": "Cassa",
+    "expiringTitle": "Contratti in scadenza",
     "seasonTrophies": "Trofei della stagione",
     "seasonRecord": "Il bilancio",
     "boardHappy": "La società è soddisfatta: obiettivo {target}°, chiuso {pos}°.",
@@ -1966,7 +1984,7 @@
       "loanTitle": "Prestito concluso",
       "soldText": "{player} è ceduto a titolo definitivo. Acquirente: {club}. Cifra: {fee}.",
       "loanText": "{player} va in prestito fino a fine stagione. Club: {club}. Cifra: {fee}, più il {share}% dell’ingaggio pagato da loro.",
-      "split": "{toBudget} entrano nel budget di mercato, {toClub} (il 10%) restano alla società.",
+      "split": "Tutti i {toBudget} entrano nel budget di mercato.",
       "budgetNow": "Budget di mercato ora: {budget}."
     },
     "tl": {

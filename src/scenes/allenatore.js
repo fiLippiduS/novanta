@@ -15,9 +15,9 @@ import { slotScore, available } from '../manager/lineup.js';
 import { zones, matchdayDate } from '../manager/league.js';
 import {
   MANAGER_VERSION, newCareer, leagueOf, squadOf, table, nextFixture, startUserMatch, applyMatch, simulateRest,
-  closeMatchday, refreshUserLineup, endSeason, beginNextSeason, jobOffers, takeJob, currentStrength, objectiveFor, isDerby,
+  closeMatchday, refreshUserLineup, endSeason, beginNextSeason, jobOffers, takeJob, currentStrength, objectiveFor, isDerby, repairCareer,
 } from '../manager/career.js';
-import { planWeek, resolve, oddsFor } from '../manager/events.js';
+import { planWeek, resolve, oddsFor, isDelicate } from '../manager/events.js';
 import { adviseMoment, decide, restoreMatch, serializeMatch, tick, playerRatings } from '../manager/match.js';
 import { matchTimeline } from '../manager/timeline.js';
 import { trophySvg, TROPHY_COLOR } from '../career/trophies.js';
@@ -116,12 +116,62 @@ export async function mount(host) {
 
   const TABS = ['hub', 'squad', 'tactics', 'market', 'table', 'fixtures', 'coach'];
 
+  /**
+   * Disegna la schermata. Se qualcosa va storto — un salvataggio vecchio, un
+   * giocatore che non c'è più — la carriera non resta bloccata: si ripara e
+   * si riprova una volta sola, e se proprio non si può si offre una via
+   * d'uscita invece di una pagina bianca.
+   */
   function render(opts = {}) {
+    try {
+      draw(opts);
+    } catch (err) {
+      console.error('allenatore: schermata in errore', err);
+      if (!opts.repaired && career) {
+        stopSim();
+        sim = null;
+        career.live = null;
+        career.liveCup = null;
+        live = null;
+        const res = repairCareer(career, data, events);
+        persist();
+        if (res.ok) {
+          view = homeView();
+          try { draw({ ...opts, repaired: true }); return; } catch (err2) { console.error('allenatore: neanche dopo la riparazione', err2); }
+        }
+      }
+      drawBroken();
+    }
+  }
+
+  /* l'ultima spiaggia: si dice cosa è successo e si dà una strada, non un muro */
+  function drawBroken() {
+    stage.innerHTML = '';
+    const box = el('section', 'mcard card is-loss');
+    box.append(el('h3', 'display t-lg', t('allenatore.broken.title')), el('p', 'dim', t('allenatore.broken.text')));
+    box.appendChild(button(t('allenatore.broken.retry'), 'btn--go btn--block', () => {
+      if (career) { repairCareer(career, data, events); view = homeView(); persist(); }
+      render({ repaired: true });
+    }));
+    box.appendChild(button(t('allenatore.restart'), 'btn--ghost btn--block', () => {
+      sheet({
+        title: t('allenatore.restartTitle'),
+        body: el('p', 'dim', t('allenatore.restartText')),
+        actions: [
+          { label: t('common.cancel'), onClick: (c) => c() },
+          { label: t('allenatore.restartYes'), variant: 'btn--go', onClick: (c) => { c(); localStorage.removeItem(SAVE_KEY); localStorage.removeItem(META_KEY); career = null; view = 'intro'; render({ repaired: true }); } },
+        ],
+      });
+    }));
+    stage.appendChild(box);
+  }
+
+  function draw(opts = {}) {
     const keepTop = opts.keepScroll ? window.scrollY : 0;
     if (liveTeardown && view !== 'match') { liveTeardown(); liveTeardown = null; }
     if (view !== 'sim') stopSim();
     stage.innerHTML = '';
-    bar.setTitle(career ? career.clubs[career.club].name : t('allenatore.title'));
+    bar.setTitle(career ? career.clubs[career.club]?.name || t('allenatore.title') : t('allenatore.title'));
     const views = {
       intro: renderIntro, create: renderCreate, hub: renderHub, squad: renderSquad, tactics: renderTactics,
       table: renderTable, fixtures: renderFixtures, coach: renderCoach, match: renderMatch, report: renderReport,
@@ -426,7 +476,7 @@ export async function mount(host) {
       const home = nf.tie.h === career.club;
       nf = { ...nf, home, opponent: home ? nf.tie.a : nf.tie.h, md: career.md - 1 };
     }
-    const opp = career.clubs[nf.opponent] || data.leagues.clubs[nf.opponent];
+    const opp = career.clubs[nf.opponent] || data.leagues.clubs[nf.opponent] || { name: '—', colors: [], strength: 60 };
     const comp = nf.cup ? compOf(nf.cup.id) : null;
     const card = el('div', `mfixture card anim-rise ${nf.cup ? 'mfixture--cup' : ''} ${comp ? `comp comp--${comp}` : ''}`.trim());
     const rows = table(career, data);
@@ -485,6 +535,12 @@ export async function mount(host) {
   /* un imprevisto da decidere, con l'esito che resta sulla carta dopo la scelta */
   function eventCard(item) {
     const ev = events.find((e) => e.id === item.id);
+    if (!ev) {
+      /* un evento di una versione vecchia del gioco: si toglie e si va avanti */
+      career.queue = (career.queue || []).filter((q) => q.key !== item.key);
+      persist();
+      return el('div', '');
+    }
     const txt = tx(item.id);
     const subject = item.player ? career.players[item.player] : null;
     const card = el('article', `mevent card mevent--${ev.cat}`);
@@ -594,6 +650,11 @@ export async function mount(host) {
     return card;
   }
 
+  /* soldi entrati o usciti dalla cassa: quanto e perché */
+  function financeLine(f) {
+    return richText(`allenatore.msg.${f.key}`, { amount: euro(f.amount), budget: euro(f.budget) }, ['amount'], `minbox__i ${f.sign < 0 ? 'is-bad' : 'mreport__good'}`);
+  }
+
   /* un'offerta arrivata per un nostro giocatore, con nomi e cifra in evidenza */
   function offerNews(o) {
     return richText(o.kind === 'loan' ? 'allenatore.market.newLoanOffer' : 'allenatore.market.newOffer', { player: o.player, club: o.club, fee: euro(o.fee) }, ['player', 'club', 'fee']);
@@ -607,7 +668,7 @@ export async function mount(host) {
     for (const it of items) {
       if (it.type === 'msg') {
         const m = it.m;
-        if (m.type === 'market') { card.appendChild(marketMsg(m)); continue; }
+        if (m.type === 'market' || m.type === 'finance') { card.appendChild(marketMsg(m)); continue; }
         card.appendChild(el('p', 'minbox__i', t(`allenatore.msg.${m.key}`, { ...m.vars, objective: m.vars.objective ? t(`allenatore.objectives.${m.vars.objective}`) : '', budget: m.vars.budget != null ? euro(m.vars.budget) : '' })));
       } else {
         const txt = tx(it.l.id);
@@ -620,9 +681,13 @@ export async function mount(host) {
   /** il messaggio di una cessione o di un prestito: chi, dove, quanto e come si dividono i soldi */
   function marketMsg(m) {
     const v = { ...m.vars };
-    for (const k of ['fee', 'toBudget', 'toClub']) if (typeof v[k] === 'number') v[k] = euro(v[k]);
-    return richText(`allenatore.msg.${m.key}`, v, ['player', 'club', 'fee', 'toBudget'], 'minbox__i minbox__i--market');
+    for (const k of ['fee', 'toBudget', 'toClub', 'amount', 'budget']) if (typeof v[k] === 'number') v[k] = euro(v[k]);
+    const cls = m.type === 'finance' ? `minbox__i minbox__i--market ${m.vars.amount != null && FINANCE_BAD.has(m.key) ? 'is-bad' : ''}` : 'minbox__i minbox__i--market';
+    return richText(`allenatore.msg.${m.key}`, v, ['player', 'club', 'fee', 'toBudget', 'amount'], cls.trim());
   }
+
+  /* gli imprevisti che tolgono soldi si leggono in rosso */
+  const FINANCE_BAD = new Set(['fine', 'stadium', 'tax', 'sponsorLost']);
 
   /* ---------------------------------------------------------------- */
   /* 3. rosa e scheda del giocatore                                    */
@@ -1011,6 +1076,8 @@ export async function mount(host) {
       if (!f) return;
       const home = f.h === career.club;
       const opp = home ? f.a : f.h;
+      const oppInfo = career.clubs[opp] || data.leagues.clubs[opp];
+      if (!oppInfo) return;
       const row = el('div', `mfix ${md === career.md ? 'is-next' : ''}`);
       let res = '';
       let tone = '';
@@ -1025,8 +1092,8 @@ export async function mount(host) {
         el('span', 'mfix__md label', String(md + 1)),
         el('span', 'mfix__date label', date.toLocaleDateString(lang(), { day: 'numeric', month: 'short' })),
         el('span', `mfix__ha label ${home ? 'is-home' : ''}`, t(home ? 'allenatore.homeShort' : 'allenatore.awayShort')),
-        crest(career.clubs[opp].colors, 16),
-        el('span', 'mfix__opp', career.clubs[opp].name),
+        crest(oppInfo.colors || [], 16),
+        el('span', 'mfix__opp', oppInfo.name),
         el('strong', `mfix__res num ${tone ? `mform__i--${tone}` : ''}`, res || '·'),
       );
       /* una giornata futura: si può simulare fino a lì */
@@ -1206,7 +1273,8 @@ export async function mount(host) {
     if (career.md > sim.target) return simFinish('reached');
     /* una decisione da prendere: la simulazione aspetta, oppure decide il vice (e la cronaca lo racconta) */
     if ((career.queue || []).length) {
-      if (sim.who === 'me') { sim.state = 'decide'; render({ keepScroll: true }); return; }
+      const mustAsk = (career.queue || []).some((q) => { const ev = events.find((e) => e.id === q.id); return isDelicate(ev); });
+      if (sim.who === 'me' || mustAsk) { sim.state = 'decide'; render({ keepScroll: true }); return; }
       viceDecides();
     }
     const before = new Map(table(career, data).map((r) => [r.id, r.pos]));
@@ -1236,6 +1304,8 @@ export async function mount(host) {
       for (const n of (rep.transfers || []).slice(0, 5)) items.push({ k: 'news', n });
       for (const b of rep.bonuses || []) items.push({ k: 'bonus', name: b.name, fee: b.fee });
       if (rep.talksExpired) items.push({ k: 'talks' });
+      if (rep.finance) items.push({ k: 'finance', f: rep.finance });
+      if (rep.expiring?.length) items.push({ k: 'expiring', n: rep.expiring.length, names: rep.expiring.slice(0, 4).map((x) => x.name).join(', ') });
       if (rep.board?.ultimatum === 'given') items.push({ k: 'board', key: 'ultimatumGiven' });
       if (rep.board?.ultimatum === 'passed') items.push({ k: 'board', key: 'ultimatumPassed' });
       if (rep.board?.sacked) items.push({ k: 'board', key: 'sackedLine' });
@@ -1401,6 +1471,8 @@ export async function mount(host) {
       else if (it.k === 'evo') box.appendChild(richText(it.delta > 0 ? 'allenatore.sim.evoUp' : 'allenatore.sim.evoDown', { name: it.name, delta: `${it.delta > 0 ? '+' : ''}${it.delta}`, ovr: it.ovr }, ['name', 'delta']));
       else if (it.k === 'bonus') box.appendChild(el('p', 'minbox__i', t('allenatore.bonusPaid', { name: it.name, fee: euro(it.fee) })));
       else if (it.k === 'talks') box.appendChild(el('p', 'minbox__i is-bad', t('allenatore.talks.reason.windowClosed')));
+      else if (it.k === 'finance') box.appendChild(financeLine(it.f));
+      else if (it.k === 'expiring') box.appendChild(richText('allenatore.msg.expiring', { n: it.n, names: it.names }, ['names'], 'minbox__i mstrip__alert'));
       else if (it.k === 'board') box.appendChild(el('p', 'minbox__i mstrip__alert', t(`allenatore.${it.key}`)));
       else if (it.k === 'decision') box.appendChild(el('p', 'minbox__i msim__dec', `★ ${it.title}`));
 
@@ -1444,7 +1516,15 @@ export async function mount(host) {
   function renderMatch() {
     const nf = nextFixture(career);
     const cupId = career.liveCup;
-    if (!live && career.live) live = restoreMatch(career.live, (id) => career.players[id]);
+    /* una partita salvata male non deve tenere in ostaggio la carriera */
+    if (!live && career.live) {
+      try {
+        const m = restoreMatch(career.live, (id) => career.players[id]);
+        const ok = m.sides.every((side) => side.team.players.length >= 11 && side.onPitch.every((o) => side.byId.has(o.id)));
+        live = ok ? m : null;
+      } catch (err) { console.error('allenatore: partita salvata illeggibile', err); live = null; }
+      if (!live) { career.live = null; career.liveCup = null; persist(); view = homeView(); render(); return; }
+    }
     if (!live || (!nf && !cupId)) { career.live = null; career.liveCup = null; view = 'hub'; render(); return; }
     liveTeardown = mountLive(stage, {
       match: live,
@@ -1682,6 +1762,18 @@ export async function mount(host) {
       stage.appendChild(inj);
     }
     /* il mercato della giornata: colpi degli altri, trattative saltate, bonus pagati */
+    if (rep.finance) {
+      const fin = el('section', 'mcard card');
+      fin.appendChild(el('h3', 'mhead display', t('allenatore.financeTitle')));
+      fin.appendChild(financeLine(rep.finance));
+      stage.appendChild(fin);
+    }
+    if (rep.expiring?.length) {
+      const exp = el('section', 'mcard card');
+      exp.append(el('h3', 'mhead display', t('allenatore.expiringTitle')), richText('allenatore.msg.expiring', { n: rep.expiring.length, names: rep.expiring.slice(0, 6).map((x) => x.name).join(', ') }, ['names']));
+      for (const x of rep.expiring.slice(0, 6)) { const p = career.players[x.id]; if (p) exp.appendChild(playerRow(p, career.season, { onClick: () => playerSheet(p.id) })); }
+      stage.appendChild(exp);
+    }
     if (rep.transfers?.length || rep.bonuses?.length || rep.talksExpired || rep.offersNew?.length) {
       const mk = el('section', 'mcard card');
       mk.appendChild(el('h3', 'mhead display', t('allenatore.news.title')));

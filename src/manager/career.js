@@ -50,10 +50,19 @@ export function objectiveFor(league, rank) {
   return { id: 'safe', target: n - 3, tolerance: 2 };
 }
 
+/* Il budget di mercato di una stagione. Deve bastare per comprare un
+   titolare, non solo una riserva: è il mercato a far vivere la carriera. */
 function budgetFor(club, league, reputation) {
-  const base = Math.exp((club.strength - 65) * 0.19) * 2.4;
-  const mult = league.level === 1 ? 1 : 0.45;
+  const base = Math.exp((club.strength - 65) * 0.16) * 5.5 + 3;
+  const mult = league.level === 1 ? 1 : 0.42;
   return Math.round(base * mult * (0.85 + reputation / 250) * 10) / 10;
+}
+
+/* Il monte ingaggi: sempre un po' di spazio sopra quello che già si paga,
+   così una rosa si può rinforzare senza dover prima vendere. */
+function wageBudgetFor(club, league, wages) {
+  const room = Math.max(wages * 0.25, 2 + Math.exp((club.strength - 65) * 0.13) * 1.6 * (league.level === 1 ? 1 : 0.5));
+  return Math.round((wages + room) * 10) / 10;
 }
 
 function buildClub(data, id, season, moved = {}) {
@@ -94,6 +103,28 @@ function populateLeague(career, data, leagueId, keep = {}, only = null) {
     };
   }
   return clubs;
+}
+
+/**
+ * Un giocatore lascia la nostra squadra: si toglie da formazione, panchina,
+ * fascia di capitano, rigori, promesse e catene. Senza questo restano
+ * puntatori a un giocatore che non esiste più, ed è da lì che nascono le
+ * schermate rotte.
+ */
+export function forgetPlayer(career, playerId) {
+  const t = career.tactics;
+  if (t) {
+    t.lineup = (t.lineup || []).filter((id) => id !== playerId);
+    t.bench = (t.bench || []).filter((id) => id !== playerId);
+    if (t.captainId === playerId) t.captainId = null;
+    if (t.penaltyId === playerId) t.penaltyId = null;
+    if (t.penaltyIdAuto === playerId) t.penaltyIdAuto = null;
+    if (t.freeKickId === playerId) t.freeKickId = null;
+  }
+  career.promises = (career.promises || []).filter((x) => x.player !== playerId);
+  career.later = (career.later || []).filter((x) => x.player !== playerId);
+  career.queue = (career.queue || []).filter((x) => x.player !== playerId);
+  career.offersIn = (career.offersIn || []).filter((o) => o.player !== playerId);
 }
 
 export function squadOf(career, clubId) {
@@ -180,8 +211,11 @@ export function startSeason(career, data, { first = false } = {}) {
     ultimatum: null,
     patience: clamp(Math.round(55 + (rep - 40) * 0.4), 35, 80),
   };
-  club.budget = budgetFor(club, league, rep);
-  club.wageBudget = Math.round(squadOf(career, career.club).reduce((n, p) => n + p.wage, 0) * 1.08 * 10) / 10;
+  /* quello che non hai speso resta: il budget si porta avanti di stagione in stagione */
+  const carry = Math.max(0, Math.round((club.budget || 0) * 10) / 10);
+  const fresh = budgetFor(club, league, rep);
+  club.budget = Math.round((fresh + carry) * 10) / 10;
+  club.wageBudget = wageBudgetFor(club, league, squadOf(career, career.club).reduce((n, p) => n + p.wage, 0));
   for (const id of Object.keys(career.clubs)) {
     if (id === career.club) continue;
     career.clubs[id].budget = budgetFor(career.clubs[id], league, 50);
@@ -206,6 +240,7 @@ export function startSeason(career, data, { first = false } = {}) {
   refreshUserLineup(career);
   setupCups(career, data);
   career.inbox.unshift({ id: `season-${career.season}`, type: 'board', season: career.season, md: 0, key: 'objective', vars: { objective: objective.id, target: objective.target, budget: club.budget } });
+  if (carry > 0.05) career.inbox.unshift({ id: `carry-${career.season}`, type: 'finance', season: career.season, md: 0, key: 'carry', vars: { amount: carry, budget: club.budget } });
   career.phase = 'season';
 }
 
@@ -255,7 +290,8 @@ export function nextFixture(career) {
   return { md: career.md, fixture: f, home, opponent: home ? f.a : f.h };
 }
 
-function teamFor(career, clubId, { user = false, rand = Math.random } = {}) {
+function teamFor(career, clubId, { user = false, rand = null } = {}) {
+  rand = rand || rngFor(career, `lineup-${clubId}`);
   const club = career.clubs[clubId];
   const players = squadOf(career, clubId).filter((p) => !p.loanOut);
   if (user) {
@@ -531,6 +567,8 @@ export function closeMatchday(career, data) {
     club.familiarity[s] = s === career.tactics.style ? clamp(cur + 3, 0, 100) : clamp(cur - 0.5, 0, 100);
   }
 
+  report.finance = budgetNews(career, data, rngFor(career, `finance-${md}`));
+  report.expiring = expiryWarning(career, md);
   report.board = boardReview(career, data, after, report);
   report.bonuses = payBonuses(career);
   const marketWasOpen = windowOpen(career);
@@ -541,11 +579,65 @@ export function closeMatchday(career, data) {
     report.transfers = worldTransfers(career, data, closing ? 0.3 : 0.12);
     report.talksExpired = expireTalks(career);
   }
+  if (career.inbox.length > 40) career.inbox.length = 40;
   career.lastReport = report;
   if (career.md >= career.fixtures.length) career.phase = 'seasonEnd';
   if (career.board.sacked) career.phase = 'sacked';
   refreshUserLineup(career);
   return report;
+}
+
+/* ------------------------------------------------------------------ */
+/* i soldi che vanno e vengono                                          */
+/* ------------------------------------------------------------------ */
+
+/* Gli imprevisti di cassa: uno sponsor che arriva, una multa, i lavori allo
+   stadio. Cambiano il budget di mercato e si presentano sempre con un
+   messaggio, perché nessuno deve scoprire i soldi spariti per caso. */
+const FINANCE_NEWS = [
+  { key: 'sponsor', sign: 1, size: [0.06, 0.18] },
+  { key: 'tv', sign: 1, size: [0.05, 0.14] },
+  { key: 'merch', sign: 1, size: [0.03, 0.09] },
+  { key: 'euroBonus', sign: 1, size: [0.08, 0.2], needEurope: true },
+  { key: 'youthSale', sign: 1, size: [0.04, 0.12] },
+  { key: 'fine', sign: -1, size: [0.03, 0.08] },
+  { key: 'stadium', sign: -1, size: [0.06, 0.16] },
+  { key: 'tax', sign: -1, size: [0.04, 0.1] },
+  { key: 'sponsorLost', sign: -1, size: [0.05, 0.15] },
+];
+
+export function budgetNews(career, data, rand) {
+  if (career.phase !== 'season') return null;
+  if (rand() >= 0.07) return null;
+  const club = career.clubs[career.club];
+  const league = leagueOf(data, career.league);
+  const inEurope = Boolean(career.cups?.europe);
+  const pool = FINANCE_NEWS.filter((x) => !x.needEurope || inEurope);
+  const pick = pool[Math.floor(rand() * pool.length)];
+  /* la cifra è proporzionata al club: un imprevisto non ribalta una stagione */
+  const scale = budgetFor(club, league, career.coach.reputation);
+  const share = pick.size[0] + rand() * (pick.size[1] - pick.size[0]);
+  let amount = Math.round(scale * share * 10) / 10;
+  if (pick.sign < 0) amount = Math.min(amount, Math.round(club.budget * 0.5 * 10) / 10);
+  if (amount < 0.1) return null;
+  club.budget = Math.round(Math.max(0, club.budget + amount * pick.sign) * 10) / 10;
+  const news = { key: pick.key, amount, sign: pick.sign, budget: club.budget };
+  career.inbox.unshift({ id: `fin-${career.season}-${career.md}`, type: 'finance', season: career.season, md: career.md, key: pick.key, vars: { amount, budget: club.budget } });
+  career.inbox = career.inbox.slice(0, 40);
+  return news;
+}
+
+/* A sei giornate dalla fine: chi ha il contratto in scadenza e non ha ancora
+   rinnovato. Se non si fa niente, in estate se ne va a zero. */
+function expiryWarning(career, md) {
+  if (career.fixtures.length - (md + 1) !== 6) return null;
+  const list = squadOf(career, career.club)
+    .filter((p) => p.contract <= career.season && !(p.flags || []).includes('renewed') && !p.loanIn)
+    .sort((a, b) => b.ovr - a.ovr)
+    .map((p) => ({ id: p.id, name: p.name, ovr: p.ovr }));
+  if (!list.length) return null;
+  career.inbox.unshift({ id: `exp-${career.season}`, type: 'board', season: career.season, md, key: 'expiring', vars: { names: list.slice(0, 6).map((x) => x.name).join(', '), n: list.length } });
+  return list;
 }
 
 /* ------------------------------------------------------------------ */
@@ -604,6 +696,72 @@ export function boardReview(career, data, rows, report) {
 }
 
 /* ------------------------------------------------------------------ */
+/* riparazione: una carriera non si butta mai                           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Rimette in ordine un salvataggio incoerente: giocatori spariti citati
+ * ancora in formazione, eventi che non esistono più, offerte per chi non
+ * c'è, una giornata fuori dal calendario. Torna l'elenco di quello che ha
+ * sistemato, così si può anche solo controllare.
+ */
+export function repairCareer(career, data, defs = []) {
+  const fixed = [];
+  if (!career || !career.clubs || !career.clubs[career.club]) return { ok: false, fixed };
+  const known = new Set(defs.map((e) => e.id));
+  const club = career.clubs[career.club];
+
+  /* la rosa: niente id fantasma */
+  const before = club.squad.length;
+  club.squad = [...new Set(club.squad.filter((id) => career.players[id]))];
+  if (club.squad.length !== before) fixed.push('squad');
+  for (const c of Object.values(career.clubs)) c.squad = [...new Set(c.squad.filter((id) => career.players[id]))];
+
+  /* la formazione */
+  if (!career.tactics || !FORMATIONS[career.tactics.formation] || !STYLES[career.tactics.style]) {
+    const style = STYLES[career.coach.style] ? career.coach.style : 'equilibrio';
+    career.tactics = { formation: STYLES[style].formations[0], style, mentality: 'equilibrata', lineup: [], bench: [], captainId: null, penaltyId: null, freeKickId: null, auto: true };
+    fixed.push('tactics');
+  }
+  const t = career.tactics;
+  const alive = (id) => career.players[id] && club.squad.includes(id);
+  if (t.lineup.some((id) => !alive(id)) || t.bench.some((id) => !alive(id))) {
+    t.lineup = t.lineup.filter(alive);
+    t.bench = t.bench.filter(alive);
+    fixed.push('lineup');
+  }
+  if (t.captainId && !alive(t.captainId)) { t.captainId = null; fixed.push('captain'); }
+  if (t.penaltyId && !alive(t.penaltyId)) { t.penaltyId = null; fixed.push('penalty'); }
+
+  /* eventi: quelli che non esistono più in questa versione del gioco */
+  const liveEvent = (x) => (!known.size || known.has(x.id)) && (!x.player || career.players[x.player]);
+  for (const key of ['queue', 'later']) {
+    const list = career[key] || [];
+    const kept = list.filter(liveEvent);
+    if (kept.length !== list.length) fixed.push(key);
+    career[key] = kept;
+  }
+  career.promises = (career.promises || []).filter((x) => career.players[x.player]);
+  career.offersIn = (career.offersIn || []).filter((o) => career.players[o.player]);
+  career.talks = (career.talks || []).filter((x) => !x.live || !x.playerId || career.players[x.playerId] || x.stage === 'signed' || x.stage === 'collapsed');
+
+  /* il calendario e la fase */
+  if (!Array.isArray(career.fixtures) || !career.fixtures.length) return { ok: false, fixed };
+  if (career.md < 0 || career.md > career.fixtures.length) { career.md = clamp(career.md, 0, career.fixtures.length); fixed.push('matchday'); }
+  if (career.phase === 'season' && career.md >= career.fixtures.length) { career.phase = 'seasonEnd'; fixed.push('phase'); }
+  if (!career.board?.objective) {
+    career.board = { objective: objectiveFor(leagueOf(data, career.league), strengthRank(career, career.club)), trust: 60, fans: 60, warned: false, ultimatum: null, patience: 60 };
+    fixed.push('board');
+  }
+  /* la posta non cresce all'infinito */
+  if (career.inbox?.length > 80) { career.inbox = career.inbox.slice(0, 40); fixed.push('inbox'); }
+  if (career.log?.length > 120) { career.log = career.log.slice(0, 120); fixed.push('log'); }
+
+  refreshUserLineup(career);
+  return { ok: true, fixed };
+}
+
+/* ------------------------------------------------------------------ */
 /* utilità per le schermate                                             */
 /* ------------------------------------------------------------------ */
 
@@ -648,7 +806,11 @@ function drawPromoted(career, data, otherId, n, rand, exclude = [], weakest = fa
 
 /** una sfida secca fra due club (andata e ritorno se `legs` 2), simulata */
 export function playTie(career, data, a, b, { legs = 2, tag = 'tie' } = {}) {
-  const make = (id) => (career.clubs[id] ? teamFor(career, id, { user: id === career.club }) : outsideTeam(career, data, id));
+  /* anche qui il caso viene dal seme della carriera: uno spareggio deve
+     finire allo stesso modo ogni volta che si ricarica il salvataggio */
+  const make = (id) => (career.clubs[id]
+    ? teamFor(career, id, { user: id === career.club, rand: rngFor(career, `${tag}-lineup-${id}`) })
+    : outsideTeam(career, data, id));
   let ga = 0; let gb = 0;
   const games = [];
   for (let leg = 0; leg < legs; leg++) {
@@ -896,6 +1058,7 @@ export function endSeason(career, data) {
         career.moved = career.moved || {};
         career.moved[`${p.name}|${p.birth}`] = 'retired';
         if (club.id === career.club) summary.retired.push({ id, name: p.name, age, ovr: p.ovr });
+        if (club.id === career.club) forgetPlayer(career, id);
         else summary.retiredAround.push({ name: p.name, age, ovr: p.ovr, club: club.name });
         delete career.players[id];
         continue;
@@ -903,6 +1066,7 @@ export function endSeason(career, data) {
       if (p.loanIn) {
         club.squad = club.squad.filter((x) => x !== id);
         if (club.id === career.club) summary.left.push({ id, name: p.name, why: 'loanEnd' });
+        if (club.id === career.club) forgetPlayer(career, id);
         delete career.players[id];
         continue;
       }
@@ -936,6 +1100,7 @@ export function endSeason(career, data) {
         else {
           club.squad = club.squad.filter((x) => x !== id);
           if (club.id === career.club) summary.left.push({ id, name: p.name, why: 'contract' });
+        if (club.id === career.club) forgetPlayer(career, id);
           delete career.players[id];
         }
       }

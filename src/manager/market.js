@@ -17,7 +17,7 @@
 
 import { fnv1a, mulberry32 } from '../core/rng.js';
 import { playerFromRow, valueOf, wageFor, ageOf, emptyStats, careerCurve, rowActive, DEPT } from './players.js';
-import { squadOf, currentStrength, leagueOf, rngFor } from './career.js';
+import { squadOf, currentStrength, leagueOf, rngFor, forgetPlayer } from './career.js';
 import { pickName } from './names.js';
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -29,7 +29,7 @@ const keyOf = (p) => rowKey(p.name, p.birth);
 /** la rosa minima: mai sotto i 20 giocatori disponibili, mai senza il secondo portiere */
 export const SQUAD_MIN = 20;
 /** la rosa massima per comprare ancora */
-export const SQUAD_MAX = 36;
+export const SQUAD_MAX = 38;
 /** in prestito l'ingaggio si divide: il club che prende paga questa quota */
 export const LOAN_WAGE = 0.6;
 export const TALK_ROLES = ['starter', 'rotation', 'prospect'];
@@ -156,7 +156,7 @@ export const wageBill = (career) => squadOf(career, career.club).reduce((n, p) =
 export function wageRoom(career) {
   const club = career.clubs[career.club];
   const bill = wageBill(career);
-  return r2(club.wageBudget * 1.1 - bill);
+  return r2(club.wageBudget * 1.15 - bill);
 }
 
 /* ------------------------------------------------------------------ */
@@ -585,17 +585,16 @@ function refillAfterSale(career, clubId, rand) {
 export const LISTS = { transfer: 'listed', loan: 'loanListed' };
 export const listOf = (p) => ((p.flags || []).includes('loanListed') ? 'loan' : (p.flags || []).includes('listed') ? 'transfer' : null);
 
-/** la quota di ogni incasso che resta alla società; il resto va nel budget di mercato */
-export const CLUB_CUT = 0.1;
+/** quanto di un incasso resta alla società: niente, tutto va sul mercato */
+export const CLUB_CUT = 0;
 
-/** i soldi di una cessione: il 90% nel budget di mercato, il 10% alla società */
+/** i soldi di una cessione finiscono tutti nel budget di mercato */
 export function cashIn(career, fee) {
   const club = career.clubs[career.club];
-  const toClub = r1(fee * CLUB_CUT);
-  const toBudget = r1(fee - toClub);
+  const toBudget = r1(fee);
   club.budget = r1(club.budget + toBudget);
-  club.revenue = r1((club.revenue || 0) + toClub);
-  return { toBudget, toClub };
+  club.earned = r1((club.earned || 0) + toBudget);
+  return { toBudget, toClub: 0 };
 }
 
 /**
@@ -605,6 +604,7 @@ export function cashIn(career, fee) {
  */
 export function setListed(career, data, playerId, mode) {
   if (typeof data === 'string') { mode = playerId; playerId = data; data = null; }
+  if (!career.players[playerId]) return [];
   if (mode === true) mode = 'transfer';
   const p = career.players[playerId];
   if (!p) return [];
@@ -641,6 +641,7 @@ function stanceOf(career, p, buyer, kind = 'buy') {
 
 /** la rosa minima: si può lasciar partire questo giocatore? */
 export function canLetGo(career, p) {
+  if (!p) return 'gone';
   const left = squadOf(career, career.club).filter((x) => !x.loanOut && x.id !== p.id);
   if (left.length < SQUAD_MIN) return 'squadMin';
   if (p.role === 'POR' && left.filter((x) => x.role === 'POR').length < 2) return 'keeperMin';
@@ -750,16 +751,15 @@ export function acceptOffer(career, data, offerId) {
   const o = (career.offersIn || []).find((x) => x.id === offerId);
   if (!o) return null;
   const p = career.players[o.player];
-  if (!p) return null;
+  /* il giocatore non è più nostro: l'offerta è vecchia e si butta */
+  if (!p) { career.offersIn = career.offersIn.filter((x) => x.id !== offerId); return { status: 'gone' }; }
   if (!windowOpen(career)) return { status: 'closed' };
   const blocked = canLetGo(career, p);
   if (blocked) return { status: blocked };
   if (o.stance === 'refuses') return { status: 'playerRefuses' };
   const club = career.clubs[career.club];
   const money = cashIn(career, o.fee);
-  career.tactics.lineup = career.tactics.lineup.filter((id) => id !== p.id);
-  career.tactics.bench = career.tactics.bench.filter((id) => id !== p.id);
-  career.offersIn = career.offersIn.filter((x) => x.player !== o.player);
+  forgetPlayer(career, p.id);
   career.transfers = career.transfers || [];
   const loan = o.kind === 'loan';
   if (loan) {
@@ -781,7 +781,6 @@ export function acceptOffer(career, data, offerId) {
       career.clubs[o.club].squad.push(moved.id);
     }
     delete career.players[p.id];
-    career.promises = (career.promises || []).filter((x) => x.player !== p.id);
   }
   career.transfers.unshift({ season: career.season, md: career.md, dir: 'out', kind: loan ? 'loan' : 'buy', name: p.name, to: o.club, fee: o.fee, ...money });
   const vars = { player: p.name, club: o.clubName, fee: o.fee, ...money, share: loan ? Math.round((o.wageShare || 0) * 100) : 0 };
@@ -799,6 +798,7 @@ export function counterIncoming(career, data, offerId, ask) {
   const o = (career.offersIn || []).find((x) => x.id === offerId);
   if (!o) return null;
   const p = career.players[o.player];
+  if (!p) { career.offersIn = career.offersIn.filter((x) => x.id !== offerId); return { status: 'gone' }; }
   if (!windowOpen(career)) return { status: 'closed' };
   const blocked = canLetGo(career, p);
   if (blocked) return { status: blocked };
@@ -820,7 +820,7 @@ export function rejectOffer(career, offerId) {
   if (!o) return null;
   career.offersIn = career.offersIn.filter((x) => x.id !== offerId);
   const p = career.players[o.player];
-  if (!p) return null;
+  if (!p) return { status: 'gone' };
   /* dire di no a chi voleva andare lascia il segno (se non restano altre offerte per lui) */
   const others = career.offersIn.some((x) => x.player === o.player);
   if (o.stance === 'wants' && !others) {
@@ -940,11 +940,11 @@ export function renewalTerms(career, p) {
 
 export function renew(career, playerId) {
   const p = career.players[playerId];
-  if (!p) return null;
+  if (!p) return { status: 'gone' };
   const terms = renewalTerms(career, p);
   if (!terms.willing) return { status: 'refused' };
   const bill = wageBill(career) - p.wage + terms.wage;
-  if (bill > career.clubs[career.club].wageBudget * 1.1) return { status: 'noWages' };
+  if (bill > career.clubs[career.club].wageBudget * 1.15) return { status: 'noWages' };
   p.contract = career.season + terms.years;
   p.wage = terms.wage;
   p.morale = clamp(p.morale + 6, 0, 100);
@@ -955,7 +955,7 @@ export function renew(career, playerId) {
 /** rescissione: si paga metà di quello che resta del contratto */
 export function release(career, playerId) {
   const p = career.players[playerId];
-  if (!p) return null;
+  if (!p) return { status: 'gone' };
   const blocked = canLetGo(career, p);
   if (blocked) return { status: blocked };
   const club = career.clubs[career.club];
@@ -963,11 +963,9 @@ export function release(career, playerId) {
   if (cost > club.budget) return { status: 'noBudget', cost };
   club.budget = r1(club.budget - cost);
   club.squad = club.squad.filter((id) => id !== p.id);
-  career.tactics.lineup = career.tactics.lineup.filter((id) => id !== p.id);
-  career.tactics.bench = career.tactics.bench.filter((id) => id !== p.id);
+  forgetPlayer(career, p.id);
   career.moved = career.moved || {};
   career.moved[keyOf(p)] = 'free';
-  career.promises = (career.promises || []).filter((x) => x.player !== p.id);
   delete career.players[p.id];
   return { status: 'released', cost };
 }

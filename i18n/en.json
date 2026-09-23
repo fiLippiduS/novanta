@@ -1290,9 +1290,20 @@
     "msg": {
       "objective": "The board sets the target: {objective} (finish {target}th or better). Transfer budget: {budget}.",
       "newJob": "Welcome to {club}. The squad is waiting at the training ground.",
-      "sold": "Sale: {player} → {club} for {fee}. {toBudget} into the transfer budget, {toClub} to the club.",
-      "loanedOut": "Loan: {player} → {club} until the end of the season for {fee}. {toBudget} into the transfer budget, {toClub} to the club. They pay {share}% of his wages.",
-      "soldEvent": "Sale: {player} for {fee}. {toBudget} into the transfer budget, {toClub} to the club."
+      "carry": "What you didn't spend stays: {amount} more on the market. You now have {budget}.",
+      "sponsor": "A new sponsor brings {amount} into the transfer budget. You now have {budget}.",
+      "tv": "TV money arrives: {amount} for the market. You now have {budget}.",
+      "merch": "Shirt sales are worth {amount} more on the market. You now have {budget}.",
+      "euroBonus": "The European prize money is worth {amount}. You now have {budget}.",
+      "youthSale": "An academy boy sold elsewhere brings {amount}. You now have {budget}.",
+      "fine": "A federation fine: {amount} out of the budget. {budget} left.",
+      "stadium": "Stadium works: {amount} out of the budget. {budget} left.",
+      "tax": "A tax bill: {amount} out of the budget. {budget} left.",
+      "sponsorLost": "A sponsor walks away: {amount} out of the budget. {budget} left.",
+      "expiring": "{n} contracts run out at the end of the season: {names}. Renew them or they leave for free.",
+      "sold": "Sale: {player} → {club} for {fee}. All of it into the transfer budget.",
+      "loanedOut": "Loan: {player} → {club} until the end of the season for {fee}, all into the transfer budget. They pay {share}% of his wages.",
+      "soldEvent": "Sale: {player} for {fee}. All of it into the transfer budget."
     },
     "depts": {
       "POR": "Goalkeepers",
@@ -1940,6 +1951,13 @@
       "line": "{to} sign {name} from {from} · {fee}"
     },
     "bonusPaid": "Bonus for {name}: {fee}",
+    "broken": {
+      "title": "Something jammed",
+      "text": "This screen could not be drawn. Your career has been put back in order: try again. If it keeps happening you can start over.",
+      "retry": "Try again"
+    },
+    "financeTitle": "The books",
+    "expiringTitle": "Contracts running out",
     "seasonTrophies": "Trophies this season",
     "seasonRecord": "The season in numbers",
     "boardHappy": "The board is happy: target {target}th, finished {pos}th.",
@@ -1966,7 +1984,7 @@
       "loanTitle": "Loan agreed",
       "soldText": "{player} is sold permanently. Buyer: {club}. Fee: {fee}.",
       "loanText": "{player} goes out on loan until the end of the season. Club: {club}. Fee: {fee}, plus {share}% of his wages paid by them.",
-      "split": "{toBudget} goes into the transfer budget, {toClub} (10%) stays with the club.",
+      "split": "All {toBudget} goes into the transfer budget.",
       "budgetNow": "Transfer budget now: {budget}."
     },
     "tl": {
