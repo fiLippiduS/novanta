@@ -220,6 +220,7 @@ export function mount(host) {
   const links = el('nav', 'hub__links');
   [
     ['/come-si-gioca', t('foot.howto')],
+    ['/guide', t('foot.guides')],
     ['/faq', t('foot.faq')],
     ['/chi-siamo', t('foot.about')],
     ['/contatti', t('foot.contact')],

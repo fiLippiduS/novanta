@@ -6,9 +6,12 @@ const MAIL = '<a href="mailto:ciao@instascope.app">ciao@instascope.app</a>';
 
 export const NAV = [
   ['come-si-gioca', 'Come si gioca'],
+  ['guide', 'Le guide'],
   ['ruoli-calcio', 'I ruoli'],
   ['moduli-calcio', 'I moduli'],
   ['calciomercato-come-funziona', 'Il mercato'],
+  ['coppe-europee-come-funzionano', 'Le coppe'],
+  ['asta-fantacalcio-strategia', 'L’asta'],
   ['glossario-calcio', 'Glossario'],
   ['faq', 'Domande frequenti'],
   ['chi-siamo', 'Chi siamo'],
@@ -43,6 +46,177 @@ const FAQ = [
 ];
 
 export const PAGES = [
+  {
+    slug: 'guide',
+    title: 'Le guide di NOVANTA',
+    description: 'Ruoli, moduli, calciomercato, coppe europee, asta del fantacalcio e un glossario: le guide per capire il calcio con cui sono fatti i giochi di NOVANTA.',
+    lead: 'Sei guide scritte per chi guarda le partite e vuole capire meglio quello che vede. Si leggono in dieci minuti l’una e non servono conoscenze tecniche.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Il campo</h2>
+  <p><a href="/ruoli-calcio"><strong>I ruoli e i numeri di maglia</strong></a> — Che cosa fa
+  davvero un terzino, un mediano, un trequartista o un falso nove, perché il numero sulla
+  maglia non dice quasi più niente e cosa cambia da un paese all’altro.</p>
+  <p><a href="/moduli-calcio"><strong>I moduli spiegati uno per uno</strong></a> — 4-3-3,
+  4-2-3-1, 4-4-2, 3-5-2, 3-4-3 e il rombo: quali giocatori chiedono, dove lasciano scoperto
+  il campo e come si sceglie quello giusto per la propria rosa.</p>
+
+  <h2 class="display">I soldi e le regole</h2>
+  <p><a href="/calciomercato-come-funziona"><strong>Come funziona davvero il
+  calciomercato</strong></a> — Cartellino e ingaggio, clausole, prestiti con diritto o con
+  obbligo, parametro zero, bonus, percentuali sulla rivendita e commissioni dei procuratori.</p>
+  <p><a href="/coppe-europee-come-funzionano"><strong>Champions, Europa League e
+  Conference</strong></a> — Chi si qualifica, com’è cambiato il formato dal 2024, cosa
+  comporta giocare ogni tre giorni e quanto pesa l’Europa sul bilancio di un club.</p>
+  <p><a href="/asta-fantacalcio-strategia"><strong>L’asta del fantacalcio</strong></a> —
+  Le regole dell’asta a chiamata, quanto spendere per reparto, quando rilanciare e gli
+  errori che si ripetono ogni anno.</p>
+
+  <h2 class="display">Le parole</h2>
+  <p><a href="/glossario-calcio"><strong>Glossario del calcio</strong></a> — Quaranta
+  parole spiegate: fuorigioco, gegenpressing, expected goals, baricentro, clean sheet,
+  parametro zero, ammortamento e tutte quelle che si sentono in telecronaca.</p>
+
+  <h2 class="display">Come sono scritte</h2>
+  <p>Ogni guida parte da quello che si vede in televisione e arriva a spiegare perché
+  succede: non ci sono formule, non ci sono schemi da memorizzare e non serve aver giocato
+  a calcio. Quando compare una parola tecnica viene spiegata la prima volta che la si
+  incontra, e se ha una voce nel <a href="/glossario-calcio">glossario</a> la trovi
+  collegata.</p>
+  <p>Sono scritte per chi guarda il calcio da appassionato: chi discute di moduli al bar,
+  chi fa l’asta del fantacalcio a settembre, chi vuole capire perché il suo club ha venduto
+  un giocatore a gennaio. Le aggiorniamo quando cambiano le regole — la fase a girone unico
+  delle coppe europee, per esempio, è arrivata nel 2024 e ha cambiato mezzo calendario.</p>
+  <p>Se una cosa non è chiara o manca, scrivilo: le guide nascono dalle domande che ci
+  arrivano, e la prossima può partire dalla tua. L’indirizzo è nella pagina
+  <a href="/contatti">Contatti</a>.</p>
+
+  <h2 class="display">E poi c’è da giocare</h2>
+  <p>Le guide raccontano il calcio con cui sono fatti i giochi: le rose vere di
+  <a href="/quiz-rosa-squadra">La Rosa</a>, le carriere di
+  <a href="/indovina-il-calciatore">Chi è?</a>, il mercato a trattative di
+  <a href="/allenatore-calcio">Allenatore</a>. Le regole di tutte le modalità stanno in
+  <a href="/come-si-gioca">Come si gioca</a>.</p>`,
+  },
+  {
+    slug: 'coppe-europee-come-funzionano',
+    title: 'Champions, Europa League e Conference: come funzionano',
+    description: 'Chi si qualifica alle coppe europee, come sono cambiati i gironi, cosa succede a chi arriva terzo e quanto valgono davvero i premi. Guida alle tre competizioni UEFA.',
+    lead: 'Tre competizioni, un solo albero: chi entra in Champions, chi scende in Europa League, chi finisce in Conference e che cosa cambia davvero fra loro.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Chi si qualifica</h2>
+  <p>I posti europei si assegnano con la classifica di campionato, e quanti ne ha ogni
+  paese dipende dal <strong>ranking UEFA</strong>, cioè da come sono andate le sue squadre
+  nelle stagioni precedenti. I campionati più forti hanno quattro posti diretti in
+  Champions League, poi uno o due in Europa League e uno in Conference League; scendendo
+  nel ranking i posti calano e compaiono i turni preliminari, quelli che si giocano ad
+  agosto prima che inizi la fase principale.</p>
+  <p>Ai posti da campionato si aggiunge la coppa nazionale: chi la vince entra in Europa
+  League. Se ha già un posto in Champions, il posto passa alla squadra meglio piazzata in
+  campionato fra quelle rimaste fuori. È il motivo per cui certi anni il sesto posto vale
+  l’Europa e altri no.</p>
+
+  <h2 class="display">Che cosa è cambiato nel formato</h2>
+  <p>Fino al 2024 le tre coppe avevano trentadue squadre divise in otto gironi da quattro,
+  andata e ritorno, con le prime due qualificate agli ottavi. Dal 2024 la fase a gironi è
+  stata sostituita da un <strong>girone unico</strong>: trentasei squadre in un’unica
+  classifica, ognuna gioca otto partite contro otto avversarie diverse. Le prime otto
+  passano direttamente agli ottavi, dalla nona alla ventiquattresima si giocano uno
+  spareggio, le ultime escono.</p>
+  <p>Il resto del tabellone è rimasto quello di sempre: ottavi, quarti e semifinali con
+  andata e ritorno, finale in gara secca in campo neutro. La regola del gol in trasferta,
+  che per sessant’anni ha deciso i pareggi, è stata abolita nel 2021: oggi se dopo due
+  partite il punteggio totale è pari si giocano i supplementari e poi i rigori.</p>
+
+  <h2 class="display">Le tre competizioni</h2>
+  <p><strong>Champions League</strong> — La più ricca e la più difficile: ci sono le
+  campionesse nazionali e le migliori dei campionati più forti. Vincerla vale una stagione
+  intera, e il solo fatto di qualificarsi cambia i conti di un club.</p>
+  <p><strong>Europa League</strong> — Il secondo livello, con squadre che in campionato
+  stanno appena sotto le prime. Chi la vince entra in Champions l’anno dopo, ed è la
+  scorciatoia che negli ultimi anni diverse squadre hanno preso davvero.</p>
+  <p><strong>Conference League</strong> — Nata nel 2021 per dare l’Europa anche ai
+  campionati più piccoli. Meno ricca, ma è una coppa vera: si gioca il giovedì, porta
+  punti al ranking del paese e per molti club è la prima finale continentale della storia.</p>
+
+  <h2 class="display">Che cosa comporta giocare in Europa</h2>
+  <p>Chi va in Europa gioca una partita in più ogni settimana, spesso il giovedì con il
+  campionato la domenica. Serve una rosa lunga: le squadre che affrontano la coppa con
+  tredici o quattordici giocatori affidabili arrivano a febbraio senza benzina, e in
+  campionato lo si vede. Per questo gli allenatori ruotano, e per questo una rosa costruita
+  per due competizioni costa molto più di una costruita per una sola.</p>
+  <p>Dall’altra parte ci sono i soldi: partecipazione, premi per ogni vittoria, quote
+  legate al ranking e agli incassi televisivi. Per un club medio una buona stagione europea
+  vale quanto la cessione di un titolare, e cambia il budget di mercato dell’anno dopo.</p>
+
+  <h2 class="display">Nel gioco</h2>
+  <p>In <a href="/allenatore-calcio">Allenatore</a> le coppe europee si giocano come le
+  partite di campionato, con il colore della competizione sul tabellone: blu per la
+  Champions, arancione per l’Europa League, verde per la Conference. Ti qualifichi con la
+  classifica dell’anno prima, il calendario alterna coppa e campionato, e la fatica dei
+  giocatori è quella vera: chi gioca ogni tre giorni arriva scarico. Alla fine della
+  stagione trovi anche il capocannoniere della coppa, oltre a quello del campionato.</p>`,
+  },
+  {
+    slug: 'asta-fantacalcio-strategia',
+    title: 'Asta del fantacalcio: regole e strategia',
+    description: 'Come funziona l’asta a chiamata, quanto spendere per ogni reparto, quando rilanciare e quando lasciar perdere. Guida pratica per non restare senza attaccanti.',
+    lead: 'L’asta si vince nei primi venti minuti, quando tutti hanno soldi e nessuno ha ancora paura. Ecco le regole e i conti da fare prima di alzare la mano.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Come funziona l’asta a chiamata</h2>
+  <p>Ogni partecipante ha un budget uguale (nel fantacalcio classico cinquecento crediti)
+  e deve riempire una rosa completa: tre portieri, otto difensori, otto centrocampisti,
+  sei attaccanti. A turno si <strong>chiama</strong> un giocatore, si parte da un credito
+  e si rilancia finché tutti si fermano tranne uno. Chi non completa un reparto resta con
+  il buco: nessuno regala giocatori a fine asta.</p>
+  <p>La variante più diffusa è il <em>rilancio libero</em>: si può alzare di uno o di
+  dieci, e il ritmo lo decide chi ha coraggio. In alcune leghe si gioca a tempo, con pochi
+  secondi per rispondere: lì vince chi ha deciso prima quanto vale ogni nome.</p>
+
+  <h2 class="display">Il conto da fare prima</h2>
+  <p>Cinquecento crediti e venticinque giocatori fanno venti crediti a testa, ma non si
+  distribuiscono in parti uguali. Una divisione che funziona quasi sempre:</p>
+  <ul>
+    <li><strong>portieri 8-10%</strong>: un titolare affidabile e due riserve da un credito;</li>
+    <li><strong>difensori 12-15%</strong>: uno o due che segnano, gli altri presi a poco;</li>
+    <li><strong>centrocampisti 30-35%</strong>: qui stanno i giocatori che fanno assist e
+    tirano i rigori, ed è il reparto dove si vince il campionato;</li>
+    <li><strong>attaccanti 45-50%</strong>: i gol costano, e chi risparmia davanti lo paga
+    tutto l’anno.</li>
+  </ul>
+  <p>La regola pratica è tenere sempre da parte, fino alla fine, i crediti per l’ultimo
+  attaccante. Chi arriva agli ultimi giri con trenta crediti e una casella vuota davanti
+  prende quello che avanza, e quello che avanza non segna.</p>
+
+  <h2 class="display">Quando rilanciare</h2>
+  <p>Il prezzo di un giocatore non è il suo valore: è quanto sono disposti a pagare gli
+  altri. Nei primi giri tutti hanno il budget pieno e i prezzi si gonfiano; se aspetti, gli
+  stessi nomi passano per meno. Ma non esagerare con la pazienza: quando restano pochi
+  titolari veri, i prezzi risalgono perché chi è rimasto scoperto deve comprare per forza.</p>
+  <p>Guarda le rose degli avversari, non solo la tua. Chi ha già tre punte non rilancerà
+  sulla quarta: è il momento di prendere la tua a poco. E quando qualcuno resta con pochi
+  crediti, i giocatori che chiama vanno fatti salire di uno o due: costringerlo a spendere
+  tutto vale più che strappargli il nome.</p>
+
+  <h2 class="display">Gli errori che si ripetono ogni anno</h2>
+  <p>Comprare il fuoriclasse a qualunque cifra e poi riempire la rosa con giocatori da un
+  credito: una squadra con un campione e ventiquattro riserve fa meno punti di una squadra
+  di undici titolari normali. Innamorarsi della propria squadra del cuore e pagare i suoi
+  giocatori il doppio. Prendere il portiere per primo, quando i portieri sono l’unico
+  reparto che si trova sempre. E, il più comune di tutti, rilanciare su un nome che non
+  serve solo per far spendere un avversario: quasi sempre resta in mano a chi ha rilanciato.</p>
+
+  <h2 class="display">Provare senza rischiare</h2>
+  <p>L’<a href="/asta-calcio">Asta di NOVANTA</a> serve proprio a questo: si gioca contro
+  avversari che hanno un budget, una lista di ruoli da coprire e un’idea del valore di ogni
+  giocatore, quindi i prezzi si muovono come in una lega vera. Si può giocare da soli o in
+  due sullo stesso telefono, e in dieci minuti si capisce se la propria strategia regge.
+  Se poi vuoi capire perché certi giocatori costano tanto, in
+  <a href="/calciomercato-come-funziona">Come funziona il calciomercato</a> c’è come
+  nascono i valori.</p>`,
+  },
   {
     slug: 'calciomercato-come-funziona',
     title: 'Come funziona davvero il calciomercato',

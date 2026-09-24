@@ -96,7 +96,8 @@ for (const p of PAGES) {
 <div id="app"><main class="shell doc">
   <p class="label">NOVANTA</p>
   <h1 class="display t-xxl">${p.h1 || p.title}</h1>
-  <p class="dim">${p.lead}</p>${p.play ? `\n  <a class="btn btn--go doc__play doc__play--top" href="${p.play.href}">${p.play.label}</a>` : ''}
+  <p class="dim">${p.lead}</p>
+  <a class="btn btn--go doc__play doc__play--top" href="${p.play ? p.play.href : '/'}">${p.play ? p.play.label : 'Gioca a NOVANTA'}</a>
 ${p.body.trim()}
   <a class="btn btn--go doc__play" href="${p.play ? p.play.href : '/'}">${p.play ? p.play.label : 'Gioca a NOVANTA'}</a>
 ${nav(p.slug)}

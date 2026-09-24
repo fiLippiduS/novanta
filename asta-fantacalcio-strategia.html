@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asta del fantacalcio: regole e strategia — NOVANTA</title>
+<meta name="description" content="Come funziona l’asta a chiamata, quanto spendere per ogni reparto, quando rilanciare e quando lasciar perdere. Guida pratica per non restare senza attaccanti.">
+<link rel="canonical" href="https://instascope.app/asta-fantacalcio-strategia">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="NOVANTA">
+<meta property="og:title" content="Asta del fantacalcio: regole e strategia — NOVANTA">
+<meta property="og:description" content="Come funziona l’asta a chiamata, quanto spendere per ogni reparto, quando rilanciare e quando lasciar perdere. Guida pratica per non restare senza attaccanti.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://instascope.app/asta-fantacalcio-strategia">
+<meta property="og:image" content="https://instascope.app/assets/og.jpg">
+<!-- Google AdSense: verifica del sito e annunci -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9665914988223658"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFCC29N242"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  // In Europa nessun cookie prima del sì: si parte negati e si sale col banner.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  gtag('js', new Date());
+  // le partite di collaudo non devono sporcare i numeri veri
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    gtag('config', 'G-HFCC29N242');
+  }
+</script>
+<script src="/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/styles/base.css">
+<style>
+.doc{max-width:44rem;padding-block:var(--s-7) var(--s-8)}
+.doc h2{margin-top:var(--s-6);font-size:var(--t-lg)}
+.doc h3{margin-top:var(--s-5);font-size:1.05rem}
+.doc a{color:var(--lime)}
+.doc a.btn{color:var(--btn-fg,var(--ink-950));text-decoration:none}
+.doc h2 a{color:inherit;text-decoration:underline;text-decoration-color:var(--lime);text-underline-offset:4px}
+.doc p{margin-top:var(--s-3);line-height:1.6}
+.doc ul,.doc ol{margin-top:var(--s-3);padding-left:1.2rem;line-height:1.6}
+.doc li{margin-top:var(--s-2)}
+.doc details{margin-top:var(--s-3);padding:var(--s-3) var(--s-4);border:1px solid var(--line);border-radius:var(--r-md)}
+.doc summary{cursor:pointer;font-weight:600}
+.doc table{width:100%;border-collapse:collapse;margin-top:var(--s-3);font-size:var(--t-sm)}
+.doc th,.doc td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.doc__nav{margin-top:var(--s-7);display:flex;flex-wrap:wrap;gap:6px 14px;font-size:var(--t-sm)}
+.doc__play{display:inline-block;margin-top:var(--s-5)}
+.doc__play--top{margin-top:var(--s-4)}
+.doc__nav--pages{margin-top:var(--s-4)}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="app"><main class="shell doc">
+  <p class="label">NOVANTA</p>
+  <h1 class="display t-xxl">Asta del fantacalcio: regole e strategia</h1>
+  <p class="dim">L’asta si vince nei primi venti minuti, quando tutti hanno soldi e nessuno ha ancora paura. Ecco le regole e i conti da fare prima di alzare la mano.</p>
+  <a class="btn btn--go doc__play doc__play--top" href="/">Gioca a NOVANTA</a>
+<h2 class="display">Come funziona l’asta a chiamata</h2>
+  <p>Ogni partecipante ha un budget uguale (nel fantacalcio classico cinquecento crediti)
+  e deve riempire una rosa completa: tre portieri, otto difensori, otto centrocampisti,
+  sei attaccanti. A turno si <strong>chiama</strong> un giocatore, si parte da un credito
+  e si rilancia finché tutti si fermano tranne uno. Chi non completa un reparto resta con
+  il buco: nessuno regala giocatori a fine asta.</p>
+  <p>La variante più diffusa è il <em>rilancio libero</em>: si può alzare di uno o di
+  dieci, e il ritmo lo decide chi ha coraggio. In alcune leghe si gioca a tempo, con pochi
+  secondi per rispondere: lì vince chi ha deciso prima quanto vale ogni nome.</p>
+
+  <h2 class="display">Il conto da fare prima</h2>
+  <p>Cinquecento crediti e venticinque giocatori fanno venti crediti a testa, ma non si
+  distribuiscono in parti uguali. Una divisione che funziona quasi sempre:</p>
+  <ul>
+    <li><strong>portieri 8-10%</strong>: un titolare affidabile e due riserve da un credito;</li>
+    <li><strong>difensori 12-15%</strong>: uno o due che segnano, gli altri presi a poco;</li>
+    <li><strong>centrocampisti 30-35%</strong>: qui stanno i giocatori che fanno assist e
+    tirano i rigori, ed è il reparto dove si vince il campionato;</li>
+    <li><strong>attaccanti 45-50%</strong>: i gol costano, e chi risparmia davanti lo paga
+    tutto l’anno.</li>
+  </ul>
+  <p>La regola pratica è tenere sempre da parte, fino alla fine, i crediti per l’ultimo
+  attaccante. Chi arriva agli ultimi giri con trenta crediti e una casella vuota davanti
+  prende quello che avanza, e quello che avanza non segna.</p>
+
+  <h2 class="display">Quando rilanciare</h2>
+  <p>Il prezzo di un giocatore non è il suo valore: è quanto sono disposti a pagare gli
+  altri. Nei primi giri tutti hanno il budget pieno e i prezzi si gonfiano; se aspetti, gli
+  stessi nomi passano per meno. Ma non esagerare con la pazienza: quando restano pochi
+  titolari veri, i prezzi risalgono perché chi è rimasto scoperto deve comprare per forza.</p>
+  <p>Guarda le rose degli avversari, non solo la tua. Chi ha già tre punte non rilancerà
+  sulla quarta: è il momento di prendere la tua a poco. E quando qualcuno resta con pochi
+  crediti, i giocatori che chiama vanno fatti salire di uno o due: costringerlo a spendere
+  tutto vale più che strappargli il nome.</p>
+
+  <h2 class="display">Gli errori che si ripetono ogni anno</h2>
+  <p>Comprare il fuoriclasse a qualunque cifra e poi riempire la rosa con giocatori da un
+  credito: una squadra con un campione e ventiquattro riserve fa meno punti di una squadra
+  di undici titolari normali. Innamorarsi della propria squadra del cuore e pagare i suoi
+  giocatori il doppio. Prendere il portiere per primo, quando i portieri sono l’unico
+  reparto che si trova sempre. E, il più comune di tutti, rilanciare su un nome che non
+  serve solo per far spendere un avversario: quasi sempre resta in mano a chi ha rilanciato.</p>
+
+  <h2 class="display">Provare senza rischiare</h2>
+  <p>L’<a href="/asta-calcio">Asta di NOVANTA</a> serve proprio a questo: si gioca contro
+  avversari che hanno un budget, una lista di ruoli da coprire e un’idea del valore di ogni
+  giocatore, quindi i prezzi si muovono come in una lega vera. Si può giocare da soli o in
+  due sullo stesso telefono, e in dieci minuti si capisce se la propria strategia regge.
+  Se poi vuoi capire perché certi giocatori costano tanto, in
+  <a href="/calciomercato-come-funziona">Come funziona il calciomercato</a> c’è come
+  nascono i valori.</p>
+  <a class="btn btn--go doc__play" href="/">Gioca a NOVANTA</a>
+  <nav class="doc__nav" aria-label="Le modalità">
+    <strong>Le modalità:</strong>
+    <a href="/indovina-il-calciatore">Chi è?</a>
+    <a href="/catena-calciatori">Catena</a>
+    <a href="/impostore-calcio">Impostore</a>
+    <a href="/carriera-calciatore">Carriera</a>
+    <a href="/allenatore-calcio">Allenatore</a>
+    <a href="/quiz-rosa-squadra">La Rosa</a>
+    <a href="/gioco-rigori">Rigori</a>
+    <a href="/asta-calcio">Asta</a>
+    <a href="/piu-o-meno-calcio">Più o Meno</a>
+    <a href="/quiz-calcio-giornaliero">Il Novantesimo</a>
+  </nav>
+  <nav class="doc__nav doc__nav--pages" aria-label="Pagine">
+    <a href="/">← Gioca</a>
+    <a href="/come-si-gioca">Come si gioca</a>
+    <a href="/guide">Le guide</a>
+    <a href="/ruoli-calcio">I ruoli</a>
+    <a href="/moduli-calcio">I moduli</a>
+    <a href="/calciomercato-come-funziona">Il mercato</a>
+    <a href="/coppe-europee-come-funzionano">Le coppe</a>
+    <a href="/glossario-calcio">Glossario</a>
+    <a href="/faq">Domande frequenti</a>
+    <a href="/chi-siamo">Chi siamo</a>
+    <a href="/dati">I dati</a>
+    <a href="/contatti">Contatti</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
+    <a href="/terms">Termini</a>
+  </nav>
+</main></div>
+</body>
+</html>
