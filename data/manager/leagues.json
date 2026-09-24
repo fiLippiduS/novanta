@@ -473,8 +473,8 @@
         "of": 20
       },
       "colors": [
-        "#EDE8DA",
-        "#0B1220"
+        "#FFD100",
+        "#0057A8"
       ],
       "ground": null,
       "capacity": 16227
@@ -797,7 +797,8 @@
         "of": 20
       },
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#D2232A"
       ],
       "ground": null,
       "capacity": 14884
@@ -828,7 +829,8 @@
         "of": 20
       },
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#D2232A"
       ],
       "ground": null,
       "capacity": 32420
@@ -863,6 +865,7 @@
         "of": 20
       },
       "colors": [
+        "#1B2F5E",
         "#000000"
       ],
       "ground": null,
@@ -894,8 +897,8 @@
       "strength": 61.3,
       "lastSeason": null,
       "colors": [
-        "#8E3145",
-        "#000000"
+        "#8E1F3C",
+        "#FFFFFF"
       ],
       "ground": "Stadio Città di Arezzo, Arezzo, Italy",
       "capacity": 13128
@@ -926,7 +929,8 @@
       "strength": 60.3,
       "lastSeason": null,
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#D2232A"
       ],
       "ground": "Stadio Romeo Menti",
       "capacity": 12000
@@ -961,6 +965,7 @@
         "of": 20
       },
       "colors": [
+        "#9FD5F0",
         "#FFFFFF"
       ],
       "ground": null,
@@ -1064,7 +1069,8 @@
         "of": 20
       },
       "colors": [
-        "#0000FF"
+        "#0072CE",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 3520
@@ -1574,7 +1580,7 @@
       "lastSeason": null,
       "colors": [
         "#CE131A",
-        "#1C1819"
+        "#FFFFFF"
       ],
       "ground": "Sincil Bank",
       "capacity": 11400
@@ -2221,7 +2227,8 @@
         "of": 22
       },
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#000000"
       ],
       "ground": null,
       "capacity": 15500
@@ -2238,7 +2245,8 @@
         "of": 22
       },
       "colors": [
-        "#192030"
+        "#00539F",
+        "#A50044"
       ],
       "ground": null,
       "capacity": 8164
@@ -2359,6 +2367,7 @@
         "of": 22
       },
       "colors": [
+        "#0067B1",
         "#FFFFFF"
       ],
       "ground": null,
@@ -2390,7 +2399,8 @@
       "strength": 62.5,
       "lastSeason": null,
       "colors": [
-        "#0000FF"
+        "#0000A0",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 11908
@@ -2407,6 +2417,7 @@
         "of": 22
       },
       "colors": [
+        "#005BAC",
         "#FFFFFF"
       ],
       "ground": null,
@@ -2438,8 +2449,8 @@
       "strength": 62.6,
       "lastSeason": null,
       "colors": [
-        "#EDE8DA",
-        "#0B1220"
+        "#8AC3EE",
+        "#FFFFFF"
       ],
       "ground": "Balaídos",
       "capacity": 24870
@@ -2470,7 +2481,8 @@
       "strength": 63.1,
       "lastSeason": null,
       "colors": [
-        "#173097"
+        "#173097",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 5776
@@ -2541,7 +2553,8 @@
         "of": 22
       },
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#00713C"
       ],
       "ground": "Estadio Bahrain Victorious Nuevo Arcángel de Córdoba",
       "capacity": 25800
@@ -2558,7 +2571,8 @@
         "of": 22
       },
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#000000"
       ],
       "ground": null,
       "capacity": 17524
@@ -2575,7 +2589,8 @@
         "of": 22
       },
       "colors": [
-        "#FEFEFE"
+        "#FFFFFF",
+        "#000000"
       ],
       "ground": "Estadio Alfonso Murube",
       "capacity": 6500
@@ -2664,8 +2679,8 @@
         "of": 18
       },
       "colors": [
-        "#EDE8DA",
-        "#0B1220"
+        "#000000",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": null
@@ -2826,8 +2841,8 @@
         "of": 18
       },
       "colors": [
-        "#000000",
-        "#FFFFFF"
+        "#FFFFFF",
+        "#00A14B"
       ],
       "ground": null,
       "capacity": 54057
@@ -2862,6 +2877,7 @@
         "of": 18
       },
       "colors": [
+        "#004F9F",
         "#000000"
       ],
       "ground": "Home Deluxe Arena",
@@ -2934,7 +2950,7 @@
       },
       "colors": [
         "#0030FF",
-        "#000000"
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 27332
@@ -3037,8 +3053,8 @@
         "of": 18
       },
       "colors": [
-        "#FFEFDD",
-        "#01744D"
+        "#01744D",
+        "#FFFFFF"
       ],
       "ground": "Sportpark Ronhof Thomas Sommer",
       "capacity": 16626
@@ -3055,7 +3071,7 @@
         "of": 18
       },
       "colors": [
-        "#00A650",
+        "#E30613",
         "#000000"
       ],
       "ground": "Heinz von Heiden Arena",
@@ -3073,7 +3089,8 @@
         "of": 18
       },
       "colors": [
-        "#FF0000"
+        "#E30613",
+        "#003C7D"
       ],
       "ground": null,
       "capacity": 15000
@@ -3108,7 +3125,8 @@
         "of": 18
       },
       "colors": [
-        "#0000FF"
+        "#0033A0",
+        "#FFFFFF"
       ],
       "ground": "BBBank Wildpark",
       "capacity": 33180
@@ -3143,7 +3161,8 @@
         "of": 18
       },
       "colors": [
-        "#0000FF"
+        "#004A99",
+        "#FFFFFF"
       ],
       "ground": "Avnet Arena",
       "capacity": 30098
@@ -3174,7 +3193,8 @@
       "strength": 63.3,
       "lastSeason": null,
       "colors": [
-        "#493AA6"
+        "#5B2A86",
+        "#FFFFFF"
       ],
       "ground": "Stadion an der Bremer Brücke",
       "capacity": 15741
@@ -3191,7 +3211,8 @@
         "of": 18
       },
       "colors": [
-        "#65423A"
+        "#65423A",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 29546
@@ -3298,7 +3319,8 @@
         "of": 18
       },
       "colors": [
-        "#FF0000"
+        "#FFD100",
+        "#E4002B"
       ],
       "ground": null,
       "capacity": 25064
@@ -3441,7 +3463,8 @@
         "of": 18
       },
       "colors": [
-        "#000060"
+        "#0B2265",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 20000
@@ -3620,7 +3643,8 @@
         "of": 18
       },
       "colors": [
-        "#FF0000"
+        "#E4002B",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 15714
@@ -3705,7 +3729,8 @@
         "of": 18
       },
       "colors": [
-        "#FFFFFF"
+        "#FFFFFF",
+        "#D2232A"
       ],
       "ground": null,
       "capacity": 20087
@@ -3722,7 +3747,8 @@
         "of": 18
       },
       "colors": [
-        "#DD0000"
+        "#D2232A",
+        "#FFCC00"
       ],
       "ground": null,
       "capacity": 5955
@@ -3739,8 +3765,8 @@
         "of": 18
       },
       "colors": [
-        "#EDE8DA",
-        "#0B1220"
+        "#0055A4",
+        "#FFFFFF"
       ],
       "ground": null,
       "capacity": 20068
@@ -3753,7 +3779,8 @@
       "strength": 59.6,
       "lastSeason": null,
       "colors": [
-        "#FF0000"
+        "#E4002B",
+        "#FFFFFF"
       ],
       "ground": "Stade Gaston Gérard",
       "capacity": 15459
@@ -3788,8 +3815,8 @@
         "of": 18
       },
       "colors": [
-        "#EDE8DA",
-        "#0B1220"
+        "#003DA5",
+        "#FFD100"
       ],
       "ground": null,
       "capacity": 4031
@@ -3806,8 +3833,8 @@
         "of": 18
       },
       "colors": [
-        "#EDE8DA",
-        "#0B1220"
+        "#E4002B",
+        "#003DA5"
       ],
       "ground": null,
       "capacity": 17200
@@ -3842,7 +3869,8 @@
         "of": 18
       },
       "colors": [
-        "#FF6000"
+        "#F36F21",
+        "#000000"
       ],
       "ground": null,
       "capacity": 11107

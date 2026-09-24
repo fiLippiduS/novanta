@@ -103,9 +103,15 @@ vivaio di ogni club (tre giovani per squadra, marcati `p`, che si rigenerano
 senza accumularsi).
 
 ```bash
+node tools/manager/club-colors.mjs
 node tools/manager/names.mjs && node tools/manager/prospects.mjs
 node tools/manager/build-events.mjs && node tools/manager/i18n-merge.mjs
 ```
+
+I colori delle squadre stanno in `data/manager/leagues.json` e si rifanno con
+`club-colors.mjs`: la scheda di Wikipedia dà un colore solo alle squadre a
+strisce, quindi i due colori sociali arrivano dal riquadro della divisa e, dove
+neanche quello basta, da una tabella scritta a mano dentro lo script.
 
 ## Struttura
 
