@@ -1,0 +1,15 @@
+/* La pagina vera sotto il gioco: c'è per chi arriva dal motore di ricerca e
+   per chi vuole capire cos'è NOVANTA prima di toccare qualcosa. Si vede solo
+   nella schermata principale; appena si entra in una partita sparisce. */
+
+/* sopra il cielo e la grana, come il gioco: senza questo il fondo la copre */
+.landing { position: relative; z-index: 1; padding: var(--s-7) var(--s-4) var(--s-8); border-top: 1px solid var(--line); }
+body[data-route]:not([data-route="hub"]) .landing { display: none; }
+.landing__in { max-width: 44rem; margin: 0 auto; display: grid; gap: var(--s-4); }
+.landing h1 { font-family: var(--font-display); font-size: clamp(1.5rem, 6vw, 2.2rem); line-height: 1.05; letter-spacing: var(--track-display); margin: 0; }
+.landing h2 { font-family: var(--font-display); font-size: clamp(1.1rem, 4.4vw, 1.5rem); letter-spacing: var(--track-display); margin: var(--s-4) 0 0; }
+.landing p { margin: 0; color: var(--chalk-2); line-height: 1.55; }
+.landing__lead { font-size: var(--t-lg); color: var(--chalk); }
+.landing a { color: var(--lime); }
+.landing ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 8px; color: var(--chalk-2); line-height: 1.5; }
+.landing__modes strong, .landing__links strong { color: var(--chalk); }

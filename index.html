@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NOVANTA — il gioco del calcio</title>
-<meta name="description" content="Nove sfide di calcio: nomina la rosa, batti il portiere, vinci l'asta, indovina il giocatore dalla carriera, la catena dei giocatori, l'impostore, una carriera da vivere e il novantesimo di ogni giorno.">
+<meta name="description" content="Nove sfide di calcio: nomina la rosa, batti il portiere, vinci l’asta, indovina il giocatore dalla carriera, la catena dei giocatori, l’impostore, una carriera da vivere e il novantesimo di ogni giorno.">
 <meta name="theme-color" content="#05080F">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
@@ -76,6 +76,7 @@
 <link rel="stylesheet" href="styles/chi.css">
 <link rel="stylesheet" href="styles/catena.css">
 <link rel="stylesheet" href="styles/impostore.css">
+<link rel="stylesheet" href="styles/landing.css">
 </head>
 <body>
   <div class="sky" aria-hidden="true"></div>
@@ -85,10 +86,81 @@
     <noscript>
       <div class="shell" style="padding-block:4rem">
         <h1 class="t-xl">Serve JavaScript</h1>
-        <p class="dim">NOVANTA è un gioco: senza JavaScript non c'è partita.</p>
+        <p class="dim">NOVANTA è un gioco: senza JavaScript non c’è partita.</p>
       </div>
     </noscript>
   </div>
+
+
+  <!-- La pagina vera: chi arriva su instascope.app deve capire cos’è NOVANTA
+       anche senza toccare niente, e i motori di ricerca devono trovare testo,
+       non un guscio vuoto. Compare sotto il gioco solo nella schermata
+       principale: quando si gioca sparisce (styles/landing.css). -->
+  <section class="landing" id="cos-e">
+    <div class="landing__in">
+      <h1>NOVANTA, il gioco del calcio che ti ricordi</h1>
+      <p class="landing__lead">Dieci modi di giocare con il calcio vero: le rose delle squadre,
+      le carriere dei giocatori, il mercato, i rigori. Niente account, niente acquisti,
+      niente da scaricare: si apre il sito e si gioca, dal telefono come dal computer.</p>
+
+      <h2>Che cos’è</h2>
+      <p>NOVANTA è un sito di giochi di calcio basati su dati veri. Le rose sono quelle
+      di oggi, le carriere sono quelle raccontate dalle enciclopedie, le convocazioni ai
+      tornei sono quelle che ci sono state davvero. Non ci sono carte da collezionare né
+      squadre inventate: quello che vedi in partita è successo.</p>
+      <p>Ogni modalità dura pochi minuti, tranne le due carriere, che si portano avanti
+      nel tempo e si salvano nel browser. Si può giocare da soli o passandosi il telefono
+      fra amici. Il gioco è in italiano, inglese, spagnolo, francese, tedesco e portoghese.</p>
+
+      <h2>Le dieci modalità</h2>
+      <ul class="landing__modes">
+        <li><a href="/quiz-rosa-squadra"><strong>La Rosa</strong></a> — ti diamo una squadra
+        e una stagione, tu scrivi i giocatori che ne facevano parte. Più nomi ricordi, più sali.</li>
+        <li><a href="/gioco-rigori"><strong>Rigori</strong></a> — scegli l’angolo e la forza,
+        il portiere prova a indovinare. Segna finché puoi.</li>
+        <li><a href="/asta-calcio"><strong>Asta</strong></a> — un’asta a chiamata contro
+        avversari che hanno un budget e delle idee: costruisci la rosa migliore senza restare a secco.</li>
+        <li><a href="/piu-o-meno-calcio"><strong>Più o Meno</strong></a> — due giocatori, un
+        numero: chi ha segnato di più, chi ha giocato più partite, chi vale di più.</li>
+        <li><a href="/carriera-calciatore"><strong>Carriera</strong></a> — parti a sedici anni
+        e arrivi al ritiro: allenamenti, scelte, infortuni, nazionale, trofei.</li>
+        <li><a href="/allenatore-calcio"><strong>Allenatore</strong></a> — una panchina in dieci
+        campionati con le rose di oggi: formazione, tattica, mercato a trattative, classifica
+        giornata per giornata e una società che ti giudica.</li>
+        <li><a href="/indovina-il-calciatore"><strong>Chi è?</strong></a> — una carriera vera
+        senza il nome: squadre, presenze, gol, trofei. Hai cinque tentativi.</li>
+        <li><a href="/catena-calciatori"><strong>Catena</strong></a> — squadra, giocatore,
+        squadra, giocatore: quaranta secondi a mossa e niente si ripete.</li>
+        <li><a href="/impostore-calcio"><strong>Impostore</strong></a> — tutti vedono lo stesso
+        calciatore tranne uno. Una parola a testa per scoprirlo.</li>
+        <li><a href="/quiz-calcio-giornaliero"><strong>Il Novantesimo</strong></a> — cinque
+        domande al giorno, le stesse per tutti, e il risultato da condividere.</li>
+      </ul>
+
+      <h2>Le guide</h2>
+      <p>Oltre ai giochi, qui si spiega il calcio con cui i giochi sono fatti: i ruoli e i
+      numeri di maglia, i moduli e cosa cambia davvero fra uno e l’altro, le parole del
+      calciomercato, il significato dei numeri di una carriera.</p>
+      <ul class="landing__links">
+        <li><a href="/ruoli-calcio">I ruoli e i numeri di maglia</a></li>
+        <li><a href="/moduli-calcio">I moduli spiegati, uno per uno</a></li>
+        <li><a href="/calciomercato-come-funziona">Come funziona davvero il calciomercato</a></li>
+        <li><a href="/glossario-calcio">Glossario: le parole del calcio</a></li>
+      </ul>
+
+      <h2>Come funziona il sito</h2>
+      <p>Non serve registrarsi: record, serie di giorni e preferenze restano nella memoria
+      del tuo browser, e nessuno ci chiede un’email. Il gioco si può aggiungere alla
+      schermata Home del telefono e da lì si apre a tutto schermo, come un’app.</p>
+      <p>I cataloghi vengono da Wikipedia (licenza CC BY-SA 4.0), rielaborati e controllati
+      con regole automatiche: come, è raccontato nella pagina <a href="/dati">I dati</a>.
+      NOVANTA è un progetto indipendente, non usa stemmi, foto o marchi ufficiali e non è
+      affiliato a nessun club, lega o federazione.</p>
+      <p>Le regole di tutte le modalità stanno in <a href="/come-si-gioca">Come si gioca</a>;
+      i dubbi più comuni in <a href="/faq">Domande frequenti</a>; chi c’è dietro in
+      <a href="/chi-siamo">Chi siamo</a>.</p>
+    </div>
+  </section>
 
   <div id="overlay-root"></div>
 

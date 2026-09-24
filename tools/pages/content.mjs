@@ -1,11 +1,15 @@
 /* Il testo delle pagine. Scritto per chi gioca, non per un motore di ricerca:
    se una frase non serve a nessuno, qui non ci va. */
 
-export const UPDATED = { it: '13 settembre 2026', iso: '2026-09-13' };
+export const UPDATED = { it: '24 settembre 2026', iso: '2026-09-24' };
 const MAIL = '<a href="mailto:ciao@instascope.app">ciao@instascope.app</a>';
 
 export const NAV = [
   ['come-si-gioca', 'Come si gioca'],
+  ['ruoli-calcio', 'I ruoli'],
+  ['moduli-calcio', 'I moduli'],
+  ['calciomercato-come-funziona', 'Il mercato'],
+  ['glossario-calcio', 'Glossario'],
   ['faq', 'Domande frequenti'],
   ['chi-siamo', 'Chi siamo'],
   ['dati', 'I dati'],
@@ -28,9 +32,361 @@ const FAQ = [
   ['In che lingue è disponibile?', 'Italiano, inglese, spagnolo, francese, tedesco e portoghese. La lingua si cambia dal menu in fondo alla schermata principale.'],
   ['Il gioco funziona senza connessione?', 'Dopo la prima visita molte parti restano disponibili anche se la rete cade a metà partita, ma per caricare nuove rose e nuove carriere serve la connessione.'],
   ['NOVANTA è collegato a club o federazioni?', 'No. NOVANTA è un progetto indipendente, non usa stemmi, foto o marchi ufficiali e non è affiliato a nessun club, lega o federazione.'],
+  ['Come si installa sul telefono?', 'Non serve uno store. Su iPhone apri il sito in Safari, tocca il tasto di condivisione e scegli “Aggiungi alla schermata Home”; su Android, dal menu del browser, “Installa app”. Da lì NOVANTA si apre a tutto schermo come un’app normale.'],
+  ['Perché una squadra o una stagione non c’è?', 'Perché i dati di quella rosa non sono abbastanza completi o coerenti da poter essere usati senza rischiare di farti una domanda sbagliata. Quando la fonte migliora, la squadra entra.'],
+  ['Come si cambia lingua?', 'Dal menu in cima alla schermata principale. La scelta resta salvata nel browser e vale anche per le situazioni delle due carriere, che sono tradotte per intero.'],
+  ['Le carriere si salvano?', 'Sì, Carriera e Allenatore si salvano automaticamente nel browser dopo ogni giornata, e si riprendono da dove le hai lasciate. Sono due salvataggi separati: puoi averle in corso tutte e due.'],
+  ['Posso giocare senza pubblicità?', 'Gli annunci non compaiono mai durante una partita né nei primi minuti di una visita. Quelli con premio — un suggerimento, tempo in più, un’altra possibilità — si guardano solo se lo scegli tu.'],
+  ['Il gioco è adatto ai bambini?', 'Sì: non c’è chat, non ci sono contenuti violenti e non si può spendere denaro. Le uniche parole che si scambiano sono quelle fra amici che giocano nella stessa stanza.'],
+  ['Posso suggerire una modalità nuova?', `Scrivici a ${MAIL}: le idee che arrivano dalle partite vere sono quasi sempre migliori delle nostre.`],
+  ['Perché il gioco si chiama NOVANTA?', 'Per i novanta minuti di una partita, e per il decennio che ha insegnato a molti di noi a guardare il calcio. Il nome è anche la promessa di una partita che dura poco: nessuna modalità, a parte le carriere, chiede più di qualche minuto.'],
 ];
 
 export const PAGES = [
+  {
+    slug: 'calciomercato-come-funziona',
+    title: 'Come funziona davvero il calciomercato',
+    description: 'Cartellino, ingaggio, clausola rescissoria, prestito con diritto o obbligo, parametro zero, commissioni, bonus: le parole del calciomercato spiegate con i numeri che contano.',
+    lead: 'Quando si legge “trenta milioni più bonus” si stanno guardando almeno quattro cifre diverse. Ecco quali sono e chi le incassa.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Due cifre, non una</h2>
+  <p>Un trasferimento ha sempre due prezzi. Il primo è il <strong>cartellino</strong>:
+  quanto il club che compra paga al club che vende per liberare il giocatore dal
+  contratto. Il secondo è l’<strong>ingaggio</strong>: quanto il giocatore guadagna
+  ogni anno, e lo paga il club nuovo per tutta la durata del contratto. Un giocatore
+  che costa poco di cartellino ma tanto di ingaggio può pesare più di uno pagato
+  molto e con uno stipendio normale.</p>
+  <p>Da questo nasce una regola che vale in tutte le società: il cartellino si può
+  spalmare su più bilanci (l’ammortamento: trenta milioni su cinque anni valgono sei
+  milioni l’anno), l’ingaggio no. Per questo i contratti lunghi convengono a chi compra,
+  e per questo un rinnovo che allunga la scadenza vale, per il club, quasi quanto una
+  cessione.</p>
+
+  <h2 class="display">Il contratto e la scadenza</h2>
+  <p>Finché un giocatore ha il contratto in corso, il suo club decide. Ma più la
+  scadenza si avvicina, meno vale il cartellino: a un anno dalla fine il prezzo crolla,
+  perché chi compra sa che fra dodici mesi lo prenderebbe gratis. A scadenza il
+  giocatore è un <strong>parametro zero</strong>: firma con chi vuole e il club di
+  provenienza non incassa niente. Le società più attente trattano il rinnovo due anni
+  prima proprio per non arrivare a quel punto.</p>
+
+  <h2 class="display">La clausola rescissoria</h2>
+  <p>È una cifra scritta nel contratto: chi la paga porta via il giocatore e il club
+  non può opporsi. In Spagna è obbligatoria per legge ed è il motivo per cui certi
+  trasferimenti si chiudono in poche ore; altrove si usa per blindare i giovani. Le
+  clausole sono quasi sempre molto più alte del valore di mercato: servono a scoraggiare,
+  non a vendere.</p>
+
+  <h2 class="display">Il prestito</h2>
+  <p>Il giocatore cambia squadra per un periodo, di solito una stagione, ma il cartellino
+  resta al club di partenza. Le varianti che contano sono tre:</p>
+  <ul>
+    <li><strong>prestito secco</strong>: finita la stagione torna a casa;</li>
+    <li><strong>con diritto di riscatto</strong>: chi lo ha preso può comprarlo a una
+    cifra fissata prima, se vuole;</li>
+    <li><strong>con obbligo di riscatto</strong>: lo deve comprare, spesso al verificarsi
+    di una condizione (un numero di presenze, la salvezza, la qualificazione).</li>
+  </ul>
+  <p>Nel prestito si tratta anche l’ingaggio: raramente lo paga tutto chi riceve il
+  giocatore, quasi sempre le due società se lo dividono. Per un ragazzo il prestito è
+  lo strumento con cui si cresce: giocare venticinque partite in una squadra più piccola
+  vale più di dieci minuti a partita in una grande.</p>
+
+  <h2 class="display">Bonus e percentuali</h2>
+  <p>“Venti milioni più cinque di bonus” significa che cinque milioni si pagano solo se
+  succede qualcosa: un numero di presenze, i gol, la qualificazione a una coppa. Sono
+  soldi veri ma non certi, e infatti chi vende li conta per metà. Esiste anche la
+  <strong>percentuale sulla futura rivendita</strong>: il club che vende si tiene una
+  fetta (di solito fra il 10 e il 20 per cento) di quanto incasserà il club che compra
+  quando rivenderà il giocatore. È il modo in cui le società piccole guadagnano due
+  volte dallo stesso ragazzo.</p>
+
+  <h2 class="display">Chi lavora alla trattativa</h2>
+  <p>Un affare non si chiude fra due presidenti al telefono. Ci sono il direttore
+  sportivo, che tratta il cartellino con l’altro club, e il <strong>procuratore</strong>,
+  che tratta l’ingaggio e le condizioni per conto del giocatore e prende una commissione
+  (di norma una percentuale dell’operazione). Sono due trattative separate: si può
+  trovare l’accordo con il club e non con il giocatore, e viceversa. Alla fine arrivano
+  le <strong>visite mediche</strong>, che non sono una formalità: un problema fisico può
+  far saltare tutto o far rinegoziare il prezzo il giorno prima della firma.</p>
+
+  <h2 class="display">Le finestre</h2>
+  <p>Non si compra quando si vuole. In Europa ci sono due finestre: quella lunga
+  d’estate e quella breve di gennaio, che serve a riparare. Nell’ultimo giorno si chiude
+  più di quanto si immagini, perché chi vende sa che chi compra non ha più tempo per
+  cercare alternative. Fuori dalle finestre si può tesserare solo chi è svincolato.</p>
+
+  <h2 class="display">Come si legge un valore di mercato</h2>
+  <p>I valori che si leggono sui siti specializzati non sono prezzi: sono stime di
+  quanto un giocatore dovrebbe costare, costruite su età, rendimento, ruolo, contratto e
+  campionato. Un ventenne in crescita vale più di quanto renda oggi, perché si paga
+  anche quello che diventerà; un trentaquattrenne vale una frazione, anche se è ancora
+  fortissimo. Il prezzo vero, poi, dipende da quanto quel giocatore serve a chi vende:
+  un titolare inamovibile costa il doppio di una riserva dello stesso livello.</p>
+
+  <h2 class="display">Dove si prova</h2>
+  <p>Il mercato di <a href="/allenatore-calcio">Allenatore</a> funziona con queste regole:
+  si tratta prima con il club (che ha una pazienza e un prezzo sotto il quale non scende,
+  e a volte si vede arrivare una rivale), poi con il giocatore e il suo procuratore
+  (ingaggio, anni, ruolo promesso, commissione) e infine si passa dalle visite mediche.
+  Le clausole spagnole si possono pagare, i prestiti si fanno con la divisione
+  dell’ingaggio, e mettere un giocatore in lista non fa arrivare offerte all’istante:
+  i club ci mettono qualche giorno, e per uno scarso non arriva niente.</p>`,
+  },
+  {
+    slug: 'glossario-calcio',
+    title: 'Glossario del calcio: le parole spiegate',
+    description: 'Dal fuorigioco al gegenpressing, dal parametro zero agli expected goals: quaranta parole del calcio spiegate in italiano, senza giri.',
+    lead: 'Le parole che si sentono in telecronaca e si leggono nei giornali, spiegate una per una. In ordine di argomento, non alfabetico: così si capiscono meglio.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Le regole</h2>
+  <p><strong>Fuorigioco</strong> — Un attaccante è in fuorigioco se, nel momento in cui
+  un compagno gli passa la palla, si trova più vicino alla linea di porta avversaria
+  sia del pallone sia del penultimo difensore (di solito l’ultimo di movimento, perché
+  il portiere conta come uno dei due). Non è punibile se riceve da una rimessa laterale,
+  da un rinvio dal fondo o da un calcio d’angolo.</p>
+  <p><strong>Vantaggio</strong> — L’arbitro può non fischiare un fallo se fermare il
+  gioco danneggerebbe la squadra che l’ha subito.</p>
+  <p><strong>Doppia ammonizione</strong> — Due gialli nella stessa partita valgono un
+  rosso, e la squalifica è di una giornata; un rosso diretto ne costa di più.</p>
+  <p><strong>VAR</strong> — L’assistenza video. Interviene solo su quattro cose: gol,
+  rigori, espulsioni dirette e scambi di persona.</p>
+
+  <h2 class="display">In campo</h2>
+  <p><strong>Pressing</strong> — Andare a prendere l’avversario che ha la palla invece
+  di aspettarlo. <strong>Pressing alto</strong> se si fa nella metà campo avversaria.</p>
+  <p><strong>Gegenpressing</strong> — Riconquistare subito il pallone appena lo si è
+  perso, nei primi secondi, quando l’avversario è ancora sbilanciato in avanti.</p>
+  <p><strong>Linea difensiva alta</strong> — Tenere i difensori lontani dalla propria
+  porta per accorciare il campo. Rende la squadra compatta e la espone alla palla in
+  profondità.</p>
+  <p><strong>Baricentro</strong> — La posizione media della squadra in campo. Alto se si
+  gioca avanti, basso se si difende vicino alla propria area.</p>
+  <p><strong>Ripartenza (o contropiede)</strong> — Attaccare subito dopo aver recuperato
+  palla, mentre l’avversario è ancora fuori posizione.</p>
+  <p><strong>Palla inattiva</strong> — Calci d’angolo, punizioni e rimesse lunghe. Vale
+  circa un gol su quattro nel calcio professionistico: le squadre ci lavorano più di
+  quanto si creda.</p>
+  <p><strong>Marcatura a uomo e a zona</strong> — Seguire un avversario ovunque vada,
+  oppure difendere uno spazio e prendere chi ci entra.</p>
+  <p><strong>Falso nove</strong> — Un centravanti che si abbassa a centrocampo per
+  trascinarsi dietro il difensore e lasciare spazio a chi arriva.</p>
+  <p><strong>Mediano</strong>, <strong>mezzala</strong>, <strong>quinto</strong> — I ruoli
+  del centrocampo e delle fasce: li trovi spiegati in
+  <a href="/ruoli-calcio">I ruoli e i numeri di maglia</a>.</p>
+
+  <h2 class="display">I numeri</h2>
+  <p><strong>Expected goals (xG)</strong> — Il valore di un’occasione: quanti gol,
+  in media, nascono da un tiro fatto in quella posizione e in quella situazione. Un tiro
+  da fuori area vale spesso 0,03; un rigore circa 0,78. Servono a capire se una squadra
+  ha creato tanto o è stata solo fortunata.</p>
+  <p><strong>Tiri in porta</strong> — I tiri che entrerebbero senza l’intervento del
+  portiere o di un difensore sulla linea.</p>
+  <p><strong>Possesso palla</strong> — La percentuale di tempo con il pallone tra i piedi.
+  Da sola non dice chi ha giocato meglio: molte squadre vincono con il 35 per cento.</p>
+  <p><strong>Duelli e contrasti</strong> — Gli uno contro uno vinti, a terra e in aria.</p>
+  <p><strong>Clean sheet</strong> — La porta inviolata: una partita senza gol subiti.</p>
+  <p><strong>Assist</strong> — L’ultimo passaggio prima del gol.</p>
+
+  <h2 class="display">Squadre e competizioni</h2>
+  <p><strong>Differenza reti</strong> — Gol fatti meno gol subiti. Serve a separare due
+  squadre a pari punti, in molti campionati prima degli scontri diretti.</p>
+  <p><strong>Scontri diretti</strong> — I risultati fra le squadre a pari punti. In Italia
+  contano prima della differenza reti, in Inghilterra e Spagna no (in Inghilterra vale la
+  differenza reti, in Spagna gli scontri diretti).</p>
+  <p><strong>Play-off e play-out</strong> — Spareggi di fine stagione per salire di
+  categoria o per non scendere.</p>
+  <p><strong>Derby</strong> — La partita fra due squadre della stessa città o della stessa
+  zona. Vale tre punti come le altre e pesa il doppio.</p>
+  <p><strong>Vivaio (o settore giovanile)</strong> — Le squadre giovanili di un club.
+  Un giocatore <em>cresciuto nel vivaio</em> conta anche nelle liste che molte
+  competizioni impongono.</p>
+
+  <h2 class="display">Mercato e contratti</h2>
+  <p><strong>Cartellino</strong> — Quanto un club paga a un altro club per prendere un
+  giocatore sotto contratto. <strong>Ingaggio</strong> — Quanto guadagna il giocatore.</p>
+  <p><strong>Parametro zero</strong> — Giocatore con il contratto scaduto: si prende
+  senza pagare niente al club di prima.</p>
+  <p><strong>Clausola rescissoria</strong> — La cifra che, se pagata, permette di
+  prendere il giocatore anche se il club non vuole venderlo.</p>
+  <p><strong>Prestito con diritto o con obbligo di riscatto</strong> — Chi riceve il
+  giocatore può, oppure deve, comprarlo a fine prestito.</p>
+  <p><strong>Ammortamento</strong> — Il costo del cartellino spalmato sugli anni di
+  contratto, che è il modo in cui pesa sul bilancio.</p>
+  <p><strong>Procuratore</strong> — Chi cura gli interessi del giocatore e tratta
+  l’ingaggio; prende una commissione sull’operazione.</p>
+  <p>Il quadro completo, con i numeri, è in
+  <a href="/calciomercato-come-funziona">Come funziona davvero il calciomercato</a>.</p>
+
+  <h2 class="display">Parole che si sentono in telecronaca</h2>
+  <p><strong>Cucchiaio</strong> — Il pallonetto morbido sul portiere, di solito su rigore.
+  <strong>Tunnel</strong> — Far passare la palla fra le gambe dell’avversario.
+  <strong>Sombrero</strong> — Scavalcare l’avversario con un tocco alto.
+  <strong>Catenaccio</strong> — Difendere bassi e in tanti, colpendo in ripartenza.
+  <strong>Melina</strong> — Far girare la palla per far passare il tempo.
+  <strong>Tiki-taka</strong> — Il possesso fatto di passaggi corti e continui.</p>`,
+  },
+  {
+    slug: 'ruoli-calcio',
+    title: 'I ruoli nel calcio e i numeri di maglia',
+    description: 'Che cosa fa davvero un terzino, un mediano, un trequartista o un falso nove, e perché il numero sulla maglia non dice quasi più niente. Guida ai ruoli del calcio moderno.',
+    lead: 'Undici giocatori, otto ruoli e una quantità di nomi che cambiano da paese a paese. Qui c’è cosa fa ognuno, in campo, quando la palla ce l’ha la sua squadra e quando ce l’hanno gli altri.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Il portiere</h2>
+  <p>È l’unico che può usare le mani, e da vent’anni è anche il primo che imposta.
+  Un portiere moderno viene giudicato su tre cose diverse fra loro: le parate, le
+  uscite (alte, sui cross, e basse, sui palloni filtranti) e i piedi. Le squadre
+  che vogliono far uscire il pallone da dietro gli chiedono di ricevere spalle
+  alla porta e di saltare la prima linea di pressing con un passaggio: è il motivo
+  per cui oggi un portiere che para benissimo ma sbaglia l’appoggio corto fatica a
+  trovare posto in certe squadre.</p>
+
+  <h2 class="display">I difensori</h2>
+  <p><strong>Il difensore centrale</strong> gioca al centro della linea. Nei sistemi
+  a quattro sono due e si dividono i compiti: uno marca la punta, l’altro copre lo
+  spazio alle sue spalle. In una difesa a tre il centrale di destra e quello di
+  sinistra escono spesso sul portatore, mentre quello in mezzo resta a proteggere.
+  Le doti che contano sono il tempo dell’anticipo, il colpo di testa, la velocità
+  quando la squadra difende alta e — di nuovo — il piede, perché è da lì che parte
+  la costruzione.</p>
+  <p><strong>Il terzino</strong> parte largo, difende sulla fascia e attacca la
+  stessa fascia quando la squadra ha il pallone. Negli ultimi anni ne sono nate due
+  varianti: il terzino che si accentra a centrocampo per dare una linea di passaggio
+  in più, e il terzino che resta bassissimo per formare una difesa a tre in fase di
+  costruzione. Il <em>quinto</em> è la stessa idea portata all’estremo: nei sistemi
+  a tre difensori corre tutta la fascia, dal fondo campo alla bandierina avversaria,
+  ed è il ruolo che chiede più fiato di tutti.</p>
+
+  <h2 class="display">I centrocampisti</h2>
+  <p><strong>Il mediano</strong> gioca davanti alla difesa. Il suo lavoro si vede
+  poco: chiude la linea di passaggio verso il trequartista avversario, scala per
+  coprire il terzino salito, recupera il secondo pallone dopo un contrasto. Se la
+  squadra imposta da dietro è anche il primo regista, quello che riceve dal centrale
+  e gira il gioco da una parte all’altra.</p>
+  <p><strong>La mezzala</strong> è il centrocampista che copre più campo in verticale:
+  rientra a dare una mano in difesa e arriva in area a chiudere l’azione. Le mezzale
+  che segnano otto o dieci gol a stagione sono fra i giocatori più cercati sul mercato,
+  perché arrivare in area partendo da lontano è la cosa più difficile da marcare.</p>
+  <p><strong>Il trequartista</strong> gioca fra il centrocampo e la difesa avversaria,
+  nello spazio che i difensori non vogliono lasciare e i centrocampisti non riescono a
+  coprire. È il ruolo più cambiato dagli anni Novanta a oggi: quando le squadre hanno
+  iniziato a pressare a uomo su tutto il campo, il trequartista fermo è sparito, e al
+  suo posto sono arrivati giocatori che partono larghi e si accentrano.</p>
+
+  <h2 class="display">Gli attaccanti</h2>
+  <p><strong>L’ala</strong> parte larga e punta l’uomo. Se gioca sul piede opposto
+  (il destro a sinistra, il mancino a destra) rientra verso il centro per calciare;
+  se gioca sul suo piede, va sul fondo e mette il cross. Sono due mestieri diversi e
+  vanno letti come tali: al primo si chiedono gol, al secondo assist.</p>
+  <p><strong>La punta</strong> è chi finisce l’azione. C’è il centravanti d’area, che
+  vive di posizione e colpo di testa; la punta che attacca lo spazio alle spalle della
+  difesa; il centravanti che viene incontro, riceve e fa salire la squadra. Il
+  <em>falso nove</em> non è un ruolo ma un movimento: un attaccante che lascia l’area
+  e si abbassa a centrocampo, così il difensore che lo marca deve scegliere se
+  seguirlo — e lasciare un buco — o mollarlo.</p>
+
+  <h2 class="display">I numeri di maglia</h2>
+  <p>Per decenni il numero indicava il posto in campo: 1 portiere, 2 e 3 terzini, 4 e 5
+  al centro, 6 mediano, 7 e 11 ali, 8 mezzala, 9 centravanti, 10 fantasista. Dal 1993
+  in Italia i numeri sono personali e si portano per tutta la stagione: da lì in poi la
+  corrispondenza si è sciolta, e oggi un 10 può giocare largo a sinistra e un 5 può
+  essere un mediano.</p>
+  <p>Restano però le abitudini nazionali, ed è utile conoscerle quando si legge una
+  formazione straniera: in Spagna e in Sudamerica il 5 è quasi sempre il mediano
+  davanti alla difesa, in Inghilterra è un centrale; in Olanda il 4 e il 3 sono i due
+  centrali; il 6 in Brasile è il terzino sinistro, in Europa il centrocampista
+  davanti alla difesa.</p>
+
+  <h2 class="display">Perché serve saperlo, qui</h2>
+  <p>In <a href="/allenatore-calcio">Allenatore</a> ogni giocatore ha un ruolo preciso e
+  rende meno se lo metti fuori posto: un’ala adattata a terzino difende peggio di un
+  terzino vero, e un mediano schierato da trequartista tocca meno palloni. In
+  <a href="/quiz-rosa-squadra">La Rosa</a> i ruoli servono a ricordarsi chi manca: quando
+  ti blocchi, conta i difensori che hai già scritto. E in
+  <a href="/asta-calcio">Asta</a> il ruolo è quello che decide il prezzo: i portieri
+  costano poco, le punte che segnano costano sempre troppo.</p>`,
+  },
+  {
+    slug: 'moduli-calcio',
+    title: 'I moduli del calcio spiegati uno per uno',
+    description: '4-3-3, 4-2-3-1, 3-5-2, 4-4-2: cosa cambia davvero fra un modulo e l’altro, quali giocatori servono e dove ognuno lascia scoperto il campo.',
+    lead: 'Un modulo non è una formazione: è il modo in cui undici giocatori si dividono il campo. Ecco i più usati, cosa chiedono alla rosa e dove si rompono.',
+    priority: '0.7',
+    body: `
+  <h2 class="display">Prima una premessa</h2>
+  <p>I numeri di un modulo descrivono la squadra ferma, e una squadra ferma non esiste
+  mai. La stessa formazione può difendere a 4-4-2 e attaccare a 3-2-5, perché i terzini
+  salgono e un mediano scende fra i centrali. Per questo, quando si guarda una partita,
+  contano più due domande che il nome del sistema: quanti giocatori ci sono fra le due
+  linee avversarie, e chi copre lo spazio che si apre quando la squadra attacca.</p>
+
+  <h2 class="display">4-3-3</h2>
+  <p>Quattro difensori, tre centrocampisti, tre attaccanti. È il sistema che occupa
+  meglio il campo in larghezza: le due ali tengono i terzini avversari inchiodati, il
+  centravanti fissa i centrali, le mezzale attaccano gli spazi che si aprono in mezzo.
+  Chiede un mediano di livello — resta solo davanti alla difesa quando le mezzale salgono —
+  e ali che difendano, altrimenti i terzini restano uno contro uno per novanta minuti.
+  È il modulo che ha vinto di più negli ultimi vent’anni, ed è anche il più esigente:
+  senza qualità in mezzo diventa una squadra lunga e spezzata in due.</p>
+
+  <h2 class="display">4-2-3-1</h2>
+  <p>La variante più diffusa del calcio europeo. I due mediani si coprono a vicenda:
+  uno può uscire in pressione perché l’altro resta. Davanti, tre giocatori offensivi
+  dietro un centravanti, con il trequartista centrale che lavora sul mediano avversario.
+  È solido per natura e semplice da insegnare, ma dipende tutto dal centravanti: se non
+  tiene palla, la squadra non riesce a salire e i tre dietro di lui restano tagliati fuori.</p>
+
+  <h2 class="display">4-4-2</h2>
+  <p>Il sistema più vecchio ancora in uso, e non per nostalgia: due linee da quattro
+  coprono il campo in modo ordinato e non lasciano corridoi facili. Due punte vicine si
+  aiutano e mettono in difficoltà una difesa a due centrali. Il prezzo lo paga il
+  centrocampo, dove in due si perde il confronto contro chi ne schiera tre: per questo
+  le squadre che lo usano difendono più basse e cercano di vincere le seconde palle
+  invece del possesso.</p>
+
+  <h2 class="display">3-5-2 e 5-3-2</h2>
+  <p>Sono lo stesso sistema visto in due momenti diversi: con la palla i due esterni
+  salgono e diventa 3-5-2, senza palla scendono e diventa 5-3-2. Tre centrali coprono
+  l’area e permettono di uscire sul portatore senza restare scoperti; i due esterni
+  fanno tutta la fascia. È il modulo che chiede il fisico migliore della rosa: se i
+  quinti non reggono i novanta minuti, la squadra si schiaccia e passa la partita
+  nella propria metà campo.</p>
+
+  <h2 class="display">3-4-3</h2>
+  <p>Tre dietro, due mediani, due esterni e tre davanti. Copre il campo in larghezza
+  come pochi altri e permette di attaccare con sette uomini, ma lascia solo due
+  centrocampisti centrali: contro chi ne ha tre bisogna vincere i duelli o accettare
+  di essere superati in mezzo. Funziona benissimo con una squadra che pressa alta,
+  malissimo con una che difende bassa.</p>
+
+  <h2 class="display">4-3-1-2 e il rombo</h2>
+  <p>Il rombo a centrocampo (mediano, due mezzali, trequartista) riempie il centro del
+  campo e mette il trequartista in una zona che le difese fanno fatica a coprire. In
+  cambio rinuncia alle ali, e quindi alla larghezza: i terzini devono salire sempre,
+  ed è la loro corsa a decidere se il sistema funziona. Contro squadre che attaccano
+  sulle fasce diventa fragile.</p>
+
+  <h2 class="display">Come si sceglie</h2>
+  <p>Un modulo si sceglie a partire dai giocatori che hai, non al contrario. Tre domande
+  bastano quasi sempre: hai due centrali veloci che difendono lo spazio, o due forti
+  nell’area? Hai ali capaci di saltare l’uomo? Hai un mediano che regge il campo da solo?
+  Chi ha un mediano dominante può permettersi tre attaccanti; chi non ce l’ha farà meglio
+  con due mediani e un trequartista.</p>
+  <p>La seconda regola è che il modulo si cambia anche a partita in corso. Si passa a due
+  punte quando serve un gol e la squadra avversaria difende bassa; si passa a cinque
+  dietro quando si è avanti e l’avversario spinge sulle fasce; si accetta di perdere il
+  centrocampo quando la partita è diventata una serie di lanci e di duelli aerei.</p>
+
+  <h2 class="display">Provarli</h2>
+  <p>In <a href="/allenatore-calcio">Allenatore</a> ci sono nove moduli e dodici stili di
+  gioco, e l’effetto si sente davvero nel motore della partita: il possesso, le occasioni
+  create e concesse, la fatica dei giocatori cambiano insieme alla scelta. La familiarità
+  con lo stile cresce allenandolo, quindi cambiare sistema ogni settimana costa: la
+  squadra ci mette qualche giornata a capirlo.</p>`,
+  },
   {
     slug: 'come-si-gioca',
     title: 'Come si gioca',
@@ -159,10 +515,43 @@ export const PAGES = [
     browser. Non sappiamo chi sei e non ci serve saperlo.</li>
   </ul>
 
+  <h2 class="display">Com’è fatto il gioco</h2>
+  <p>NOVANTA è un sito, non un’app da scaricare: si apre nel browser e funziona allo
+  stesso modo sul telefono, sul tablet e sul computer. Chi vuole può aggiungerlo alla
+  schermata Home e da lì si apre a tutto schermo, senza barra del browser; dopo la prima
+  visita molte parti restano disponibili anche se la rete cade a metà partita.</p>
+  <p>Dietro le quinte ci sono due cose: i cataloghi e il motore. I cataloghi sono le
+  carriere dei giocatori, le rose delle stagioni, le convocazioni ai tornei; vengono da
+  Wikipedia, che è pubblica e verificabile, e passano da una serie di controlli automatici
+  che scartano quello che non torna. Il motore è quello che trasforma i dati in partite:
+  le domande del quiz, le aste, la simulazione minuto per minuto delle due carriere.</p>
+  <p>Tutto quello che il gioco calcola è ripetibile: a parità di partenza, la stessa
+  partita dà lo stesso risultato. Non è un dettaglio da programmatori — è la ragione per
+  cui una carriera salvata si può riprendere mesi dopo e ritrovare esattamente il mondo
+  che avevi lasciato.</p>
+
+  <h2 class="display">Cosa non facciamo</h2>
+  <ul>
+    <li><strong>Niente account.</strong> Non chiediamo email, non mandiamo newsletter e
+    non abbiamo un database di utenti: i tuoi record vivono nel tuo browser.</li>
+    <li><strong>Niente pagamenti.</strong> Non ci sono acquisti dentro il gioco, monete
+    da comprare, abbonamenti o contenuti chiusi dietro un prezzo.</li>
+    <li><strong>Niente classifiche mondiali.</strong> Ci interessa la sfida fra amici,
+    non una graduatoria globale che spinge a giocare per forza.</li>
+    <li><strong>Niente foto e niente marchi.</strong> Usiamo i nomi, che sono fatti, e
+    colori disegnati da noi.</li>
+  </ul>
+
   <h2 class="display">Indipendenti</h2>
-  <p>NOVANTA non è affiliato a nessun club, lega, federazione o sponsor. Non usiamo
-  stemmi, maglie ufficiali, fotografie o marchi registrati: solo i nomi, che sono
-  fatti, e colori disegnati da noi.</p>
+  <p>NOVANTA non è affiliato a nessun club, lega, federazione o sponsor. Il progetto si
+  sostiene con la pubblicità, che compare fra una partita e l’altra, e con chi decide di
+  offrirci un caffè. Nessun inserzionista decide cosa finisce nel gioco: se una squadra
+  manca è perché mancano i dati, non perché qualcuno ha pagato.</p>
+
+  <h2 class="display">Le lingue</h2>
+  <p>Il gioco è tradotto in italiano, inglese, spagnolo, francese, tedesco e portoghese,
+  comprese le centinaia di situazioni che si incontrano nelle due carriere. Le pagine di
+  testo, per ora, sono in italiano: le traduciamo man mano.</p>
 
   <h2 class="display">Scrivici</h2>
   <p>Idee per nuove modalità, squadre che mancano, dati da correggere: ${MAIL}.</p>`,

@@ -58,6 +58,8 @@ async function render() {
   root.appendChild(host);
 
   currentName = name;
+  /* la pagina di presentazione sotto il gioco si vede solo nella schermata principale */
+  document.body.dataset.route = name;
   const mod = await loader();
   currentTeardown = await mod.mount(host, params);
 
