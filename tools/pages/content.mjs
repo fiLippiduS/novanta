@@ -39,9 +39,9 @@ const FAQ = [
   ['Perché una squadra o una stagione non c’è?', 'Perché i dati di quella rosa non sono abbastanza completi o coerenti da poter essere usati senza rischiare di farti una domanda sbagliata. Quando la fonte migliora, la squadra entra.'],
   ['Come si cambia lingua?', 'Dal menu in cima alla schermata principale. La scelta resta salvata nel browser e vale anche per le situazioni delle due carriere, che sono tradotte per intero.'],
   ['Le carriere si salvano?', 'Sì, Carriera e Allenatore si salvano automaticamente nel browser dopo ogni giornata, e si riprendono da dove le hai lasciate. Sono due salvataggi separati: puoi averle in corso tutte e due.'],
-  ['Posso giocare senza pubblicità?', 'Gli annunci non compaiono mai durante una partita né nei primi minuti di una visita. Quelli con premio — un suggerimento, tempo in più, un’altra possibilità — si guardano solo se lo scegli tu.'],
+  ['Posso giocare senza pubblicità?', 'Gli annunci non compaiono mai durante una partita né nei primi minuti di una visita. Quelli con premio (un suggerimento, tempo in più, un’altra possibilità) si guardano solo se lo scegli tu.'],
   ['Il gioco è adatto ai bambini?', 'Sì: non c’è chat, non ci sono contenuti violenti e non si può spendere denaro. Le uniche parole che si scambiano sono quelle fra amici che giocano nella stessa stanza.'],
-  ['Posso suggerire una modalità nuova?', `Scrivici a ${MAIL}: le idee che arrivano dalle partite vere sono quasi sempre migliori delle nostre.`],
+  ['Posso suggerire una modalità nuova?', `Scrivici a ${MAIL}: le idee che arrivano dalle partite vere battono le nostre nove volte su dieci.`],
   ['Perché il gioco si chiama NOVANTA?', 'Per i novanta minuti di una partita, e per il decennio che ha insegnato a molti di noi a guardare il calcio. Il nome è anche la promessa di una partita che dura poco: nessuna modalità, a parte le carriere, chiede più di qualche minuto.'],
 ];
 
@@ -54,26 +54,25 @@ export const PAGES = [
     priority: '0.7',
     body: `
   <h2 class="display">Il campo</h2>
-  <p><a href="/ruoli-calcio"><strong>I ruoli e i numeri di maglia</strong></a> — Che cosa fa
-  davvero un terzino, un mediano, un trequartista o un falso nove, perché il numero sulla
+  <p><a href="/ruoli-calcio"><strong>I ruoli e i numeri di maglia</strong></a>: che cosa fa
+  un terzino, un mediano, un trequartista o un falso nove, perché il numero sulla
   maglia non dice quasi più niente e cosa cambia da un paese all’altro.</p>
-  <p><a href="/moduli-calcio"><strong>I moduli spiegati uno per uno</strong></a> — 4-3-3,
+  <p><a href="/moduli-calcio"><strong>I moduli spiegati uno per uno</strong></a>: 4-3-3,
   4-2-3-1, 4-4-2, 3-5-2, 3-4-3 e il rombo: quali giocatori chiedono, dove lasciano scoperto
   il campo e come si sceglie quello giusto per la propria rosa.</p>
 
   <h2 class="display">I soldi e le regole</h2>
-  <p><a href="/calciomercato-come-funziona"><strong>Come funziona davvero il
-  calciomercato</strong></a> — Cartellino e ingaggio, clausole, prestiti con diritto o con
+  <p><a href="/calciomercato-come-funziona"><strong>Il calciomercato</strong></a>: cartellino e ingaggio, clausole, prestiti con diritto o con
   obbligo, parametro zero, bonus, percentuali sulla rivendita e commissioni dei procuratori.</p>
   <p><a href="/coppe-europee-come-funzionano"><strong>Champions, Europa League e
-  Conference</strong></a> — Chi si qualifica, com’è cambiato il formato dal 2024, cosa
+  Conference</strong></a>: chi si qualifica, com’è cambiato il formato dal 2024, cosa
   comporta giocare ogni tre giorni e quanto pesa l’Europa sul bilancio di un club.</p>
-  <p><a href="/asta-fantacalcio-strategia"><strong>L’asta del fantacalcio</strong></a> —
-  Le regole dell’asta a chiamata, quanto spendere per reparto, quando rilanciare e gli
+  <p><a href="/asta-fantacalcio-strategia"><strong>L’asta del fantacalcio</strong></a>:
+  le regole dell’asta a chiamata, quanto spendere per reparto, quando rilanciare e gli
   errori che si ripetono ogni anno.</p>
 
   <h2 class="display">Le parole</h2>
-  <p><a href="/glossario-calcio"><strong>Glossario del calcio</strong></a> — Quaranta
+  <p><a href="/glossario-calcio"><strong>Glossario del calcio</strong></a>: quaranta
   parole spiegate: fuorigioco, gegenpressing, expected goals, baricentro, clean sheet,
   parametro zero, ammortamento e tutte quelle che si sentono in telecronaca.</p>
 
@@ -85,8 +84,8 @@ export const PAGES = [
   collegata.</p>
   <p>Sono scritte per chi guarda il calcio da appassionato: chi discute di moduli al bar,
   chi fa l’asta del fantacalcio a settembre, chi vuole capire perché il suo club ha venduto
-  un giocatore a gennaio. Le aggiorniamo quando cambiano le regole — la fase a girone unico
-  delle coppe europee, per esempio, è arrivata nel 2024 e ha cambiato mezzo calendario.</p>
+  un giocatore a gennaio. Le aggiorniamo quando cambiano le regole: la fase a girone unico
+  delle coppe europee è arrivata nel 2024 e ha cambiato mezzo calendario.</p>
   <p>Se una cosa non è chiara o manca, scrivilo: le guide nascono dalle domande che ci
   arrivano, e la prossima può partire dalla tua. L’indirizzo è nella pagina
   <a href="/contatti">Contatti</a>.</p>
@@ -101,8 +100,8 @@ export const PAGES = [
   {
     slug: 'coppe-europee-come-funzionano',
     title: 'Champions, Europa League e Conference: come funzionano',
-    description: 'Chi si qualifica alle coppe europee, come sono cambiati i gironi, cosa succede a chi arriva terzo e quanto valgono davvero i premi. Guida alle tre competizioni UEFA.',
-    lead: 'Tre competizioni, un solo albero: chi entra in Champions, chi scende in Europa League, chi finisce in Conference e che cosa cambia davvero fra loro.',
+    description: 'Chi si qualifica alle coppe europee, come sono cambiati i gironi, cosa succede a chi arriva terzo e quanto pesano i premi. Guida alle tre competizioni UEFA.',
+    lead: 'Tre competizioni, un solo albero: chi entra in Champions, chi scende in Europa League, chi finisce in Conference e che cosa cambia fra loro.',
     priority: '0.7',
     body: `
   <h2 class="display">Chi si qualifica</h2>
@@ -130,13 +129,13 @@ export const PAGES = [
   partite il punteggio totale è pari si giocano i supplementari e poi i rigori.</p>
 
   <h2 class="display">Le tre competizioni</h2>
-  <p><strong>Champions League</strong> — La più ricca e la più difficile: ci sono le
+  <p><strong>Champions League</strong>: la più ricca e la più difficile: ci sono le
   campionesse nazionali e le migliori dei campionati più forti. Vincerla vale una stagione
   intera, e il solo fatto di qualificarsi cambia i conti di un club.</p>
-  <p><strong>Europa League</strong> — Il secondo livello, con squadre che in campionato
-  stanno appena sotto le prime. Chi la vince entra in Champions l’anno dopo, ed è la
-  scorciatoia che negli ultimi anni diverse squadre hanno preso davvero.</p>
-  <p><strong>Conference League</strong> — Nata nel 2021 per dare l’Europa anche ai
+  <p><strong>Europa League</strong>: il secondo livello, con squadre che in campionato
+  stanno appena sotto le prime. Chi la vince entra in Champions l’anno dopo, ed è la scorciatoia che
+  negli ultimi anni diverse squadre hanno preso.</p>
+  <p><strong>Conference League</strong>: nata nel 2021 per dare l’Europa anche ai
   campionati più piccoli. Meno ricca, ma è una coppa vera: si gioca il giovedì, porta
   punti al ranking del paese e per molti club è la prima finale continentale della storia.</p>
 
@@ -162,7 +161,7 @@ export const PAGES = [
     slug: 'asta-fantacalcio-strategia',
     title: 'Asta del fantacalcio: regole e strategia',
     description: 'Come funziona l’asta a chiamata, quanto spendere per ogni reparto, quando rilanciare e quando lasciar perdere. Guida pratica per non restare senza attaccanti.',
-    lead: 'L’asta si vince nei primi venti minuti, quando tutti hanno soldi e nessuno ha ancora paura. Ecco le regole e i conti da fare prima di alzare la mano.',
+    lead: 'L’asta si vince nei primi venti minuti, quando tutti hanno soldi e nessuno ha ancora paura. Le regole, i conti da fare prima di alzare la mano e gli errori che si ripetono ogni anno.',
     priority: '0.7',
     body: `
   <h2 class="display">Come funziona l’asta a chiamata</h2>
@@ -177,7 +176,7 @@ export const PAGES = [
 
   <h2 class="display">Il conto da fare prima</h2>
   <p>Cinquecento crediti e venticinque giocatori fanno venti crediti a testa, ma non si
-  distribuiscono in parti uguali. Una divisione che funziona quasi sempre:</p>
+  distribuiscono in parti uguali. Una divisione che regge:</p>
   <ul>
     <li><strong>portieri 8-10%</strong>: un titolare affidabile e due riserve da un credito;</li>
     <li><strong>difensori 12-15%</strong>: uno o due che segnano, gli altri presi a poco;</li>
@@ -206,7 +205,7 @@ export const PAGES = [
   di undici titolari normali. Innamorarsi della propria squadra del cuore e pagare i suoi
   giocatori il doppio. Prendere il portiere per primo, quando i portieri sono l’unico
   reparto che si trova sempre. E, il più comune di tutti, rilanciare su un nome che non
-  serve solo per far spendere un avversario: quasi sempre resta in mano a chi ha rilanciato.</p>
+  serve solo per far spendere un avversario: finisce in mano a chi ha rilanciato.</p>
 
   <h2 class="display">Provare senza rischiare</h2>
   <p>L’<a href="/asta-calcio">Asta di NOVANTA</a> serve proprio a questo: si gioca contro
@@ -221,7 +220,7 @@ export const PAGES = [
     slug: 'calciomercato-come-funziona',
     title: 'Come funziona davvero il calciomercato',
     description: 'Cartellino, ingaggio, clausola rescissoria, prestito con diritto o obbligo, parametro zero, commissioni, bonus: le parole del calciomercato spiegate con i numeri che contano.',
-    lead: 'Quando si legge “trenta milioni più bonus” si stanno guardando almeno quattro cifre diverse. Ecco quali sono e chi le incassa.',
+    lead: 'Quando si legge “trenta milioni più bonus” si stanno guardando almeno quattro cifre diverse. Quali sono, chi le incassa e perché il contratto conta più del prezzo.',
     priority: '0.7',
     body: `
   <h2 class="display">Due cifre, non una</h2>
@@ -249,8 +248,8 @@ export const PAGES = [
   <p>È una cifra scritta nel contratto: chi la paga porta via il giocatore e il club
   non può opporsi. In Spagna è obbligatoria per legge ed è il motivo per cui certi
   trasferimenti si chiudono in poche ore; altrove si usa per blindare i giovani. Le
-  clausole sono quasi sempre molto più alte del valore di mercato: servono a scoraggiare,
-  non a vendere.</p>
+  clausole stanno molto sopra il valore di mercato: servono a scoraggiare chi compra, non
+  a vendere il giocatore.</p>
 
   <h2 class="display">Il prestito</h2>
   <p>Il giocatore cambia squadra per un periodo, di solito una stagione, ma il cartellino
@@ -263,7 +262,7 @@ export const PAGES = [
     di una condizione (un numero di presenze, la salvezza, la qualificazione).</li>
   </ul>
   <p>Nel prestito si tratta anche l’ingaggio: raramente lo paga tutto chi riceve il
-  giocatore, quasi sempre le due società se lo dividono. Per un ragazzo il prestito è
+  giocatore, di solito le due società se lo dividono. Per un ragazzo il prestito è
   lo strumento con cui si cresce: giocare venticinque partite in una squadra più piccola
   vale più di dieci minuti a partita in una grande.</p>
 
@@ -316,96 +315,96 @@ export const PAGES = [
     priority: '0.7',
     body: `
   <h2 class="display">Le regole</h2>
-  <p><strong>Fuorigioco</strong> — Un attaccante è in fuorigioco se, nel momento in cui
+  <p><strong>Fuorigioco</strong>: un attaccante è in fuorigioco se, nel momento in cui
   un compagno gli passa la palla, si trova più vicino alla linea di porta avversaria
   sia del pallone sia del penultimo difensore (di solito l’ultimo di movimento, perché
   il portiere conta come uno dei due). Non è punibile se riceve da una rimessa laterale,
   da un rinvio dal fondo o da un calcio d’angolo.</p>
-  <p><strong>Vantaggio</strong> — L’arbitro può non fischiare un fallo se fermare il
+  <p><strong>Vantaggio</strong>: l’arbitro può non fischiare un fallo se fermare il
   gioco danneggerebbe la squadra che l’ha subito.</p>
-  <p><strong>Doppia ammonizione</strong> — Due gialli nella stessa partita valgono un
+  <p><strong>Doppia ammonizione</strong>: due gialli nella stessa partita valgono un
   rosso, e la squalifica è di una giornata; un rosso diretto ne costa di più.</p>
-  <p><strong>VAR</strong> — L’assistenza video. Interviene solo su quattro cose: gol,
+  <p><strong>VAR</strong>: l’assistenza video. Interviene solo su quattro cose: gol,
   rigori, espulsioni dirette e scambi di persona.</p>
 
   <h2 class="display">In campo</h2>
-  <p><strong>Pressing</strong> — Andare a prendere l’avversario che ha la palla invece
+  <p><strong>Pressing</strong>: andare a prendere l’avversario che ha la palla invece
   di aspettarlo. <strong>Pressing alto</strong> se si fa nella metà campo avversaria.</p>
-  <p><strong>Gegenpressing</strong> — Riconquistare subito il pallone appena lo si è
+  <p><strong>Gegenpressing</strong>: riconquistare subito il pallone appena lo si è
   perso, nei primi secondi, quando l’avversario è ancora sbilanciato in avanti.</p>
-  <p><strong>Linea difensiva alta</strong> — Tenere i difensori lontani dalla propria
+  <p><strong>Linea difensiva alta</strong>: tenere i difensori lontani dalla propria
   porta per accorciare il campo. Rende la squadra compatta e la espone alla palla in
   profondità.</p>
-  <p><strong>Baricentro</strong> — La posizione media della squadra in campo. Alto se si
+  <p><strong>Baricentro</strong>: la posizione media della squadra in campo. Alto se si
   gioca avanti, basso se si difende vicino alla propria area.</p>
-  <p><strong>Ripartenza (o contropiede)</strong> — Attaccare subito dopo aver recuperato
+  <p><strong>Ripartenza (o contropiede)</strong>: attaccare subito dopo aver recuperato
   palla, mentre l’avversario è ancora fuori posizione.</p>
-  <p><strong>Palla inattiva</strong> — Calci d’angolo, punizioni e rimesse lunghe. Vale
+  <p><strong>Palla inattiva</strong>: calci d’angolo, punizioni e rimesse lunghe. Vale
   circa un gol su quattro nel calcio professionistico: le squadre ci lavorano più di
   quanto si creda.</p>
-  <p><strong>Marcatura a uomo e a zona</strong> — Seguire un avversario ovunque vada,
+  <p><strong>Marcatura a uomo e a zona</strong>: seguire un avversario ovunque vada,
   oppure difendere uno spazio e prendere chi ci entra.</p>
-  <p><strong>Falso nove</strong> — Un centravanti che si abbassa a centrocampo per
+  <p><strong>Falso nove</strong>: un centravanti che si abbassa a centrocampo per
   trascinarsi dietro il difensore e lasciare spazio a chi arriva.</p>
-  <p><strong>Mediano</strong>, <strong>mezzala</strong>, <strong>quinto</strong> — I ruoli
+  <p><strong>Mediano</strong>, <strong>mezzala</strong>, <strong>quinto</strong>: i ruoli
   del centrocampo e delle fasce: li trovi spiegati in
   <a href="/ruoli-calcio">I ruoli e i numeri di maglia</a>.</p>
 
   <h2 class="display">I numeri</h2>
-  <p><strong>Expected goals (xG)</strong> — Il valore di un’occasione: quanti gol,
+  <p><strong>Expected goals (xG)</strong>: il valore di un’occasione: quanti gol,
   in media, nascono da un tiro fatto in quella posizione e in quella situazione. Un tiro
   da fuori area vale spesso 0,03; un rigore circa 0,78. Servono a capire se una squadra
   ha creato tanto o è stata solo fortunata.</p>
-  <p><strong>Tiri in porta</strong> — I tiri che entrerebbero senza l’intervento del
+  <p><strong>Tiri in porta</strong>: i tiri che entrerebbero senza l’intervento del
   portiere o di un difensore sulla linea.</p>
-  <p><strong>Possesso palla</strong> — La percentuale di tempo con il pallone tra i piedi.
+  <p><strong>Possesso palla</strong>: la percentuale di tempo con il pallone tra i piedi.
   Da sola non dice chi ha giocato meglio: molte squadre vincono con il 35 per cento.</p>
-  <p><strong>Duelli e contrasti</strong> — Gli uno contro uno vinti, a terra e in aria.</p>
-  <p><strong>Clean sheet</strong> — La porta inviolata: una partita senza gol subiti.</p>
-  <p><strong>Assist</strong> — L’ultimo passaggio prima del gol.</p>
+  <p><strong>Duelli e contrasti</strong>: gli uno contro uno vinti, a terra e in aria.</p>
+  <p><strong>Clean sheet</strong>: la porta inviolata: una partita senza gol subiti.</p>
+  <p><strong>Assist</strong>: l’ultimo passaggio prima del gol.</p>
 
   <h2 class="display">Squadre e competizioni</h2>
-  <p><strong>Differenza reti</strong> — Gol fatti meno gol subiti. Serve a separare due
+  <p><strong>Differenza reti</strong>: gol fatti meno gol subiti. Serve a separare due
   squadre a pari punti, in molti campionati prima degli scontri diretti.</p>
-  <p><strong>Scontri diretti</strong> — I risultati fra le squadre a pari punti. In Italia
+  <p><strong>Scontri diretti</strong>: i risultati fra le squadre a pari punti. In Italia
   contano prima della differenza reti, in Inghilterra e Spagna no (in Inghilterra vale la
   differenza reti, in Spagna gli scontri diretti).</p>
-  <p><strong>Play-off e play-out</strong> — Spareggi di fine stagione per salire di
+  <p><strong>Play-off e play-out</strong>: spareggi di fine stagione per salire di
   categoria o per non scendere.</p>
-  <p><strong>Derby</strong> — La partita fra due squadre della stessa città o della stessa
+  <p><strong>Derby</strong>: la partita fra due squadre della stessa città o della stessa
   zona. Vale tre punti come le altre e pesa il doppio.</p>
-  <p><strong>Vivaio (o settore giovanile)</strong> — Le squadre giovanili di un club.
+  <p><strong>Vivaio (o settore giovanile)</strong>: le squadre giovanili di un club.
   Un giocatore <em>cresciuto nel vivaio</em> conta anche nelle liste che molte
   competizioni impongono.</p>
 
   <h2 class="display">Mercato e contratti</h2>
-  <p><strong>Cartellino</strong> — Quanto un club paga a un altro club per prendere un
-  giocatore sotto contratto. <strong>Ingaggio</strong> — Quanto guadagna il giocatore.</p>
-  <p><strong>Parametro zero</strong> — Giocatore con il contratto scaduto: si prende
+  <p><strong>Cartellino</strong>: quanto un club paga a un altro club per prendere un
+  giocatore sotto contratto. <strong>Ingaggio</strong>: quanto guadagna il giocatore.</p>
+  <p><strong>Parametro zero</strong>: giocatore con il contratto scaduto: si prende
   senza pagare niente al club di prima.</p>
-  <p><strong>Clausola rescissoria</strong> — La cifra che, se pagata, permette di
+  <p><strong>Clausola rescissoria</strong>: la cifra che, se pagata, permette di
   prendere il giocatore anche se il club non vuole venderlo.</p>
-  <p><strong>Prestito con diritto o con obbligo di riscatto</strong> — Chi riceve il
+  <p><strong>Prestito con diritto o con obbligo di riscatto</strong>: chi riceve il
   giocatore può, oppure deve, comprarlo a fine prestito.</p>
-  <p><strong>Ammortamento</strong> — Il costo del cartellino spalmato sugli anni di
+  <p><strong>Ammortamento</strong>: il costo del cartellino spalmato sugli anni di
   contratto, che è il modo in cui pesa sul bilancio.</p>
-  <p><strong>Procuratore</strong> — Chi cura gli interessi del giocatore e tratta
+  <p><strong>Procuratore</strong>: chi cura gli interessi del giocatore e tratta
   l’ingaggio; prende una commissione sull’operazione.</p>
-  <p>Il quadro completo, con i numeri, è in
-  <a href="/calciomercato-come-funziona">Come funziona davvero il calciomercato</a>.</p>
+  <p>Il quadro completo, con i numeri, è nella guida al
+  <a href="/calciomercato-come-funziona">calciomercato</a>.</p>
 
   <h2 class="display">Parole che si sentono in telecronaca</h2>
-  <p><strong>Cucchiaio</strong> — Il pallonetto morbido sul portiere, di solito su rigore.
-  <strong>Tunnel</strong> — Far passare la palla fra le gambe dell’avversario.
-  <strong>Sombrero</strong> — Scavalcare l’avversario con un tocco alto.
-  <strong>Catenaccio</strong> — Difendere bassi e in tanti, colpendo in ripartenza.
-  <strong>Melina</strong> — Far girare la palla per far passare il tempo.
-  <strong>Tiki-taka</strong> — Il possesso fatto di passaggi corti e continui.</p>`,
+  <p><strong>Cucchiaio</strong>: il pallonetto morbido sul portiere, di solito su rigore.
+  <strong>Tunnel</strong>: far passare la palla fra le gambe dell’avversario.
+  <strong>Sombrero</strong>: scavalcare l’avversario con un tocco alto.
+  <strong>Catenaccio</strong>: difendere bassi e in tanti, colpendo in ripartenza.
+  <strong>Melina</strong>: far girare la palla per far passare il tempo.
+  <strong>Tiki-taka</strong>: il possesso fatto di passaggi corti e continui.</p>`,
   },
   {
     slug: 'ruoli-calcio',
     title: 'I ruoli nel calcio e i numeri di maglia',
-    description: 'Che cosa fa davvero un terzino, un mediano, un trequartista o un falso nove, e perché il numero sulla maglia non dice quasi più niente. Guida ai ruoli del calcio moderno.',
+    description: 'Che cosa fa un terzino, un mediano, un trequartista o un falso nove, e perché il numero sulla maglia non dice quasi più niente. Guida ai ruoli del calcio moderno.',
     lead: 'Undici giocatori, otto ruoli e una quantità di nomi che cambiano da paese a paese. Qui c’è cosa fa ognuno, in campo, quando la palla ce l’ha la sua squadra e quando ce l’hanno gli altri.',
     priority: '0.7',
     body: `
@@ -424,8 +423,7 @@ export const PAGES = [
   spazio alle sue spalle. In una difesa a tre il centrale di destra e quello di
   sinistra escono spesso sul portatore, mentre quello in mezzo resta a proteggere.
   Le doti che contano sono il tempo dell’anticipo, il colpo di testa, la velocità
-  quando la squadra difende alta e — di nuovo — il piede, perché è da lì che parte
-  la costruzione.</p>
+  quando la squadra difende alta e, di nuovo, il piede: è da lì che parte la costruzione.</p>
   <p><strong>Il terzino</strong> parte largo, difende sulla fascia e attacca la
   stessa fascia quando la squadra ha il pallone. Negli ultimi anni ne sono nate due
   varianti: il terzino che si accentra a centrocampo per dare una linea di passaggio
@@ -458,9 +456,8 @@ export const PAGES = [
   <p><strong>La punta</strong> è chi finisce l’azione. C’è il centravanti d’area, che
   vive di posizione e colpo di testa; la punta che attacca lo spazio alle spalle della
   difesa; il centravanti che viene incontro, riceve e fa salire la squadra. Il
-  <em>falso nove</em> non è un ruolo ma un movimento: un attaccante che lascia l’area
-  e si abbassa a centrocampo, così il difensore che lo marca deve scegliere se
-  seguirlo — e lasciare un buco — o mollarlo.</p>
+  <em>falso nove</em> descrive un movimento: un attaccante che lascia l’area
+  e si abbassa a centrocampo, così il difensore che lo marca deve scegliere: seguirlo e lasciare un buco, oppure mollarlo.</p>
 
   <h2 class="display">I numeri di maglia</h2>
   <p>Per decenni il numero indicava il posto in campo: 1 portiere, 2 e 3 terzini, 4 e 5
@@ -486,8 +483,8 @@ export const PAGES = [
   {
     slug: 'moduli-calcio',
     title: 'I moduli del calcio spiegati uno per uno',
-    description: '4-3-3, 4-2-3-1, 3-5-2, 4-4-2: cosa cambia davvero fra un modulo e l’altro, quali giocatori servono e dove ognuno lascia scoperto il campo.',
-    lead: 'Un modulo non è una formazione: è il modo in cui undici giocatori si dividono il campo. Ecco i più usati, cosa chiedono alla rosa e dove si rompono.',
+    description: '4-3-3, 4-2-3-1, 3-5-2, 4-4-2: cosa cambia fra un modulo e l’altro, quali giocatori servono e dove ognuno lascia scoperto il campo.',
+    lead: 'Un modulo è il modo in cui undici giocatori si dividono il campo, non una formazione da imparare a memoria. I più usati, cosa chiedono alla rosa e dove si rompono.',
     priority: '0.7',
     body: `
   <h2 class="display">Prima una premessa</h2>
@@ -501,8 +498,8 @@ export const PAGES = [
   <p>Quattro difensori, tre centrocampisti, tre attaccanti. È il sistema che occupa
   meglio il campo in larghezza: le due ali tengono i terzini avversari inchiodati, il
   centravanti fissa i centrali, le mezzale attaccano gli spazi che si aprono in mezzo.
-  Chiede un mediano di livello — resta solo davanti alla difesa quando le mezzale salgono —
-  e ali che difendano, altrimenti i terzini restano uno contro uno per novanta minuti.
+  Chiede un mediano di livello, che resta solo davanti alla difesa quando le mezzale
+  salgono, e ali che difendano: senza, i terzini restano uno contro uno per novanta minuti.
   È il modulo che ha vinto di più negli ultimi vent’anni, ed è anche il più esigente:
   senza qualità in mezzo diventa una squadra lunga e spezzata in due.</p>
 
@@ -544,8 +541,7 @@ export const PAGES = [
   sulle fasce diventa fragile.</p>
 
   <h2 class="display">Come si sceglie</h2>
-  <p>Un modulo si sceglie a partire dai giocatori che hai, non al contrario. Tre domande
-  bastano quasi sempre: hai due centrali veloci che difendono lo spazio, o due forti
+  <p>Un modulo si sceglie a partire dai giocatori che hai, non al contrario. Tre domande bastano: hai due centrali veloci che difendono lo spazio, o due forti
   nell’area? Hai ali capaci di saltare l’uomo? Hai un mediano che regge il campo da solo?
   Chi ha un mediano dominante può permettersi tre attaccanti; chi non ce l’ha farà meglio
   con due mediani e un trequartista.</p>
@@ -700,9 +696,8 @@ export const PAGES = [
   che scartano quello che non torna. Il motore è quello che trasforma i dati in partite:
   le domande del quiz, le aste, la simulazione minuto per minuto delle due carriere.</p>
   <p>Tutto quello che il gioco calcola è ripetibile: a parità di partenza, la stessa
-  partita dà lo stesso risultato. Non è un dettaglio da programmatori — è la ragione per
-  cui una carriera salvata si può riprendere mesi dopo e ritrovare esattamente il mondo
-  che avevi lasciato.</p>
+  partita dà lo stesso risultato. Serve a una cosa concreta: una carriera salvata si
+  riprende mesi dopo e ritrova il mondo che avevi lasciato.</p>
 
   <h2 class="display">Cosa non facciamo</h2>
   <ul>
